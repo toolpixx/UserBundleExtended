@@ -47,5 +47,5 @@ sudo app/console server:run
 </pre>
 
 <pre>
-http://127.0.0.1:<PORT>
+http://127.0.0.1:PORT
 </pre>
