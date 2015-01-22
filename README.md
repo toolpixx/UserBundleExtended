@@ -44,3 +44,7 @@ mkdir web/uploads/user/profilepics
 <pre>
 sudo app/console server:run
 </pre>
+
+<pre>
+http://127.0.0.1:<PORT>
+</pre>
