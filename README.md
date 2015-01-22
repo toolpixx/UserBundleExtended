@@ -1,7 +1,7 @@
 # FOSUserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
-* Add dashboard and forward after login.
+* Add dashboard (with symfony related feed) and forward after login.
 * Add automatically <i>role (ROLE_CUSTOMER)</i> after registration. (FOSUserBundle doesn't)
 * Remove ask for <i>current_password</i> at profile edit page.
 * Add <i>avatar</i> for user incl. upload.
