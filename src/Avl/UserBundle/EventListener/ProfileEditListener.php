@@ -51,18 +51,9 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileInitialize(UserEvent $userEvent) {
-
-        /**
-         * Set the username into session, because
-         * if you change the name and error ocurred
-         * sf will change the name to the new one.
-         *
-         * We want change the name only if form-data
-         * is persist.
-         */
-        $this->session->set('username', $userEvent->getUser()->getUsername());
-        $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
+    public function onProfileInitialize(UserEvent $userEvent)
+    {
+        $this->setUsernameAndProfilePicturePath($userEvent);
     }
 
     /**
@@ -78,14 +69,20 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileCompleted(UserEvent $userEvent)
     {
-        /**
-         * Set the username into session, because
-         * if you change the name and error ocurred
-         * sf will change the name to the new one.
-         *
-         * We want change the name only if form-data
-         * is persist.
-         */
+        $this->setUsernameAndProfilePicturePath($userEvent);
+    }
+
+    /**
+     * Set the username into session, because
+     * if you change the name and error ocurred
+     * sf will change the name to the new one.
+     *
+     * We want change the name only if form-data
+     * is persist.
+     *
+     * @param UserEvent $userEvent
+     */
+    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) {
         $this->session->set('username', $userEvent->getUser()->getUsername());
         $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
     }
