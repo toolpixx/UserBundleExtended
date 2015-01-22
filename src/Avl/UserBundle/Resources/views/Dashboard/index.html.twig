@@ -1,0 +1,39 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="title">Dashboard</h1>
+    <p>
+        Hello {{ app.session.get('username') }}
+        <br><br>
+        nice to meet you. Lets take a look arround the
+        features of FOSUserBundle that was overwrite
+        and change by avl.
+    </p>
+    <p>
+        Lets have a look at you:
+        <br>
+        <small>(Output generate with Twig-Dump)</small>
+    </p>
+    <div style="max-height:200px;overflow:auto">
+        {{ dump(user) }}
+    </div>
+    <br>
+    <p>
+        The follow changes was made:
+    </p>
+    <ol style="font-size:12px">
+        <li>Add dashboard and forward after login.</li>
+        <li>Add automatically <i>role (ROLE_CUSTOMER)</i> after registration. (FOSUserBundle doesn't)</li>
+        <li>Remove ask for <i>current_password</i> at profile edit page.</li>
+        <li>Add <i>avatar</i> for user incl. upload.</li>
+        <li>Add TwigExtension to show the <i>avatar</i>.</li>
+        <li>Add <i>username</i> to the session after login or profile edit. Because if profile edit will be error ocurred the username doesn't correct.</li>
+        <li>Add <i>avatar</i> to the session after login or profile edit. Because if profile edit will be error ocurred the avatar doesn't correct.</li>
+        <li>Demonstrate how <i>overwrite</i> FOSUserBundle-Controller and add FOSUserBundle-EventListener.</li>
+        <li>Forward to the <i>dashboard</i> if user is logged in when he is called the /login, /register or /resetting/request</li>
+        <li>Remove the route /profile/show</li>
+    </ol>
+    <p>Regards avl</p>
+{% endblock %}

@@ -1,0 +1,10 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_profile_show:
+    path:      /profile/edit
+    defaults:  { _controller: FOSUserBundle:Profile:edit }
+
+fos_ext_avl_user_dashboard_show:
+    path:      /profile/dashboard
+    defaults:  { _controller: UserBundle:Dashboard:index }

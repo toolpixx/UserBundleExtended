@@ -1,0 +1,26 @@
+services:
+    avl_user.profile.form.type:
+        class: Avl\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: avl_user_profile }
+    avl_user.profile_edit:
+        class: Avl\UserBundle\EventListener\ProfileEditListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    avl_user.registration:
+            class: Avl\UserBundle\EventListener\RegistrationListener
+            arguments: [@router]
+            tags:
+                - { name: kernel.event_subscriber }
+    avl_user.login_manager:
+        class: Avl\UserBundle\EventListener\LoginListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    avl.twig.extension.UserProfileImagePath:
+         class: Avl\UserBundle\Twig\Extension\UserProfileImagePathExtension
+         arguments: []
+         tags:
+            - { name: twig.extension }

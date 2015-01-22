@@ -1,0 +1,32 @@
+{% block subject %}Dein neues Passwort{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    Hallo {{ user.username }} !
+
+    vielen Dank für Deine Registrierung. Damit Deine Registrierung abgeschlossen werden kann
+    klicke bitte den folgenden Link:
+
+    {{ confirmationUrl }}
+
+    Grüße,
+    Toolpi
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {#
+        You can of course render the html directly here.
+        Including a template as done here allows keeping things DRY by using
+        the template inheritance in it
+    #}
+    Hallo {{ user.username }} !
+    <br><br>
+    vielen Dank für Deine Registrierung. Damit Deine Registrierung abgeschlossen werden kann
+    klicke bitte den folgenden Link:
+    <br><br>
+    <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+    <br><br>
+    Grüße,<br>
+    Toolpi
+{% endblock %}

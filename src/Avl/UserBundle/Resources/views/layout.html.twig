@@ -1,0 +1,58 @@
+{% extends "TwigBundle::layout.html.twig" %}
+
+{% block head %}
+    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/user/css/demo.css') }}" />
+{% endblock %}
+
+{% block title 'FOSUserBundle extended by avl' %}
+
+    {% block body %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-message">
+                <em>Notice</em>: {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% block content_header %}
+            <ul id="menu">
+                {% block content_header_more %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('fos_ext_avl_user_dashboard_show') }}">Dashboard</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}">Mein Account</a></li>
+                        <li><a href="{{ path('fos_user_change_password') }}">Passwort ändern</a></li>
+                    {% endif %}
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}">Registrieren</a></li>
+                        <li><a href="{{ path('fos_user_resetting_request') }}">Passwort vergessen</a></li>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    {% endif %}
+                {% endblock %}
+            </ul>
+
+            <div style="clear: both"></div>
+        {% endblock %}
+
+        <div class="block">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div style="text-align: right;margin-bottom:12px;">
+                    Eingeloggt als <strong>{{ app.session.get('username') }}</strong>
+                    <img src="{{ UserProfileImagePath() }}" height="40"/>
+                </div>
+            {% endif %}
+            {% block content %}
+                {% block fos_user_content %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+
+        {% if code is defined %}
+            <h2>Code behind this page</h2>
+            <div class="block">
+                <div class="symfony-content">{{ code|raw }}</div>
+            </div>
+        {% endif %}
+    {% endblock %}

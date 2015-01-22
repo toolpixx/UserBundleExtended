@@ -1,0 +1,13 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Mein Account</h1>
+    <br>
+    <div style="float:left;width:500px">
+        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+    </div>
+    <div style="float:right;width:200px">
+        <img src="{{ UserProfileImagePath() }}" height="200"/>
+    </div>
+    <br style="clear:both">
+{% endblock content %}
