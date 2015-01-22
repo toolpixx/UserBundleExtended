@@ -11,13 +11,11 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        /*
-         * The action's view can be rendered using render() method
-         * or @Template annotation as demonstrated in DemoController.
-         *
-         */
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'symfonyRss' => \Feed::loadAtom('http://feeds.feedburner.com/symfony/blog')->toArray(),
+            //'stackoverflowRss' => \Feed::loadAtom('http://stackoverflow.com/feeds/tag/php+symfony')->toArray(),
+            //'githubRss' => \Feed::loadAtom('https://github.com/toolpixx/FOSUserBundleExtended/commits/master.atom')->toArray(),
         ));
     }
 }
