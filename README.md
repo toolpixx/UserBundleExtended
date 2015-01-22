@@ -1,5 +1,5 @@
 # FOSUserBundleExtended
-Add and change some functionally stuff for FOSUserBundle.
+Add and change/overwrite some functions stuff for FOSUserBundle.
 
 * Add dashboard and forward after login.
 * Add automatically <i>role (ROLE_CUSTOMER)</i> after registration. (FOSUserBundle doesn't)
