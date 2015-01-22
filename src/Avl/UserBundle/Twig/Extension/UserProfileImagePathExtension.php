@@ -17,17 +17,26 @@ class UserProfileImagePathExtension extends \Twig_Extension
      */
     private $session;
 
+    /**
+     * Contructor
+     */
     public function __construct()
     {
         $this->session = new Session();
         $this->user = new User();
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'profile_image_extension';
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return array(
@@ -35,6 +44,9 @@ class UserProfileImagePathExtension extends \Twig_Extension
         );
     }
 
+    /**
+     * @return string
+     */
     public function UserProfileImagePath()
     {
         return true
