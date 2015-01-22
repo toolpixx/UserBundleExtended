@@ -167,9 +167,10 @@ class User extends BaseUser implements AdvancedUserInterface
      * Get the absolute path of the profilePicturePath
      */
     public function getProfilePictureAbsolutePath() {
-        return null === $this->profilePicturePath
+
+        return null == $this->getProfilePicturePath()
             ? null
-            : $this->getUploadRootDir().'/'.$this->profilePicturePath;
+            : $this->getUploadRootDir().'/'.$this->getProfilePicturePath();
     }
 
     /**
@@ -302,10 +303,12 @@ class User extends BaseUser implements AdvancedUserInterface
     public function removeProfilePictureFile()
     {
         if (true
-            && $file = $this->getProfilePictureAbsolutePath()
+            && ($file = $this->getProfilePictureAbsolutePath())
             && file_exists($this->getProfilePictureAbsolutePath())
         ) {
             unlink($file);
+            return true;
         }
+        return false;
     }
 }
