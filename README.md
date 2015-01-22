@@ -14,6 +14,7 @@ Add and change some functionally stuff for FOSUserBundle.
 * Demonstrate how <i>overwrite</i> FOSUserBundle-Controller and add FOSUserBundle-EventListener.
 * Forward to the <i>dashboard</i> if user is logged in when he is called the /login, /register or /resetting/request
 * Remove the route /profile/show
+* Delete profile-picture now
 
 
 ## Installation:
