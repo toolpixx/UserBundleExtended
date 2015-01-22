@@ -22,7 +22,7 @@ Add and change/overwrite some functions stuff for  [FOSUserBundle](https://githu
 Please check if your parameter.yml has correct parameter for mysql-database and email. (needed)
 
 <pre>
-bin/composer.phar install
+sudo bin/composer.phar install
 </pre>
 
 <pre>
@@ -38,7 +38,7 @@ sudo app/console assets:install
 </pre>
 
 <pre>
-mkdir web/uploads/user/profilepics
+sudo mkdir web/uploads/user/profilepics
 # is generated automatically / change permissions if needed
 </pre>
 
