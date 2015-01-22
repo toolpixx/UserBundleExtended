@@ -148,7 +148,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * @param string $profilePicturePath
      * @return User
      */
-    public function setProfilePicturePath($profilePicturePath)
+    public function setProfilePicturePath($profilePicturePath = '')
     {
         $this->profilePicturePath = $profilePicturePath;
     }
@@ -281,12 +281,13 @@ class User extends BaseUser implements AdvancedUserInterface
             /**
              * delete the old image
              */
-            unlink($this->getUploadRootDir().'/'.$this->oldProfilePicturePath);
-
-            /**
-             * clear the temp image path
-             */
-            $this->oldProfilePicturePath = null;
+            if (is_file($this->getUploadRootDir().'/'.$this->oldProfilePicturePath)) {
+                unlink($this->getUploadRootDir().'/'.$this->oldProfilePicturePath);
+                /**
+                 * clear the temp image path
+                 */
+                $this->oldProfilePicturePath = null;
+            }
         }
         $this->profilePictureFile = null;
     }
@@ -302,12 +303,24 @@ class User extends BaseUser implements AdvancedUserInterface
      */
     public function removeProfilePictureFile()
     {
+        /**
+         * Check the profile-picture
+         */
         if (true
             && ($file = $this->getProfilePictureAbsolutePath())
             && file_exists($this->getProfilePictureAbsolutePath())
         ) {
-            unlink($file);
-            return true;
+            /**
+             * Delete profile-picture
+             */
+            if (unlink($file)) {
+                /**
+                 * Set profile-picture to empty
+                 */
+                $this->setProfilePicturePath();
+
+                return true;
+            }
         }
         return false;
     }

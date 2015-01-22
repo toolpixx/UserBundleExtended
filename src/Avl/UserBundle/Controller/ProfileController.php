@@ -44,15 +44,36 @@ class ProfileController extends BaseProfileController
         return parent::editAction($request);
     }
 
+    /**
+     * Delete profile-picture
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function deletePictureAction(Request $request) {
 
+        /**
+         * Method DELETE?
+         */
         if ($request->getMethod() == 'DELETE') {
+
+            /**
+             * Can i delete the picture
+             */
             if ($this->getUser()->removeProfilePictureFile()) {
+                /**
+                 * Update user profile
+                 */
+                $this->get('fos_user.user_manager')->updateUser(
+                    $this->getUser()
+                );
+
                 $this->session->getFlashBag()->add('notice', 'Picture was deleted.');
             } else {
                 $this->session->getFlashBag()->add('notice', 'Cannot delete picture.');
             }
         }
+
         return new RedirectResponse(
             $this->container->get('router')->generate('fos_user_profile_edit',
                 array())
