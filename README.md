@@ -37,5 +37,10 @@ sudo app/console assets:install
 </pre>
 
 <pre>
+mkdir web/uploads/user/profilepics
+</pre>
+<i>(Change permissions if needed)</i>
+
+<pre>
 sudo app/console server:run
 </pre>
