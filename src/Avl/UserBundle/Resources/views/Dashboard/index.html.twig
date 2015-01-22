@@ -41,10 +41,28 @@
     </div>
     <div style="float:right;width:350px">
         <h1 class="title">Symfony News</h1>
-        {% for item in symfonyRss.channel.item %}
-            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-            <hr>
-        {% endfor %}
+        <div style="max-height:220px;overflow:auto">
+            {% for item in symfonyRss.channel.item %}
+                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                <hr>
+            {% endfor %}
+        </div>
+        <br>
+        <h1 class="title">Stackoverflow<br>#symfony</h1>
+        <div style="max-height:220px;overflow:auto">
+            {% for item in stackoverflowRss.entry %}
+                <a href="{{ item.id }}" target="_blank">{{ item.title }}</a>
+                <hr>
+            {% endfor %}
+        </div>
+        <br>
+        <h1 class="title">Github<br>#symfony</h1>
+        <div style="max-height:220px;overflow:auto">
+            {% for item in githubRss.entry %}
+                <a href="{{ item.id }}" target="_blank">{{ item.title }}</a>
+                <hr>
+            {% endfor %}
+        </div>
     </div>
     <br style="clear:both">
 {% endblock %}
