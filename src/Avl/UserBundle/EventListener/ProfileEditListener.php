@@ -15,6 +15,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * Class ProfileEditListener
+ * @package Avl\UserBundle\EventListener
+ */
 class ProfileEditListener implements EventSubscriberInterface
 {
     /**
