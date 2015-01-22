@@ -39,8 +39,8 @@ sudo app/console assets:install
 
 <pre>
 mkdir web/uploads/user/profilepics
+# is generated automatically / change permissions if needed
 </pre>
-<small><i>(Change permissions if needed)</i></small>
 
 <pre>
 sudo app/console server:run
