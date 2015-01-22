@@ -99,3 +99,24 @@ ul#demo-list a {
     white-space: pre;
     font-family: monospace;
 }
+
+body {
+    background-image: url(../images/bg.png);
+    background-position: left top;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-color: #C0DEED;
+    margin:0px;
+    padding:0px;
+}
+
+#menu li a {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#menu li a:hover {
+    opacity:.7
+}
