@@ -1,4 +1,4 @@
-# FOSUserBundleExtended
+# UserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
 * Add dashboard (with symfony related feed) and forward after login.
