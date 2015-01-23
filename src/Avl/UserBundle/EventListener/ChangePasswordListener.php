@@ -12,6 +12,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\UserEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -54,7 +55,7 @@ class ChangePasswordListener implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onChangePasswordInitialize',
-            FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onChangePasswordSuccess',
+            FOSUserEvents::CHANGE_PASSWORD_SUCCESS => 'onChangePasswordSuccess',
             FOSUserEvents::CHANGE_PASSWORD_COMPLETED => 'onChangePasswordCompleted'
         );
     }
@@ -68,11 +69,13 @@ class ChangePasswordListener implements EventSubscriberInterface
     }
 
     /**
-     * @param FormEvent $event
+     * @param FormEvent $formEvent
      */
-    public function onChangePasswordSuccess(FormEvent $event)
+    public function onChangePasswordSuccess(FormEvent $formEvent)
     {
         // nothing implemented yet
+        $url = $this->router->generate('fos_ext_avl_user_dashboard_show');
+        $formEvent->setResponse(new RedirectResponse($url));
     }
 
     /**
