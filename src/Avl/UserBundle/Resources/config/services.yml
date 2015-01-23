@@ -9,6 +9,11 @@ services:
         arguments: [@router]
         tags:
             - { name: kernel.event_subscriber }
+    avl_user.change_password:
+            class: Avl\UserBundle\EventListener\ChangePasswordListener
+            arguments: [@router, @service_container]
+            tags:
+                - { name: kernel.event_subscriber }
     avl_user.registration:
             class: Avl\UserBundle\EventListener\RegistrationListener
             arguments: [@router]

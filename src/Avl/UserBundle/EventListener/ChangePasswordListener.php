@@ -14,17 +14,23 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ProfileEditListener
  * @package Avl\UserBundle\EventListener
  */
-class ProfileEditListener implements EventSubscriberInterface
+class ChangePasswordListener implements EventSubscriberInterface
 {
     /**
      * @var UrlGeneratorInterface
      */
     private $router;
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     /**
      * @var Session
@@ -34,9 +40,10 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param UrlGeneratorInterface $router
      */
-    public function __construct(UrlGeneratorInterface $router)
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
+        $this->container = $container;
         $this->session = new Session();
     }
 
@@ -46,24 +53,24 @@ class ProfileEditListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileInitialize',
-            FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
-            FOSUserEvents::PROFILE_EDIT_COMPLETED => 'onProfileCompleted'
+            FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onChangePasswordInitialize',
+            FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onChangePasswordSuccess',
+            FOSUserEvents::CHANGE_PASSWORD_COMPLETED => 'onChangePasswordCompleted'
         );
     }
 
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileInitialize(UserEvent $userEvent)
+    public function onChangePasswordInitialize(UserEvent $userEvent)
     {
-        $this->setUsernameAndProfilePicturePath($userEvent);
+        // nothing implemented yes
     }
 
     /**
      * @param FormEvent $event
      */
-    public function onProfileEditSuccess(FormEvent $event)
+    public function onChangePasswordSuccess(FormEvent $event)
     {
         // nothing implemented yet
     }
@@ -71,24 +78,8 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileCompleted(UserEvent $userEvent)
+    public function onChangePasswordCompleted(UserEvent $userEvent)
     {
-        $this->setUsernameAndProfilePicturePath($userEvent);
         $this->session->getFlashBag()->add('notice', 'Your data was edit.');
-    }
-
-    /**
-     * Set the username into session, because
-     * if you change the name and error ocurred
-     * sf will change the name to the new one.
-     *
-     * We want change the name only if form-data
-     * is persist.
-     *
-     * @param UserEvent $userEvent
-     */
-    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) {
-        $this->session->set('username', $userEvent->getUser()->getUsername());
-        $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
     }
 }

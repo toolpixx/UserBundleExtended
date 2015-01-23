@@ -8,12 +8,6 @@
 {% block title 'FOSUserBundle extended by avl' %}
 
     {% block body %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-message">
-                <em>Notice</em>: {{ flashMessage }}
-            </div>
-        {% endfor %}
-
         {% block content_header %}
             <ul id="menu">
                 {% block content_header_more %}
@@ -43,6 +37,11 @@
                     <img src="{{ UserProfileImagePath() }}" height="40"/>
                 </div>
             {% endif %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-message" style="padding:20px;border-radius:10px;background-color:#C0DEED;margin-bottom:16px;">
+                    <em>Notice</em>: {{ flashMessage }}
+                </div>
+            {% endfor %}
             {% block content %}
                 {% block fos_user_content %}
                 {% endblock %}
