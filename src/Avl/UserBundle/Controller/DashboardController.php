@@ -2,16 +2,28 @@
 
 namespace Avl\UserBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 
 class DashboardController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct() {
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
+        /**
+         * Log info to test chromephp
+         */
+        $this->get('logger')->info($this->getUser());
+
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
             'symfonyRss' => $this->getRssFeed('http://feeds.feedburner.com/symfony/blog'),
@@ -29,8 +41,11 @@ class DashboardController extends Controller
      * @return \SimpleXMLElement
      */
     private function getRssFeed($url) {
-
-        return
-            simplexml_load_file($url);
+        try {
+            return simplexml_load_file($url);
+        } catch(ContextErrorException $e) {
+            $this->get('logger')->error('Can not load: '.$url);
+            $this->get('logger')->error($e->getCode().' : '.$e->getMessage());
+        }
     }
 }
