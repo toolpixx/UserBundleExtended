@@ -1,7 +1,7 @@
 # UserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
-* Send issue to [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/issues/1736)
+* Send issue to [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/issues/1736). 
 If you use PasswortChangeListener please check the issue and change your FOSUserBundle by hand. (Wait for FOSUserBundle update)
 
 * Add dashboard (with symfony related feed) and forward after login.
