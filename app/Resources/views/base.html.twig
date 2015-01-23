@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+<head>
+    <meta charset="{{ _charset }}" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{{ asset('bundles/framework/css/structure.css', absolute=true) }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/framework/css/body.css', absolute=true) }}" rel="stylesheet" />
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div id="content">
+    <div class="header clear-fix">
+        <div class="header-logo">
+            <img src="{{ asset('bundles/user/images/logo.png', absolute=true) }}" width="100" alt="AvL" />
+        </div>
+    </div>
+
+    <div class="sf-reset">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+</div>
+</body>
 </html>
