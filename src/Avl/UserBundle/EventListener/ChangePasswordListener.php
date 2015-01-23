@@ -53,8 +53,8 @@ class ChangePasswordListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onChangePasswordInitialize',
-            FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onChangePasswordSuccess',
+            FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onChangePasswordInitialize',
+            FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onChangePasswordSuccess',
             FOSUserEvents::CHANGE_PASSWORD_COMPLETED => 'onChangePasswordCompleted'
         );
     }
