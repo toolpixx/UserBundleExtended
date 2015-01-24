@@ -5,6 +5,9 @@
     <br>
     <div style="float:left;width:500px">
         {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        <div class="fixed-dragger-cropper" style="width:400px;height:400px;">
+            <!-- Hier erscheinen die Vorschaubilder -->
+        </div>
     </div>
     <div style="float:right;width:200px">
         <img src="{{ UserProfileImagePath() }}" height="200"/>
@@ -16,4 +19,64 @@
         {% endif %}
     </div>
     <br style="clear:both">
+    <link rel="stylesheet" href="{{ asset('bundles/user/cropper/cropper.css') }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="{{ asset('bundles/user/cropper/cropper.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#fos_user_profile_form_profilePictureFile').change(function(e) {
+                if (this.files !== 'undefined' && typeof FileReader !== 'undefined') {
+                    for (var f = 0; f < this.files.length; f++) {
+                        var file = this.files[f];
+                        var reader = new FileReader();
+
+                        if (!/image\/(jpeg|jpg|png|gif)/.test(file.type)) {
+                            alert('Dateityp "' + file.type + '" wird nicht unterstützt.');
+                            continue;
+                        }
+
+                        $(reader).load(previewImage);
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+        });
+
+        function previewImage(e)
+        {
+            var img = $(document.createElement('img'));
+
+            $(img).attr('src', e.target.result);
+            $('.fixed-dragger-cropper').append(img);
+
+            $('.fixed-dragger-cropper > img').ready(function(e) {
+
+                $(".fixed-dragger-cropper > img").cropper({
+                    aspectRatio: 500 / 500,
+                    autoCropArea: 0.6, // Center 60%
+                    minWidth:400,
+                    maxWidth:400,
+                    minHeight:400,
+                    maxHeight:400,
+                    multiple: false,
+                    dragCrop: false,
+                    dashed: false,
+                    movable: true,
+                    zoomable: false,
+                    resizable: false,
+                    done: function(data) {
+                        $('#fos_user_profile_form_imageCropY').val(Math.round(data.y));
+                        $('#fos_user_profile_form_imageCropX').val(Math.round(data.x));
+                        $('#fos_user_profile_form_imageCropHeight').val(Math.round(data.height));
+                        $('#fos_user_profile_form_imageCropWidth').val(Math.round(data.width));
+                    }
+                    //built: function () {
+                    //    $(this).cropper("zoom", 0.5);
+                    //}
+                });
+
+            });
+        }
+    </script>
 {% endblock content %}

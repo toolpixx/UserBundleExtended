@@ -48,7 +48,7 @@ class User extends BaseUser implements AdvancedUserInterface
     protected $id;
 
     /**
-     * @Assert\Image(
+     * Assert\Image(
      *  maxWidth = 400,
      *  maxWidthMessage = "The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px.",
      *  maxHeight = 400,
@@ -58,7 +58,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * http://symfony.com/doc/current/reference/constraints/Image.html
      *
-     * @Assert\File(
+     * Assert\File(
      *  maxSize = "100k",
      *  mimeTypes = {"image/jpeg", "image/gif", "image/png"},
      *  maxSizeMessage = "Die ausgewählte Datei ({{ size }} {{ suffix }}) ist zu gross. Maximal {{ limit }} {{ suffix }} erlaubt.",
@@ -86,6 +86,26 @@ class User extends BaseUser implements AdvancedUserInterface
      * )
      */
     protected $profilePicturePath;
+
+    /**
+     * @var
+     */
+    protected $imageCropY;
+
+    /**
+     * @var
+     */
+    protected $imageCropX;
+
+    /**
+     * @var
+     */
+    protected $imageCropHeight;
+
+    /**
+     * @var
+     */
+    protected $imageCropWidth;
 
     /**
      * Constructor
@@ -271,6 +291,8 @@ class User extends BaseUser implements AdvancedUserInterface
             $this->getProfilePicturePath()
         );
 
+        $this->crop($this->getUploadRootDir().'/'.$this->getProfilePicturePath());
+
         /**
          * check if we have an old image
          */
@@ -323,5 +345,122 @@ class User extends BaseUser implements AdvancedUserInterface
             }
         }
         return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageCropY() {
+        return $this->imageCropY;
+    }
+
+    /**
+     * @param $imageCropY
+     */
+    public function setImageCropY($imageCropY) {
+        $this->imageCropY = $imageCropY;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageCropX() {
+        return $this->imageCropX;
+    }
+
+    /**
+     * @param $imageCropX
+     */
+    public function setImageCropX($imageCropX) {
+        $this->imageCropX = $imageCropX;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageCropHeight() {
+        return $this->imageCropHeight;
+    }
+
+    /**
+     * @param $imageCropHeight
+     */
+    public function setImageCropHeight($imageCropHeight) {
+        $this->imageCropHeight = $imageCropHeight;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageCropWidth() {
+        return $this->imageCropWidth;
+    }
+
+    /**
+     * @param $imageCropWidth
+     */
+    public function setImageCropWidth($imageCropWidth) {
+        $this->imageCropWidth = $imageCropWidth;
+    }
+
+    private function crop($src) {
+        $type = getimagesize($src);
+        if (!empty($src)) {
+            switch ($type['mime']) {
+                case "image/gif":
+                    $src_img = imagecreatefromgif($src);
+                    break;
+                case "image/jpeg":
+                    $src_img = imagecreatefromjpeg($src);
+                    break;
+                case "image/png":
+                    $src_img = imagecreatefrompng($src);
+                    break;
+            }
+            if (!$src) {
+                $this -> msg = "Failed to read the image file";
+                return;
+            }
+
+            $dst_img = imagecreatetruecolor(
+                220,
+                220
+            );
+
+            $result = imagecopyresampled(
+                $dst_img,
+                $src_img,
+                0,
+                0,
+                $this->imageCropX,
+                $this->imageCropY,
+                220,
+                220,
+                $this->imageCropWidth,
+                $this->imageCropHeight
+            );
+
+            if ($result) {
+                switch ($type['mime']) {
+                    case "image/gif":
+                        $result = imagegif($dst_img, $src);
+                        break;
+                    case "image/jpeg":
+                        $result = imagejpeg($dst_img, $src);
+                        break;
+                    case "image/png":
+                        $result = imagepng($dst_img, $src);
+                        break;
+                }
+                if (!$result) {
+                    $this -> msg = "Failed to save the cropped image file";
+                }
+            } else {
+                $this -> msg = "Failed to crop the image file";
+            }
+            imagedestroy($src_img);
+            imagedestroy($dst_img);
+
+        }
     }
 }

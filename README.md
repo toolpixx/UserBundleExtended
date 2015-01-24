@@ -22,14 +22,20 @@ If you use PasswortChangeListener please check the issue and change your FOSUser
 
 ## Installation:
 
-Please check if your parameter.yml has correct parameter for mysql-database and email. (needed)
+* If your system is mac with yosemite please check that your php has
+gd-support. If not, please have a look here [Install/Update php with gd-support](http://stackoverflow.com/questions/26493762/yosemite-php-gd-mcrypt-installation/26505558#26505558)
+
+## Very important note:
+
+* Please check if your parameter.yml has correct parameter for mysql-database and email. If not composer will ask for them.
+* Please checkout, that ou create backup fro existing database.
 
 <pre>
-sudo bin/composer.phar install
+git clone git@github.com:toolpixx/UserBundleExtended.git
 </pre>
 
 <pre>
-sudo app/console cache:clear
+sudo bin/composer.phar install
 </pre>
 
 <pre>
@@ -52,3 +58,14 @@ sudo app/console server:run
 <pre>
 http://127.0.0.1:PORT
 </pre>
+
+# Configuration?
+
+Checkout the config_dev.yml, i have activated <b>chromephp</b> If you wan't use it, please comment it out.
+
+[chromephp](https://github.com/ccampbell/chromephp)
+
+Checkout the config.yml, i have activated <b>PhpStormOpener</b> If you wan't use it, please comment <b>ide</b> out.
+[PhpStormOpener](https://github.com/pinepain/PhpStormOpener)
+
+ide: "pstorm://%%f:%%l"
