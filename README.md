@@ -28,7 +28,7 @@ gd-support. If not, please have a look here [Install/Update php with gd-support]
 ## Very important note:
 
 * Please check if your parameter.yml has correct parameter for mysql-database and email. If not composer will ask for them.
-* Please checkout, that ou create backup fro existing database.
+* Please checkout, that you create backup fro existing database.
 
 <pre>
 git clone git@github.com:toolpixx/UserBundleExtended.git
