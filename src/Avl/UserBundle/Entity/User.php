@@ -7,7 +7,9 @@
  */
 namespace Avl\UserBundle\Entity;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,11 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
  */
 class User extends BaseUser implements AdvancedUserInterface
 {
+    /**
+     * @var Session
+     */
+    private $session;
+
     /**
      * @var string
      */
@@ -48,18 +55,18 @@ class User extends BaseUser implements AdvancedUserInterface
     protected $id;
 
     /**
-     * Assert\Image(
-     *  maxWidth = 400,
+     * @Assert\Image(
+     *  maxWidth = 1024,
      *  maxWidthMessage = "The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px.",
-     *  maxHeight = 400,
+     *  maxHeight = 768,
      *  maxHeightMessage = "The image width is too big ({{ height }}px). Allowed maximum width is {{ max_height }}px.",
      *  mimeTypesMessage = "Please upload a valid image."
      * )
      *
      * http://symfony.com/doc/current/reference/constraints/Image.html
      *
-     * Assert\File(
-     *  maxSize = "100k",
+     * @Assert\File(
+     *  maxSize = "1M",
      *  mimeTypes = {"image/jpeg", "image/gif", "image/png"},
      *  maxSizeMessage = "Die ausgewählte Datei ({{ size }} {{ suffix }}) ist zu gross. Maximal {{ limit }} {{ suffix }} erlaubt.",
      *  mimeTypesMessage = "Ihr Dokument ({{ type }}) hat das falsche Format. Bitte benutzen Sie nur {{ types }}.",
@@ -123,6 +130,78 @@ class User extends BaseUser implements AdvancedUserInterface
          *
          * $this->roles = $this->usedRoles;
          */
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @return mixed
+     */
+    public function getImageCropY() {
+        return $this->imageCropY;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @param $imageCropY
+     */
+    public function setImageCropY($imageCropY) {
+        $this->imageCropY = $imageCropY;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @return mixed
+     */
+    public function getImageCropX() {
+        return $this->imageCropX;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @param $imageCropX
+     */
+    public function setImageCropX($imageCropX) {
+        $this->imageCropX = $imageCropX;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @return mixed
+     */
+    public function getImageCropHeight() {
+        return $this->imageCropHeight;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @param $imageCropHeight
+     */
+    public function setImageCropHeight($imageCropHeight) {
+        $this->imageCropHeight = $imageCropHeight;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @return mixed
+     */
+    public function getImageCropWidth() {
+        return $this->imageCropWidth;
+    }
+
+    /**
+     * For cropping profile-picture
+     *
+     * @param $imageCropWidth
+     */
+    public function setImageCropWidth($imageCropWidth) {
+        $this->imageCropWidth = $imageCropWidth;
     }
 
     /**
@@ -348,119 +427,104 @@ class User extends BaseUser implements AdvancedUserInterface
     }
 
     /**
-     * @return mixed
+     * Crop profile-picture
+     *
+     * @param $src
+     * @return bool
      */
-    public function getImageCropY() {
-        return $this->imageCropY;
-    }
-
-    /**
-     * @param $imageCropY
-     */
-    public function setImageCropY($imageCropY) {
-        $this->imageCropY = $imageCropY;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageCropX() {
-        return $this->imageCropX;
-    }
-
-    /**
-     * @param $imageCropX
-     */
-    public function setImageCropX($imageCropX) {
-        $this->imageCropX = $imageCropX;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageCropHeight() {
-        return $this->imageCropHeight;
-    }
-
-    /**
-     * @param $imageCropHeight
-     */
-    public function setImageCropHeight($imageCropHeight) {
-        $this->imageCropHeight = $imageCropHeight;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageCropWidth() {
-        return $this->imageCropWidth;
-    }
-
-    /**
-     * @param $imageCropWidth
-     */
-    public function setImageCropWidth($imageCropWidth) {
-        $this->imageCropWidth = $imageCropWidth;
-    }
-
     private function crop($src) {
-        $type = getimagesize($src);
-        if (!empty($src)) {
-            switch ($type['mime']) {
-                case "image/gif":
-                    $src_img = imagecreatefromgif($src);
-                    break;
-                case "image/jpeg":
-                    $src_img = imagecreatefromjpeg($src);
-                    break;
-                case "image/png":
-                    $src_img = imagecreatefrompng($src);
-                    break;
-            }
-            if (!$src) {
-                $this -> msg = "Failed to read the image file";
-                return;
-            }
 
-            $dst_img = imagecreatetruecolor(
-                220,
-                220
-            );
+        /**
+         * Get the Session
+         */
+        $this->session = new Session();
 
-            $result = imagecopyresampled(
-                $dst_img,
-                $src_img,
-                0,
-                0,
-                $this->imageCropX,
-                $this->imageCropY,
-                220,
-                220,
-                $this->imageCropWidth,
-                $this->imageCropHeight
-            );
+        try {
 
-            if ($result) {
-                switch ($type['mime']) {
+            /**
+             * Get the image-type
+             */
+            $imageType = $this->getImageMimeType($src);
+
+            if (is_file($src)) {
+
+                /**
+                 * Read the picture
+                 */
+                switch ($imageType) {
                     case "image/gif":
-                        $result = imagegif($dst_img, $src);
+                        $src_img = imagecreatefromgif($src);
                         break;
                     case "image/jpeg":
-                        $result = imagejpeg($dst_img, $src);
+                        $src_img = imagecreatefromjpeg($src);
                         break;
                     case "image/png":
-                        $result = imagepng($dst_img, $src);
+                        $src_img = imagecreatefrompng($src);
                         break;
                 }
-                if (!$result) {
-                    $this -> msg = "Failed to save the cropped image file";
-                }
-            } else {
-                $this -> msg = "Failed to crop the image file";
-            }
-            imagedestroy($src_img);
-            imagedestroy($dst_img);
 
+                /**
+                 * Check if pictures can read
+                 */
+                if (!isset($src_img)) {
+                    throw new Exception('Cannot read image.');
+                }
+
+                /**
+                 * Resample the picture
+                 */
+                $dst_img = imagecreatetruecolor(
+                    220, 220
+                );
+
+                $result = imagecopyresampled(
+                    $dst_img, $src_img, 0, 0,
+                    $this->imageCropX, $this->imageCropY, 220, 220,
+                    $this->imageCropWidth, $this->imageCropHeight
+                );
+
+                /**
+                 * If picture was resampled save
+                 */
+                if ($result) {
+                    switch ($imageType) {
+                        case "image/gif":
+                            $result = imagegif($dst_img, $src);
+                            break;
+                        case "image/jpeg":
+                            $result = imagejpeg($dst_img, $src);
+                            break;
+                        case "image/png":
+                            $result = imagepng($dst_img, $src);
+                            break;
+                    }
+                    if (!$result) {
+                        throw new Exception('Failed to save the cropped image file');
+                    }
+                } else {
+                    throw new Exception('Failed to crop the image file');
+                }
+
+                /**
+                 * Make clean
+                 */
+                imagedestroy($src_img);
+                imagedestroy($dst_img);
+
+                return true;
+            }
+        } catch (Exception $e) {
+            $this->session->getFlashBag()->add('error', $e->getMessage());
+            return false;
         }
+    }
+
+    private function getImageMimeType($src) {
+
+        if (is_file($src)) {
+            $imageInfo = getimagesize($src);
+            return ($imageInfo['mime']) ? $imageInfo['mime'] : null;
+        }
+        return null;
     }
 }

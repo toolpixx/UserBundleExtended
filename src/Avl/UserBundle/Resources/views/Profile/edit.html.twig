@@ -48,6 +48,7 @@
             var img = $(document.createElement('img'));
 
             $(img).attr('src', e.target.result);
+            $('.cropper-container').remove();
             $('.fixed-dragger-cropper').append(img);
 
             $('.fixed-dragger-cropper > img').ready(function(e) {
@@ -70,10 +71,10 @@
                         $('#fos_user_profile_form_imageCropX').val(Math.round(data.x));
                         $('#fos_user_profile_form_imageCropHeight').val(Math.round(data.height));
                         $('#fos_user_profile_form_imageCropWidth').val(Math.round(data.width));
+                    },
+                    built: function () {
+                        $(this).cropper("zoom", 0.5);
                     }
-                    //built: function () {
-                    //    $(this).cropper("zoom", 0.5);
-                    //}
                 });
 
             });

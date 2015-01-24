@@ -61,15 +61,17 @@ class DashboardController extends Controller
                 return
                     simplexml_load_string($cache_driver->fetch($cache_key));
             }
+
             /**
              * Or get and save the new content
              */
             else {
                 $rssFeed = file_get_contents($url);
+
                 /**
                  * Save to cache ad return content
                  */
-                $cache_driver->save($cache_key, $rssFeed, strtotime('+5 Minutes'));
+                $cache_driver->save($cache_key, $rssFeed, 3600); // 1 hour
                 return simplexml_load_string($rssFeed);
             }
 

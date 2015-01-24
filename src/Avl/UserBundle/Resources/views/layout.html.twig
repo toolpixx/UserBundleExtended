@@ -42,6 +42,11 @@
                     <em>Notice</em>: {{ flashMessage }}
                 </div>
             {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="flash-message" style="padding:20px;border-radius:10px;background-color:red;color:white;margin-bottom:16px;">
+                    <em>Notice</em>: {{ flashMessage }}
+                </div>
+            {% endfor %}
             {% block content %}
                 {% block fos_user_content %}
                 {% endblock %}

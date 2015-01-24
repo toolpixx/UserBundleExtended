@@ -74,7 +74,13 @@ class ProfileEditListener implements EventSubscriberInterface
     public function onProfileCompleted(UserEvent $userEvent)
     {
         $this->setUsernameAndProfilePicturePath($userEvent);
-        $this->session->getFlashBag()->add('notice', 'Your data was edit.');
+
+        /**
+         * If no error-message was set (etc. cropping picture)
+         */
+        if (!$this->session->getFlashBag()->has('error')) {
+            $this->session->getFlashBag()->add('notice', 'Your data was edit.');
+        }
     }
 
     /**
