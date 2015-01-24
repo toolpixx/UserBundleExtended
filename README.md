@@ -4,6 +4,8 @@ Add and change/overwrite some functions stuff for  [FOSUserBundle](https://githu
 * Send issue to [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/issues/1736). 
 If you use PasswortChangeListener please check the issue and change your FOSUserBundle by hand. (Wait for FOSUserBundle update)
 
+* Add image-crop for profil-picture. (Experimentell, it isn't the last source for that)
+
 * Add dashboard (with symfony related feed) and forward after login.
 * Add automatically <i>role (ROLE_CUSTOMER)</i> after registration. (FOSUserBundle doesn't)
 * Remove ask for <i>current_password</i> at profile edit page.
