@@ -68,6 +68,21 @@ sudo bin/setup.sh
 
 <pre>
 #
+# Create User demo
+#
+# user, email, password
+#
+sudo app/console fos:user:create demo demo@example.com 123456
+
+#
+# Add/promote role to user demo
+#
+sudo app/console fos:user:promote demo ROLE_CUSTOMER
+</pre>
+
+
+<pre>
+#
 # Run internal php-server
 #
 sudo app/console server:run
