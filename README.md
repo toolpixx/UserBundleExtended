@@ -1,9 +1,6 @@
 # UserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
-* Send issue to [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/issues/1736). 
-If you use PasswortChangeListener please check the issue and change your FOSUserBundle by hand. (Wait for FOSUserBundle update)
-
 * Add image-crop for profil-picture. (Experimental, it isn't the last source for that)
 
 * Add dashboard (with symfony related feed) and forward after login.
@@ -49,8 +46,7 @@ sudo app/console assets:install
 </pre>
 
 <pre>
-sudo mkdir web/uploads/user/profilepics
-# is generated automatically / change permissions if needed
+sudo bin/setup.sh
 </pre>
 
 <pre>
