@@ -30,30 +30,54 @@ gd-support. If not, please have a look here [Install/Update php with gd-support]
 * Please checkout, that you create backup fro existing database.
 
 <pre>
+#
+# Clone the project from github
+#
 git clone git@github.com:toolpixx/UserBundleExtended.git
 </pre>
 
 <pre>
+#
+# Install all dependencies
+#
 sudo bin/composer.phar install
 </pre>
 
 <pre>
+#
+# Update your database-schema
+#
 sudo app/console doctrine:schema:update --force
 </pre>
 
 <pre>
+#
+# Install web-assets
+#
 sudo app/console assets:install
 </pre>
 
 <pre>
+#
+# Create upload-path for profile-pictures
+# and copy the default-picture to the
+# profile-pictures.
+#
 sudo bin/setup.sh
 </pre>
 
 <pre>
+#
+# Run internal php-server
+#
 sudo app/console server:run
 </pre>
 
 <pre>
+#
+# Look the port from step before and
+# browse to this url.
+#
 http://127.0.0.1:PORT
 </pre>
 
