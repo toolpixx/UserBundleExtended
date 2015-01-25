@@ -34,7 +34,11 @@ class ProfileFormType extends BaseType
         $builder
             //->remove('username')
             ->remove('current_password')
-            ->add('profilePictureFile', 'file')
+            ->add('profilePictureFile', 'file',
+                array(
+                    'required' => false
+                )
+            )
             ->add('imageCropY', 'hidden')
             ->add('imageCropX', 'hidden')
             ->add('imageCropHeight', 'hidden')
