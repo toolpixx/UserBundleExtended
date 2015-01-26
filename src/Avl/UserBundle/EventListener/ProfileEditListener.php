@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ProfileEditListener
@@ -27,16 +28,23 @@ class ProfileEditListener implements EventSubscriberInterface
     private $router;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * @var Session
      */
     private $session;
 
     /**
      * @param UrlGeneratorInterface $router
+     * @param ContainerInterface $container
      */
-    public function __construct(UrlGeneratorInterface $router)
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
+        $this->container = $container;
         $this->session = new Session();
     }
 
@@ -57,6 +65,9 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileInitialize(UserEvent $userEvent)
     {
+        /**
+         * Setup username and profile-picture to the session
+         */
         $this->setUsernameAndProfilePicturePath($userEvent);
     }
 
@@ -65,7 +76,36 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileEditSuccess(FormEvent $event)
     {
-        // nothing implemented yet
+        $user = $event->getForm('user')->getData();
+
+        /**
+         * Use the Crop-Service
+         */
+        try {
+            /**
+             * Was profilePicture uploaded?
+             */
+            if ($user->hasProfilePictureUpload()) {
+                /**
+                 * Get the cropimage-service
+                 */
+                $cropImage = $this->container->get('crop_image');
+                /**
+                 * crop the iomage
+                 */
+                $cropImage->cropImage(
+                    array(
+                        'cropY' => $user->getImageCropY(),
+                        'cropX' => $user->getImageCropX(),
+                        'cropHeight' => $user->getImageCropHeight(),
+                        'cropWidth' => $user->getImageCropWidth(),
+                        'cropImagePath' => $user->getProfilePictureFile()->getPathname()
+                    )
+                );
+            }
+        } catch(Exception $e) {
+            $this->session->getFlashBag()->add('error', $e->getMessage());
+        }
     }
 
     /**
@@ -73,6 +113,9 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileCompleted(UserEvent $userEvent)
     {
+        /**
+         * Setup username and profile-picture to the session
+         */
         $this->setUsernameAndProfilePicturePath($userEvent);
 
         /**

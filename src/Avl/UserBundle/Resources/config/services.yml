@@ -6,7 +6,7 @@ services:
             - { name: form.type, alias: avl_user_profile }
     avl_user.profile_edit:
         class: Avl\UserBundle\EventListener\ProfileEditListener
-        arguments: [@router]
+        arguments: [@router, @service_container]
         tags:
             - { name: kernel.event_subscriber }
     avl_user.change_password:
@@ -29,3 +29,8 @@ services:
          arguments: []
          tags:
             - { name: twig.extension }
+    crop_image:
+             class: Common\Services\CropImage
+             arguments: []
+             tags:
+                - { name: crop.image }
