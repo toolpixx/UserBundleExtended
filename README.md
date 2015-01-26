@@ -1,7 +1,8 @@
 # UserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
-* Add image-crop for profil-picture. (Experimental, it isn't the last source for that)
+* Add image-crop as service for profil-picture.
+* Upload image in user-entity with traits.
 
 * Add dashboard (with symfony related feed) and forward after login.
 * Add automatically <i>role (ROLE_CUSTOMER)</i> after registration. (FOSUserBundle doesn't)
