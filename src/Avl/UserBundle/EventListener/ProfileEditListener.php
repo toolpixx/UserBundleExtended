@@ -65,9 +65,7 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileInitialize(UserEvent $userEvent)
     {
-        /**
-         * Setup username and profile-picture to the session
-         */
+        // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);
     }
 
@@ -78,21 +76,15 @@ class ProfileEditListener implements EventSubscriberInterface
     {
         $user = $event->getForm('user')->getData();
 
-        /**
-         * Use the Crop-Service
-         */
+        // Use the Crop-Service
         try {
-            /**
-             * Was profilePicture uploaded?
-             */
+            // Was profilePicture uploaded?
             if ($user->hasProfilePictureUpload()) {
-                /**
-                 * Get the cropimage-service
-                 */
+
+                // Get the cropimage-service
                 $cropImage = $this->container->get('crop_image');
-                /**
-                 * crop the iomage
-                 */
+
+                // crop the image
                 $cropImage->cropImage(
                     array(
                         'cropY' => $user->getImageCropY(),
@@ -113,14 +105,10 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileCompleted(UserEvent $userEvent)
     {
-        /**
-         * Setup username and profile-picture to the session
-         */
+        // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);
 
-        /**
-         * If no error-message was set (etc. cropping picture)
-         */
+        // If no error-message was set (etc. cropping picture)
         if (!$this->session->getFlashBag()->has('error')) {
             $this->session->getFlashBag()->add('notice', 'Your data was edit.');
         }
@@ -136,7 +124,8 @@ class ProfileEditListener implements EventSubscriberInterface
      *
      * @param UserEvent $userEvent
      */
-    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) {
+    private function setUsernameAndProfilePicturePath(UserEvent $userEvent)
+    {
         $this->session->set('username', $userEvent->getUser()->getUsername());
         $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
     }

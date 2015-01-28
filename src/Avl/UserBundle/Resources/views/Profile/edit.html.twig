@@ -1,31 +1,29 @@
 {% extends "UserBundle::layout.html.twig" %}
 
-{% block content %}
-    <h1>Mein Account</h1>
-    <br>
-    <div style="float:left;width:500px">
-        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-        <div class="fixed-dragger-cropper" style="width:400px;height:400px;">
-            <!-- Hier erscheinen die Vorschaubilder -->
-        </div>
-    </div>
-    <div style="float:right;width:200px">
-        <img src="{{ UserProfileImagePath() }}" height="200"/>
-        {% if  app.user.getProfilePicturePath %}
-        <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('Are you sure you want to delete this entry?')">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="delete">
-        </form>
-        {% endif %}
-    </div>
-    <br style="clear:both">
-    <link rel="stylesheet" href="{{ asset('bundles/user/cropper/cropper.css') }}" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="{{ asset('bundles/user/cropper/cropper.js') }}"></script>
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    "bundles/user/cropper/cropper.css"
+    filter="cssrewrite"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        'bundles/user/cropper/cropper.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
     <script type="text/javascript">
         $(function() {
             $('#fos_user_profile_form_profilePictureFile').change(function(e) {
                 if (this.files !== 'undefined' && typeof FileReader !== 'undefined') {
+                    $('.fixed-dragger-cropper').hide();
                     for (var f = 0; f < this.files.length; f++) {
                         var file = this.files[f];
                         var reader = new FileReader();
@@ -52,6 +50,8 @@
             $('.fixed-dragger-cropper').append(img);
 
             $('.fixed-dragger-cropper > img').ready(function(e) {
+
+                $('.fixed-dragger-cropper').show();
 
                 $(".fixed-dragger-cropper > img").cropper({
                     aspectRatio: 500 / 500,
@@ -80,4 +80,25 @@
             });
         }
     </script>
+{% endblock javascripts %}
+
+{% block content %}
+<div class="col-md-8">
+    <h1>Mein Account</h1>
+    <br>
+    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+</div>
+<div class="col-md-4">
+    <br>
+    <img src="{{ UserProfileImagePath() }}" class="img-thumbnail" height="200"/>
+    {% if  app.user.getProfilePicturePath %}
+        <br><br>
+        <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('Are you sure you want to delete this entry?')">
+            <input type="hidden" name="_method" value="DELETE">
+            <div style="text-align: center">
+                <input type="submit" class="btn btn-warning" value="delete">
+            </div>
+        </form>
+    {% endif %}
+</div>
 {% endblock content %}

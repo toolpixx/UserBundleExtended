@@ -22,20 +22,17 @@ class ProfileFormType extends BaseType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /**
-         * Get the parent from FOSUserBundle
-         */
+        // Get the parent from FOSUserBundle
         parent::buildForm($builder, $options);
 
-        /**
-         * Remove ask for current_password
-         * Add profilePicture for upload...
-         */
+        // Remove ask for current_password
+        // Add profilePicture for upload...
         $builder
             //->remove('username')
             ->remove('current_password')
             ->add('profilePictureFile', 'file',
                 array(
+                    'label' => 'Profilbild',
                     'required' => false
                 )
             )

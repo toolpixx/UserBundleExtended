@@ -26,10 +26,8 @@ class SecurityController extends BaseSecurityController
      */
     public function loginAction(Request $request)
     {
-        /**
-         * Check if user is loggin. If yes they cannot
-         * login, too; he stilled login in past....
-         */
+        // Check if user is loggin. If yes they cannot
+        // login, too; he stilled login in past....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return new RedirectResponse(
                 $this->container->get('router')->generate('fos_ext_avl_user_dashboard_show',

@@ -68,16 +68,12 @@ class LoginListener implements EventSubscriberInterface
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
-        /**
-         * Get user-object
-         */
+        // Get user-object
         $user = $event->getAuthenticationToken()->getUser();
 
-        /**
-         * If user-object is instance of User
-         * set the actually name into session.
-         * (for output and so on...)
-         */
+        // If user-object is instance of User
+        // set the actually name into session.
+        // (for output and so on...)
         if ($user instanceof User) {
             $this->session->set('username', $user->getUsername());
             $this->session->set('profilePicturePath', $user->getProfilePicturePath());

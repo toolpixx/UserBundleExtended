@@ -1,62 +1,105 @@
 {% extends "base.html.twig" %}
 
+{% block title 'UserBundleExtended by avl' %}
+
 {% block head %}
     <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/user/css/demo.css') }}" />
+    <style>
+        body {
+            background-image: url({{ asset('bundles/user/images/bg.png') }});
+            background-position: left top;
+            background-attachment: fixed;
+            background-repeat: repeat;
+            background-repeat: no-repeat;
+            background-color: #C0DEED;
+        }
+    </style>
 {% endblock %}
 
-{% block title 'FOSUserBundle extended by avl' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    'bundles/user/bootstrap3/css/bootstrap.min.css'
+    filter="cssrewrite"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
 
-    {% block body %}
-        {% block content_header %}
-            <ul id="menu">
-                {% block content_header_more %}
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a href="{{ path('fos_ext_avl_user_dashboard_show') }}">Dashboard</a></li>
-                        <li><a href="{{ path('fos_user_profile_show') }}">Mein Account</a></li>
-                        <li><a href="{{ path('fos_user_change_password') }}">Passwort ändern</a></li>
-                    {% endif %}
-                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-                        <li><a href="{{ path('fos_user_registration_register') }}">Registrieren</a></li>
-                        <li><a href="{{ path('fos_user_resetting_request') }}">Passwort vergessen</a></li>
-                    {% endif %}
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                    {% endif %}
-                {% endblock %}
-            </ul>
+{% block javascripts %}
+    {{ parent() }}
 
-            <div style="clear: both"></div>
-        {% endblock %}
+    {% javascripts
+    'bundles/user/js/jquery-1.11.1.min.js'
+    'bundles/user/bootstrap3/js/bootstrap.min.js'
+    'bundles/user/jquery-ui-1.11.2/jquery-ui.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
-        <div class="block">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div style="text-align: right;margin-bottom:12px;">
-                    Eingeloggt als <strong>{{ app.session.get('username') }}</strong>
-                    <img src="{{ UserProfileImagePath() }}" height="40"/>
-                </div>
-            {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block body %}
+    {% block content_header %}
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    {% block content_header_more %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}">Dashboard</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_profile_show') }}">Mein Account</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_change_password') }}">Passwort ändern</a></li>
+                        {% endif %}
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a role="presentation" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_registration_register') }}">Registrieren</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_resetting_request') }}">Passwort vergessen</a></li>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                        {% endif %}
+                    {% endblock %}
+                </ul>
+            </nav>
+            <h3 class="text-muted">UserBundleExtended</h3>
+        </div>
+    {% endblock %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <br>
+        <div class="row">
+            <div class="col-lg-12" style="background-color:white;text-align: right;padding:6px">
+                Eingeloggt als <strong>{{ app.session.get('username') }}</strong>
+                <img src="{{ UserProfileImagePath() }}" height="40"/>
+            </div>
+        </div>
+    {% endif %}
+
+    <br>
+    <div class="row" style="background-color:white;">
+        <div class="col-lg-12">
             {% for flashMessage in app.session.flashbag.get('notice') %}
+                <br>
                 <div class="flash-message" style="padding:20px;border-radius:10px;background-color:#C0DEED;margin-bottom:16px;">
                     <em>Notice</em>: {{ flashMessage }}
                 </div>
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('error') %}
+                <br>
                 <div class="flash-message" style="padding:20px;border-radius:10px;background-color:red;color:white;margin-bottom:16px;">
                     <em>Notice</em>: {{ flashMessage }}
                 </div>
             {% endfor %}
-            {% block content %}
-                {% block fos_user_content %}
-                {% endblock %}
-            {% endblock %}
         </div>
-
-        {% if code is defined %}
-            <h2>Code behind this page</h2>
-            <div class="block">
-                <div class="symfony-content">{{ code|raw }}</div>
-            </div>
-        {% endif %}
-    {% endblock %}
+    </div>
+    <div class="row" style="background-color:white;padding-bottom:20px">
+        {% block content %}
+            {% block fos_user_content %}
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock %}

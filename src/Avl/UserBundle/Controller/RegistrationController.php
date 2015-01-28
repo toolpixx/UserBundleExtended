@@ -40,10 +40,8 @@ class RegistrationController extends BaseRegistrationController
      */
     public function registerAction(Request $request)
     {
-        /**
-         * Check if user is loggin. If yes they cannot
-         * register accounts....
-         */
+        // Check if user is loggin. If yes they cannot
+        // register accounts....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->session->getFlashBag()->add('notice', 'Please logout before register.');
             return new RedirectResponse(

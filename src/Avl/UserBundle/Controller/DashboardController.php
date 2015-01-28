@@ -9,9 +9,22 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 class DashboardController extends Controller
 {
     /**
+     * @var null|object
+     */
+    private $cacheDriver = null;
+
+    /**
+     * @var null
+     */
+    private $cacheKey = null;
+
+    /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
+        // Get the cache-driver
+        $this->cacheDriver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
     }
 
     /**
@@ -19,9 +32,7 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        /**
-         * Log info to test chromephp
-         */
+        // Log info to test chromephp
         $this->get('logger')->info($this->getUser());
 
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
@@ -41,43 +52,37 @@ class DashboardController extends Controller
      * @param $url
      * @return \SimpleXMLElement
      */
-    private function getRssFeed($url) {
+    private function getRssFeed($url)
+    {
         try {
-            /**
-             * CacheKey
-             */
-            $cache_key = $url;
+            // CacheKey
+            $this->cacheKey = $url;
 
-            /**
-             * Get the cache-driver
-             */
-            $cache_driver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
-
-            /**
-             * If content was cached return it
-             */
-            if ($cache_driver->contains($cache_key)) {
-
-                return
-                    simplexml_load_string($cache_driver->fetch($cache_key));
+            // If content was cached return it
+            if ($this->cacheDriver->contains($this->cacheKey)) {
+                return $this->getCachedFeed();
             }
-
-            /**
-             * Or get and save the new content
-             */
+            // Or get and save the new content
             else {
                 $rssFeed = file_get_contents($url);
 
-                /**
-                 * Save to cache ad return content
-                 */
-                $cache_driver->save($cache_key, $rssFeed, 3600); // 1 hour
+                // Save to cache ad return content
+                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600); // 1 hour
+
                 return simplexml_load_string($rssFeed);
             }
 
         } catch(ContextErrorException $e) {
             $this->get('logger')->error('Can not load: '.$url);
             $this->get('logger')->error($e->getCode().' : '.$e->getMessage());
+        } finally {
+            return $this->getCachedFeed();
         }
+    }
+
+    private function getCachedFeed()
+    {
+        return
+            simplexml_load_string($this->cacheDriver->fetch($this->cacheKey));
     }
 }

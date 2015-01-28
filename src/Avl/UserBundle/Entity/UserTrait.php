@@ -20,16 +20,6 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 trait UserTrait
 {
     /**
-     * @var string
-     */
-    private $uploadRootDir = '/../../../../web';
-
-    /**
-     * @var string
-     */
-    private $uploadDir = '/uploads/user/profilepics';
-
-    /**
      * @Assert\Image(
      *  maxWidth = 1024,
      *  maxWidthMessage = "The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px.",
@@ -177,19 +167,13 @@ trait UserTrait
      */
     public function setProfilePictureFile(UploadedFile $file = null)
     {
-
-        /**
-         * set the value of the holder
-         */
+        // set the value of the holder
         $this->profilePictureFile = $file;
 
-        /**
-         * check if we have an old image path
-         */
+        // check if we have an old image path
         if (isset($this->profilePicturePath)) {
-            /**
-             * store the old name to delete after the update
-             */
+
+            // store the old name to delete after the update
             $this->oldProfilePicturePath = $this->profilePicturePath;
             $this->profilePicturePath = null;
         } else {
@@ -237,7 +221,7 @@ trait UserTrait
 
         return null == $this->getProfilePicturePath()
             ? null
-            : $this->getUploadRootDir() . '/' . $this->getProfilePicturePath();
+            : $this->getUploadRootDir().'/'.$this->getProfilePicturePath();
     }
 
     /**
@@ -247,12 +231,9 @@ trait UserTrait
      */
     public function getUploadRootDir()
     {
-
-        /**
-         * the absolute directory path where uploaded
-         * documents should be saved
-         */
-        return __DIR__ . $this->uploadRootDir . $this->uploadDir;
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.$this->uploadRootDir.$this->uploadDir;
     }
 
     /**
@@ -263,7 +244,7 @@ trait UserTrait
     public function getWebProfilePicturePath()
     {
 
-        return $this->uploadDir . '/' . $this->getProfilePicturePath();
+        return $this->uploadDir.'/'.$this->getProfilePicturePath();
     }
 
     /**
@@ -280,14 +261,12 @@ trait UserTrait
      */
     public function preUploadProfilePicture()
     {
-
         if (null !== $this->getProfilePictureFile()) {
-            /**
-             * a file was uploaded, generate a unique filename
-             */
+
+            // a file was uploaded, generate a unique filename
             $filename = $this->generateRandomFilename();
             $this->setProfilePicturePath(
-                $filename . '.' . $this->getProfilePictureFile()->guessExtension()
+                $filename.'.'.$this->getProfilePictureFile()->guessExtension()
             );
         }
     }
@@ -303,21 +282,16 @@ trait UserTrait
      */
     public function generateRandomFilename()
     {
-
-        /**
-         * Local variable
-         */
+        // Local variable
         $count = 0;
 
-        /**
-         * Generate..
-         */
+        // Generate..
         do {
             $generator = new SecureRandom();
             $random = $generator->nextBytes(16);
             $randomString = bin2hex($random);
             $count++;
-        } while (file_exists($this->getUploadRootDir() . '/' . $randomString . '.' . $this->getProfilePictureFile()->guessExtension()) && $count < 50);
+        } while (file_exists($this->getUploadRootDir().'/'.$randomString.'.'.$this->getProfilePictureFile()->guessExtension()) && $count < 50);
 
         return $randomString;
     }
@@ -332,39 +306,29 @@ trait UserTrait
      */
     public function uploadProfilePicture()
     {
-
-        /**
-         * check there is a profile pic to upload
-         */
+        // check there is a profile pic to upload
         if ($this->getProfilePictureFile() === null) {
             return;
         }
 
-        /**
-         * if there is an error when moving the file, an exception will
-         * be automatically thrown by move(). This will properly prevent
-         * the entity from being persisted to the database on error
-         */
+        // if there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
         $this->getProfilePictureFile()->move(
             $this->getUploadRootDir(),
             $this->getProfilePicturePath()
         );
 
-        /**
-         * check if we have an old image
-         */
+        // check if we have an old image
         if (true
             && isset($this->oldProfilePicturePath)
-            && file_exists($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath)
+            && file_exists($this->getUploadRootDir().'/'.$this->oldProfilePicturePath)
         ) {
-            /**
-             * delete the old image
-             */
-            if (is_file($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath)) {
-                unlink($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath);
-                /**
-                 * clear the temp image path
-                 */
+            // delete the old image
+            if (is_file($this->getUploadRootDir().'/'.$this->oldProfilePicturePath)) {
+
+                unlink($this->getUploadRootDir().'/'.$this->oldProfilePicturePath);
+                // clear the temp image path
                 $this->oldProfilePicturePath = null;
             }
         }
@@ -383,20 +347,14 @@ trait UserTrait
      */
     public function removeProfilePictureFile()
     {
-        /**
-         * Check the profile-picture
-         */
+        // Check the profile-picture
         if (true
             && ($file = $this->getProfilePictureAbsolutePath())
             && file_exists($this->getProfilePictureAbsolutePath())
         ) {
-            /**
-             * Delete profile-picture
-             */
+            // Delete profile-picture
             if (unlink($file)) {
-                /**
-                 * Set profile-picture to empty
-                 */
+                // Set profile-picture to empty
                 $this->setProfilePicturePath();
 
                 return true;

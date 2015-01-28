@@ -1,8 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-
     {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+
+    <div class="fixed-dragger-cropper img-thumbnail" style="width:100%;display:none">
+        <!-- Hier erscheinen die Vorschaubilder -->
+    </div>
+
+    <div style="clear:both;text-align: center;padding-top:20px">
+        <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
     </div>
 </form>

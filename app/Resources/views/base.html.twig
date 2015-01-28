@@ -4,21 +4,15 @@
     <meta charset="{{ _charset }}" />
     <meta name="robots" content="noindex,nofollow" />
     <title>{% block title %}{% endblock %}</title>
-    <link href="{{ asset('bundles/framework/css/structure.css', absolute=true) }}" rel="stylesheet" />
-    <link href="{{ asset('bundles/framework/css/body.css', absolute=true) }}" rel="stylesheet" />
+    {% block stylesheets %}{% endblock %}
     {% block head %}{% endblock %}
 </head>
 <body>
-<div id="content">
-    <div class="header clear-fix">
-        <div class="header-logo">
-            <img src="{{ asset('bundles/user/images/logo.png', absolute=true) }}" width="100" alt="AvL" />
-        </div>
-    </div>
-
-    <div class="sf-reset">
+<div>
+    <div class="container" style="width:60%;">
         {% block body %}{% endblock %}
     </div>
 </div>
+{% block javascripts %}{% endblock %}
 </body>
 </html>

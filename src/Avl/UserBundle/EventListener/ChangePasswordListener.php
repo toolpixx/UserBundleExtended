@@ -73,9 +73,7 @@ class ChangePasswordListener implements EventSubscriberInterface
      */
     public function onChangePasswordSuccess(FormEvent $formEvent)
     {
-        /**
-         * Redirect after update to the dashboard 
-         */
+        // Redirect after update to the dashboard
         $url = $this->router->generate('fos_ext_avl_user_dashboard_show');
         $formEvent->setResponse(new RedirectResponse($url));
     }

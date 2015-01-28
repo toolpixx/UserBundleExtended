@@ -57,13 +57,10 @@ class ProfileController extends BaseProfileController
          */
         if ($request->getMethod() == 'DELETE') {
 
-            /**
-             * Can i delete the picture
-             */
+            // Can i delete the picture?
             if ($this->getUser()->removeProfilePictureFile()) {
-                /**
-                 * Update user profile
-                 */
+
+                // Update user profile
                 $this->get('fos_user.user_manager')->updateUser(
                     $this->getUser()
                 );

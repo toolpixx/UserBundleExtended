@@ -36,10 +36,8 @@ class ResettingController extends BaseResettingController
      */
     public function requestAction()
     {
-        /**
-         * Check if user is loggin. If yes they cannot
-         * resetting passwort....
-         */
+        // Check if user is loggin. If yes they cannot
+        // resetting passwort....
         if( $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $this->session->getFlashBag()->add('notice', 'Please logout before resetting password.');
             return new RedirectResponse(

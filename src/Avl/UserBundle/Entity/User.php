@@ -22,6 +22,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends BaseUser implements AdvancedUserInterface
 {
     /**
+     * @var string
+     */
+    private $uploadRootDir = '/../../../../web';
+
+    /**
+     * @var string
+     */
+    private $uploadDir = '/uploads/user/profilepics';
+
+    /**
      * @var Session
      */
     private $session;
@@ -44,7 +54,7 @@ class User extends BaseUser implements AdvancedUserInterface
     /**
      * We will use trait-"class" to use
      * things for upload later on other
-     * palaced, too...
+     * places, too...
      */
     use UserTrait;
 
