@@ -19,15 +19,6 @@ class DashboardController extends Controller
     private $cacheKey = null;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        // Get the cache-driver
-        $this->cacheDriver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
-    }
-
-    /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
@@ -57,6 +48,9 @@ class DashboardController extends Controller
         try {
             // CacheKey
             $this->cacheKey = $url;
+
+            // Get the cachedriver
+            $this->cacheDriver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
 
             // If content was cached return it
             if ($this->cacheDriver->contains($this->cacheKey)) {

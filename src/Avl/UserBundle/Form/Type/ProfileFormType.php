@@ -30,6 +30,22 @@ class ProfileFormType extends BaseType
         $builder
             //->remove('username')
             ->remove('current_password')
+            ->remove('email')
+            ->remove('username')
+            ->add('username', 'text', array(
+                'required' => true,
+                'attr' => array(
+                    'size' => 20,
+                    'style' => 'width:200px'
+                )
+            ))
+            ->add('email', 'email', array(
+                'required' => true,
+                'attr' => array(
+                    'size' => 20,
+                    'style' => 'width:200px'
+                )
+            ))
             ->add('profilePictureFile', 'file',
                 array(
                     'label' => 'Profilbild',
