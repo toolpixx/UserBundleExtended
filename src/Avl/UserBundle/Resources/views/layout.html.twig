@@ -64,21 +64,21 @@
                                 </a>
                             </li>
                             <li>
-                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}">
+                                <a role="presentation" href="{{ path('avl_event_show') }}">
                                     <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
                                     Events
                                     <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="Today there are 2 events">2</span>
                                 </a>
                             </li>
                             <li>
-                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}">
+                                <a role="presentation" href="{{ path('avl_enquiry_show') }}">
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true" style="top:2px"></span>
-                                    Inquire
+                                    Enquiry
                                     <span class="label label-danger label-as-badge" style="top: -10px;position: relative;" title="You have 78 inquiry about your events">78</span>
                                 </a>
                             </li>
                             <li>
-                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}">
+                                <a role="presentation" href="{{ path('avl_comment_show') }}">
                                     <span class="glyphicon glyphicon-comment" aria-hidden="true" style="top:2px"></span>
                                     Comments
                                     <span class="label label-warning label-as-badge" style="top: -10px;position: relative;" title="You have 10 comments at your events">10</span>
@@ -98,8 +98,12 @@
                         <img src="{{ UserProfileImagePath() }}" height="40"/>
                     </li>
                     <li style="color:black;font-weight: normal;">
-                        <a href="{{ path('fos_user_profile_show') }}"  id="dropdownMenu1" data-toggle="dropdown">
+                        <a href="{{ path('fos_user_profile_show') }}">
                             {{ app.session.get('username') }}
+                        </a>
+                    </li>
+                    <li style="color:black;font-weight: normal;">
+                        <a href="{{ path('fos_user_profile_show') }}"  id="dropdownMenu1" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
