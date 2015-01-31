@@ -29,8 +29,7 @@ security:
                 path:   /logout
                 target: /login
             anonymous:    true
-
     access_control:
         - { path: ^/(login|register|resetting)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/dashboard, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/profile/dashboard, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
