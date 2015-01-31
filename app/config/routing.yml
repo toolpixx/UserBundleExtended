@@ -14,6 +14,11 @@ fos_user_profile_delete_picture:
     defaults:  { _controller: UserBundle:Profile:deletePicture }
     methods:   [DELETE]
 
+fos_user_change_password:
+    path:      /profile/changepassword
+    defaults:  { _controller: UserBundle:ChangePassword:changePassword }
+    methods:   [GET|POST]
+
 fos_ext_avl_user_dashboard_show:
     path:      /profile/dashboard
     defaults:  { _controller: UserBundle:Dashboard:index }
