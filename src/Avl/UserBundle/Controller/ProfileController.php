@@ -33,15 +33,36 @@ class ProfileController extends BaseProfileController
     }
 
     /**
-     * Overriding profile edit to add custom logic.
+     * Overriding profile edit to add custom logic
+     * ot custom variables to the form...
      *
      * @param Request $request
      * @return null|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request)
     {
-        // nothing implemented yet
-        return parent::editAction($request);
+        // Get and create the FOSUserbundleForm
+        $formFactory = $this->get('fos_user.profile.form.factory');
+        $form = $formFactory->createForm();
+        // Add Data and the request to the form
+        $form->setData($this->getUser());
+        $form->handleRequest($request);
+
+        // If method was POST and is valid,
+        // then we save and redirect the
+        // output.
+        if ($request->getMethod() == 'POST' && $form->isValid()) {
+            return parent::editAction($request);
+        } else {
+            // Get and create the FOSUserbundleForm
+            // Render my view with additional data
+            return $this->render('UserBundle:Profile:edit.html.twig',
+                array(
+                    'form' => $form->createView(),
+                    //'variable' => 'test',
+                )
+            );
+        }
     }
 
     /**

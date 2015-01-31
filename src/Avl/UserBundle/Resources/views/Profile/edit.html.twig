@@ -83,20 +83,19 @@
 {% endblock javascripts %}
 
 {% block content %}
-<div class="col-md-8">
-    <h1>Mein Account</h1>
-    <br>
+<div class="col-md-9">
+    <h1>My Account</h1>
     {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 </div>
-<div class="col-md-4">
-    <br>
+<div class="col-md-3">
+    <h1>My Avatar</h1>
     <img src="{{ UserProfileImagePath() }}" class="img-thumbnail" height="200"/>
     {% if  app.user.getProfilePicturePath %}
         <br><br>
         <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('Are you sure you want to delete this entry?')">
             <input type="hidden" name="_method" value="DELETE">
             <div style="text-align: center">
-                <input type="submit" class="btn btn-warning" value="delete">
+                <input type="submit" class="btn btn-block btn-sm btn-warning" value="delete">
             </div>
         </form>
     {% endif %}

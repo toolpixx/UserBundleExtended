@@ -143,8 +143,8 @@ class CropImage
      * @param $vars
      * @return bool
      */
-    public function cropImage($vars) {
-
+    public function cropImage($vars)
+    {
         $this->setImageCropY($vars['cropY']);
         $this->setImageCropX($vars['cropX']);
         $this->setImageCropHeight($vars['cropHeight']);
@@ -152,17 +152,12 @@ class CropImage
         $this->setImagePath($vars['cropImagePath']);
 
         try {
-
-            /**
-             * Get the image-type
-             */
+            // Get the image-type
             $imageType = $this->getImageMimeType($this->getImagePath());
 
             if (is_file($this->getImagePath())) {
 
-                /**
-                 * Read the picture
-                 */
+                // Read the picture
                 switch ($imageType) {
                     case "image/gif":
                         $src_img = imagecreatefromgif($this->getImagePath());
@@ -175,16 +170,12 @@ class CropImage
                         break;
                 }
 
-                /**
-                 * Check if pictures can read
-                 */
+                // Check if pictures can read
                 if (!isset($src_img)) {
                     throw new Exception('Cannot read image.');
                 }
 
-                /**
-                 * Resample the picture
-                 */
+                // Resample the picture
                 $dst_img = imagecreatetruecolor(
                     220, 220
                 );
@@ -195,9 +186,7 @@ class CropImage
                     $this->imageCropWidth, $this->imageCropHeight
                 );
 
-                /**
-                 * If picture was resampled save
-                 */
+                // If picture was resampled save
                 if ($result) {
                     switch ($imageType) {
                         case "image/gif":
@@ -217,9 +206,7 @@ class CropImage
                     throw new Exception('Failed to crop the image file');
                 }
 
-                /**
-                 * Make clean
-                 */
+                // Make clean
                 imagedestroy($src_img);
                 imagedestroy($dst_img);
 
@@ -227,6 +214,7 @@ class CropImage
             }
         } catch (Exception $e) {
         }
+        return false;
     }
 
     /**

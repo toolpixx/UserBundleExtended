@@ -61,7 +61,7 @@ class DashboardController extends Controller
                 $rssFeed = file_get_contents($url);
 
                 // Save to cache ad return content
-                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600); // 1 hour
+                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600*24); // 1 hour
 
                 return simplexml_load_string($rssFeed);
             }
@@ -74,9 +74,16 @@ class DashboardController extends Controller
         }
     }
 
+    /**
+     * Get the content from cache...
+     *
+     * @return \SimpleXMLElement
+     */
     private function getCachedFeed()
     {
         return
-            simplexml_load_string($this->cacheDriver->fetch($this->cacheKey));
+            simplexml_load_string(
+                $this->cacheDriver->fetch($this->cacheKey)
+            );
     }
 }
