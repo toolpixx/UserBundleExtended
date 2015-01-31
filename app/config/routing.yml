@@ -22,3 +22,15 @@ fos_user_change_password:
 fos_ext_avl_user_dashboard_show:
     path:      /profile/dashboard
     defaults:  { _controller: UserBundle:Dashboard:index }
+
+avl_event_show:
+    path:      /event
+    defaults:  { _controller: UserBundle:Event:index }
+
+avl_enquiry_show:
+    path:      /enquiry
+    defaults:  { _controller: UserBundle:Enquiry:index }
+
+avl_comment_show:
+    path:      /comment
+    defaults:  { _controller: UserBundle:Comment:index }
