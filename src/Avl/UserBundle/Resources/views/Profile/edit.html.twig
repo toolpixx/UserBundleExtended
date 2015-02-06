@@ -4,6 +4,7 @@
     {{ parent() }}
     {% stylesheets
     "bundles/user/cropper/cropper.css"
+    "bundles/user/fileinput/css/fileinput.min.css"
     filter="cssrewrite"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
@@ -15,6 +16,7 @@
 
     {% javascripts
         'bundles/user/cropper/cropper.js'
+        'bundles/user/fileinput/js/fileinput.min.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -39,6 +41,21 @@
                     }
                 }
             });
+
+            $("#fos_user_profile_form_profilePictureFile").fileinput({
+                showPreview: false,
+                showUpload: false,
+                mainClass: "input-group-small",
+                previewFileType: "image",
+                allowedFileExtensions: ['jpg', 'gif', 'png'],
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> "
+            });
+            $('.input-group').css({width: '320px !important'});
         });
 
         function previewImage(e)
