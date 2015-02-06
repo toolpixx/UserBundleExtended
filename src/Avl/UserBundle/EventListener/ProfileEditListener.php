@@ -128,5 +128,6 @@ class ProfileEditListener implements EventSubscriberInterface
     {
         $this->session->set('username', $userEvent->getUser()->getUsername());
         $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
+        $this->session->set('_locale', $userEvent->getUser()->getLocale());
     }
 }

@@ -101,11 +101,11 @@
 
 {% block content %}
 <div class="col-md-9">
-    <h1>My Account</h1>
+    <h1>{{ 'My Account'|trans }}</h1>
     {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 </div>
 <div class="col-md-3">
-    <h1>My Avatar</h1>
+    <h1>{{ 'My Avatar'|trans }}</h1>
     <img src="{{ UserProfileImagePath() }}" class="img-thumbnail" height="200"/>
     {% if  app.user.getProfilePicturePath %}
         <br><br>

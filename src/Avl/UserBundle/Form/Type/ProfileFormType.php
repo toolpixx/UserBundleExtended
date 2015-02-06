@@ -7,6 +7,7 @@
  */
 namespace Avl\UserBundle\Form\Type;
 
+use Avl\UserBundle\Entity\User as User;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
@@ -46,6 +47,13 @@ class ProfileFormType extends BaseType
                     'style' => 'width:200px'
                 )
             ))
+            ->add('locale', 'choice', array(
+                'choices' => User::getLocaleNames(),
+                'preferred_choices' => array('baz'),
+                'attr' => array(
+                    'style' => 'width:200px'
+                )
+            ))
             ->add('profilePictureFile', 'file',
                 array(
                     'label' => 'Profilbild',
@@ -57,6 +65,7 @@ class ProfileFormType extends BaseType
             ->add('imageCropHeight', 'hidden')
             ->add('imageCropWidth', 'hidden')
         ;
+
     }
 
     /**
