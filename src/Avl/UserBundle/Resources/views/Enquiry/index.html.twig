@@ -4,11 +4,26 @@
 
 {% block content %}
 <div class="col-md-12">
-    <h1>Enquiry</h1>
-    <p>
-        Hello {{ app.session.get('username') }}
-        <br><br>
-        this is empty page. I'am working hard to change this.
-    </p>
+    <h1>Enquiry <small>/ All about your enquirys</small></h1>
+    <hr>
+    <br>
+    <!-- tabs left -->
+    <div class="tabbable tabs-left">
+        {% include 'UserBundle:Event:tabs.html.twig' %}
+        <div class="tab-content" style="width:80%;float:left">
+            <div class="tab-pane active">
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+                Lorem ipsum for enquirys. Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.Lorem ipsum for enquirys.
+            </div>
+        </div>
+    </div>
+    <!-- /tabs -->
 </div>
 {% endblock %}

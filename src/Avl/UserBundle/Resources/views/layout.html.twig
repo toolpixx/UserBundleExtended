@@ -1,16 +1,18 @@
 {% extends "base.html.twig" %}
-
+{% set currentRouteName = app.request.attributes.get('_route') %}
 {% block title 'UserBundleExtended by avl' %}
 
 {% block head %}
     <style>
         body {
-            background-image: url({{ asset('bundles/user/images/bg.png') }});
+            /*background-image: url({{ asset('bundles/user/images/bg.png') }});**/
+
             background-position: left -30px;
             background-attachment: fixed;
             background-repeat: repeat;
             background-repeat: no-repeat;
-            background-color: #C0DEED;
+            /*background-color: #C0DEED;*/
+            background-color: #f1f1f1;
         }
         .container {
             width:1000px;
@@ -29,6 +31,110 @@
             background-color:white !important;
         }
 
+        .tabs-below > .nav-tabs,
+        .tabs-right > .nav-tabs,
+        .tabs-left > .nav-tabs {
+            border-bottom: 0;
+        }
+
+        .tab-content > .tab-pane,
+        .pill-content > .pill-pane {
+            display: none;
+        }
+
+        .tab-content > .active,
+        .pill-content > .active {
+            display: block;
+        }
+
+        .tabs-below > .nav-tabs {
+            border-top: 1px solid #ddd;
+        }
+
+        .tabs-below > .nav-tabs > li {
+            margin-top: -1px;
+            margin-bottom: 0;
+        }
+
+        .tabs-below > .nav-tabs > li > a {
+            -webkit-border-radius: 0 0 4px 4px;
+            -moz-border-radius: 0 0 4px 4px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .tabs-below > .nav-tabs > li > a:hover,
+        .tabs-below > .nav-tabs > li > a:focus {
+            border-top-color: #ddd;
+            border-bottom-color: transparent;
+        }
+
+        .tabs-below > .nav-tabs > .active > a,
+        .tabs-below > .nav-tabs > .active > a:hover,
+        .tabs-below > .nav-tabs > .active > a:focus {
+            border-color: transparent #ddd #ddd #ddd;
+        }
+
+        .tabs-left > .nav-tabs > li,
+        .tabs-right > .nav-tabs > li {
+            float: none;
+        }
+
+        .tabs-left > .nav-tabs > li > a,
+        .tabs-right > .nav-tabs > li > a {
+            min-width: 74px;
+            margin-right: 0;
+            margin-bottom: 3px;
+        }
+
+        .tabs-left > .nav-tabs {
+            float: left;
+            margin-right: 19px;
+            border-right: 1px solid #ddd;
+        }
+
+        .tabs-left > .nav-tabs > li > a {
+            margin-right: -1px;
+            -webkit-border-radius: 4px 0 0 4px;
+            -moz-border-radius: 4px 0 0 4px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .tabs-left > .nav-tabs > li > a:hover,
+        .tabs-left > .nav-tabs > li > a:focus {
+            border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+        }
+
+        .tabs-left > .nav-tabs .active > a,
+        .tabs-left > .nav-tabs .active > a:hover,
+        .tabs-left > .nav-tabs .active > a:focus {
+            border-color: #ddd transparent #ddd #ddd;
+            *border-right-color: #ffffff;
+        }
+
+        .tabs-right > .nav-tabs {
+            float: right;
+            margin-left: 19px;
+            border-left: 1px solid #ddd;
+        }
+
+        .tabs-right > .nav-tabs > li > a {
+            margin-left: -1px;
+            -webkit-border-radius: 0 4px 4px 0;
+            -moz-border-radius: 0 4px 4px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tabs-right > .nav-tabs > li > a:hover,
+        .tabs-right > .nav-tabs > li > a:focus {
+            border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+        }
+
+        .tabs-right > .nav-tabs .active > a,
+        .tabs-right > .nav-tabs .active > a:hover,
+        .tabs-right > .nav-tabs .active > a:focus {
+            border-color: #ddd #ddd #ddd transparent;
+            *border-left-color: #ffffff;
+        }
     </style>
 {% endblock %}
 
@@ -50,38 +156,28 @@
             </div>
         </nav>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <i class="fa fa-reorder"></i>
+                </button>
+                <a href="#" class="navbar-brand">MT_CNSL</a>
+            </div>
             <div class="collapse navbar-collapse" style="width: 1000px;margin:0 auto;" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {% block content_header_more %}
-                        <li>
-                            <img src="/bundles/user/images/logo.png" style="height:40px;margin-top: 3px;">
-                        </li>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li>
-                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}">
+                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
                                     Dashboard
                                 </a>
                             </li>
                             <li>
-                                <a role="presentation" href="{{ path('avl_event_show') }}">
+                                <a role="presentation" href="{{ path('avl_event_show') }}" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
                                     Events
-                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="Today there are 2 events">2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a role="presentation" href="{{ path('avl_enquiry_show') }}">
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true" style="top:2px"></span>
-                                    Enquiry
-                                    <span class="label label-danger label-as-badge" style="top: -10px;position: relative;" title="You have 78 inquiry about your events">78</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a role="presentation" href="{{ path('avl_comment_show') }}">
-                                    <span class="glyphicon glyphicon-comment" aria-hidden="true" style="top:2px"></span>
-                                    Comments
-                                    <span class="label label-warning label-as-badge" style="top: -10px;position: relative;" title="You have 10 comments at your events">10</span>
+                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="You have 2 new comments">2</span>
+                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="You have 78 new enquirys">78</span>
                                 </a>
                             </li>
                         {% endif %}
@@ -124,7 +220,7 @@
         </nav>
     {% endblock %}
 
-    <div class="row" style="border-radius: 10px;background-color:white;padding-bottom:5%;margin-top:120px">
+    <div class="row" style="border-top:3px solid #e7eaec;background-color:white;padding-bottom:5%;margin-top:100px">
         <div style="margin:2%">
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="flash-message" style="padding:20px;border-radius:10px;background-color:#C0DEED;margin-bottom:16px;">
