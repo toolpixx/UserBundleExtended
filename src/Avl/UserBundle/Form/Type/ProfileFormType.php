@@ -49,7 +49,6 @@ class ProfileFormType extends BaseType
             ))
             ->add('locale', 'choice', array(
                 'choices' => User::getLocaleNames(),
-                'preferred_choices' => array('baz'),
                 'attr' => array(
                     'style' => 'width:200px'
                 )

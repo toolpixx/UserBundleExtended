@@ -133,7 +133,7 @@ class User extends BaseUser implements AdvancedUserInterface
     }
 
     /**
-     * Crate values for the locale dropdown.
+     * Create values for the locale dropdown.
      * @return array
      */
     public static function getLocaleNames() {
