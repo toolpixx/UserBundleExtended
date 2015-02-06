@@ -77,6 +77,7 @@ class LoginListener implements EventSubscriberInterface
         if ($user instanceof User) {
             $this->session->set('username', $user->getUsername());
             $this->session->set('profilePicturePath', $user->getProfilePicturePath());
+            $this->session->set('_locale', $user->getLocale());
         }
     }
 }
