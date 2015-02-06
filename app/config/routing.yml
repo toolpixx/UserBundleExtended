@@ -27,10 +27,6 @@ avl_event_show:
     path:      /event
     defaults:  { _controller: UserBundle:Event:index }
 
-avl_enquiry_show:
-    path:      /enquiry
-    defaults:  { _controller: UserBundle:Enquiry:index }
-
 avl_comment_show:
     path:      /comment
     defaults:  { _controller: UserBundle:Comment:index }
