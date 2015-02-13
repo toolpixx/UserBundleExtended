@@ -15,25 +15,11 @@
     {% stylesheets
     'bundles/user/bootstrap3/css/bootstrap.min.css'
     'bundles/user/bootstrap3/css/style.css'
+    'bundles/user/css/style.css'
     filter="cssrewrite"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
-
-    {% javascripts
-    'bundles/user/bootstrap3/js/html5shiv.js'
-    'bundles/user/bootstrap3/js/jquery.min.js'
-    'bundles/user/bootstrap3/js/bootstrap.min.js'
-    'bundles/user/bootstrap3/js/scripts.js'
-
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-        });
-    </script>
 
     <!-- Fav and touch icons -->
     <!-- link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
@@ -53,6 +39,21 @@
         </div>
     </div>
 </div>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    {% javascripts
+    'bundles/user/bootstrap3/js/html5shiv.js'
+    'bundles/user/bootstrap3/js/jquery.min.js'
+    'bundles/user/bootstrap3/js/bootstrap.min.js'
+    'bundles/user/bootstrap3/js/scripts.js'
+
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock %}
 </body>
 </html>
