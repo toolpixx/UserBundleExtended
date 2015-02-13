@@ -31,5 +31,5 @@ security:
             anonymous:    true
     access_control:
         - { path: ^/(login|register|resetting)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(profile/dashboard|comment|comment)$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(profile/dashboard|comment|content)$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }

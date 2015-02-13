@@ -30,3 +30,9 @@ avl_event_show:
 avl_comment_show:
     path:      /comment
     defaults:  { _controller: UserBundle:Comment:index }
+
+avl_content_show:
+    path:      /content/{slug}
+    defaults:  { _controller: UserBundle:Content:index }
+    requirements:
+        _method: GET
