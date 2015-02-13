@@ -29,17 +29,12 @@ class DashboardController extends Controller
 
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
-            'symfonyRss' => $this->getRssFeed('http://feeds.feedburner.com/symfony/blog'),
-            'stackoverflowRss' => $this->getRssFeed('http://stackoverflow.com/feeds/tag/php+symfony'),
-            'scoopRss' => $this->getRssFeed('http://www.scoop.it/t/webdevilopers/rss.xml'),
-            'githubRss' => $this->getRssFeed('https://github.com/symfony/symfony/commits/master.atom'),
+            'symfonyRss' => $this->getRssFeed('http://feeds.feedburner.com/symfony/blog')
         ));
     }
 
     /**
      * Get a rssfeed
-     *
-     * Todo: make it better (errorhandling and caching)
      *
      * @param $url
      * @return \SimpleXMLElement
@@ -62,7 +57,7 @@ class DashboardController extends Controller
                 $rssFeed = file_get_contents($url);
 
                 // Save to cache ad return content
-                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600*24); // 1 hour
+                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600*24);
 
                 return simplexml_load_string($rssFeed);
             }

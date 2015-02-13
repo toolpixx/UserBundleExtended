@@ -40,43 +40,10 @@
 </div>
 <div class="col-md-4">
     <h3 class="title">Symfony News</h3>
-    <div style="max-height:220px;overflow:auto">
+    <div style="overflow:auto">
         {% if symfonyRss %}
             {% for item in symfonyRss.channel.item %}
                 <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                <hr style="margin-top:0px;margin-bottom:0px">
-            {% endfor %}
-        {% else %}
-            No data found
-        {% endif %}
-    </div>
-    <h3 class="title">Stackoverflow<br>#symfony</h3>
-    <div style="max-height:220px;overflow:auto">
-        {% if stackoverflowRss %}
-            {% for item in stackoverflowRss.entry %}
-                <a href="{{ item.id }}" target="_blank">{{ item.title }}</a>
-                <hr style="margin-top:0px;margin-bottom:0px">
-            {% endfor %}
-        {% else %}
-            No data found
-        {% endif %}
-    </div>
-    <h3 class="title">Scoop.it<br>#symfony</h3>
-    <div style="max-height:220px;overflow:auto">
-        {% if scoopRss %}
-            {% for item in scoopRss.channel.item %}
-                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                <hr style="margin-top:0px;margin-bottom:0px">
-            {% endfor %}
-        {% else %}
-            No data found
-        {% endif %}
-    </div>
-    <h3 class="title">Github<br>#symfony</h3>
-    <div style="max-height:220px;overflow:auto">
-        {% if githubRss %}
-            {% for item in githubRss.entry %}
-                <a href="{{ item.id }}" target="_blank">{{ item.title }}</a>
                 <hr style="margin-top:0px;margin-bottom:0px">
             {% endfor %}
         {% else %}

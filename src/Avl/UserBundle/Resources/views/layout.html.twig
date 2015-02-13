@@ -13,12 +13,29 @@
             background-repeat: no-repeat;
             /*background-color: #C0DEED;*/
             background-color: #f1f1f1;
+            font-weight:200;
         }
         .container {
             width:1000px;
         }
         .form-control {
             margin-bottom:10px;
+        }
+        .label {
+            font-weight:400 !important;
+        }
+        .control-label {
+            font-weight:400 !important;
+        }
+        .btn {
+            font-weight:200 !important;
+        }
+        h1>small {
+            font-weight:100 !important;
+        }
+        h1, .h1, h2, .h2, h3, .h3 {
+            margin-top: 5px;
+            margin-bottom: 20px;
         }
         .navbar-nav>li>a:hover {
             color:#167ac6 !important;
@@ -155,7 +172,7 @@
         <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div style="margin-top:16px;color:silver">
-                    This is the footer with copyright...Your slogan here....
+                    {{ 'footer.text'|trans }}
                 </div>
             </div>
         </nav>
@@ -173,29 +190,28 @@
                             <li>
                                 <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
-                                    Dashboard
+                                    {{ 'link.dashboard'|trans }}
                                 </a>
                             </li>
                             <li>
                                 <a role="presentation" href="{{ path('avl_event_show') }}" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
-                                    Events
-                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="You have 2 new comments">2</span>
-                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="You have 78 new enquirys">78</span>
+                                    {{ 'link.events'|trans }}
+                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
                                 </a>
                             </li>
                         {% endif %}
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li><a role="presentation" href="{{ path('fos_user_security_login') }}">Login</a></li>
-                            <li><a role="presentation" href="{{ path('fos_user_registration_register') }}">Registrieren</a></li>
-                            <li><a role="presentation" href="{{ path('fos_user_resetting_request') }}">Passwort vergessen</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_security_login') }}">{{ 'link.login'|trans }}</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_registration_register') }}">{{ 'link.register'|trans }}</a></li>
+                            <li><a role="presentation" href="{{ path('fos_user_resetting_request') }}">{{ 'link.resetting.password'|trans }}</a></li>
                         {% endif %}
                     {% endblock %}
                 </ul>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <ul class="nav navbar-nav navbar-right">
                     <li style="padding-top:6px;">
-                        <img src="{{ UserProfileImagePath() }}" height="40"/>
+                        <img src="{{ UserProfileImagePath() }}" height="40" style="border-radius: 20px"/>
                     </li>
                     <li style="color:black;font-weight: normal;">
                         <a href="{{ path('fos_user_profile_show') }}">
@@ -207,9 +223,9 @@
                             <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" href="{{ path('fos_user_profile_show') }}">My Account</a></li>
-                            <li role="presentation"><a role="presentation" href="{{ path('fos_user_change_password') }}">Change password</a></li>
-                            <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">FAQ & Help</a></li>
+                            <li role="presentation"><a role="menuitem" href="{{ path('fos_user_profile_show') }}">{{ 'link.account'|trans }}</a></li>
+                            <li role="presentation"><a role="presentation" href="{{ path('fos_user_change_password') }}">{{ 'link.change.password'|trans }}</a></li>
+                            <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">{{ 'link.faq'|trans }}</a></li>
                         </ul>
                     </li>
                     <li>

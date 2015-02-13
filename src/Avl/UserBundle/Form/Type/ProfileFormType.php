@@ -35,6 +35,7 @@ class ProfileFormType extends BaseType
             ->remove('username')
             ->add('username', 'text', array(
                 'required' => true,
+                'label' => 'label.username',
                 'attr' => array(
                     'size' => 20,
                     'style' => 'width:200px'
@@ -42,6 +43,7 @@ class ProfileFormType extends BaseType
             ))
             ->add('email', 'email', array(
                 'required' => true,
+                'label' => 'label.email',
                 'attr' => array(
                     'size' => 20,
                     'style' => 'width:200px'
@@ -49,13 +51,14 @@ class ProfileFormType extends BaseType
             ))
             ->add('locale', 'choice', array(
                 'choices' => User::getLocaleNames(),
+                'label' => 'label.locale',
                 'attr' => array(
                     'style' => 'width:200px'
                 )
             ))
             ->add('profilePictureFile', 'file',
                 array(
-                    'label' => 'Profilbild',
+                    'label' => 'label.avatar',
                     'required' => false
                 )
             )
