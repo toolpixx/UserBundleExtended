@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>title.customer.edit</source>
+                <target>Meine Daten</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>title.customer.avatar</source>
+                <target>Benutzerbild</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>button.delete</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>alert.delete.avatar</source>
+                <target>Möchten Sie Ihr Benutzerbild wirklich löschen?</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>button.select.image</source>
+                <target>Datei</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>label.avatar</source>
+                <target>Benutzerbild</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>label.locale</source>
+                <target>Sprache</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>label.email</source>
+                <target>E-Mail-Adresse</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>label.username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>button.save</source>
+                <target>Speichern</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>footer.text</source>
+                <target>This is the footer with copyright...Your slogan here....</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>link.dashboard</source>
+                <target>Übersicht</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>link.events</source>
+                <target>Ihre Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>link.events.badge.title</source>
+                <target>Sie haben 2 neue Kommentare</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>link.login</source>
+                <target>Anmelden</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>link.register</source>
+                <target>Registrieren</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>link.resetting.password</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>link.account</source>
+                <target>Meine Daten</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>link.change.password</source>
+                <target>Passwort ändern</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>link.faq</source>
+                <target>Faq und Hilfe</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>title.customer.password</source>
+                <target>Passwort ändern</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>link.comments</source>
+                <target>Kommentare</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>title.events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>title.sub.events</source>
+                <target>/ Alles rund um Ihre Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>title.comments</source>
+                <target>Kommentare</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>title.sub.comments</source>
+                <target>/ Alles rund um Kommentare zu Ihren Veranstaltungen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
