@@ -44,6 +44,7 @@ class RegistrationController extends BaseRegistrationController
         // register accounts....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->session->getFlashBag()->add('notice', 'Please logout before register.');
+
             return new RedirectResponse(
                 $this->container->get('router')->generate('fos_ext_avl_user_dashboard_show',
                 array())

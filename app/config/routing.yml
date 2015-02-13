@@ -6,33 +6,33 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 fos_user_profile_show:
-    path:      /profile/edit
+    path:      /cnsl/profile/edit
     defaults:  { _controller: FOSUserBundle:Profile:edit }
 
 fos_user_profile_delete_picture:
-    path:      /profile/delete/picture
-    defaults:  { _controller: UserBundle:Profile:deletePicture }
+    path:      /cnsl/profile/remove/picture
+    defaults:  { _controller: UserBundle:Profile:removePicture }
     methods:   [DELETE]
 
 fos_user_change_password:
-    path:      /profile/changepassword
+    path:      /cnsl/profile/changepassword
     defaults:  { _controller: UserBundle:ChangePassword:changePassword }
     methods:   [GET|POST]
 
 fos_ext_avl_user_dashboard_show:
-    path:      /profile/dashboard
+    path:      /cnsl/dashboard
     defaults:  { _controller: UserBundle:Dashboard:index }
 
 avl_event_show:
-    path:      /event
+    path:      /cnsl/event
     defaults:  { _controller: UserBundle:Event:index }
 
 avl_comment_show:
-    path:      /comment
+    path:      /cnsl/comment
     defaults:  { _controller: UserBundle:Comment:index }
 
 avl_content_show:
-    path:      /content/{slug}
+    path:      /cnsl/content/{slug}
     defaults:  { _controller: UserBundle:Content:index }
     requirements:
         _method: GET

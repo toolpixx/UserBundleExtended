@@ -1,10 +1,10 @@
 {% extends 'UserBundle::layout.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}{{ 'title.dashboard'|trans }}{% endblock %}
 
 {% block content %}
 <div class="col-md-8">
-    <h1>Dashboard</h1>
+    <h1>{{ 'title.dashboard'|trans }}</h1>
     <p>
         Hello {{ app.session.get('username') }}
         <br><br>

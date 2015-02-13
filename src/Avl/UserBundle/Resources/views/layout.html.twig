@@ -46,6 +46,14 @@
                                     <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
                                 </a>
                             </li>
+                            <li>
+                                <li>
+                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                </li>
+                            </li>
                         {% endif %}
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li><a role="presentation" href="{{ path('fos_user_security_login') }}">{{ 'link.login'|trans }}</a></li>
@@ -56,26 +64,19 @@
                 </ul>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="padding-top:6px;">
-                        <img src="{{ UserProfileImagePath() }}" height="40" style="border-radius: 20px"/>
-                    </li>
                     <li style="color:black;font-weight: normal;">
-                        <a href="{{ path('fos_user_profile_show') }}">
+                        <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown" style="padding-top: 17px;padding-bottom: 10px;">
+                            <img src="{{ UserProfileImagePath() }}" height="26" class="img-circle" style="margin-top:-5px"/>
                             {{ app.session.get('username') }}
-                        </a>
-                    </li>
-                    <li style="color:black;font-weight: normal;">
-                        <a href="{{ path('fos_user_profile_show') }}"  id="dropdownMenu1" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation"><a role="menuitem" href="{{ path('fos_user_profile_show') }}">{{ 'link.account'|trans }}</a></li>
                             <li role="presentation"><a role="presentation" href="{{ path('fos_user_change_password') }}">{{ 'link.change.password'|trans }}</a></li>
-                            <li role="presentation"><a href="{{ path('avl_content_show', {'slug': 'faq'}) }}">{{ 'link.faq'|trans }}</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;" title="Logout">
+                        <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;" title="{{ 'title.link.logout'|trans }}">
                             <span class="glyphicon glyphicon-log-out" style="top:2px"></span>
                         </a>
                     </li>
@@ -86,19 +87,7 @@
         </nav>
     {% endblock %}
 
-    <div class="row" style="border-top:3px solid #e7eaec;background-color:white;padding-bottom:5%;margin-top:100px">
-        <div style="margin:2%">
-            {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div class="flash-message" style="padding:20px;border-radius:10px;background-color:#C0DEED;margin-bottom:16px;">
-                    <em>Notice</em>: {{ flashMessage }}
-                </div>
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                <div class="flash-message" style="padding:20px;border-radius:10px;background-color:red;color:white;margin-bottom:16px;">
-                    <em>Notice</em>: {{ flashMessage }}
-                </div>
-            {% endfor %}
-        </div>
+    <div class="row" style="padding-top:20px;border-top:3px solid #e7eaec;background-color:white;padding-bottom:5%;margin-top:100px">
         {% block content %}
             {% block fos_user_content %}{% endblock %}
         {% endblock %}

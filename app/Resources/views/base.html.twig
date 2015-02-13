@@ -16,6 +16,7 @@
     'bundles/user/bootstrap3/css/bootstrap.min.css'
     'bundles/user/bootstrap3/css/style.css'
     'bundles/user/css/style.css'
+    'bundles/user/css/toastr.css'
     filter="cssrewrite"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
@@ -45,6 +46,7 @@
     'bundles/user/bootstrap3/js/jquery.min.js'
     'bundles/user/bootstrap3/js/bootstrap.min.js'
     'bundles/user/bootstrap3/js/scripts.js'
+    'bundles/user/jquery/toaster/toastr.js'
 
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -52,6 +54,29 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "showDuration": "3000",
+                "hideDuration": "1000",
+                "timeOut": "10000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                toastr.success('{{ flashMessage|trans }}', '{{ 'notice.label'|trans }}');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                toastr.error('{{ flashMessage|trans }}', '{{ 'notice.label'|trans }}');
+            {% endfor %}
         });
     </script>
 {% endblock %}

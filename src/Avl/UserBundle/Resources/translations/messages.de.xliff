@@ -2,113 +2,151 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="1">
+            <trans-unit id="title.customer.edit">
                 <source>title.customer.edit</source>
                 <target>Meine Daten</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="title.customer.avatar">
                 <source>title.customer.avatar</source>
                 <target>Benutzerbild</target>
             </trans-unit>
-            <trans-unit id="3">
+            <trans-unit id="button.delete">
                 <source>button.delete</source>
                 <target>Löschen</target>
             </trans-unit>
-            <trans-unit id="4">
+            <trans-unit id="alert.delete.avatar">
                 <source>alert.delete.avatar</source>
                 <target>Möchten Sie Ihr Benutzerbild wirklich löschen?</target>
             </trans-unit>
-            <trans-unit id="5">
+            <trans-unit id="button.select.image">
                 <source>button.select.image</source>
                 <target>Datei</target>
             </trans-unit>
-            <trans-unit id="6">
+            <trans-unit id="label.avatar">
                 <source>label.avatar</source>
                 <target>Benutzerbild</target>
             </trans-unit>
-            <trans-unit id="7">
+            <trans-unit id="label.locale">
                 <source>label.locale</source>
                 <target>Sprache</target>
             </trans-unit>
-            <trans-unit id="8">
+            <trans-unit id="label.email">
                 <source>label.email</source>
                 <target>E-Mail-Adresse</target>
             </trans-unit>
-            <trans-unit id="9">
+            <trans-unit id="label.username">
                 <source>label.username</source>
                 <target>Benutzername</target>
             </trans-unit>
-            <trans-unit id="10">
+            <trans-unit id="button.save">
                 <source>button.save</source>
                 <target>Speichern</target>
             </trans-unit>
-            <trans-unit id="11">
+            <trans-unit id="footer.text">
                 <source>footer.text</source>
                 <target>This is the footer with copyright...Your slogan here....</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="link.dashboard">
                 <source>link.dashboard</source>
                 <target>Übersicht</target>
             </trans-unit>
-            <trans-unit id="13">
+            <trans-unit id="title.dashboard">
+                <source>title.dashboard</source>
+                <target>Übersicht</target>
+            </trans-unit>
+            <trans-unit id="link.events">
                 <source>link.events</source>
                 <target>Ihre Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="14">
+            <trans-unit id="link.events.badge.title">
                 <source>link.events.badge.title</source>
                 <target>Sie haben 2 neue Kommentare</target>
             </trans-unit>
-            <trans-unit id="15">
+            <trans-unit id="link.login">
                 <source>link.login</source>
                 <target>Anmelden</target>
             </trans-unit>
-            <trans-unit id="16">
+            <trans-unit id="link.register">
                 <source>link.register</source>
                 <target>Registrieren</target>
             </trans-unit>
-            <trans-unit id="17">
+            <trans-unit id="link.resetting.password">
                 <source>link.resetting.password</source>
                 <target>Passwort vergessen</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="link.account">
                 <source>link.account</source>
                 <target>Meine Daten</target>
             </trans-unit>
-            <trans-unit id="19">
+            <trans-unit id="link.change.password">
                 <source>link.change.password</source>
                 <target>Passwort ändern</target>
             </trans-unit>
-            <trans-unit id="20">
+            <trans-unit id="link.faq">
                 <source>link.faq</source>
                 <target>Faq und Hilfe</target>
             </trans-unit>
-            <trans-unit id="21">
+            <trans-unit id="title.link.logout">
+                <source>title.link.logout</source>
+                <target>Abmelden</target>
+            </trans-unit>
+            <trans-unit id="title.customer.password">
                 <source>title.customer.password</source>
                 <target>Passwort ändern</target>
             </trans-unit>
-            <trans-unit id="22">
+            <trans-unit id="link.comments">
                 <source>link.comments</source>
                 <target>Kommentare</target>
             </trans-unit>
-            <trans-unit id="23">
+            <trans-unit id="title.events">
                 <source>title.events</source>
                 <target>Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="24">
+            <trans-unit id="title.sub.events">
                 <source>title.sub.events</source>
                 <target>/ Alles rund um Ihre Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="25">
+            <trans-unit id="title.comments">
                 <source>title.comments</source>
                 <target>Kommentare</target>
             </trans-unit>
-            <trans-unit id="26">
+            <trans-unit id="title.sub.comments">
                 <source>title.sub.comments</source>
                 <target>/ Alles rund um Kommentare zu Ihren Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="27">
+            <trans-unit id="title.faq">
                 <source>title.faq</source>
                 <target>Faq und Hilfe</target>
+            </trans-unit>
+            <trans-unit id="notice.label">
+                <source>notice.label</source>
+                <target>Nachricht</target>
+            </trans-unit>
+            <trans-unit id="notice.avatar.was.removed">
+                <source>notice.avatar.was.removed</source>
+                <target>Ihr Benutzerbild wurde gelöscht</target>
+            </trans-unit>
+            <trans-unit id="notice.cannot.remove.avatar">
+                <source>notice.cannot.remove.avatar</source>
+                <target>Ihr Benutzerbild konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="profile.flash.updated">
+                <source>profile.flash.updated</source>
+                <target>Das Benutzerprofil wurde aktualisiert.</target>
+            </trans-unit>
+            <trans-unit id="change_password.flash.success">
+                <source>change_password.flash.success</source>
+                <target>Ihr Passwort wurde aktualisiert.</target>
+            </trans-unit>
+            <trans-unit id="title.404.not.found">
+                <source>title.404.not.found</source>
+                <target>Seite nicht gefunden!</target>
+            </trans-unit>
+            <trans-unit id="text.404.not.found">
+                <source>text.404.not.found</source>
+                <target>
+                    Der von Ihnen aufgerufene Link funktioniert
+                    leider nicht. Bitte prüfen Sie den Link.</target>
             </trans-unit>
         </body>
     </file>

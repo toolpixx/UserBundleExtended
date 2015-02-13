@@ -110,7 +110,7 @@ class ProfileEditListener implements EventSubscriberInterface
 
         // If no error-message was set (etc. cropping picture)
         if (!$this->session->getFlashBag()->has('error')) {
-            $this->session->getFlashBag()->add('notice', 'Your data was edit.');
+            $this->session->getFlashBag()->add('notice', 'profile.flash.updated');
         }
     }
 

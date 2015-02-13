@@ -44,6 +44,7 @@ class ProfileController extends BaseProfileController
         // Get and create the FOSUserbundleForm
         $formFactory = $this->get('fos_user.profile.form.factory');
         $form = $formFactory->createForm();
+
         // Add Data and the request to the form
         $form->setData($this->getUser());
         $form->handleRequest($request);
@@ -58,20 +59,19 @@ class ProfileController extends BaseProfileController
             // Render my view with additional data
             return $this->render('UserBundle:Profile:edit.html.twig',
                 array(
-                    'form' => $form->createView(),
-                    //'variable' => 'test',
+                    'form' => $form->createView()
                 )
             );
         }
     }
 
     /**
-     * Delete profile-picture
+     * Remove profile-picture
      *
      * @param Request $request
      * @return RedirectResponse
      */
-    public function deletePictureAction(Request $request) {
+    public function removePictureAction(Request $request) {
 
         /**
          * Method DELETE?
@@ -86,9 +86,9 @@ class ProfileController extends BaseProfileController
                     $this->getUser()
                 );
 
-                $this->session->getFlashBag()->add('notice', 'Picture was deleted.');
+                $this->session->getFlashBag()->add('notice', 'notice.avatar.was.removed');
             } else {
-                $this->session->getFlashBag()->add('notice', 'Cannot delete picture.');
+                $this->session->getFlashBag()->add('error', 'notice.cannot.remove.avatar');
             }
         }
 

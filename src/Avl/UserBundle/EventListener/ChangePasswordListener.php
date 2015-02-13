@@ -84,6 +84,8 @@ class ChangePasswordListener implements EventSubscriberInterface
      */
     public function onChangePasswordCompleted(UserEvent $userEvent)
     {
-        $this->session->getFlashBag()->add('notice', 'Your data was edit.');
+        if (!$this->session->getFlashBag()->has('error')) {
+            $this->session->getFlashBag()->add('notice', 'change_password.flash.success');
+        }
     }
 }

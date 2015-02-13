@@ -3,6 +3,7 @@
 namespace Avl\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentController extends Controller
 {
@@ -11,6 +12,13 @@ class ContentController extends Controller
      */
     public function indexAction($slug)
     {
-        return $this->render('UserBundle:Content:'.$slug.'.html.twig', array());
+        try {
+            return $this->render('UserBundle:Content:'.$slug.'.html.twig', array());
+        } catch(\Exception $e) {
+            return $this->render('UserBundle:Content:404.html.twig', array());
+            //throw new NotFoundHttpException(
+            //    $this->get('translator')->trans('404.not.found')
+            //);
+        }
     }
 }

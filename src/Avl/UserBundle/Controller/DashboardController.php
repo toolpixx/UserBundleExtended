@@ -10,6 +10,11 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 class DashboardController extends Controller
 {
     /**
+     * Url for the rss from symfony.com
+     */
+    const SYMFONY_RSS_URL = 'http://feeds.feedburner.com/symfony/blog';
+
+    /**
      * @var null|object
      */
     private $cacheDriver = null;
@@ -29,7 +34,7 @@ class DashboardController extends Controller
 
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
-            'symfonyRss' => $this->getRssFeed('http://feeds.feedburner.com/symfony/blog')
+            'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
         ));
     }
 
