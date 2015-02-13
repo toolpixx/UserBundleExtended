@@ -106,6 +106,10 @@
                 <source>title.sub.comments</source>
                 <target>/ Alles rund um Kommentare zu Ihren Veranstaltungen</target>
             </trans-unit>
+            <trans-unit id="27">
+                <source>title.faq</source>
+                <target>Faq und Hilfe</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
