@@ -47,12 +47,13 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function UserProfileImagePath()
+    public function UserProfileImagePath($profilePicturePath)
     {
         return true
-            && null != $this->session->get('profilePicturePath')
-            && is_file($this->user->getUploadRootDir().'/'.$this->session->get('profilePicturePath'))
-            ? $this->user->getUploadDir().'/'.$this->session->get('profilePicturePath')
+            //&& null != $this->session->get('profilePicturePath')
+            &&
+            is_file($this->user->getUploadRootDir().'/'.$profilePicturePath)
+            ? $this->user->getUploadDir().'/'.$profilePicturePath
             : $this->user->getUploadDir().'/default-avatar.png';
     }
 }

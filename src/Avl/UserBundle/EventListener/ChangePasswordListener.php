@@ -7,15 +7,15 @@
  */
 namespace Avl\UserBundle\EventListener;
 
-use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ProfileEditListener
@@ -74,15 +74,15 @@ class ChangePasswordListener implements EventSubscriberInterface
      */
     public function onChangePasswordSuccess(FormEvent $formEvent)
     {
-        // Redirect after update to the dashboard
+        // Redirect to dashboard after update
         $url = $this->router->generate('fos_user_change_password');
         $formEvent->setResponse(new RedirectResponse($url));
     }
 
     /**
-     * @param UserEvent $userEvent
+     * onChangePasswordCompleted
      */
-    public function onChangePasswordCompleted(UserEvent $userEvent)
+    public function onChangePasswordCompleted()
     {
         if (!$this->session->getFlashBag()->has('error')) {
             $this->session->getFlashBag()->add('notice', 'change_password.flash.success');

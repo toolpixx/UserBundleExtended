@@ -1,0 +1,50 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}Subuser{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h1>Subuser-Management</h1>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th width="1%"></th>
+                <th width="1%"></th>
+                <th>Name</th>
+                <th>E-Mail-Adresse</th>
+                <th width="13%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>
+                        {% if entity.enabled %}
+                            <span class="glyphicon glyphicon-ok text-success"></span>
+                        {% else %}
+                            <span class="glyphicon glyphicon-off text-danger"></span>
+                        {% endif %}
+                    </td>
+                    <td><img src="{{ UserProfileImagePath(entity.profilePicturePath) }}" height="20" class="img-circle" style="margin-top:-5px"/></td>
+                    <td valign="middle">
+                        {{ entity.username }}
+                    </td>
+                    <td>{{ entity.email }}</td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" role="button" style="float:left">Edit</a>
+
+                        <form action="{{ path('avl_subuser_remove', {'id': entity.id}) }}" method="POST" onsubmit="return confirm('{{ 'Do you remove the subuser?'|trans }}')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <div style="text-align: center">
+                                <input type="submit" class="btn btn-xs btn-danger" value="{{ 'Remove'|trans }}">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-primary" href="{{ path('avl_subuser_new') }}" role="button">New</a>
+    </div>
+{% endblock %}

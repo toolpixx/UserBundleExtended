@@ -1,0 +1,11 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{% if path is defined  %}{{ path(path) }}{% else %}{{ path('fos_user_registration_register') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        {% if path is defined %}
+            <a class="btn btn-primary" href="{{ path('avl_subuser') }}" role="button">Back</a>
+        {% endif %}
+    </div>
+</form>

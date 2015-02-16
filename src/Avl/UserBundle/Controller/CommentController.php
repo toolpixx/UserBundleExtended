@@ -2,15 +2,18 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Avl\UserBundle\Controller\Controller as BaseController;
 
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
+        // Has user granted role?
+        $this->hasGranted('ROLE_CUSTOMER_COMMENT_MANAGER');
+
         return $this->render('UserBundle:Comment:index.html.twig', array());
     }
 }

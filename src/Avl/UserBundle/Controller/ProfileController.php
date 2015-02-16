@@ -7,11 +7,11 @@
  */
 namespace Avl\UserBundle\Controller;
 
+use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
-
-use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
 
 /**
  * Class ProfileController
@@ -19,6 +19,14 @@ use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
  */
 class ProfileController extends BaseProfileController
 {
+    /**
+     * For the profile form
+     *
+     * \FOS\UserBundle\Form\Factory\FactoryInterface
+     */
+    const FORM_FACTORY_PROFILE = 'avl_user.profile.form.factory';
+
+
     /**
      * @var null
      */
@@ -42,7 +50,12 @@ class ProfileController extends BaseProfileController
     public function editAction(Request $request)
     {
         // Get and create the FOSUserbundleForm
-        $formFactory = $this->get('fos_user.profile.form.factory');
+        $formFactory = $this->get(self::FORM_FACTORY_PROFILE);
+
+        // Add the user to the formobject
+        $formFactory->setUser($this->getUser());
+
+        // Create the form
         $form = $formFactory->createForm();
 
         // Add Data and the request to the form
@@ -53,13 +66,15 @@ class ProfileController extends BaseProfileController
         // then we save and redirect the
         // output.
         if ($request->getMethod() == 'POST' && $form->isValid()) {
+            // Save the userdata
             return parent::editAction($request);
         } else {
             // Get and create the FOSUserbundleForm
             // Render my view with additional data
             return $this->render('UserBundle:Profile:edit.html.twig',
                 array(
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'profilePicturePath' => $this->getUser()->getProfilePicturePath()
                 )
             );
         }

@@ -31,6 +31,24 @@ avl_comment_show:
     path:      /cnsl/comment
     defaults:  { _controller: UserBundle:Comment:index }
 
+avl_subuser:
+    path:      /cnsl/subuser
+    defaults:  { _controller: UserBundle:SubUser:index }
+
+avl_subuser_new:
+    path:      /cnsl/subuser/new
+    defaults:  { _controller: UserBundle:SubUser:new }
+
+avl_subuser_edit:
+    path:      /cnsl/subuser/edit/{id}
+    defaults:  { _controller: UserBundle:SubUser:edit }
+
+avl_subuser_remove:
+    path:      /cnsl/subuser/remove/{id}
+    defaults:  { _controller: UserBundle:SubUser:remove }
+    requirements:
+        _method: DELETE
+
 avl_content_show:
     path:      /cnsl/content/{slug}
     defaults:  { _controller: UserBundle:Content:index }

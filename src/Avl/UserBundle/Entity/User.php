@@ -7,16 +7,18 @@
  */
 namespace Avl\UserBundle\Entity;
 
+
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Locale as Locale;
+
+use Symfony\Component\Intl\Locale\Locale as Locale;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="fos_user")
  * @ORM\HasLifecycleCallbacks
  */
@@ -73,7 +75,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @var array
      */
-    private $usedRoles = array('ROLE_CUSTOMER');
+    private $usedRoles; // array('ROLE_ADMIN', 'ROLE_CUSTOMER');
 
     /**
      * @ORM\Id
@@ -83,6 +85,11 @@ class User extends BaseUser implements AdvancedUserInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $parentId;
+
+    /**
      * @ORM\Column(
      *  type="string",
      *  length=8,
@@ -90,6 +97,13 @@ class User extends BaseUser implements AdvancedUserInterface
      * )
      */
     protected $locale;
+
+    /**
+     *  @ORM\Column(
+     *  type="datetimetz",
+     *  nullable=true)
+     */
+    protected $createdDate;
 
     /**
      * We will use trait-"class" to use
@@ -114,6 +128,36 @@ class User extends BaseUser implements AdvancedUserInterface
          *
          * $this->roles = $this->usedRoles;
          */
+    }
+
+    /**
+     * Get the parentId from user
+     *
+     * @return mixed
+     */
+    public function getParentId() {
+        return $this->parentId;
+    }
+
+    /**
+     * Set the parentId for user
+     *
+     * @param $id
+     */
+    public function setParentId($id) {
+        $this->parentId = $id;
+    }
+
+    /**
+     * Create values for the locale dropdown.
+     * @return array
+     */
+    public static function getUsedRoles() {
+        return array(
+            'ROLE_CUSTOMER_EVENT_MANAGER' => 'ROLE_CUSTOMER_EVENT_MANAGER',
+            'ROLE_CUSTOMER_COMMENT_MANAGER' => 'ROLE_CUSTOMER_COMMENT_MANAGER',
+            'ROLE_CUSTOMER_SUBUSER_MANAGER' => 'ROLE_CUSTOMER_SUBUSER_MANAGER'
+        );
     }
 
     /**
@@ -144,5 +188,36 @@ class User extends BaseUser implements AdvancedUserInterface
             self::DEFAULT_LOCALE_FR => self::DEFAULT_LOCALE_FR_NAME,
             self::DEFAULT_LOCALE_IT => self::DEFAULT_LOCALE_IT_NAME,
         );
+    }
+
+    /**
+     * Set createdDate
+     *
+     * @param \DateTime $createdDate
+     * @return News
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+    }
+
+    /**
+     * Get createdDate
+     *
+     * @return \DateTime
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate; //->format('d.m.Y H:i:s');
+    }
+
+    /**
+     * Get createdDateFormatted
+     *
+     * @return \DateTime
+     */
+    public function getCreatedDateFormatted()
+    {
+        return $this->createdDate->format('d.m.Y H:i:s');
     }
 }

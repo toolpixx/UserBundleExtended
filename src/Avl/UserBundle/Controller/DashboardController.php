@@ -2,8 +2,6 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 
@@ -27,7 +25,7 @@ class DashboardController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         // Log info to test chromephp
         $this->get('logger')->info($this->getUser());

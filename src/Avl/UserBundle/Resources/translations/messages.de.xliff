@@ -146,7 +146,24 @@
                 <source>text.404.not.found</source>
                 <target>
                     Der von Ihnen aufgerufene Link funktioniert
-                    leider nicht. Bitte prüfen Sie den Link.</target>
+                    leider nicht. Bitte prüfen Sie den Link.
+                </target>
+            </trans-unit>
+            <trans-unit id="label.enabled">
+                <source>label.enabled</source>
+                <target>Benutzer aktivieren</target>
+            </trans-unit>
+            <trans-unit id="ROLE_CUSTOMER_EVENT_MANAGER">
+                <source>ROLE_CUSTOMER_EVENT_MANAGER</source>
+                <target>Veranstaltung-Manager</target>
+            </trans-unit>
+            <trans-unit id="ROLE_CUSTOMER_COMMENT_MANAGER">
+                <source>ROLE_CUSTOMER_COMMENT_MANAGER</source>
+                <target>Kommentar-Manager</target>
+            </trans-unit>
+            <trans-unit id="ROLE_CUSTOMER_SUBUSER_MANAGER">
+                <source>ROLE_CUSTOMER_SUBUSER_MANAGER</source>
+                <target>Subuser-Manager</target>
             </trans-unit>
         </body>
     </file>

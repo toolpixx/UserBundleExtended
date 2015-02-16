@@ -1,15 +1,19 @@
 <ul class="nav nav-tabs" style="width:20%">
-    <li {% if currentRouteName == 'avl_event_show' %}class="active"{% endif %}>
-        <a href="{{ path('avl_event_show') }}">
-            <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
-            {{ 'link.events'|trans }}
-        </a>
-    </li>
-    <li {% if currentRouteName == 'avl_comment_show' %}class="active"{% endif %}>
-        <a href="{{ path('avl_comment_show') }}">
-            <span class="glyphicon glyphicon-comment" aria-hidden="true" style="top:2px"></span>
-            {{ 'link.comments'|trans }}
-            <span class="label label-success label-as-badge" title="{{ 'link.events.badge.title'|trans }}">2</span>
-        </a>
-    </li>
+    {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') %}
+        <li {% if currentRouteName == 'avl_event_show' %}class="active"{% endif %}>
+            <a href="{{ path('avl_event_show') }}">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
+                {{ 'link.events'|trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+        <li {% if currentRouteName == 'avl_comment_show' %}class="active"{% endif %}>
+            <a href="{{ path('avl_comment_show') }}">
+                <span class="glyphicon glyphicon-comment" aria-hidden="true" style="top:2px"></span>
+                {{ 'link.comments'|trans }}
+                <span class="label label-success label-as-badge" title="{{ 'link.events.badge.title'|trans }}">2</span>
+            </a>
+        </li>
+    {% endif %}
 </ul>

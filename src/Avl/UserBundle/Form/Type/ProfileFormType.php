@@ -8,8 +8,11 @@
 namespace Avl\UserBundle\Form\Type;
 
 use Avl\UserBundle\Entity\User as User;
-use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+
+use Symfony\Component\Locale as Locale;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ProfileFormType
@@ -23,8 +26,7 @@ class ProfileFormType extends BaseType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // Get the parent from FOSUserBundle
-        parent::buildForm($builder, $options);
+        $this->buildUserForm($builder, $options);
 
         // Remove ask for current_password
         // Add profilePicture for upload...
@@ -48,14 +50,35 @@ class ProfileFormType extends BaseType
                     'size' => 20,
                     'style' => 'width:200px'
                 )
-            ))
-            ->add('locale', 'choice', array(
-                'choices' => User::getLocaleNames(),
-                'label' => 'label.locale',
-                'attr' => array(
-                    'style' => 'width:200px'
+            ));
+
+            // If not the admin from customer
+            if (isset($options['user']) && $options['user']->getId() != $options['user']->getParentId()) {
+                $builder->add('usedRoles', 'choice', array(
+                        'property_path' => 'roles',
+                        'choices' => User::getUsedRoles(),
+                        'mapped' => true,
+                        'expanded' => true,
+                        'multiple' => true,
+                        'label' => 'Rollen',
+                        'attr' => array(
+                            'style' => 'width:200px'
+                        )
+                    ))
+                    ->add('enabled', 'checkbox', array(
+                        'label' => 'label.enabled',
+                        'required' => false
+                    )
+                );
+            }
+            $builder->add('locale', 'choice', array(
+                    'choices' => User::getLocaleNames(),
+                    'label' => 'label.locale',
+                    'attr' => array(
+                        'style' => 'width:200px'
+                    )
                 )
-            ))
+            )
             ->add('profilePictureFile', 'file',
                 array(
                     'label' => 'label.avatar',
@@ -67,7 +90,16 @@ class ProfileFormType extends BaseType
             ->add('imageCropHeight', 'hidden')
             ->add('imageCropWidth', 'hidden')
         ;
+    }
 
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setRequired(array(
+            'user'
+        ));
+
+        $resolver->setDefaults(array(
+            'user'  => null,
+        ));
     }
 
     /**

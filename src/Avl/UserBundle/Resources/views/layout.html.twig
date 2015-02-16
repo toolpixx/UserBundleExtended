@@ -39,20 +39,33 @@
                                     {{ 'link.dashboard'|trans }}
                                 </a>
                             </li>
-                            <li>
-                                <a role="presentation" href="{{ path('avl_event_show') }}" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                    <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.events'|trans }}
-                                    <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
-                                </a>
-                            </li>
-                            <li>
+                            {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') or is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
                                 <li>
-                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
-                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
-                                        {{ 'link.faq'|trans }}
+                                    <a role="presentation" href="{{ path('avl_event_show') }}" id="dropdownMenuEvents" data-toggle="dropdown" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
+                                        {{ 'link.events'|trans }}
+                                        <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
                                     </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+                                        {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') %}
+                                            <li role="presentation"><a role="menuitem" href="{{ path('avl_event_show') }}">{{ 'link.events'|trans }}</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+                                            <li role="presentation">
+                                                <a role="presentation" href="{{ path('avl_comment_show') }}">
+                                                    {{ 'link.comments'|trans }}
+                                                    <span class="label label-success label-as-badge" title="{{ 'link.events.badge.title'|trans }}">2</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
                                 </li>
+                            {% endif %}
+                            <li>
+                                <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.faq'|trans }}
+                                </a>
                             </li>
                         {% endif %}
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -66,13 +79,16 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li style="color:black;font-weight: normal;">
                         <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown" style="padding-top: 17px;padding-bottom: 10px;">
-                            <img src="{{ UserProfileImagePath() }}" height="26" class="img-circle" style="margin-top:-5px"/>
+                            <img src="{{ UserProfileImagePath(app.session.get('profilePicturePath')) }}" height="26" class="img-circle" style="margin-top:-5px"/>
                             {{ app.session.get('username') }}
                             <span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation"><a role="menuitem" href="{{ path('fos_user_profile_show') }}">{{ 'link.account'|trans }}</a></li>
                             <li role="presentation"><a role="presentation" href="{{ path('fos_user_change_password') }}">{{ 'link.change.password'|trans }}</a></li>
+                            {% if is_granted('ROLE_CUSTOMER_SUBUSER_MANAGER') %}
+                                <li role="presentation"><a role="presentation" href="{{ path('avl_subuser') }}">{{ 'Subuser-Management'|trans }}</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                     <li>

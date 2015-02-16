@@ -7,9 +7,7 @@
  */
 namespace Avl\UserBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
-
 use FOS\UserBundle\Controller\ChangePasswordController as BaseChangePasswordController;
 
 /**
@@ -18,19 +16,6 @@ use FOS\UserBundle\Controller\ChangePasswordController as BaseChangePasswordCont
  */
 class ChangePasswordController extends BaseChangePasswordController
 {
-    /**
-     * @var null|Session
-     */
-    protected $session = null;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
-
     /**
      * Change user password
      *
