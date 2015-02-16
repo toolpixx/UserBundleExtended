@@ -10,8 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class SubUserController extends BaseController
-{
+/**
+ * Class SubUserController
+ * @package Avl\UserBundle\Controller
+ */
+class SubUserController extends BaseController {
+
     /**
      * \FOS\UserBundle\Model\UserManagerInterface
      */
@@ -92,6 +96,9 @@ class SubUserController extends BaseController
                 )
             );
 
+            // Set the default locale
+            $user->setLocale();
+
             // Insert the user
             $this->getUserManager()->updateUser($user);
 
@@ -122,8 +129,13 @@ class SubUserController extends BaseController
         // Add Data and the request to the form
         $formFactory = $this->getFormFactory(self::FORM_FACTORY_PROFILE);
 
-        // Add the user to the formobject
-        $formFactory->setUser($user);
+        // View the roles to select which
+        // role user can use
+        $formFactory->setRoleView(true);
+
+        // View the enabled checkbox to
+        // select if user is enabled
+        $formFactory->setEnabledView(true);
 
         // Create the form
         $form = $formFactory->createForm();

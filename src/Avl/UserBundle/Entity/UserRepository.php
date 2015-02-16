@@ -9,10 +9,19 @@ namespace Avl\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
-class UserRepository extends EntityRepository
-{
-    public function findAllSubUserByParentId($userId, $parentId)
-    {
+/**
+ * Class UserRepository
+ * @package Avl\UserBundle\Entity
+ */
+class UserRepository extends EntityRepository {
+
+    /**
+     * @param $userId
+     * @param $parentId
+     * @return array
+     */
+    public function findAllSubUserByParentId($userId, $parentId) {
+
         $query = $this->getEntityManager()
             ->createQuery('
               SELECT

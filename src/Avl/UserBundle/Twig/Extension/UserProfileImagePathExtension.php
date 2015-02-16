@@ -5,8 +5,12 @@ namespace Avl\UserBundle\Twig\Extension;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Avl\UserBundle\Entity\User as User;
 
-class UserProfileImagePathExtension extends \Twig_Extension
-{
+/**
+ * Class UserProfileImagePathExtension
+ * @package Avl\UserBundle\Twig\Extension
+ */
+class UserProfileImagePathExtension extends \Twig_Extension {
+
     /**
      * @var User
      */
@@ -20,8 +24,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * Contructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->session = new Session();
         $this->user = new User();
     }
@@ -29,16 +32,14 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return 'profile_image_extension';
     }
 
     /**
      * @return array
      */
-    public function getFunctions()
-    {
+    public function getFunctions() {
         return array(
             'UserProfileImagePath' => new \Twig_Function_Method($this, 'UserProfileImagePath')
         );
@@ -47,8 +48,8 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function UserProfileImagePath($profilePicturePath)
-    {
+    public function UserProfileImagePath($profilePicturePath) {
+
         return true
             //&& null != $this->session->get('profilePicturePath')
             &&

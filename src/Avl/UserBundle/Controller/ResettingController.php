@@ -15,8 +15,7 @@ use FOS\UserBundle\Controller\ResettingController as BaseResettingController;
  * Class ResettingController
  * @package Avl\UserBundle\Controller
  */
-class ResettingController extends BaseResettingController
-{
+class ResettingController extends BaseResettingController {
     /**
      * @var null
      */
@@ -25,16 +24,15 @@ class ResettingController extends BaseResettingController
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->session = new Session();
     }
 
     /**
      * Overriding resetting to add custom logic.
      */
-    public function requestAction()
-    {
+    public function requestAction() {
+
         // Check if user is loggin. If yes they cannot
         // resetting passwort....
         if( $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') ){

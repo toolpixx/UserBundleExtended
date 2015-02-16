@@ -44,7 +44,9 @@
                                     <a role="presentation" href="{{ path('avl_event_show') }}" id="dropdownMenuEvents" data-toggle="dropdown" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
                                         <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
                                         {{ 'link.events'|trans }}
-                                        <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
+                                        {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+                                            <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
+                                        {% endif %}
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
                                         {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') %}

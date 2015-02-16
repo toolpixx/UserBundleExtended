@@ -14,8 +14,8 @@ use FOS\UserBundle\Controller\ChangePasswordController as BaseChangePasswordCont
  * Class ChangePasswordController
  * @package Avl\UserBundle\Controller
  */
-class ChangePasswordController extends BaseChangePasswordController
-{
+class ChangePasswordController extends BaseChangePasswordController {
+
     /**
      * Change user password
      *

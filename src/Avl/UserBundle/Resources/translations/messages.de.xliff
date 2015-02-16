@@ -165,6 +165,26 @@
                 <source>ROLE_CUSTOMER_SUBUSER_MANAGER</source>
                 <target>Subuser-Manager</target>
             </trans-unit>
+            <trans-unit id="TITLE_EN">
+                <source>TITLE_EN</source>
+                <target>Englisch</target>
+            </trans-unit>
+            <trans-unit id="TITLE_DE">
+                <source>TITLE_DE</source>
+                <target>Deutsch</target>
+            </trans-unit>
+            <trans-unit id="TITLE_ES">
+                <source>TITLE_ES</source>
+                <target>Spanisch</target>
+            </trans-unit>
+            <trans-unit id="TITLE_FR">
+                <source>TITLE_FR</source>
+                <target>Französisch</target>
+            </trans-unit>
+            <trans-unit id="TITLE_IT">
+                <source>TITLE_IT</source>
+                <target>Italienisch</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

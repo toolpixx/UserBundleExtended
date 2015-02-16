@@ -20,8 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class RegistrationListener
  * @package Avl\UserBundle\EventListener
  */
-class RegistrationListener implements EventSubscriberInterface
-{
+class RegistrationListener implements EventSubscriberInterface {
+
     /**
      * @var UrlGeneratorInterface
      */
@@ -41,8 +41,8 @@ class RegistrationListener implements EventSubscriberInterface
      * @param UrlGeneratorInterface $router
      * @param ContainerInterface $container
      */
-    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
-    {
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) {
+
         $this->router = $router;
         $this->container = $container;
         $this->session = new Session();
@@ -51,19 +51,20 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
-    {
+    public static function getSubscribedEvents() {
+
         return array(
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
             FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted',
+            FOSUserEvents::REGISTRATION_CONFIRMED => 'onRegistrationConfirmed'
         );
     }
 
     /**
      * @param FormEvent $event
      */
-    public function onRegistrationSuccess(FormEvent $event)
-    {
+    public function onRegistrationSuccess(FormEvent $event) {
+
         // Get the userdate
         $user = $event->getForm()->getData();
 
@@ -78,8 +79,8 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * @param FilterUserResponseEvent $responseEvent
      */
-    public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent)
-    {
+    public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent) {
+
         // Get the user who created
         $user = $responseEvent->getUser();
 
@@ -91,5 +92,13 @@ class RegistrationListener implements EventSubscriberInterface
 
         // Update the user
         $userManager->updateUser($user);
+    }
+
+    /**
+     * @param FilterUserResponseEvent $responseEvent
+     */
+    public function onRegistrationConfirmed(FilterUserResponseEvent $responseEvent) {
+        $this->session->set('username', $responseEvent->getUser()->getUsername());
+        $this->session->set('_locale', $responseEvent->getUser()->getLocale());
     }
 }

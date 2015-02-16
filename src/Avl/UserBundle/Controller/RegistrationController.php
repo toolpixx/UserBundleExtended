@@ -17,8 +17,8 @@ use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationControll
  * Class RegistrationController
  * @package Avl\UserBundle\Controller
  */
-class RegistrationController extends BaseRegistrationController
-{
+class RegistrationController extends BaseRegistrationController {
+
     /**
      * @var null
      */
@@ -27,8 +27,7 @@ class RegistrationController extends BaseRegistrationController
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->session = new Session();
     }
 
@@ -38,8 +37,8 @@ class RegistrationController extends BaseRegistrationController
      * @param Request $request
      * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request)
-    {
+    public function registerAction(Request $request) {
+
         // Check if user is loggin. If yes they cannot
         // register accounts....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

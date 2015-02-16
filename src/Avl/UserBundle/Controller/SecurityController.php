@@ -16,16 +16,16 @@ use FOS\UserBundle\Controller\SecurityController as BaseSecurityController;
  * Class SecurityController
  * @package Avl\UserBundle\Controller
  */
-class SecurityController extends BaseSecurityController
-{
+class SecurityController extends BaseSecurityController {
+
     /**
      * Overriding login to add custom logic.
      *
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction(Request $request)
-    {
+    public function loginAction(Request $request) {
+
         // Check if user is loggin. If yes they cannot
         // login, too; he stilled login in past....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

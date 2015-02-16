@@ -18,14 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class ProfileFormType
  * @package Avl\UserBundle\Form\Type
  */
-class ProfileFormType extends BaseType
-{
+class ProfileFormType extends BaseType {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+
         $this->buildUserForm($builder, $options);
 
         // Remove ask for current_password
@@ -52,25 +52,29 @@ class ProfileFormType extends BaseType
                 )
             ));
 
-            // If not the admin from customer
-            if (isset($options['user']) && $options['user']->getId() != $options['user']->getParentId()) {
+            // If roleView is true
+            if (isset($options['roleView']) && $options['roleView']) {
                 $builder->add('usedRoles', 'choice', array(
-                        'property_path' => 'roles',
-                        'choices' => User::getUsedRoles(),
-                        'mapped' => true,
-                        'expanded' => true,
-                        'multiple' => true,
-                        'label' => 'Rollen',
-                        'attr' => array(
-                            'style' => 'width:200px'
-                        )
-                    ))
-                    ->add('enabled', 'checkbox', array(
-                        'label' => 'label.enabled',
-                        'required' => false
+                    'property_path' => 'roles',
+                    'choices' => User::getUsedRoles(),
+                    'mapped' => true,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'label' => 'Rollen',
+                    'attr' => array(
+                        'style' => 'width:200px'
                     )
-                );
+                ));
             }
+
+            // If enabledView is true
+            if (isset($options['enabledView']) && $options['enabledView']) {
+                $builder->add('enabled', 'checkbox', array(
+                    'label' => 'label.enabled',
+                    'required' => false
+                ));
+            }
+
             $builder->add('locale', 'choice', array(
                     'choices' => User::getLocaleNames(),
                     'label' => 'label.locale',
@@ -92,11 +96,27 @@ class ProfileFormType extends BaseType
         ;
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setRequired(array(
-            'user'
+
+        // Not use yet...
+        //$resolver->setRequired(array(
+        //    'user'
+        //));
+
+        // Set roleView
+        $resolver->setDefaults(array(
+            'roleView'  => null,
         ));
 
+        // Set enabledView
+        $resolver->setDefaults(array(
+            'enabledView'  => null,
+        ));
+
+        // Set user
         $resolver->setDefaults(array(
             'user'  => null,
         ));
@@ -105,16 +125,14 @@ class ProfileFormType extends BaseType
     /**
      * @return string
      */
-    public function getParent()
-    {
+    public function getParent() {
         return 'fos_user_profile';
     }
 
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return 'avl_user_profile';
     }
 }

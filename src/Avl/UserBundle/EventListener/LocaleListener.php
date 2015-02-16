@@ -11,17 +11,29 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LocaleListener implements EventSubscriberInterface
-{
+/**
+ * Class LocaleListener
+ * @package Avl\UserBundle\EventListener
+ */
+class LocaleListener implements EventSubscriberInterface {
+
+    /**
+     * @var string
+     */
     private $defaultLocale;
 
-    public function __construct($defaultLocale = 'en')
-    {
+    /**
+     * @param string $defaultLocale
+     */
+    public function __construct($defaultLocale = 'en') {
         $this->defaultLocale = $defaultLocale;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
-    {
+    /**
+     * @param GetResponseEvent $event
+     */
+    public function onKernelRequest(GetResponseEvent $event) {
+
         $request = $event->getRequest();
         if (!$request->hasPreviousSession()) {
             return;
@@ -36,8 +48,11 @@ class LocaleListener implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
-    {
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents() {
+
         return array(
             // must be registered before the default Locale listener
             KernelEvents::REQUEST => array(array('onKernelRequest', 17)),

@@ -15,44 +15,23 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Symfony\Component\Intl\Locale\Locale as Locale;
-
 /**
  * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="fos_user")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements AdvancedUserInterface
-{
-    /**
-     * German locale
-     */
-    const DEFAULT_LOCALE_DE = 'de_DE';
-    const DEFAULT_LOCALE_DE_NAME = 'German';
+class User extends BaseUser implements AdvancedUserInterface {
 
     /**
-     * English locale
+     * @var array
      */
-    const DEFAULT_LOCALE_EN = 'en_EN';
-    const DEFAULT_LOCALE_EN_NAME = 'English';
-
-    /**
-     * Spanish locale
-     */
-    const DEFAULT_LOCALE_ES = 'es_ES';
-    const DEFAULT_LOCALE_ES_NAME = 'Spain';
-
-    /**
-     * Francais locale
-     */
-    const DEFAULT_LOCALE_FR = 'fr_FR';
-    const DEFAULT_LOCALE_FR_NAME = 'Francais';
-
-    /**
-     * Italy locale
-     */
-    const DEFAULT_LOCALE_IT = 'it_IT';
-    const DEFAULT_LOCALE_IT_NAME = 'Italy';
+    public static $defaultLocaleNames = array(
+        'en_EN' => 'TITLE_EN',
+        'de_DE' => 'TITLE_DE',
+        'es_ES' => 'TITLE_ES',
+        'fr_FR' => 'TITLE_FR',
+        'it_IT' => 'TITLE_IT'
+    );
 
     /**
      * @var string
@@ -118,8 +97,7 @@ class User extends BaseUser implements AdvancedUserInterface
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         // your own logic
 
@@ -168,15 +146,15 @@ class User extends BaseUser implements AdvancedUserInterface
      * @return mixed
      */
     public function getLocale() {
-        return (null !== $this->locale) ? $this->locale : Locale::getDefault();
+        return (null !== $this->locale) ? $this->locale : locale_get_default(); //Locale::getDefault();
     }
 
     /**
      * Set the locale of a user
      * @param string $locale
      */
-    public function setLocale($locale) {
-        $this->locale = (null !== $locale) ? $locale : Locale::getDefault();
+    public function setLocale($locale = null) {
+        $this->locale = (null !== $locale) ? $locale : locale_get_default();
     }
 
     /**
@@ -184,13 +162,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * @return array
      */
     public static function getLocaleNames() {
-        return array(
-            self::DEFAULT_LOCALE_EN => self::DEFAULT_LOCALE_EN_NAME,
-            self::DEFAULT_LOCALE_DE => self::DEFAULT_LOCALE_DE_NAME,
-            self::DEFAULT_LOCALE_ES => self::DEFAULT_LOCALE_ES_NAME,
-            self::DEFAULT_LOCALE_FR => self::DEFAULT_LOCALE_FR_NAME,
-            self::DEFAULT_LOCALE_IT => self::DEFAULT_LOCALE_IT_NAME,
-        );
+        return self::$defaultLocaleNames;
     }
 
     /**
@@ -199,8 +171,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * @param \DateTime $createdDate
      * @return News
      */
-    public function setCreatedDate($createdDate)
-    {
+    public function setCreatedDate($createdDate) {
         $this->createdDate = $createdDate;
     }
 
@@ -209,8 +180,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @return \DateTime
      */
-    public function getCreatedDate()
-    {
+    public function getCreatedDate() {
         return $this->createdDate; //->format('d.m.Y H:i:s');
     }
 
@@ -219,8 +189,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @return \DateTime
      */
-    public function getCreatedDateFormatted()
-    {
+    public function getCreatedDateFormatted() {
         return $this->createdDate->format('d.m.Y H:i:s');
     }
 }

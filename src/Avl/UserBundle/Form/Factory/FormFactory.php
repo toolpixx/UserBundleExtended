@@ -10,14 +10,53 @@ namespace Avl\UserBundle\Form\Factory;
 use Symfony\Component\Form\FormFactoryInterface;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 
-class FormFactory implements FactoryInterface
-{
+/**
+ * Class FormFactory
+ * @package Avl\UserBundle\Form\Factory
+ */
+class FormFactory implements FactoryInterface {
+
+    /**
+     * @var FormFactoryInterface
+     */
     private $formFactory;
+
+    /**
+     * @var
+     */
     private $name;
+
+    /**
+     * @var
+     */
     private $type;
+
+    /**
+     * @var array
+     */
     private $validationGroups;
+
+    /**
+     * @var
+     */
     private $user;
 
+    /**
+     * @var
+     */
+    private $roleView;
+
+    /**
+     * @var
+     */
+    private $enabledView;
+
+    /**
+     * @param FormFactoryInterface $formFactory
+     * @param $name
+     * @param $type
+     * @param array $validationGroups
+     */
     public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
     {
         $this->formFactory = $formFactory;
@@ -26,15 +65,20 @@ class FormFactory implements FactoryInterface
         $this->validationGroups = $validationGroups;
     }
 
-    public function createForm()
-    {
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function createForm() {
+
         return $this->formFactory->createNamed(
             $this->name,
             $this->type,
             null,
             array(
                 'validation_groups' => $this->validationGroups,
-                'user' => $this->user
+                'user' => $this->user,
+                'roleView' => $this->roleView,
+                'enabledView' => $this->enabledView
             )
         );
     }
@@ -46,5 +90,25 @@ class FormFactory implements FactoryInterface
      */
     public function setUser($user) {
         $this->user = $user;
+    }
+
+    /**
+     * Set the roleView parameter to
+     * view checkboxes or not
+     *
+     * @param $roleView
+     */
+    public function setRoleView($roleView) {
+        $this->roleView = $roleView;
+    }
+
+    /**
+     * Set the enabledView parameter to
+     * view checkbox or not
+     *
+     * @param $enabledView
+     */
+    public function setEnabledView($enabledView) {
+        $this->enabledView = $enabledView;
     }
 }

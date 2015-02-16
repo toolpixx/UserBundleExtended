@@ -4,8 +4,12 @@ namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
 
-class ContentController extends BaseController
-{
+/**
+ * Class ContentController
+ * @package Avl\UserBundle\Controller
+ */
+class ContentController extends BaseController {
+
     /**
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response

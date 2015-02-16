@@ -4,8 +4,12 @@ namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
 
-class EventController extends BaseController
-{
+/**
+ * Class EventController
+ * @package Avl\UserBundle\Controller
+ */
+class EventController extends BaseController {
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */

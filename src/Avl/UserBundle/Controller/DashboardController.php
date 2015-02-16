@@ -5,8 +5,12 @@ namespace Avl\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 
-class DashboardController extends Controller
-{
+/**
+ * Class DashboardController
+ * @package Avl\UserBundle\Controller
+ */
+class DashboardController extends Controller {
+
     /**
      * Url for the rss from symfony.com
      */
