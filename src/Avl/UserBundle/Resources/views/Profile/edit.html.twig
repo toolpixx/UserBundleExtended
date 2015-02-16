@@ -1,6 +1,12 @@
 {% extends "UserBundle::layout.html.twig" %}
 
-{% block title %}{{ 'title.customer.edit'|trans }}{% endblock %}
+{% block title %}
+    {% if currentRouteName == 'avl_subuser_edit' %}
+        {{ 'title.subuser.edit'|trans }}
+    {% else %}
+        {{ 'title.customer.edit'|trans }}
+    {% endif %}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -103,7 +109,11 @@
 
 {% block content %}
 <div class="col-md-9">
-    <h1>{{ 'title.customer.edit'|trans }}</h1>
+    {% if currentRouteName == 'avl_subuser_edit' %}
+        <h1>{{ 'title.subuser.edit'|trans }}</h1>
+    {% else %}
+        <h1>{{ 'title.customer.edit'|trans }}</h1>
+    {% endif %}
     {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 </div>
 <div class="col-md-3">

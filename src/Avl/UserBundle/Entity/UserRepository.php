@@ -22,6 +22,8 @@ class UserRepository extends EntityRepository {
      */
     public function findAllSubUserByParentId($userId, $parentId) {
 
+        $parentId = (null !== $parentId) ? $parentId : $userId;
+
         $query = $this->getEntityManager()
             ->createQuery('
               SELECT

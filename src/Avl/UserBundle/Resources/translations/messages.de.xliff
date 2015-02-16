@@ -6,6 +6,10 @@
                 <source>title.customer.edit</source>
                 <target>Meine Daten</target>
             </trans-unit>
+            <trans-unit id="title.subuser.edit">
+                <source>title.subuser.edit</source>
+                <target>Benutzerdaten</target>
+            </trans-unit>
             <trans-unit id="title.customer.avatar">
                 <source>title.customer.avatar</source>
                 <target>Benutzerbild</target>

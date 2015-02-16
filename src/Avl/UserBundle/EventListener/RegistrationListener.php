@@ -90,6 +90,9 @@ class RegistrationListener implements EventSubscriberInterface {
         // Set the parentId of his own id
         $user->setParentId($user->getId());
 
+        // Set the default locale
+        $user->setLocale();
+
         // Update the user
         $userManager->updateUser($user);
     }

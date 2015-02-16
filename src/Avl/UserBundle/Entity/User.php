@@ -23,6 +23,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends BaseUser implements AdvancedUserInterface {
 
     /**
+     * Default locale
+     */
+    const DEFAULT_LOCALE = 'de_DE';
+
+    /**
      * @var array
      */
     public static $defaultLocaleNames = array(
@@ -146,7 +151,7 @@ class User extends BaseUser implements AdvancedUserInterface {
      * @return mixed
      */
     public function getLocale() {
-        return (null !== $this->locale) ? $this->locale : locale_get_default(); //Locale::getDefault();
+        return (null !== $this->locale) ? $this->locale : self::DEFAULT_LOCALE;
     }
 
     /**
@@ -154,7 +159,7 @@ class User extends BaseUser implements AdvancedUserInterface {
      * @param string $locale
      */
     public function setLocale($locale = null) {
-        $this->locale = (null !== $locale) ? $locale : locale_get_default();
+        $this->locale = (null !== $locale) ? $locale : self::DEFAULT_LOCALE;
     }
 
     /**
