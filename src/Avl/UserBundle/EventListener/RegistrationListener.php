@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class RegistrationListener
@@ -27,24 +28,23 @@ class RegistrationListener implements EventSubscriberInterface
     private $router;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * @var Session
      */
     private $session;
 
     /**
-     * Add more roles if you wan't. But do not forget
-     * to define the roles in security.yaml
-     *
-     * @var array
-     */
-    private $roles = array('ROLE_CUSTOMER');
-
-    /**
      * @param UrlGeneratorInterface $router
+     * @param ContainerInterface $container
      */
-    public function __construct(UrlGeneratorInterface $router)
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
+        $this->container = $container;
         $this->session = new Session();
     }
 
@@ -69,7 +69,9 @@ class RegistrationListener implements EventSubscriberInterface
 
         // Add some roles to the user
         $user->setRoles(
-            $this->roles
+            array_keys(
+                $user->getUsedRoles()
+            )
         );
     }
 
@@ -78,6 +80,16 @@ class RegistrationListener implements EventSubscriberInterface
      */
     public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent)
     {
-        // not implemented yet
+        // Get the user who created
+        $user = $responseEvent->getUser();
+
+        // Insert parentId for the user
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        // Set the parentId of his own id
+        $user->setParentId($user->getId());
+
+        // Update the user
+        $userManager->updateUser($user);
     }
 }

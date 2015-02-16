@@ -21,7 +21,7 @@ services:
                 - { name: kernel.event_subscriber }
     avl_user.registration:
             class: Avl\UserBundle\EventListener\RegistrationListener
-            arguments: [@router]
+            arguments: [@router, @service_container]
             tags:
                 - { name: kernel.event_subscriber }
     avl_user.login_manager:

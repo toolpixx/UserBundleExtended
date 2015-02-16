@@ -2,9 +2,9 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
+use Avl\UserBundle\Controller\Controller as BaseController;
 
-class ContentController extends Controller
+class ContentController extends BaseController
 {
     /**
      * @param $slug

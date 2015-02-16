@@ -80,9 +80,19 @@ class SubUserController extends BaseController
 
         if ($form->isValid()) {
 
+            // Add the parentId
             $user->setParentId(
                 $this->getUser()->getParentId()
             );
+
+            // Set the roles
+            $user->setRoles(
+                array_keys(
+                    $user->getUsedRoles()
+                )
+            );
+
+            // Insert the user
             $this->getUserManager()->updateUser($user);
 
             return $this->redirectSubUser('Subuser was created');

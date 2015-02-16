@@ -85,7 +85,10 @@ class User extends BaseUser implements AdvancedUserInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(
+     *  type="integer",
+     *  nullable=true
+     * )
      */
     protected $parentId;
 

@@ -109,7 +109,7 @@
 <div class="col-md-3">
     <h1>{{ 'title.customer.avatar'|trans }}</h1>
     <img src="{{ UserProfileImagePath(profilePicturePath) }}" class="img-thumbnail" height="200"/>
-    {% if  app.user.getProfilePicturePath %}
+    {% if profilePicturePath is not null %}
         <br><br>
         <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('{{ 'alert.delete.avatar'|trans }}')">
             <input type="hidden" name="_method" value="DELETE">
