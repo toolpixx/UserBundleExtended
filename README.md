@@ -1,6 +1,10 @@
 # UserBundleExtended
 Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 
+[Checkout first the video at youtube](https://www.youtube.com/watch?v=Ogyof5WTp3c&feature=youtu.be) 
+
+* Add subuser. Now you can administrate subuser from a parent user
+
 * Add image-crop as service for profil-picture.
 * Upload image in user-entity with traits.
 
