@@ -71,9 +71,24 @@
                             </li>
                         {% endif %}
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li><a role="presentation" href="{{ path('fos_user_security_login') }}">{{ 'link.login'|trans }}</a></li>
-                            <li><a role="presentation" href="{{ path('fos_user_registration_register') }}">{{ 'link.register'|trans }}</a></li>
-                            <li><a role="presentation" href="{{ path('fos_user_resetting_request') }}">{{ 'link.resetting.password'|trans }}</a></li>
+                            <li>
+                                <a role="presentation" href="{{ path('fos_user_security_login') }}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.login'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a role="presentation" href="{{ path('fos_user_registration_register') }}">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.register'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a role="presentation" href="{{ path('fos_user_resetting_request') }}">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.resetting.password'|trans }}
+                                </a>
+                            </li>
                         {% endif %}
                     {% endblock %}
                 </ul>

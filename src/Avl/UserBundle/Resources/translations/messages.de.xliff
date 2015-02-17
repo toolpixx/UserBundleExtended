@@ -46,6 +46,14 @@
                 <source>button.save</source>
                 <target>Speichern</target>
             </trans-unit>
+            <trans-unit id="button.subuser.save">
+                <source>button.subuser.save</source>
+                <target>Anlegen</target>
+            </trans-unit>
+            <trans-unit id="button.registration">
+                <source>button.registration</source>
+                <target>Registrieren</target>
+            </trans-unit>
             <trans-unit id="footer.text">
                 <source>footer.text</source>
                 <target>This is the footer with copyright...Your slogan here....</target>
@@ -122,6 +130,22 @@
                 <source>title.faq</source>
                 <target>Faq und Hilfe</target>
             </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Anmelden</target>
+            </trans-unit>
+            <trans-unit id="title.registration">
+                <source>title.registration</source>
+                <target>Registrieren</target>
+            </trans-unit>
+            <trans-unit id="title.sub.registration">
+                <source>title.sub.registration</source>
+                <target>/ Registrieren Sie sich einen Account.</target>
+            </trans-unit>
+            <trans-unit id="title.subuser.registration">
+                <source>title.subuser.registration</source>
+                <target>Subuser anlegen</target>
+            </trans-unit>
             <trans-unit id="notice.label">
                 <source>notice.label</source>
                 <target>Nachricht</target>
@@ -189,6 +213,24 @@
                 <source>TITLE_IT</source>
                 <target>Italienisch</target>
             </trans-unit>
+
+            <trans-unit id="label.login.username">
+                <source>label.login.username</source>
+                <target>Benutzername oder E-Mail-Adresse</target>
+            </trans-unit>
+            <trans-unit id="label.login.password">
+                <source>label.login.password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="label.login.remember_me">
+                <source>label.login.remember_me</source>
+                <target>An mich erinnern</target>
+            </trans-unit>
+            <trans-unit id="login.button">
+                <source>login.button</source>
+                <target>Anmelden</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

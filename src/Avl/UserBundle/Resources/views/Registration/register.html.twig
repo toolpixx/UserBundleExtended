@@ -1,5 +1,12 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "UserBundle::layout.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Registration:register_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block content %}
+<div class="col-md-12">
+    {% if currentRouteName == 'avl_subuser_new' %}
+        <h1>{{ 'title.subuser.registration'|trans }}</h1>
+    {% else %}
+        <h1>{{ 'title.registration'|trans }}  <small>{{ 'title.sub.registration'|trans }}</small></h1>
+    {% endif %}
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+</div>
+{% endblock %}

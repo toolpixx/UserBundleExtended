@@ -1,9 +1,11 @@
-{% trans_default_domain 'FOSUserBundle' %}
-
 <form action="{% if path is defined  %}{{ path(path) }}{% else %}{{ path('fos_user_registration_register') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
     {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    <div style="clear:both;text-align: center;padding-top:20px">
+        {% if currentRouteName == 'avl_subuser_new' %}
+            <input type="submit" class="btn btn-primary" value="{{ 'button.subuser.save'|trans }}" />
+        {% else %}
+            <input type="submit" class="btn btn-primary" value="{{ 'button.registration'|trans }}" />
+        {% endif %}
         {% if path is defined %}
             <a class="btn btn-primary" href="{{ path('avl_subuser') }}" role="button">Back</a>
         {% endif %}
