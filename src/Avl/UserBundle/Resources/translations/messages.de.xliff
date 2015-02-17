@@ -42,6 +42,18 @@
                 <source>label.username</source>
                 <target>Benutzername</target>
             </trans-unit>
+            <trans-unit id="label.subject">
+                <source>label.subject</source>
+                <target>Betreff</target>
+            </trans-unit>
+            <trans-unit id="label.body">
+                <source>label.body</source>
+                <target>Ihre Nachricht</target>
+            </trans-unit>
+            <trans-unit id="label.file">
+                <source>label.file</source>
+                <target>Dateianhang</target>
+            </trans-unit>
             <trans-unit id="button.save">
                 <source>button.save</source>
                 <target>Speichern</target>
@@ -144,7 +156,7 @@
             </trans-unit>
             <trans-unit id="title.subuser.registration">
                 <source>title.subuser.registration</source>
-                <target>Subuser anlegen</target>
+                <target>Benutzer anlegen</target>
             </trans-unit>
             <trans-unit id="notice.label">
                 <source>notice.label</source>
@@ -166,6 +178,15 @@
                 <source>change_password.flash.success</source>
                 <target>Ihr Passwort wurde aktualisiert.</target>
             </trans-unit>
+            <trans-unit id="enquiry.flash.success">
+                <source>enquiry.flash.success</source>
+                <target>Ihre Nachricht wurde an Uns weitergeleitet.</target>
+            </trans-unit>
+            <trans-unit id="enquiry.flash.error">
+                <source>enquiry.flash.error</source>
+                <target>Es ist ein Fehler bei der Weiterleitung Ihrer E-Mail an Uns aufgetreten.</target>
+            </trans-unit>
+
             <trans-unit id="title.404.not.found">
                 <source>title.404.not.found</source>
                 <target>Seite nicht gefunden!</target>
@@ -231,6 +252,58 @@
                 <target>Anmelden</target>
             </trans-unit>
 
+            <trans-unit id="title.registration.confirmed">
+                <source>title.registration.confirmed</source>
+                <target>Registrierung abgeschlossen</target>
+            </trans-unit>
+            <trans-unit id="text.registration.confirmed">
+                <source>text.registration.confirmed</source>
+                <target>
+                    <![CDATA[
+                    Hallo %username%,<br><br>Ihre Registrierung wurde Erfolgreich abgeschlossen. Sie haben nun die
+                    Möglichkeit unseren Service in vollen Umfang zu nutzen.
+                    <br><br>
+                    Wenn Sie Fragen zu unseren Service haben, nutzen Sie bitte erst unsere <a href="%faq_link%"><span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span> FAQ und Hilfe.</a> Wir
+                    sind Sicher, dass Ihre offenen Fragen in diesem Bereich beantwortet werden. Sollte dies
+                    nicht der Fall sein, so können Sie über diesen Bereich unser Support-Formular nutzen.
+                    <br><br>
+                    Wir Wünschen Ihnen nun viel Spass und Erfolg mit unseren Service.
+                    <br><br>
+                    Das Team von MT_CNSL
+                    ]]>
+                </target>
+            </trans-unit>
+
+            <trans-unit id="title.sub.faq.event">
+                <source>title.sub.faq.event</source>
+                <target>/ Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="title.sub.faq.comment">
+                <source>title.sub.faq.comment</source>
+                <target>/ Veranstaltungs-Kommentare</target>
+            </trans-unit>
+            <trans-unit id="title.sub.faq.user">
+                <source>title.sub.faq.user</source>
+                <target>/ Benutzer</target>
+            </trans-unit>
+
+            <trans-unit id="title.sub.faq.enquiry">
+                <source>title.sub.faq.enquiry</source>
+                <target>/ Frage stellen, weil die FAQ und Hilfe keine Lösung bietet</target>
+            </trans-unit>
+            <trans-unit id="text.faq.enquiry">
+                <source>text.faq.enquiry</source>
+                <target>
+                    <![CDATA[
+                    Die FAQ und Hilfe konnte Ihnen nicht weiterhelfen? Dann nehmen Sie mit uns
+                    Kontakt auf. Wir sind bemüht Ihnen bei Ihren Fragen zu helfen.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="button.send">
+                <source>button.send</source>
+                <target>Abschicken</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

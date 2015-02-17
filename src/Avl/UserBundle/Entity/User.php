@@ -93,6 +93,14 @@ class User extends BaseUser implements AdvancedUserInterface {
     protected $createdDate;
 
     /**
+     * @Assert\Regex(
+     *  pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
+     *  message="Password must be seven or more characters long and contain at least one digit, one upper- and one lowercase character."
+     * )
+     */
+    protected $plainPassword;
+
+    /**
      * We will use trait-"class" to use
      * things for upload later on other
      * places, too...

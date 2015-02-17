@@ -54,3 +54,9 @@ avl_content_show:
     defaults:  { _controller: UserBundle:Content:index }
     requirements:
         _method: GET
+
+avl_faq_enquiry:
+    path:      /cnsl/faq/enquiry
+    defaults:  { _controller: UserBundle:Enquiry:enquiry }
+    requirements:
+        _method:  GET|POST

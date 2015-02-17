@@ -35,4 +35,4 @@ security:
     access_control:
         - { path: ^/(login|register|resetting)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(profile/dashboard|comment|content|subuser)$, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/(admin|group)/, role: ROLE_ADMIN }
+        - { path: ^/(admin)/, role: ROLE_ADMIN }

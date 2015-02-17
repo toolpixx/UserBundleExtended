@@ -28,6 +28,11 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
 
+parameters:
+    enquiry.email.address.returnpath: a.vanloock@gmail.com
+    enquiry.email.address.from: a.vanloock@gmail.com
+    enquiry.email.address.to: a.vanloock@gmail.com
+    enquiry.email.address.subject: "[Kontaktanfrage über Homepage] %s"
 
 framework:
     #esi:             ~

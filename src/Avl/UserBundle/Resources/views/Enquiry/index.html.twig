@@ -1,0 +1,70 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'title.faq'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    "bundles/user/fileinput/css/fileinput.min.css"
+    filter="cssrewrite"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    'bundles/user/fileinput/js/fileinput.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(function() {
+            $("#enquiry_attachment").fileinput({
+                showPreview: false,
+                showUpload: false,
+                mainClass: "input-group-small",
+                previewFileType: "image",
+                allowedFileExtensions: ['jpg', 'gif', 'png'],
+                browseClass: "btn btn-success",
+                browseLabel: "{{ 'button.select.image'|trans }}",
+                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                removeClass: "btn btn-danger",
+                removeLabel: "{{ 'button.delete'|trans }}",
+                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> "
+            });
+            $('.input-group').css({width: '320px !important'});
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block content %}
+<div class="col-md-12">
+    <h1>{{ 'title.faq'|trans }} <small>{{ 'title.sub.faq.enquiry'|trans }}</small></h1>
+    <div class="tabbable tabs-left">
+        {% include 'UserBundle:Content:faq.tabs.html.twig' %}
+        <div class="tab-content" style="width:75%;float:left">
+            <div class="well">
+                {{ 'text.faq.enquiry'|trans }}
+            </div>
+            <form action="{{ path('avl_faq_enquiry') }}" method="post" {{ form_enctype(form) }} class="blogger">
+                {{ form_errors(form) }}
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.subject) }}
+                {{ form_row(form.body) }}
+
+                {{ form_rest(form) }}
+
+                <div style="clear:both;text-align: center;padding-top:20px">
+                    <input type="submit" class="btn btn-primary" value="{{ 'button.send'|trans }}" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
