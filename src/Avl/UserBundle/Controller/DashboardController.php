@@ -34,8 +34,17 @@ class DashboardController extends Controller {
         // Log info to test chromephp
         $this->get('logger')->info($this->getUser());
 
+        // Can i view the subuser?
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
+            $em = $this->getDoctrine()->getManager();
+            $entities = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
+        } else {
+            $entities = null;
+        }
+
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
+            'entities' => $entities,
             'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
         ));
     }
