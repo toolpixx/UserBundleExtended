@@ -89,20 +89,16 @@ class SubUserController extends BaseController {
                 $this->getUser()->getParentId()
             );
 
-            // Set the roles
-            $user->setRoles(
-                array_keys(
-                    $user->getUsedRoles()
-                )
-            );
-
-            // Set the default locale
-            $user->setLocale();
-
             // Insert the user
             $this->getUserManager()->updateUser($user);
 
-            return $this->redirectSubUser('Subuser was created');
+            $this->session->getFlashBag()->add('notice', 'Subuser was created');
+
+            return $this->redirect(
+                $this->generateUrl('avl_subuser_edit', array(
+                    'id' => $user->getId()
+                ))
+            );
         }
 
         return $this->render('FOSUserBundle:Registration:register.html.twig', array(

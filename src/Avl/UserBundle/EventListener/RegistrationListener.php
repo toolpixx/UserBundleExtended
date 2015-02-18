@@ -64,16 +64,7 @@ class RegistrationListener implements EventSubscriberInterface {
      * @param FormEvent $event
      */
     public function onRegistrationSuccess(FormEvent $event) {
-
-        // Get the userdate
-        $user = $event->getForm()->getData();
-
-        // Add some roles to the user
-        $user->setRoles(
-            array_keys(
-                $user->getUsedRoles()
-            )
-        );
+        // not use yet
     }
 
     /**
@@ -89,9 +80,6 @@ class RegistrationListener implements EventSubscriberInterface {
 
         // Set the parentId of his own id
         $user->setParentId($user->getId());
-
-        // Set the default locale
-        $user->setLocale();
 
         // Update the user
         $userManager->updateUser($user);

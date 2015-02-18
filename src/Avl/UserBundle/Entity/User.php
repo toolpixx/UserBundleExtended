@@ -114,6 +114,16 @@ class User extends BaseUser implements AdvancedUserInterface {
         parent::__construct();
         // your own logic
 
+        // Set the standard-roles
+        $this->setRoles(
+            array_keys(
+                $this->getUsedRoles()
+            )
+        );
+
+        // Set the standard-locale
+        $this->setLocale();
+
         /**
          * Here you can setup the roles if you want. This
          * roles will set anyway. I have setup roles in
