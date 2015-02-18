@@ -7,6 +7,8 @@
     {% else %}
         <h1>{{ 'title.registration'|trans }}  <small>{{ 'title.sub.registration'|trans }}</small></h1>
     {% endif %}
+    <hr>
+    <br>
     {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 </div>
 {% endblock %}
