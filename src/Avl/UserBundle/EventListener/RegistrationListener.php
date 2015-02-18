@@ -78,9 +78,6 @@ class RegistrationListener implements EventSubscriberInterface {
         // Insert parentId for the user
         $userManager = $this->container->get('fos_user.user_manager');
 
-        // Set the parentId of his own id
-        $user->setParentId($user->getId());
-
         // Update the user
         $userManager->updateUser($user);
     }

@@ -86,7 +86,7 @@ class SubUserController extends BaseController {
 
             // Add the parentId
             $user->setParentId(
-                $this->getUser()->getParentId()
+                $this->getParentId()
             );
 
             // Insert the user
@@ -214,7 +214,7 @@ class SubUserController extends BaseController {
         return $userManager->findUserBy(
             array(
                 'id' => (integer) $id,
-                'parentId' => (integer) $this->getUser()->getParentId()
+                'parentId' => (integer) $this->getParentId()
             )
         );
     }
@@ -252,6 +252,19 @@ class SubUserController extends BaseController {
         return $this->redirect(
             $this->generateUrl('avl_subuser')
         );
+    }
+
+    /**
+     * Get the parentId or if null then
+     * the userId.
+     *
+     * @return mixed
+     */
+    private function getParentId() {
+
+        return
+            (null !== $this->getUser()->getParentId()) ?
+                $this->getUser()->getParentId() : $this->getUser()->getId();
     }
 
     /**
