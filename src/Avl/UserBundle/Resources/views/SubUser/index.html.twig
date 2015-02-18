@@ -25,7 +25,7 @@
                             <span class="glyphicon glyphicon-off text-danger"></span>
                         {% endif %}
                     </td>
-                    <td><img src="{{ UserProfileImagePath(entity.profilePicturePath) }}" height="20" class="img-circle" style="margin-top:-5px"/></td>
+                    <td><img src="{{ UserProfileImagePath(entity.profilePicturePath, 50, 50) }}" height="20" class="img-circle" style="margin-top:-5px"/></td>
                     <td valign="middle">
                         {{ entity.username }}
                     </td>

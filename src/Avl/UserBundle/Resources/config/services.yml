@@ -31,14 +31,14 @@ services:
             - { name: kernel.event_subscriber }
     avl.twig.extension.UserProfileImagePath:
          class: Avl\UserBundle\Twig\Extension\UserProfileImagePathExtension
-         arguments: []
+         arguments: [@service_container]
          tags:
             - { name: twig.extension }
-    crop_image:
-             class: Common\Services\CropImage
+    image_service:
+             class: Common\Services\ImageService
              arguments: []
              tags:
-                - { name: crop.image }
+                - { name: image.service }
 
     avl_user.profile.form.factory:
         class: Avl\UserBundle\Form\Factory\FormFactory

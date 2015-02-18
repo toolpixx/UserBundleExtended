@@ -269,16 +269,16 @@ class SubUserController extends BaseController {
         try {
             if ($user->getImageCropY() != '') {
                 // Get the cropimage-service
-                $cropImage = $this->container->get('crop_image');
+                $imageService = $this->container->get('image_service');
 
                 // crop the image
-                $cropImage->cropImage(
+                $imageService->cropImage(
                     array(
-                        'cropY' => $user->getImageCropY(),
-                        'cropX' => $user->getImageCropX(),
-                        'cropHeight' => $user->getImageCropHeight(),
-                        'cropWidth' => $user->getImageCropWidth(),
-                        'cropImagePath' => $user->getProfilePictureAbsolutePath()
+                        'cropY' => (int) $user->getImageCropY(),
+                        'cropX' => (int) $user->getImageCropX(),
+                        'cropHeight' => (int) $user->getImageCropHeight(),
+                        'cropWidth' => (int) $user->getImageCropWidth(),
+                        'cropImagePath' => (string) $user->getProfilePictureAbsolutePath()
                     )
                 );
             }

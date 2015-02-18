@@ -13,7 +13,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  * Class CropImage
  * @package Common
  */
-class CropImage
+class ImageService
 {
     /**
      * @var
@@ -152,10 +152,11 @@ class CropImage
         $this->setImagePath($vars['cropImagePath']);
 
         try {
-            // Get the image-type
-            $imageType = $this->getImageMimeType($this->getImagePath());
 
             if (is_file($this->getImagePath())) {
+
+                // Get the image-type
+                $imageType = $this->getImageMimeType($this->getImagePath());
 
                 // Read the picture
                 switch ($imageType) {
@@ -223,10 +224,7 @@ class CropImage
      */
     private function getImageMimeType($src) {
 
-        if (is_file($src)) {
-            $imageInfo = getimagesize($src);
-            return ($imageInfo['mime']) ? $imageInfo['mime'] : null;
-        }
-        return null;
+        $imageInfo = getimagesize($src);
+        return ($imageInfo['mime']) ? $imageInfo['mime'] : null;
     }
 }

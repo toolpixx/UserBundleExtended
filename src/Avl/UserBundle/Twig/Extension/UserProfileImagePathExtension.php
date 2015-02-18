@@ -2,7 +2,6 @@
 
 namespace Avl\UserBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Avl\UserBundle\Entity\User as User;
 
 /**
@@ -12,20 +11,21 @@ use Avl\UserBundle\Entity\User as User;
 class UserProfileImagePathExtension extends \Twig_Extension {
 
     /**
+     * @var
+     */
+    protected $container;
+
+    /**
      * @var User
      */
     protected $user;
 
     /**
-     * @var Session
+     * @param $container
      */
-    private $session;
+    public function __construct($container) {
 
-    /**
-     * Contructor
-     */
-    public function __construct() {
-        $this->session = new Session();
+        $this->container = $container;
         $this->user = new User();
     }
 
@@ -46,15 +46,43 @@ class UserProfileImagePathExtension extends \Twig_Extension {
     }
 
     /**
-     * @return string
+     * @param $profilePicturePath
+     * @param $with
+     * @param $height
+     * @return mixed
      */
-    public function UserProfileImagePath($profilePicturePath) {
+    public function UserProfileImagePath($profilePicturePath, $with, $height) {
 
-        return true
-            //&& null != $this->session->get('profilePicturePath')
-            &&
+        // Cachemanager for images
+        $cacheManager = $this->container->get('liip_imagine.cache.manager');
+
+        // Setup the correct path for image
+        $image =
             is_file($this->user->getUploadRootDir().'/'.$profilePicturePath)
             ? $this->user->getUploadDir().'/'.$profilePicturePath
             : $this->user->getUploadDir().'/default-avatar.png';
+
+        // Cachemanager runtimeConfig
+        // it overwrite the config in
+        // config.yml
+        if (null !== $height || null !== $height) {
+            $runtimeConfig = array(
+                "thumbnail" => array(
+                    "size" => array(
+                        $with,
+                        $height
+                    )
+                )
+            );
+        } else {
+            $runtimeConfig = null;
+        }
+
+        // Return the imagepath of cached image
+        return $cacheManager->getBrowserPath(
+            $image,
+            'user_thumb',
+            $runtimeConfig
+        );
     }
 }

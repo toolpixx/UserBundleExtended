@@ -114,3 +114,17 @@ liip_doctrine_cache:
         rssfeed:
             namespace: rssfeed.cache
             type: php_file
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                web_root: %kernel.root_dir%/../web
+                cache_prefix: media/cache
+
+    filter_sets:
+        cache: ~
+        user_thumb:
+            quality: 90
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
