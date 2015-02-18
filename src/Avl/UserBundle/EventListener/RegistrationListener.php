@@ -71,15 +71,7 @@ class RegistrationListener implements EventSubscriberInterface {
      * @param FilterUserResponseEvent $responseEvent
      */
     public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent) {
-
-        // Get the user who created
-        $user = $responseEvent->getUser();
-
-        // Insert parentId for the user
-        $userManager = $this->container->get('fos_user.user_manager');
-
-        // Update the user
-        $userManager->updateUser($user);
+        // not use yet
     }
 
     /**
