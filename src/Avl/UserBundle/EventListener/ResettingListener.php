@@ -19,8 +19,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ResettingListener implements EventSubscriberInterface
-{
+/**
+ * Class ResettingListener
+ * @package Avl\UserBundle\EventListener
+ */
+class ResettingListener implements EventSubscriberInterface {
+
     /**
      * @var UrlGeneratorInterface
      */
@@ -31,27 +35,38 @@ class ResettingListener implements EventSubscriberInterface
      */
     private $session;
 
-    public function __construct(UrlGeneratorInterface $router)
-    {
+    /**
+     * @param UrlGeneratorInterface $router
+     */
+    public function __construct(UrlGeneratorInterface $router) {
+
         $this->router = $router;
         $this->session = new Session();
     }
 
-    public static function getSubscribedEvents()
-    {
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents() {
+
         return array(
             FOSUserEvents::RESETTING_RESET_INITIALIZE => 'onResettingResetInitialize',
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onResettingResetSuccess'
         );
     }
 
-    public function onResettingResetInitialize(GetResponseUserEvent $event)
-    {
+    /**
+     * @param GetResponseUserEvent $event
+     */
+    public function onResettingResetInitialize(GetResponseUserEvent $event) {
         // Not use yet
     }
 
-    public function onResettingResetSuccess(FormEvent $event)
-    {
+    /**
+     * @param FormEvent $event
+     */
+    public function onResettingResetSuccess(FormEvent $event) {
+
         // Setup username and profile-picture to the session
         /** @var $user \FOS\UserBundle\Model\UserInterface */
         $user = $event->getForm()->getData();
