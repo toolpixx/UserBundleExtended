@@ -1,33 +1,33 @@
-    <div class="row">
-        <div class="col-md-8">
-            <form action="{% if path is defined  %}{{ path(path, {'id': id}) }}{% else %}{{ path('fos_user_profile_edit') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-            <div style="padding: 19px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
-                {{ form_widget(form) }}
-                <div class="fixed-dragger-cropper img-thumbnail" style="width:80%;display:none">
-                    <!-- Hier erscheinen die Vorschaubilder -->
-                </div>
+<div class="row">
+    <div class="col-md-8">
+        <form action="{% if path is defined  %}{{ path(path, {'id': id}) }}{% else %}{{ path('fos_user_profile_edit') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        <div style="padding: 19px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
+            {{ form_widget(form) }}
+            <div class="fixed-dragger-cropper img-thumbnail" style="width:80%;display:none">
+                <!-- Hier erscheinen die Vorschaubilder -->
             </div>
-            <div style="clear:both;text-align: center;padding-top:20px">
-                <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}" />
-                {% if path is defined %}
-                    <a class="btn btn-primary" href="{{ path('avl_subuser') }}" role="button">Back</a>
-                {% endif %}
-            </div>
-            </form>
         </div>
-        <div class="col-md-4">
-            <div style="padding: 19px;min-height:336px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
-                <h2>{{ 'title.customer.avatar'|trans }}</h2>
-                <img src="{{ UserProfileImagePath(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="220" widht="220"/>
-                {% if profilePicturePath is not null %}
-                    <br><br>
-                    <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('{{ 'alert.delete.avatar'|trans }}')">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <div style="text-align: center">
-                            <input type="submit" class="btn btn-block btn-sm btn-warning" value="{{ 'button.delete'|trans }}">
-                        </div>
-                    </form>
-                {% endif %}
-            </div>
+        <div style="clear:both;text-align: center;padding-top:20px">
+            <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}" />
+            {% if path is defined %}
+                <a class="btn btn-primary" href="{{ path('avl_subuser') }}" role="button">Back</a>
+            {% endif %}
+        </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div style="padding: 19px;min-height:336px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
+            <h2>{{ 'title.customer.avatar'|trans }}</h2>
+            <img src="{{ UserProfileImagePath(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="220" widht="220"/>
+            {% if profilePicturePath is not null %}
+                <br><br>
+                <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('{{ 'alert.delete.avatar'|trans }}')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div style="text-align: center">
+                        <input type="submit" class="btn btn-block btn-sm btn-warning" value="{{ 'button.delete'|trans }}">
+                    </div>
+                </form>
+            {% endif %}
         </div>
     </div>
+</div>
