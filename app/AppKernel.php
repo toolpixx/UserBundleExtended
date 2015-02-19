@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Avl\UserBundle\UserBundle(),
         );
 

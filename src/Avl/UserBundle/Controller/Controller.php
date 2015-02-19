@@ -25,4 +25,13 @@ abstract class Controller extends BaseController {
         }
         return true;
     }
+
+    public function getPagination($request, $query, $resultsPerSite) {
+        $paginator  = $this->get('knp_paginator');
+        return $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            $resultsPerSite
+        );
+    }
 }

@@ -2,14 +2,15 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Avl\UserBundle\Controller\Controller as BaseController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 
 /**
  * Class DashboardController
  * @package Avl\UserBundle\Controller
  */
-class DashboardController extends Controller {
+class DashboardController extends BaseController {
 
     /**
      * Url for the rss from symfony.com
@@ -29,7 +30,7 @@ class DashboardController extends Controller {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // Log info to test chromephp
         $this->get('logger')->info($this->getUser());
@@ -37,14 +38,14 @@ class DashboardController extends Controller {
         // Can i view the subuser?
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
             $em = $this->getDoctrine()->getManager();
-            $entities = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
+            $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
         } else {
-            $entities = null;
+            $query = null;
         }
 
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
-            'entities' => $entities,
+            'pagination' => $this->getPagination($request, $query, 5),
             'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
         ));
     }

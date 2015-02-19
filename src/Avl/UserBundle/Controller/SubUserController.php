@@ -51,16 +51,16 @@ class SubUserController extends BaseController {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
+        $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
 
         return $this->render('UserBundle:SubUser:index.html.twig', array(
-            'entities' => $entities,
+            'pagination' => $this->getPagination($request, $query, 5)
         ));
     }
 

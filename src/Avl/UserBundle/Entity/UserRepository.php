@@ -44,6 +44,7 @@ class UserRepository extends EntityRepository {
         ->setParameter('userId', $userId)
         ->setParameter('parentId', $parentId);
 
-        return $query->getResult();
+        //return $query->getResult();
+        return $query;
     }
 }

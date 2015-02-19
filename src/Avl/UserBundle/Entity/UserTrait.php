@@ -220,7 +220,7 @@ trait UserTrait {
 
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.$this->uploadRootDir.$this->uploadDir;
+        return __DIR__.self::UPLOAD_ROOT_DIR.self::UPLOAD_DIR;
     }
 
     /**
@@ -229,7 +229,7 @@ trait UserTrait {
      * @return string
      */
     public function getWebProfilePicturePath() {
-        return $this->uploadDir.'/'.$this->getProfilePicturePath();
+        return self::UPLOAD_DIR.'/'.$this->getProfilePicturePath();
     }
 
     /**
@@ -320,7 +320,7 @@ trait UserTrait {
     }
 
     public function getUploadDir() {
-        return $this->uploadDir;
+        return self::UPLOAD_DIR;
     }
 
     /**

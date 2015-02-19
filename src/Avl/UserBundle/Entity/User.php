@@ -41,12 +41,12 @@ class User extends BaseUser implements AdvancedUserInterface {
     /**
      * @var string
      */
-    private $uploadRootDir = '/../../../../web';
+    const UPLOAD_ROOT_DIR = '/../../../../web';
 
     /**
      * @var string
      */
-    private $uploadDir = '/uploads/user/profilepics';
+    const UPLOAD_DIR = '/uploads/user/profilepics';
 
     /**
      * @var Session

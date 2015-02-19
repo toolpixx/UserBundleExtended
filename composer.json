@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "liip/doctrine-cache-bundle": "~1.0",
         "behat/behat": "~3.0.6",
-        "liip/imagine-bundle": "~1.2"
+        "liip/imagine-bundle": "~1.2",
+        "knplabs/knp-paginator-bundle": "~2.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
