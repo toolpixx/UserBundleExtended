@@ -36,7 +36,7 @@ class ResettingController extends BaseResettingController {
 
         // Check if user is loggin. If yes they cannot
         // resetting passwort....
-        if( $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')){
             $this->session->getFlashBag()->add('notice', 'Please logout before resetting password.');
 
             return new RedirectResponse(
@@ -44,6 +44,8 @@ class ResettingController extends BaseResettingController {
                 array())
             );
         }
+        //echo $this->container->getParameter('fos_user.resetting.token_ttl');
+
         return parent::requestAction();
     }
 }

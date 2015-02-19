@@ -24,7 +24,7 @@ fos_user:
         form:
             type: avl_user_change_password
     resetting:
-        token_ttl: 900
+        token_ttl: "%fos_resetting.token_ttl%"
         form:
             type: avl_user_resetting
         email:
@@ -36,6 +36,7 @@ fos_user:
         mailer: fos_user.mailer.twig_swift
 
 parameters:
+    fos_resetting.token_ttl: 900
     enquiry.email.address.returnpath: a.vanloock@gmail.com
     enquiry.email.address.from: a.vanloock@gmail.com
     enquiry.email.address.to: a.vanloock@gmail.com
@@ -68,6 +69,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        token_ttl: "%fos_resetting.token_ttl%"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:

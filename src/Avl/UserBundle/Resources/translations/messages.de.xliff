@@ -362,6 +362,16 @@
                     ]]>
                 </target>
             </trans-unit>
+
+            <trans-unit id="title.resetting.already.requested">
+                <source>title.resetting.already.requested</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="text.resetting.already.requested">
+                <source>text.resetting.already.requested</source>
+                <target>Für diesen Benutzer wurde in den vergangenen %token_ttl% Minuten bereits ein neues Passwort beantragt, bitte versuchen Sie es später noch einmal.</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
