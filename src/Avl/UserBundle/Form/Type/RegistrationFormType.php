@@ -14,8 +14,11 @@ namespace Avl\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Class RegistrationFormType
+ * @package Avl\UserBundle\Form\Type
+ */
 class RegistrationFormType extends AbstractType {
-    private $class;
 
     /**
      * @param FormBuilderInterface $builder

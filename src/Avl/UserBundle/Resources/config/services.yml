@@ -14,14 +14,23 @@ services:
             tags:
                 - { name: form.type, alias: avl_user_registration }
     avl_user.changepassword.form.type:
-                class: Avl\UserBundle\Form\Type\ChangePasswordFormType
-                tags:
-                    - { name: form.type, alias: avl_user_change_password }
+            class: Avl\UserBundle\Form\Type\ChangePasswordFormType
+            tags:
+                - { name: form.type, alias: avl_user_change_password }
+    avl_user.resetting.form.type:
+          class: Avl\UserBundle\Form\Type\ResettingFormType
+          tags:
+              - { name: form.type, alias: avl_user_resetting }
     avl_user.profile_edit:
         class: Avl\UserBundle\EventListener\ProfileEditListener
         arguments: [@router, @service_container]
         tags:
             - { name: kernel.event_subscriber }
+    avl_user.resetting_success:
+            class: Avl\UserBundle\EventListener\ResettingListener
+            arguments: [@router]
+            tags:
+                - { name: kernel.event_subscriber }
     avl_user.change_password:
             class: Avl\UserBundle\EventListener\ChangePasswordListener
             arguments: [@router, @service_container]

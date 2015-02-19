@@ -24,7 +24,9 @@ fos_user:
         form:
             type: avl_user_change_password
     resetting:
-        token_ttl: 3600
+        token_ttl: 900
+        form:
+            type: avl_user_resetting
         email:
             from_email:
                 address:        your@domain.com

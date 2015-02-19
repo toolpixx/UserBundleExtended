@@ -11,16 +11,15 @@
 
 namespace Avl\UserBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
- * Class ChangePasswordFormType
+ * Class ResettingFormType
  * @package Avl\UserBundle\Form\Type
  */
-class ChangePasswordFormType extends AbstractType {
+class ResettingFormType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
@@ -28,15 +27,6 @@ class ChangePasswordFormType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $builder->add('current_password', 'password', array(
-            'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => new UserPassword(),
-            'attr' => array(
-                'style' => 'width:180px'
-            )
-        ));
         $builder->add('plainPassword', 'repeated', array(
             'type' => 'password',
             'options' => array(
@@ -59,13 +49,13 @@ class ChangePasswordFormType extends AbstractType {
      * @return string
      */
     public function getParent() {
-        return 'fos_user_change_password';
+        return 'fos_user_resetting';
     }
 
     /**
      * @return string
      */
     public function getName() {
-        return 'avl_user_change_password';
+        return 'avl_user_resetting';
     }
 }
