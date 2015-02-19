@@ -30,22 +30,21 @@ class DashboardController extends BaseController {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
+
         // Log info to test chromephp
         $this->get('logger')->info($this->getUser());
 
         // Can i view the subuser?
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
+            $pagination = $this->getUserPagination($request, 5);
         } else {
-            $query = null;
+            $pagination = null;
         }
 
         return $this->render('UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
-            'pagination' => $this->getPagination($request, $query, 5),
+            'pagination' => $pagination,
             'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
         ));
     }
@@ -56,8 +55,7 @@ class DashboardController extends BaseController {
      * @param $url
      * @return \SimpleXMLElement
      */
-    private function getRssFeed($url)
-    {
+    private function getRssFeed($url) {
         try {
             // CacheKey
             $this->cacheKey = $url;
@@ -92,8 +90,7 @@ class DashboardController extends BaseController {
      *
      * @return \SimpleXMLElement
      */
-    private function getCachedFeed()
-    {
+    private function getCachedFeed() {
         return
             simplexml_load_string(
                 $this->cacheDriver->fetch($this->cacheKey)

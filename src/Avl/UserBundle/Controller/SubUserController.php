@@ -43,24 +43,20 @@ class SubUserController extends BaseController {
     /**
      * Contructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->session = new Session();
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
+
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
-
         return $this->render('UserBundle:SubUser:index.html.twig', array(
-            'pagination' => $this->getPagination($request, $query, 5)
+            'pagination' => $this->getUserPagination($request, 5)
         ));
     }
 
@@ -70,8 +66,8 @@ class SubUserController extends BaseController {
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
+
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
@@ -114,8 +110,8 @@ class SubUserController extends BaseController {
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $id)
-    {
+    public function editAction(Request $request, $id) {
+
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
@@ -172,8 +168,8 @@ class SubUserController extends BaseController {
      * @param $id
      * @return RedirectResponse
      */
-    public function removeAction(Request $request, $id)
-    {
+    public function removeAction(Request $request, $id) {
+
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 

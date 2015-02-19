@@ -18,11 +18,13 @@
         <small>(Output generate with Twig-Dump)</small>
         {{ dump(user) }}
     </div>
-    <h1>Subuser-Management</h1>
-    <hr>
-    <br>
-    {% include "FOSUserBundle:Subuser:entities.html.twig" %}
-    {{ knp_pagination_render(pagination) }}
+    {% if pagination is not null %}
+        <h1>Subuser-Management</h1>
+        <hr>
+        <br>
+        {% include "FOSUserBundle:Subuser:entities.html.twig" %}
+        {{ knp_pagination_render(pagination) }}
+    {% endif %}
 </div>
 <div class="col-md-4">
     <h1 class="title">Symfony News</h1>
