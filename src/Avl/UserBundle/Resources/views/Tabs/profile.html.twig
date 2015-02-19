@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs" style="width:20%">
+    <li {% if currentRouteName == 'fos_user_profile_show' %}class="active"{% endif %}>
+        <a href="{{ path('fos_user_profile_show') }}">
+            <span class="glyphicon glyphicon-user" aria-hidden="true" style="top:2px"></span>
+            {{ 'link.account'|trans }}
+        </a>
+    </li>
+
+    <li {% if currentRouteName == 'fos_user_change_password' %}class="active"{% endif %}>
+        <a href="{{ path('fos_user_change_password') }}">
+            <span class="glyphicon glyphicon-barcode" aria-hidden="true" style="top:2px"></span>
+            {{ 'link.change.password'|trans }}
+        </a>
+    </li>
+</ul>

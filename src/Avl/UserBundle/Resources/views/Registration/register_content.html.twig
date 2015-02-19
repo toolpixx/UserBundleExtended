@@ -1,5 +1,11 @@
 <form action="{% if path is defined  %}{{ path(path) }}{% else %}{{ path('fos_user_registration_register') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_widget(form) }}
+    {% if currentRouteName == 'avl_subuser_new' %}
+        <div class="well">
+    {% endif %}
+        {{ form_widget(form) }}
+    {% if currentRouteName == 'avl_subuser_new' %}
+        </div>
+    {% endif %}
     <div style="clear:both;text-align: center;padding-top:20px">
         {% if currentRouteName == 'avl_subuser_new' %}
             <input type="submit" class="btn btn-primary" value="{{ 'button.subuser.save'|trans }}" />

@@ -150,3 +150,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 .input-group-small{
     width:380px;
 }
+
+.well {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}

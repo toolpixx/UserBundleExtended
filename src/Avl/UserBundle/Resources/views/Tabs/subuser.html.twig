@@ -1,0 +1,24 @@
+<ul class="nav nav-tabs" style="width:20%">
+    <li {% if currentRouteName == 'avl_subuser' %}class="active"{% endif %}>
+        <a href="{{ path('avl_subuser') }}">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="top:2px"></span>
+            {{ 'link.subuser.list'|trans }}
+        </a>
+    </li>
+
+    <li {% if currentRouteName == 'avl_subuser_new' %}class="active"{% endif %}>
+        <a href="{{ path('avl_subuser_new') }}">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="top:2px"></span>
+            {{ 'link.subuser.new'|trans }}
+        </a>
+    </li>
+
+    {% if currentRouteName == 'avl_subuser_edit' %}
+        <li class="active">
+            <a href="#">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true" style="top:2px"></span>
+                {{ 'link.subuser.edit'|trans }}
+            </a>
+        </li>
+    {% endif %}
+</ul>

@@ -40,7 +40,7 @@ class ProfileFormType extends BaseType {
                 'label' => 'label.username',
                 'attr' => array(
                     'size' => 20,
-                    'style' => 'width:200px'
+                    'style' => 'width:350px'
                 )
             ))
             ->add('email', 'email', array(
@@ -48,7 +48,7 @@ class ProfileFormType extends BaseType {
                 'label' => 'label.email',
                 'attr' => array(
                     'size' => 20,
-                    'style' => 'width:200px'
+                    'style' => 'width:350px'
                 )
             ));
 

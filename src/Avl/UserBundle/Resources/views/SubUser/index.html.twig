@@ -4,9 +4,17 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h1>Subuser-Management</h1>
+        <h1>{{ 'title.subuser'|trans }}</h1>
         <hr>
-        <br>
-        {% include "FOSUserBundle:Subuser:entities.html.twig" %}
+        <div class="tabbable tabs-left">
+            {% include 'UserBundle:Tabs:subuser.html.twig' %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    <div class="well">
+                        {% include "FOSUserBundle:Subuser:entities.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

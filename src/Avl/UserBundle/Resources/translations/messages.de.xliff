@@ -8,7 +8,7 @@
             </trans-unit>
             <trans-unit id="title.subuser.edit">
                 <source>title.subuser.edit</source>
-                <target>Benutzerdaten</target>
+                <target>/ Benutzerdaten bearbeiten</target>
             </trans-unit>
             <trans-unit id="title.customer.avatar">
                 <source>title.customer.avatar</source>
@@ -156,7 +156,7 @@
             </trans-unit>
             <trans-unit id="title.subuser.registration">
                 <source>title.subuser.registration</source>
-                <target>Benutzer anlegen</target>
+                <target>/ Benutzer anlegen</target>
             </trans-unit>
             <trans-unit id="notice.label">
                 <source>notice.label</source>
@@ -303,6 +303,64 @@
             <trans-unit id="button.send">
                 <source>button.send</source>
                 <target>Abschicken</target>
+            </trans-unit>
+
+            <trans-unit id="title.subuser">
+                <source>title.subuser</source>
+                <target>Benutzeradministration</target>
+            </trans-unit>
+            <trans-unit id="link.subuser.list">
+                <source>link.subuser.list</source>
+                <target>Übersicht</target>
+            </trans-unit>
+            <trans-unit id="link.subuser.new">
+                <source>link.subuser.new</source>
+                <target>Benutzer anlegen</target>
+            </trans-unit>
+            <trans-unit id="link.subuser.edit">
+                <source>link.subuser.edit</source>
+                <target>Benutzer bearbeiten</target>
+            </trans-unit>
+
+            <trans-unit id="title.resetting.request">
+                <source>title.resetting.request</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="text.resetting.request">
+                <source>text.resetting.request</source>
+                <target>
+                    <![CDATA[
+                        Sie haben Ihr Passwort vergessen? Kein Problem, geben Sie hier
+                        Ihren Benutzernamen oder E-Mail-Adresse an. Sie erhalten danach
+                        eine E-Mail mit Informationen wie Sie Ihr Passwort erneuern können.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="resetting.request.invalid_username">
+                <source>resetting.request.invalid_username</source>
+                <target>Benutzername oder E-Mail-Adresse nicht gefunden.</target>
+            </trans-unit>
+
+            <trans-unit id="title.resetting.checkemail">
+                <source>title.resetting.checkemail</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="text.resetting.checkemail">
+                <source>text.resetting.checkemail</source>
+                <target>Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Passwort zurückzusetzen.</target>
+            </trans-unit>
+
+            <trans-unit id="title.resetting.reset">
+                <source>title.resetting.reset</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="text.resetting.reset">
+                <source>text.resetting.reset</source>
+                <target>
+                    <![CDATA[
+                        Bitte geben Sie hier ein neuer Passwort ein.
+                    ]]>
+                </target>
             </trans-unit>
         </body>
     </file>

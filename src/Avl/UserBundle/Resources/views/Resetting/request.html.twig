@@ -1,0 +1,14 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'title.resetting.request'|trans }}{% endblock %}
+
+{% block fos_user_content %}
+    <div class="col-md-12">
+        <h1>{{ 'title.resetting.request'|trans }}</h1>
+        <hr>
+        <div class="well">
+            {{ 'text.resetting.request'|trans }}
+        </div>
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    </div>
+{% endblock %}

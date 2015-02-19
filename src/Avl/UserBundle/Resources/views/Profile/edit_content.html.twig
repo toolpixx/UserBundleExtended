@@ -1,10 +1,27 @@
 <form action="{% if path is defined  %}{{ path(path, {'id': id}) }}{% else %}{{ path('fos_user_profile_edit') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
-
-    <div class="fixed-dragger-cropper img-thumbnail" style="width:50%;display:none">
-        <!-- Hier erscheinen die Vorschaubilder -->
+    <div class="well">
+        <div class="row">
+            <div class="col-md-9">
+                {{ form_widget(form) }}
+            </div>
+            <div class="col-md-3">
+                <h2>{{ 'title.customer.avatar'|trans }}</h2>
+                <img src="{{ UserProfileImagePath(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="200"/>
+                {% if profilePicturePath is not null %}
+                    <br><br>
+                    <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('{{ 'alert.delete.avatar'|trans }}')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <div style="text-align: center">
+                            <input type="submit" class="btn btn-block btn-sm btn-warning" value="{{ 'button.delete'|trans }}">
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="fixed-dragger-cropper img-thumbnail" style="width:60%;display:none">
+                <!-- Hier erscheinen die Vorschaubilder -->
+            </div>
+        </div>
     </div>
-
     <div style="clear:both;text-align: center;padding-top:20px">
         <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}" />
         {% if path is defined %}

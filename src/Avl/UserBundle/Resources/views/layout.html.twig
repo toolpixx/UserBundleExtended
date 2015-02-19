@@ -101,10 +101,19 @@
                             <span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" href="{{ path('fos_user_profile_show') }}">{{ 'link.account'|trans }}</a></li>
-                            <li role="presentation"><a role="presentation" href="{{ path('fos_user_change_password') }}">{{ 'link.change.password'|trans }}</a></li>
+                            <li role="presentation">
+                                <a role="menuitem" href="{{ path('fos_user_profile_show') }}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.account'|trans }}
+                                </a>
+                            </li>
                             {% if is_granted('ROLE_CUSTOMER_SUBUSER_MANAGER') %}
-                                <li role="presentation"><a role="presentation" href="{{ path('avl_subuser') }}">{{ 'Subuser-Management'|trans }}</a></li>
+                                <li role="presentation">
+                                    <a role="presentation" href="{{ path('avl_subuser') }}">
+                                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="top:2px"></span>
+                                        {{ 'title.subuser'|trans }}
+                                    </a>
+                                </li>
                             {% endif %}
                         </ul>
                     </li>

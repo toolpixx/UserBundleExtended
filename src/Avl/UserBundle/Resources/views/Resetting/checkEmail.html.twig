@@ -1,0 +1,13 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'title.resetting.checkemail'|trans }}{% endblock %}
+
+{% block fos_user_content %}
+    <div class="col-md-12">
+        <h1>{{ 'title.resetting.checkemail'|trans }}</h1>
+        <hr>
+        <div class="well">
+            {{ 'text.resetting.checkemail'|trans({'%email%': email}) }}
+        </div>
+    </div>
+{% endblock %}

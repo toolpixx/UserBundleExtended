@@ -9,6 +9,10 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: avl_user_profile }
+    avl_user.registration.form.type:
+            class: Avl\UserBundle\Form\Type\RegistrationFormType
+            tags:
+                - { name: form.type, alias: avl_user_registration }
     avl_user.profile_edit:
         class: Avl\UserBundle\EventListener\ProfileEditListener
         arguments: [@router, @service_container]

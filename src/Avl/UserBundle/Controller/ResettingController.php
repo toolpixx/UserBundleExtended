@@ -7,6 +7,7 @@
  */
 namespace Avl\UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\ResettingController as BaseResettingController;

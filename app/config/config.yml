@@ -12,6 +12,8 @@ fos_user:
         form:
             type: avl_user_profile
     registration:
+        form:
+            type: avl_user_registration
         confirmation:
             enabled:    true
             from_email:

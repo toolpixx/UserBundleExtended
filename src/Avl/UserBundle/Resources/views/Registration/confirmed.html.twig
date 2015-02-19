@@ -4,7 +4,6 @@
 <div class="col-md-12">
     <h1>{{ 'title.registration.confirmed'|trans }}</h1>
     <hr>
-    <br>
     <p>{{ 'text.registration.confirmed'|trans({'%username%': user.username, '%faq_link%': path('avl_content_show', {'slug': 'faq'})})|raw }}</p>
     {% if app.session is not empty %}
         {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}

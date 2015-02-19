@@ -108,27 +108,24 @@
 {% endblock javascripts %}
 
 {% block content %}
-<div class="col-md-9">
+<div class="col-md-12">
     {% if currentRouteName == 'avl_subuser_edit' %}
-        <h1>{{ 'title.subuser.edit'|trans }}</h1>
+        <h1>{{ 'title.subuser'|trans }} <small>{{ 'title.subuser.edit'|trans }}</small></h1>
     {% else %}
         <h1>{{ 'title.customer.edit'|trans }}</h1>
     {% endif %}
     <hr>
-    <br>
-    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-</div>
-<div class="col-md-3">
-    <h1>{{ 'title.customer.avatar'|trans }}</h1>
-    <img src="{{ UserProfileImagePath(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="200"/>
-    {% if profilePicturePath is not null %}
-        <br><br>
-        <form action="{{ path('fos_user_profile_delete_picture') }}" {{ form_enctype(form) }} method="POST" onsubmit="return confirm('{{ 'alert.delete.avatar'|trans }}')">
-            <input type="hidden" name="_method" value="DELETE">
-            <div style="text-align: center">
-                <input type="submit" class="btn btn-block btn-sm btn-warning" value="{{ 'button.delete'|trans }}">
+    <div class="tabbable tabs-left">
+        {% if currentRouteName == 'avl_subuser_edit' or currentRouteName == 'avl_subuser_create' %}
+            {% include 'UserBundle:Tabs:subuser.html.twig' %}
+        {% else %}
+            {% include 'UserBundle:Tabs:profile.html.twig' %}
+        {% endif %}
+        <div class="tab-content" style="width:75%;float:left">
+            <div class="tab-pane active">
+                {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
             </div>
-        </form>
-    {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock content %}

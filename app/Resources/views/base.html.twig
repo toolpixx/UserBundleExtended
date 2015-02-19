@@ -80,6 +80,9 @@
             {% if error is defined and error %}
             toastr.error('{{ error.messageKey|trans(error.messageData, 'security') }}', '{{ 'notice.label'|trans }}');
             {% endif %}
+            {% if invalid_username is defined %}
+            toastr.error('{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}', '{{ 'notice.label'|trans }}');
+            {% endif %}
         });
     </script>
 {% endblock %}
