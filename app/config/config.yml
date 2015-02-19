@@ -20,6 +20,9 @@ fos_user:
                 address:        your@domain.com
                 sender_name:    FOSUserBundle avl extended demo registration
             template: UserBundle:User:registration.email.html.twig
+    change_password:
+        form:
+            type: avl_user_change_password
     resetting:
         token_ttl: 3600
         email:

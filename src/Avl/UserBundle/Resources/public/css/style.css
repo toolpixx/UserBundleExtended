@@ -151,7 +151,8 @@ h1, .h1, h2, .h2, h3, .h3 {
     width:380px;
 }
 
-.well {
+.well, .btn, input, select.form-control, .form-control {
     box-shadow: none !important;
     border-radius: 0 !important;
 }
+

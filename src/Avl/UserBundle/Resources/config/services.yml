@@ -13,6 +13,10 @@ services:
             class: Avl\UserBundle\Form\Type\RegistrationFormType
             tags:
                 - { name: form.type, alias: avl_user_registration }
+    avl_user.changepassword.form.type:
+                class: Avl\UserBundle\Form\Type\ChangePasswordFormType
+                tags:
+                    - { name: form.type, alias: avl_user_change_password }
     avl_user.profile_edit:
         class: Avl\UserBundle\EventListener\ProfileEditListener
         arguments: [@router, @service_container]

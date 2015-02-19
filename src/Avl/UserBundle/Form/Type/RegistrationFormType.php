@@ -46,7 +46,7 @@ class RegistrationFormType extends AbstractType {
                 'options' => array(
                     'translation_domain' => 'FOSUserBundle',
                     'attr' => array(
-                        'style' => 'width:150px'
+                        'style' => 'width:180px'
                     )
                 ),
                 'first_options' => array(
