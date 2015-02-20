@@ -18,12 +18,12 @@
         <small>(Output generate with Twig-Dump)</small>
         {{ dump(user) }}
     </div>
-    {% if pagination is not null %}
+    {% if entities is not null %}
         <h1>Subuser-Management</h1>
         <hr>
         <br>
         {% include "FOSUserBundle:Subuser:entities.html.twig" %}
-        {{ knp_pagination_render(pagination) }}
+        {{ knp_pagination_render(entities) }}
     {% endif %}
 </div>
 <div class="col-md-4">
