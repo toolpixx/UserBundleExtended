@@ -63,7 +63,7 @@ class SubUserController extends BaseController
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
         $form = $this->createForm(new SubUserSearchFormType());
-        $form->bind($request);
+        $form->handleRequest($request);
 
         return $this->render(
             'UserBundle:SubUser:index.html.twig', array(
