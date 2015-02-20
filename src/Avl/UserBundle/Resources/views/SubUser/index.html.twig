@@ -10,6 +10,15 @@
             {% include 'UserBundle:Tabs:subuser.html.twig' %}
             <div class="tab-content" style="width:75%;float:left">
                 <div class="tab-pane active">
+                    <form action="{{ path('avl_subuser') }}" method="GET" novalidate>
+                        <div class="input-group">
+                            {{ form_widget(form.query) }}
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button">{{ 'button.search'|trans }}</button>
+                            </span>
+                        </div>
+                    </form>
+                    <br>
                     <div class="well">
                         {% include "FOSUserBundle:Subuser:entities.html.twig" %}
                     </div>

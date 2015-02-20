@@ -372,6 +372,10 @@
                 <target>Für diesen Benutzer wurde in den vergangenen %token_ttl% Minuten bereits ein neues Passwort beantragt, bitte versuchen Sie es später noch einmal.</target>
             </trans-unit>
 
+            <trans-unit id="button.search">
+                <source>button.search</source>
+                <target>Suchen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,11 +1,16 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: avanloock
+ * Date: 16.02.15
+ * Time: 16:45
+ */
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
+use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 
 use Symfony\Component\Finder\Exception\AccessDeniedException;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,8 +19,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  * Class SubUserController
  * @package Avl\UserBundle\Controller
  */
-class SubUserController extends BaseController {
-
+class SubUserController extends BaseController
+{
     /**
      * \FOS\UserBundle\Model\UserManagerInterface
      */
@@ -43,31 +48,39 @@ class SubUserController extends BaseController {
     /**
      * Contructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request) {
-
+    public function indexAction(Request $request)
+    {
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
-        return $this->render('UserBundle:SubUser:index.html.twig', array(
-            'pagination' => $this->getUserPagination($request, 5)
-        ));
+        $form = $this->createForm(new SubUserSearchFormType());
+        $form->bind($request);
+
+        return $this->render(
+            'UserBundle:SubUser:index.html.twig', array(
+            'pagination' => $this->getUserPagination($request, $form->getData(), 5),
+            'form' => $form->createView()
+            )
+        );
     }
 
     /**
      * New subuser
      *
-     * @param Request $request
+     * @param  Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request) {
-
+    public function newAction(Request $request)
+    {
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
@@ -91,27 +104,31 @@ class SubUserController extends BaseController {
             $this->session->getFlashBag()->add('notice', 'Subuser was created');
 
             return $this->redirect(
-                $this->generateUrl('avl_subuser_edit', array(
+                $this->generateUrl(
+                    'avl_subuser_edit', array(
                     'id' => $user->getId()
-                ))
+                    )
+                )
             );
         }
 
-        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
+        return $this->render(
+            'FOSUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
             'path' => 'avl_subuser_new'
-        ));
+            )
+        );
     }
 
     /**
      * Edit subuser
      *
-     * @param Request $request
-     * @param $id
+     * @param  Request $request
+     * @param  $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $id) {
-
+    public function editAction(Request $request, $id)
+    {
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
@@ -151,7 +168,8 @@ class SubUserController extends BaseController {
         }
         // Get and create the FOSUserbundleForm
         // Render my view with additional data
-        return $this->render('UserBundle:Profile:edit.html.twig',
+        return $this->render(
+            'UserBundle:Profile:edit.html.twig',
             array(
                 'id' => $id,
                 'form' => $form->createView(),
@@ -164,12 +182,12 @@ class SubUserController extends BaseController {
     /**
      * Remove subuser
      *
-     * @param Request $request
-     * @param $id
+     * @param  Request $request
+     * @param  $id
      * @return RedirectResponse
      */
-    public function removeAction(Request $request, $id) {
-
+    public function removeAction(Request $request, $id)
+    {
         // Has user granted role?
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
@@ -199,11 +217,11 @@ class SubUserController extends BaseController {
      * Find the correct user by
      * id and parentId
      *
-     * @param $id
+     * @param  $id
      * @return \FOS\UserBundle\Model\UserInterface
      */
-    private function findUser($id) {
-
+    private function findUser($id)
+    {
         // Get the userManager
         $userManager = $this->getUserManager();
 
@@ -220,28 +238,30 @@ class SubUserController extends BaseController {
      *
      * @return object
      */
-    private function getUserManager() {
+    private function getUserManager()
+    {
         return $this->get(self::USER_MANAGER);
     }
 
     /**
      * Get the formFactory from FOSUserBundle
      *
-     * @param null $formFactory
+     * @param  null $formFactory
      * @return null|object
      */
-    private function getFormFactory($formFactory = null) {
+    private function getFormFactory($formFactory = null)
+    {
         return (null !== $formFactory) ? $this->get($formFactory) : null;
     }
 
     /**
      * Redirect to the subuseroverview
      *
-     * @param null $message
+     * @param  null $message
      * @return RedirectResponse
      */
-    private function redirectSubUser($message = null) {
-
+    private function redirectSubUser($message = null)
+    {
         if (null !== $message && !$this->session->getFlashBag()->has('error')) {
             $this->session->getFlashBag()->add('notice', (string) $message);
         }
@@ -256,8 +276,8 @@ class SubUserController extends BaseController {
      *
      * @return mixed
      */
-    private function getParentId() {
-
+    private function getParentId()
+    {
         return
             (null !== $this->getUser()->getParentId()) ?
                 $this->getUser()->getParentId() : $this->getUser()->getId();
@@ -266,11 +286,11 @@ class SubUserController extends BaseController {
     /**
      * Crop the current user avatar
      *
-     * @param $user
+     * @param  $user
      * @return bool
      */
-    private function cropImage($user) {
-
+    private function cropImage($user)
+    {
         try {
             if ($user->getImageCropY() != '') {
                 // Get the cropimage-service

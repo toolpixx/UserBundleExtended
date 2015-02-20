@@ -13,36 +13,47 @@ use Doctrine\ORM\EntityRepository;
  * Class UserRepository
  * @package Avl\UserBundle\Entity
  */
-class UserRepository extends EntityRepository {
+class UserRepository extends EntityRepository
+{
 
     /**
      * @param $userId
      * @param $parentId
-     * @return array
+     * @param $formData
+     * @return \Doctrine\ORM\AbstractQuery
      */
-    public function findAllSubUserByParentId($userId, $parentId) {
+    public function findAllSubUserByParentId($userId, $parentId, $formData) 
+    {
 
+        $query = (null !== $formData['query']) ? $formData['query'] : '';
         $parentId = (null !== $parentId) ? $parentId : $userId;
 
         $query = $this->getEntityManager()
-            ->createQuery('
-              SELECT
-                user
-              FROM
-                UserBundle:User user
-              WHERE
+            ->createQuery(
+                '
+                SELECT
+                  user
+                FROM
+                  UserBundle:User user
+                WHERE
                   user.parentId = :parentId
                 AND
                   user.id != :parentId
                 AND
                   user.id != :userId
-              ORDER BY
-                user.id
-              ASC
+                AND (
+                      user.email LIKE :query
+                    OR
+                      user.username LIKE :query
+                )
+                ORDER BY
+                  user.id
+                ASC
             '
-        )
-        ->setParameter('userId', $userId)
-        ->setParameter('parentId', $parentId);
+            )
+            ->setParameter('userId', $userId)
+            ->setParameter('parentId', $parentId)
+            ->setParameter('query', '%'.$query.'%');
 
         //return $query->getResult();
         return $query;
