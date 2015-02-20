@@ -376,6 +376,12 @@
                 <source>button.search</source>
                 <target>Suchen</target>
             </trans-unit>
+
+            <trans-unit id="title.info">
+                <source>title.info</source>
+                <target>Information</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
