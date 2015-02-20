@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: avanloock
- * Date: 10.01.15
- * Time: 21:52
- */
+     * Created by PhpStorm.
+     * User: avanloock
+     * Date: 10.01.15
+     * Time: 21:52
+     */
 namespace Avl\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
