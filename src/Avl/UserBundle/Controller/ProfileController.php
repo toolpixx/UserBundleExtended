@@ -30,7 +30,7 @@ class ProfileController extends BaseProfileController
     /**
      * @var null
      */
-    private $session = null;
+    private $session;
 
     /**
      * Constructor

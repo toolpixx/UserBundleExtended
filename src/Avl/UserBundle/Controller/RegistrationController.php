@@ -22,7 +22,7 @@ class RegistrationController extends BaseRegistrationController {
     /**
      * @var null
      */
-    private $session = null;
+    private $session;
 
     /**
      * Constructor

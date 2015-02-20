@@ -20,7 +20,7 @@ class ResettingController extends BaseResettingController {
     /**
      * @var null
      */
-    private $session = null;
+    private $session;
 
     /**
      * Constructor
