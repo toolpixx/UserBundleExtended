@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: avanloock
- * Date: 12.01.15
- * Time: 16:40
- */
+     * Created by PhpStorm.
+     * User: avanloock
+     * Date: 12.01.15
+     * Time: 16:40
+     */
 namespace Avl\UserBundle\EventListener;
 
 use FOS\UserBundle\Event\FormEvent;
