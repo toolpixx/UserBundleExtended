@@ -110,11 +110,6 @@ class ProfileFormType extends BaseType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) 
     {
-        // Not use yet...
-        //$resolver->setRequired(array(
-        //    'user'
-        //));
-
         // Set roleView
         $resolver->setDefaults(
             array(
