@@ -19,12 +19,27 @@
                         </div>
                     </form>
                     <br>
-                    <div class="well">
+                    <div class="{% if entities|length > 0 %}well{% endif %}">
                         {% include "FOSUserBundle:Subuser:entities.html.twig" %}
                     </div>
-                    {{ knp_pagination_render(pagination) }}
+                    {{ knp_pagination_render(entities) }}
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% if entities|length == 0 %}
+        {% if form.vars.value.query is not null %}
+            {% set infoNotice = 'notice.no.search.results' %}
+        {% else %}
+            {% set infoNotice = 'notice.no.subuser' %}
+        {% endif %}
+        <script>
+            $(document).ready(function() {
+                toastr.info('{{ infoNotice|trans }}', '{{ 'notice.label'|trans }}');
+            });
+        </script>
+    {% endif %}
 {% endblock %}

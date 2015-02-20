@@ -382,6 +382,14 @@
                 <target>Information</target>
             </trans-unit>
 
+            <trans-unit id="notice.no.search.results">
+                <source>notice.no.search.results</source>
+                <target>Es wurden keine Benutzer gefunden.</target>
+            </trans-unit>
+            <trans-unit id="notice.no.subuser">
+                <source>notice.no.subuser</source>
+                <target>Es sind keine Benutzer vorhanden.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

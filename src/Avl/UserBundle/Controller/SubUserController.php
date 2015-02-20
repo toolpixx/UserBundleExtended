@@ -63,11 +63,11 @@ class SubUserController extends BaseController
         $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
 
         $form = $this->createForm(new SubUserSearchFormType());
-        $form->handleRequest($request);
+        $form->submit($request);
 
         return $this->render(
             'UserBundle:SubUser:index.html.twig', array(
-            'pagination' => $this->getUserPagination($request, $form->getData(), 5),
+            'entities' => $this->getUserPagination($request, $form->getData(), 5),
             'form' => $form->createView()
             )
         );
