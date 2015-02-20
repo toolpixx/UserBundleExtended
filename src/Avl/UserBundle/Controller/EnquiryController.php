@@ -32,7 +32,7 @@ class EnquiryController extends BaseController
     /**
      * Constructor
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->session = new Session();
     }
@@ -98,7 +98,7 @@ class EnquiryController extends BaseController
         // Render form
         return $this->render(
             'UserBundle:Enquiry:index.html.twig', array(
-            'form' => $form->createView()
+                'form' => $form->createView()
             )
         );
     }
@@ -109,9 +109,8 @@ class EnquiryController extends BaseController
      * @param  Enquiry $enquiry
      * @return mixed
      */
-    private function sendMail(Enquiry $enquiry) 
+    private function sendMail(Enquiry $enquiry)
     {
-
         $message = \Swift_Message::newInstance()
             ->setSubject(sprintf($this->getEnquiryParameter('subject'), $enquiry->getSubject()))
             ->setFrom($enquiry->getEmail())
@@ -120,7 +119,7 @@ class EnquiryController extends BaseController
             ->setBody(
                 $this->renderView(
                     'UserBundle:Enquiry:enquiryEmail.txt.twig', array(
-                    'enquiry' => $enquiry
+                        'enquiry' => $enquiry
                     )
                 )
             );
@@ -132,12 +131,12 @@ class EnquiryController extends BaseController
                 \Swift_Attachment::fromPath(
                     $enquiry->getAttachment()
                 )
-                ->setFilename(
-                    $enquiry->getAttachment()->getClientOriginalName()
-                )
-                ->setContentType(
-                    $enquiry->getAttachment()->getClientMimeType()
-                )
+                    ->setFilename(
+                        $enquiry->getAttachment()->getClientOriginalName()
+                    )
+                    ->setContentType(
+                        $enquiry->getAttachment()->getClientMimeType()
+                    )
             );
         }
         return $this->get('mailer')->send($message);
@@ -147,8 +146,8 @@ class EnquiryController extends BaseController
      * @param $parameter
      * @return mixed
      */
-    private function getEnquiryParameter($parameter) 
+    private function getEnquiryParameter($parameter)
     {
-        return $this->container->getParameter('enquiry.email.address.'.$parameter);
+        return $this->container->getParameter('enquiry.email.address.' . $parameter);
     }
 }
