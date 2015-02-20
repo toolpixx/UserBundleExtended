@@ -26,7 +26,7 @@ class EnquiryController extends BaseController
     /**
      * @var null
      */
-    private $session = null;
+    private $session;
 
     /**
      * Constructor
