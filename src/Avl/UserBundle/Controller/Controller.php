@@ -30,21 +30,27 @@ abstract class Controller extends BaseController
     /**
      * Pagiation for the subuser-management
      *
-     * @param  $request
-     * @param  $resultsPerSite
+     * @param $request
+     * @param $formData
+     * @param $resultsPerSite
      * @return mixed
      */
-    public function getUserPagination($request, $resultsPerSite) 
+    public function getUserPagination($request, $formData, $resultsPerSite)
     {
+        $query = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:User')
+            ->findAllSubUserByParentId(
+                $this->getUser()->getId(),
+                $this->getUser()->getParentId(),
+                $formData
+            );
 
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());
-
-        $paginator  = $this->get('knp_paginator');
-        return $paginator->paginate(
-            $query,
-            $request->query->get('page', 1),
-            $resultsPerSite
-        );
+        return $this->get('knp_paginator')
+            ->paginate(
+                $query,
+                $request->query->get('page', 1),
+                $resultsPerSite
+            );
     }
 }

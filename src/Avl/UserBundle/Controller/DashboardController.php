@@ -44,7 +44,7 @@ class DashboardController extends BaseController
 
         // Can i view the subuser?
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
-            $pagination = $this->getUserPagination($request, 5);
+            $pagination = $this->getUserPagination($request, null, 5);
         } else {
             $pagination = null;
         }
