@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class SubUserSearchFormType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

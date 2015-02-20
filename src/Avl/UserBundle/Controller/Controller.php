@@ -13,13 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
  * Class Controller
  * @package Avl\UserBundle\Controller
  */
-abstract class Controller extends BaseController {
-
+abstract class Controller extends BaseController
+{
     /**
      * @param $role
      * @return bool
      */
-    public function hasGranted($role) {
+    public function hasGranted($role) 
+    {
         if (!$this->get('security.authorization_checker')->isGranted($role)) {
             throw $this->createAccessDeniedException();
         }
@@ -29,11 +30,12 @@ abstract class Controller extends BaseController {
     /**
      * Pagiation for the subuser-management
      *
-     * @param $request
-     * @param $resultsPerSite
+     * @param  $request
+     * @param  $resultsPerSite
      * @return mixed
      */
-    public function getUserPagination($request, $resultsPerSite) {
+    public function getUserPagination($request, $resultsPerSite) 
+    {
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository('UserBundle:User')->findAllSubUserByParentId($this->getUser()->getId(), $this->getUser()->getParentId());

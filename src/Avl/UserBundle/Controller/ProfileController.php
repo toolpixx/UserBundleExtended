@@ -35,7 +35,8 @@ class ProfileController extends BaseProfileController
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct() 
+    {
         $this->session = new Session();
     }
 
@@ -43,11 +44,11 @@ class ProfileController extends BaseProfileController
      * Overriding profile edit to add custom logic
      * ot custom variables to the form...
      *
-     * @param Request $request
+     * @param  Request $request
      * @return null|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request) {
-
+    public function editAction(Request $request) 
+    {
         // Get and create the FOSUserbundleForm
         $formFactory = $this->get(self::FORM_FACTORY_PROFILE);
 
@@ -67,7 +68,8 @@ class ProfileController extends BaseProfileController
         } else {
             // Get and create the FOSUserbundleForm
             // Render my view with additional data
-            return $this->render('UserBundle:Profile:edit.html.twig',
+            return $this->render(
+                'UserBundle:Profile:edit.html.twig',
                 array(
                     'form' => $form->createView(),
                     'profilePicturePath' => $this->getUser()->getProfilePicturePath()
@@ -79,14 +81,12 @@ class ProfileController extends BaseProfileController
     /**
      * Remove profile-picture
      *
-     * @param Request $request
+     * @param  Request $request
      * @return RedirectResponse
      */
-    public function removePictureAction(Request $request) {
-
-        /**
-         * Method DELETE?
-         */
+    public function removePictureAction(Request $request) 
+    {
+        // Method DELETE?
         if ($request->getMethod() == 'DELETE') {
 
             // Can i delete the picture?
@@ -104,8 +104,10 @@ class ProfileController extends BaseProfileController
         }
 
         return new RedirectResponse(
-            $this->container->get('router')->generate('fos_user_profile_edit',
-                array())
+            $this->container->get('router')->generate(
+                'fos_user_profile_edit',
+                array()
+            )
         );
     }
 }

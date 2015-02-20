@@ -20,8 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class ProfileEditListener
  * @package Avl\UserBundle\EventListener
  */
-class ProfileEditListener implements EventSubscriberInterface {
-
+class ProfileEditListener implements EventSubscriberInterface
+{
     /**
      * @var UrlGeneratorInterface
      */
@@ -39,10 +39,10 @@ class ProfileEditListener implements EventSubscriberInterface {
 
     /**
      * @param UrlGeneratorInterface $router
-     * @param ContainerInterface $container
+     * @param ContainerInterface    $container
      */
-    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) {
-
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) 
+    {
         $this->router = $router;
         $this->container = $container;
         $this->session = new Session();
@@ -51,8 +51,8 @@ class ProfileEditListener implements EventSubscriberInterface {
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() {
-
+    public static function getSubscribedEvents() 
+    {
         return array(
             FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileInitialize',
             FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
@@ -63,8 +63,8 @@ class ProfileEditListener implements EventSubscriberInterface {
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileInitialize(UserEvent $userEvent) {
-
+    public function onProfileInitialize(UserEvent $userEvent) 
+    {
         // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);
     }
@@ -72,8 +72,8 @@ class ProfileEditListener implements EventSubscriberInterface {
     /**
      * @param FormEvent $event
      */
-    public function onProfileEditSuccess(FormEvent $event) {
-
+    public function onProfileEditSuccess(FormEvent $event) 
+    {
         $user = $event->getForm('user')->getData();
 
         // Use the Crop-Service
@@ -103,8 +103,8 @@ class ProfileEditListener implements EventSubscriberInterface {
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileCompleted(UserEvent $userEvent) {
-
+    public function onProfileCompleted(UserEvent $userEvent) 
+    {
         // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);
 
@@ -124,8 +124,8 @@ class ProfileEditListener implements EventSubscriberInterface {
      *
      * @param UserEvent $userEvent
      */
-    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) {
-
+    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) 
+    {
         $this->session->set('username', $userEvent->getUser()->getUsername());
         $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
         $this->session->set('_locale', $userEvent->getUser()->getLocale());

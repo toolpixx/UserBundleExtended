@@ -105,7 +105,6 @@ class Enquiry
      * )
      *
      * ValidateRules: http://symfony.com/doc/current/reference/constraints/File.html#mimetypes
-     *
      */
     protected $attachment;
 
@@ -192,7 +191,8 @@ class Enquiry
     /**
      * @return bool
      */
-    public function hasAttachment() {
+    public function hasAttachment() 
+    {
         return ($this->getAttachment() instanceof UploadedFile) ? true : false;
     }
 }

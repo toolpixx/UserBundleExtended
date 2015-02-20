@@ -23,8 +23,8 @@ use Symfony\Component\Security\Http\SecurityEvents;
  * Class LoginListener
  * @package Avl\UserBundle\EventListener
  */
-class LoginListener implements EventSubscriberInterface {
-
+class LoginListener implements EventSubscriberInterface
+{
     /**
      * @var UrlGeneratorInterface
      */
@@ -38,8 +38,8 @@ class LoginListener implements EventSubscriberInterface {
     /**
      * @param UrlGeneratorInterface $router
      */
-    public function __construct(UrlGeneratorInterface $router) {
-
+    public function __construct(UrlGeneratorInterface $router) 
+    {
         $this->router = $router;
         $this->session = new Session();
     }
@@ -47,8 +47,8 @@ class LoginListener implements EventSubscriberInterface {
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() {
-
+    public static function getSubscribedEvents() 
+    {
         return array(
             FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
@@ -58,15 +58,16 @@ class LoginListener implements EventSubscriberInterface {
     /**
      * @param UserEvent $event
      */
-    public function onImplicitLogin(UserEvent $event) {
+    public function onImplicitLogin(UserEvent $event) 
+    {
         // nothing implemented yet
     }
 
     /**
      * @param InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event) {
-
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event) 
+    {
         // Get user-object
         $user = $event->getAuthenticationToken()->getUser();
 

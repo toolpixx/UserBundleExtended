@@ -1,18 +1,13 @@
 <?php
-
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * Created by PhpStorm.
+ * User: avanloock
+ * Date: 12.01.15
+ * Time: 16:40
  */
-
 namespace Avl\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
@@ -20,15 +15,16 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
  * Class ChangePasswordFormType
  * @package Avl\UserBundle\Form\Type
  */
-class ChangePasswordFormType extends AbstractType {
-
+class ChangePasswordFormType extends AbstractType
+{
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-
-        $builder->add('current_password', 'password', array(
+    public function buildForm(FormBuilderInterface $builder, array $options) 
+    {
+        $builder->add(
+            'current_password', 'password', array(
             'label' => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
@@ -36,8 +32,10 @@ class ChangePasswordFormType extends AbstractType {
             'attr' => array(
                 'style' => 'width:180px'
             )
-        ));
-        $builder->add('plainPassword', 'repeated', array(
+            )
+        );
+        $builder->add(
+            'plainPassword', 'repeated', array(
             'type' => 'password',
             'options' => array(
                 'translation_domain' => 'FOSUserBundle',
@@ -52,20 +50,23 @@ class ChangePasswordFormType extends AbstractType {
                 'label' => 'form.new_password_confirmation'
             ),
             'invalid_message' => 'fos_user.password.mismatch',
-        ));
+            )
+        );
     }
 
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent() 
+    {
         return 'fos_user_change_password';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName() 
+    {
         return 'avl_user_change_password';
     }
 }

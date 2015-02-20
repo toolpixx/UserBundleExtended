@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: avanloock
+ * Date: 10.01.15
+ * Time: 21:52
+ */
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
@@ -10,8 +15,8 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
  * Class DashboardController
  * @package Avl\UserBundle\Controller
  */
-class DashboardController extends BaseController {
-
+class DashboardController extends BaseController
+{
     /**
      * Url for the rss from symfony.com
      */
@@ -28,9 +33,11 @@ class DashboardController extends BaseController {
     private $cacheKey = null;
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request) 
+    {
 
         // Log info to test chromephp
         $this->get('logger')->info($this->getUser());
@@ -42,20 +49,23 @@ class DashboardController extends BaseController {
             $pagination = null;
         }
 
-        return $this->render('UserBundle:Dashboard:index.html.twig', array(
+        return $this->render(
+            'UserBundle:Dashboard:index.html.twig', array(
             'user' => $this->getUser(),
             'pagination' => $pagination,
             'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
-        ));
+            )
+        );
     }
 
     /**
      * Get a rssfeed
      *
-     * @param $url
+     * @param  $url
      * @return \SimpleXMLElement
      */
-    private function getRssFeed($url) {
+    private function getRssFeed($url) 
+    {
         try {
             // CacheKey
             $this->cacheKey = $url;
@@ -90,7 +100,8 @@ class DashboardController extends BaseController {
      *
      * @return \SimpleXMLElement
      */
-    private function getCachedFeed() {
+    private function getCachedFeed() 
+    {
         return
             simplexml_load_string(
                 $this->cacheDriver->fetch($this->cacheKey)

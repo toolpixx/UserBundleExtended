@@ -15,8 +15,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Class LocaleListener
  * @package Avl\UserBundle\EventListener
  */
-class LocaleListener implements EventSubscriberInterface {
-
+class LocaleListener implements EventSubscriberInterface
+{
     /**
      * @var string
      */
@@ -25,15 +25,16 @@ class LocaleListener implements EventSubscriberInterface {
     /**
      * @param string $defaultLocale
      */
-    public function __construct($defaultLocale = 'en') {
+    public function __construct($defaultLocale = 'en') 
+    {
         $this->defaultLocale = $defaultLocale;
     }
 
     /**
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event) {
-
+    public function onKernelRequest(GetResponseEvent $event) 
+    {
         $request = $event->getRequest();
         if (!$request->hasPreviousSession()) {
             return;
@@ -51,8 +52,8 @@ class LocaleListener implements EventSubscriberInterface {
     /**
      * @return array
      */
-    public static function getSubscribedEvents() {
-
+    public static function getSubscribedEvents() 
+    {
         return array(
             // must be registered before the default Locale listener
             KernelEvents::REQUEST => array(array('onKernelRequest', 17)),

@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: avanloock
+ * Date: 10.01.15
+ * Time: 21:52
+ */
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
@@ -8,8 +13,8 @@ use Avl\UserBundle\Controller\Controller as BaseController;
  * Class EventController
  * @package Avl\UserBundle\Controller
  */
-class EventController extends BaseController {
-
+class EventController extends BaseController
+{
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */

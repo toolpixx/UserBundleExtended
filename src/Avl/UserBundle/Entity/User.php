@@ -20,8 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="fos_user")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements AdvancedUserInterface {
-
+class User extends BaseUser implements AdvancedUserInterface
+{
     /**
      * Default locale
      */
@@ -47,19 +47,6 @@ class User extends BaseUser implements AdvancedUserInterface {
      * @var string
      */
     const UPLOAD_DIR = '/uploads/user/profilepics';
-
-    /**
-     * @var Session
-     */
-    private $session;
-
-    /**
-     * Add more roles if you wan't. But do not forget
-     * to define the roles in security.yaml
-     *
-     * @var array
-     */
-    private $usedRoles; // array('ROLE_ADMIN', 'ROLE_CUSTOMER');
 
     /**
      * @ORM\Id
@@ -110,9 +97,10 @@ class User extends BaseUser implements AdvancedUserInterface {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct() 
+    {
+        // BaseUser from FOSUB
         parent::__construct();
-        // your own logic
 
         // Set the standard-roles
         $this->setRoles(
@@ -123,15 +111,6 @@ class User extends BaseUser implements AdvancedUserInterface {
 
         // Set the standard-locale
         $this->setLocale();
-
-        /**
-         * Here you can setup the roles if you want. This
-         * roles will set anyway. I have setup roles in
-         *
-         * Avl\UserBundle\EventListener\RegistrationListener
-         *
-         * $this->roles = $this->usedRoles;
-         */
     }
 
     /**
@@ -139,7 +118,8 @@ class User extends BaseUser implements AdvancedUserInterface {
      *
      * @return mixed
      */
-    public function getParentId() {
+    public function getParentId() 
+    {
         return $this->parentId;
     }
 
@@ -148,15 +128,17 @@ class User extends BaseUser implements AdvancedUserInterface {
      *
      * @param $id
      */
-    public function setParentId($id) {
+    public function setParentId($id) 
+    {
         $this->parentId = $id;
     }
 
     /**
-     * Create values for the locale dropdown.
+     * Create values for the locale drop-down.
      * @return array
      */
-    public static function getUsedRoles() {
+    public static function getUsedRoles() 
+    {
         return array(
             'ROLE_CUSTOMER_EVENT_MANAGER' => 'ROLE_CUSTOMER_EVENT_MANAGER',
             'ROLE_CUSTOMER_COMMENT_MANAGER' => 'ROLE_CUSTOMER_COMMENT_MANAGER',
@@ -168,7 +150,8 @@ class User extends BaseUser implements AdvancedUserInterface {
      * Returns the locale of a user
      * @return mixed
      */
-    public function getLocale() {
+    public function getLocale() 
+    {
         return (null !== $this->locale) ? $this->locale : self::DEFAULT_LOCALE;
     }
 
@@ -176,25 +159,27 @@ class User extends BaseUser implements AdvancedUserInterface {
      * Set the locale of a user
      * @param string $locale
      */
-    public function setLocale($locale = null) {
+    public function setLocale($locale = null) 
+    {
         $this->locale = (null !== $locale) ? $locale : self::DEFAULT_LOCALE;
     }
 
     /**
-     * Create values for the locale dropdown.
+     * Create values for the locale drop-down.
      * @return array
      */
-    public static function getLocaleNames() {
+    public static function getLocaleNames() 
+    {
         return self::$defaultLocaleNames;
     }
 
     /**
      * Set createdDate
      *
-     * @param \DateTime $createdDate
-     * @return News
+     * @param $createdDate
      */
-    public function setCreatedDate($createdDate) {
+    public function setCreatedDate($createdDate) 
+    {
         $this->createdDate = $createdDate;
     }
 
@@ -203,8 +188,9 @@ class User extends BaseUser implements AdvancedUserInterface {
      *
      * @return \DateTime
      */
-    public function getCreatedDate() {
-        return $this->createdDate; //->format('d.m.Y H:i:s');
+    public function getCreatedDate() 
+    {
+        return $this->createdDate;
     }
 
     /**
@@ -212,7 +198,8 @@ class User extends BaseUser implements AdvancedUserInterface {
      *
      * @return \DateTime
      */
-    public function getCreatedDateFormatted() {
+    public function getCreatedDateFormatted() 
+    {
         return $this->createdDate->format('d.m.Y H:i:s');
     }
 }

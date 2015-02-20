@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: avanloock
+ * Date: 12.01.15
+ * Time: 16:40
+ */
 namespace Avl\UserBundle\Twig\Extension;
 
 use Avl\UserBundle\Entity\User as User;
@@ -8,8 +13,8 @@ use Avl\UserBundle\Entity\User as User;
  * Class UserProfileImagePathExtension
  * @package Avl\UserBundle\Twig\Extension
  */
-class UserProfileImagePathExtension extends \Twig_Extension {
-
+class UserProfileImagePathExtension extends \Twig_Extension
+{
     /**
      * @var
      */
@@ -23,8 +28,8 @@ class UserProfileImagePathExtension extends \Twig_Extension {
     /**
      * @param $container
      */
-    public function __construct($container) {
-
+    public function __construct($container) 
+    {
         $this->container = $container;
         $this->user = new User();
     }
@@ -32,14 +37,16 @@ class UserProfileImagePathExtension extends \Twig_Extension {
     /**
      * @return string
      */
-    public function getName() {
+    public function getName() 
+    {
         return 'profile_image_extension';
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions() 
+    {
         return array(
             'UserProfileImagePath' => new \Twig_Function_Method($this, 'UserProfileImagePath')
         );
@@ -51,8 +58,8 @@ class UserProfileImagePathExtension extends \Twig_Extension {
      * @param $height
      * @return mixed
      */
-    public function UserProfileImagePath($profilePicturePath, $with, $height) {
-
+    public function UserProfileImagePath($profilePicturePath, $with, $height) 
+    {
         // Cachemanager for images
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
 

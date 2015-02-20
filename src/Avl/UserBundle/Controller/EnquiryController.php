@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  * EnquiryController
  *
  * Class EnquiryController
+ *
  * @package Avl\UserBundle\Controller
  */
 class EnquiryController extends BaseController
@@ -31,14 +32,15 @@ class EnquiryController extends BaseController
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct() 
+    {
         $this->session = new Session();
     }
 
     /**
      * View or send the contact formdata
      *
-     * @param Request $request
+     * @param  Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function enquiryAction(Request $request)
@@ -94,18 +96,21 @@ class EnquiryController extends BaseController
         }
 
         // Render form
-        return $this->render('UserBundle:Enquiry:index.html.twig', array(
+        return $this->render(
+            'UserBundle:Enquiry:index.html.twig', array(
             'form' => $form->createView()
-        ));
+            )
+        );
     }
 
     /**
      * Send email
      *
-     * @param Enquiry $enquiry
+     * @param  Enquiry $enquiry
      * @return mixed
      */
-    private function sendMail(Enquiry $enquiry) {
+    private function sendMail(Enquiry $enquiry) 
+    {
 
         $message = \Swift_Message::newInstance()
             ->setSubject(sprintf($this->getEnquiryParameter('subject'), $enquiry->getSubject()))
@@ -113,11 +118,12 @@ class EnquiryController extends BaseController
             ->setReturnPath($this->getEnquiryParameter('returnpath'))
             ->setTo($this->getEnquiryParameter('to'))
             ->setBody(
-                $this->renderView('UserBundle:Enquiry:enquiryEmail.txt.twig', array(
+                $this->renderView(
+                    'UserBundle:Enquiry:enquiryEmail.txt.twig', array(
                     'enquiry' => $enquiry
-                ))
-            )
-        ;
+                    )
+                )
+            );
 
         // If any attachment exists
         if ($enquiry->hasAttachment()) {
@@ -141,7 +147,8 @@ class EnquiryController extends BaseController
      * @param $parameter
      * @return mixed
      */
-    private function getEnquiryParameter($parameter) {
+    private function getEnquiryParameter($parameter) 
+    {
         return $this->container->getParameter('enquiry.email.address.'.$parameter);
     }
 }
