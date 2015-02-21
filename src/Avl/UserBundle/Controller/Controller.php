@@ -29,7 +29,6 @@ abstract class Controller extends BaseController
 
     /**
      * Pagiation for the subuser-management
-     *
      * @param $request
      * @param $formData
      * @param $resultsPerSite
