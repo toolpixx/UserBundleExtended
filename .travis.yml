@@ -12,7 +12,7 @@ sudo: false
 install: composer install
 
 notifications:
-  email: friendsofsymfony-dev@googlegroups.com
+  email: a.vanloock@toolpixx.com
   
 #before_script:
 #  - composer selfupdate
