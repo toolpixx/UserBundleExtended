@@ -37,7 +37,7 @@
                     <span class="glyphicon glyphicon-edit" style="top:2px"></span>
                 </a>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a class="btn btn-xs btn-info" style="float:right;margin-right:10px" href="{{ path('avl_subuser_switch', {'switch': entity.username}) }}" title="{{ 'title.link.switch.on'|trans }}" style="float:left">
+                    <a class="btn btn-xs btn-info" style="float:right;margin-right:10px" href="{{ path('avl_subuser_switch_on', {'switch': entity.username}) }}" title="{{ 'title.link.switch.on'|trans }}" style="float:left">
                         <span class="glyphicon glyphicon-user" style="top:2px"></span>
                     </a>
                 {% endif %}

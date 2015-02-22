@@ -138,7 +138,7 @@
                     </li>
                     <li>
                         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <a href="{{ path('avl_subuser', {'switch': '_exit'}) }}" style="padding-left:0px;" title="{{ 'title.link.switch.off'|trans }}">
+                            <a href="{{ path('avl_subuser_switch_off', {'switch': '_exit'}) }}" style="padding-left:0px;" title="{{ 'title.link.switch.off'|trans }}">
                                 <span class="glyphicon glyphicon-off" style="color:red;top:4px"></span>
                             </a>
                         {% else %}

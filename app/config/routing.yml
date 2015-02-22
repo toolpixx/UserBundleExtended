@@ -52,9 +52,13 @@ avl_subuser_remove:
     requirements:
         _method: DELETE
 
-avl_subuser_switch:
-    path:      /cnsl/subuser/switch
-    defaults:  { _controller: UserBundle:SubUser:switch }
+avl_subuser_switch_on:
+    path:      /cnsl/subuser/switch-on
+    defaults:  { _controller: UserBundle:SubUser:switchon }
+
+avl_subuser_switch_off:
+    path:      /cnsl/subuser/switch-off
+    defaults:  { _controller: UserBundle:SubUser:switchoff }
 
 avl_content_show:
     path:      /cnsl/content/{slug}

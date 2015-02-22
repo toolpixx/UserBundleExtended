@@ -228,15 +228,32 @@ class SubUserController extends BaseController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function switchAction()
+    public function switchOnAction()
     {
+        return $this->switchAction('fos_user_profile_show');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function switchOffAction()
+    {
+        return $this->switchAction('avl_subuser');
+    }
+
+    private function switchAction($route) {
+
         $this->session->set('username', $this->getUser()->getUsername());
         $this->session->set('profilePicturePath', $this->getUser()->getProfilePicturePath());
         $this->session->set('_locale', $this->getUser()->getLocale());
 
-        return $this->redirect(
-            $this->generateUrl('fos_user_profile_show')
-        );
+        try {
+            return $this->redirect(
+                $this->generateUrl($route)
+            );
+        } catch(\Exception $e) {
+            return $this->render('UserBundle:Content:404.html.twig', array());
+        }
     }
 
     /**
