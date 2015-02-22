@@ -1,7 +1,9 @@
 # UserBundleExtended
 
-[![Build Status](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/badges/build.png?b=master)]
-[![Code Quality](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/badges/quality-score.png?b=master)]
+![Build Status](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/badges/build.png?b=master)
+![Code Quality](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/badges/quality-score.png?b=master)
+
+Build status and code quality is powered by [Scrutinizer](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/)
 
 ## What is UserBundleExtended?
 
