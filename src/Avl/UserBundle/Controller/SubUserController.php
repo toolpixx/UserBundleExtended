@@ -241,8 +241,8 @@ class SubUserController extends BaseController
         return $this->switchAction('avl_subuser');
     }
 
-    private function switchAction($route) {
-
+    private function switchAction($route)
+    {
         $this->session->set('username', $this->getUser()->getUsername());
         $this->session->set('profilePicturePath', $this->getUser()->getProfilePicturePath());
         $this->session->set('_locale', $this->getUser()->getLocale());
@@ -268,11 +268,14 @@ class SubUserController extends BaseController
         // Get the userManager
         $userManager = $this->getUserManager();
 
+        // If user is admin
         if ($this->hasRole('ROLE_ADMIN')) {
             return $userManager->findUserBy(
                 array('id' => (integer)$id)
             );
-        } else {
+        }
+        // If user is customer
+        else {
             return $userManager->findUserBy(
                 array(
                     'id' => (integer)$id,

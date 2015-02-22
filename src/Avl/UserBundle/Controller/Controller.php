@@ -100,10 +100,9 @@ abstract class Controller extends BaseController
      * @param $roles
      * @return bool
      */
-    private function checkGrantedRoles($roles) {
-
+    private function checkGrantedRoles($roles)
+    {
         $checkSecurity = array();
-
         // If $roles is array, iterate it.
         if (is_array($roles)) {
             foreach ($roles as $role) {
@@ -118,7 +117,6 @@ abstract class Controller extends BaseController
                 $checkSecurity[] = true;
             }
         }
-
         return (count($checkSecurity) > 0) ? true : false;
     }
 }
