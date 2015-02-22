@@ -114,6 +114,25 @@
                 <source>title.link.logout</source>
                 <target>Abmelden</target>
             </trans-unit>
+            <trans-unit id="title.link.switch.off">
+                <source>title.link.switch.off</source>
+                <target>Zurück zum Adminbereich</target>
+            </trans-unit>
+
+
+            <trans-unit id="title.link.switch.on">
+                <source>title.link.switch.on</source>
+                <target>Zu diesem Benutzer wechseln</target>
+            </trans-unit>
+            <trans-unit id="title.link.edit">
+                <source>title.link.edit</source>
+                <target>Diesen Benutzer bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.link.remove">
+                <source>title.link.remove</source>
+                <target>Diesen Benutzer löschen</target>
+            </trans-unit>
+
             <trans-unit id="title.customer.password">
                 <source>title.customer.password</source>
                 <target>Passwort ändern</target>

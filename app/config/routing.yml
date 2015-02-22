@@ -22,7 +22,7 @@ fos_user_change_password:
     defaults:  { _controller: UserBundle:ChangePassword:changePassword }
     methods:   [GET|POST]
 
-fos_ext_avl_user_dashboard_show:
+avl_user_dashboard_show:
     path:      /cnsl/dashboard
     defaults:  { _controller: UserBundle:Dashboard:index }
 
@@ -52,6 +52,10 @@ avl_subuser_remove:
     requirements:
         _method: DELETE
 
+avl_subuser_switch:
+    path:      /cnsl/subuser/switch
+    defaults:  { _controller: UserBundle:SubUser:switch }
+
 avl_content_show:
     path:      /cnsl/content/{slug}
     defaults:  { _controller: UserBundle:Content:index }
@@ -63,3 +67,7 @@ avl_faq_enquiry:
     defaults:  { _controller: UserBundle:Enquiry:enquiry }
     requirements:
         _method:  GET|POST
+
+###
+# All for admin
+##

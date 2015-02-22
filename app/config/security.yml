@@ -4,7 +4,7 @@ security:
 
     role_hierarchy:
         ROLE_CUSTOMER:    ROLE_USER
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       ROLE_ADMIN
         ROLE_CUSTOMER_EVENT_MANAGER: ROLE_USER
         ROLE_CUSTOMER_COMMENT_MANAGER: ROLE_USER
         ROLE_CUSTOMER_SUBUSER_MANAGER: ROLE_USER
@@ -17,6 +17,7 @@ security:
     firewalls:
         main:
             pattern: ^/
+            switch_user: { role: ROLE_ADMIN, parameter: switch }
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -25,7 +26,7 @@ security:
                 check_path: /login_check
 
                 always_use_default_target_path: false
-                default_target_path: fos_ext_avl_user_dashboard_show
+                default_target_path: avl_user_dashboard_show
                 use_forward: true
                 use_referer: false
             logout:
@@ -34,5 +35,7 @@ security:
             anonymous:    true
     access_control:
         - { path: ^/(login|register|resetting)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(cnsl/dashboard|comment|content|subuser)$, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/(admin)/, role: ROLE_ADMIN }
+        - { path: ^/(cnsl/event.*)$, role: ROLE_CUSTOMER_EVENT_MANAGER }
+        - { path: ^/(cnsl/comment.*)$, role: ROLE_CUSTOMER_COMMENT_MANAGER }
+        - { path: ^/(cnsl/dashboard|cnsl/subuser.*|cnsl/content.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_SUBUSER_MANAGER] }
+        - { path: ^/(cnsl/dashboard|cnsl/content.*)/, role: ROLE_ADMIN }

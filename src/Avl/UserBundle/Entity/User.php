@@ -102,13 +102,6 @@ class User extends BaseUser implements AdvancedUserInterface
         // BaseUser from FOSUB
         parent::__construct();
 
-        // Set the standard-roles
-        $this->setRoles(
-            array_keys(
-                $this->getUsedRoles()
-            )
-        );
-
         // Set the standard-locale
         $this->setLocale();
     }
@@ -146,6 +139,17 @@ class User extends BaseUser implements AdvancedUserInterface
         );
     }
 
+    /**
+     * Set the standard-roles for user
+     */
+    public function setUsedRoles() {
+        // Set the standard-roles
+        $this->setRoles(
+            array_keys(
+                $this->getUsedRoles()
+            )
+        );
+    }
     /**
      * Returns the locale of a user
      * @return mixed

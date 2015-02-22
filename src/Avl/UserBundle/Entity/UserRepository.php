@@ -55,7 +55,36 @@ class UserRepository extends EntityRepository
             ->setParameter('parentId', $parentId)
             ->setParameter('query', '%'.$query.'%');
 
-        //return $query->getResult();
+        return $query;
+    }
+
+    /**
+     * @param $formData
+     * @return \Doctrine\ORM\AbstractQuery|string
+     */
+    public function findAllSubUser($formData)
+    {
+
+        $query = (null !== $formData['query']) ? $formData['query'] : '';
+
+        $query = $this->getEntityManager()
+            ->createQuery(
+                '
+                SELECT
+                  user
+                FROM
+                  UserBundle:User user
+                WHERE
+                  user.email LIKE :query
+                OR
+                  user.username LIKE :query
+                ORDER BY
+                  user.id
+                ASC
+            '
+            )
+            ->setParameter('query', '%'.$query.'%');
+
         return $query;
     }
 }

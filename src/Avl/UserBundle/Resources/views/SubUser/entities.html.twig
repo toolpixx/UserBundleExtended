@@ -1,12 +1,12 @@
 {% if entities|length > 0 %}
-<table class="table table-hover" border="0" id="pagination">
+<table class="table table-hover" id="pagination">
     <thead>
     <tr>
         <th width="1%"></th>
         <th width="1%"></th>
         <th>{{ knp_pagination_sortable(entities, 'Name', 'user.username') }}</th>
         <th>{{ knp_pagination_sortable(entities, 'E-Mail-Adresse', 'user.email') }}</th>
-        <th width="18%" style="text-align: right">Actions</th>
+        <th width="{% if is_granted('ROLE_ADMIN') %}18{% else %}13{% endif %}%" style="text-align: right"></th>
     </tr>
     </thead>
     <tbody>
@@ -28,10 +28,19 @@
                 <form style="float:right" action="{{ path('avl_subuser_remove', {'id': entity.id}) }}" method="POST" onsubmit="return confirm('{{ 'Do you remove the subuser?'|trans }}')">
                     <input type="hidden" name="_method" value="DELETE">
                     <div style="text-align: center">
-                        <input type="submit" class="btn btn-xs btn-danger" value="{{ 'Remove'|trans }}">
+                        <button type="submit" title="{{ 'title.link.remove'|trans }}" class="btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-trash" style="top:2px"></span>
+                        </button>
                     </div>
                 </form>
-                <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px" href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" role="button" style="float:left">Edit</a>
+                <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px" href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" title="{{ 'title.link.edit'|trans }}" style="float:left">
+                    <span class="glyphicon glyphicon-edit" style="top:2px"></span>
+                </a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-xs btn-info" style="float:right;margin-right:10px" href="{{ path('avl_subuser_switch', {'switch': entity.username}) }}" title="{{ 'title.link.switch.on'|trans }}" style="float:left">
+                        <span class="glyphicon glyphicon-user" style="top:2px"></span>
+                    </a>
+                {% endif %}
             </td>
         </tr>
     {% endfor %}

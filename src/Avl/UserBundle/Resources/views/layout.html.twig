@@ -32,9 +32,9 @@
             <div class="collapse navbar-collapse" style="width: 1000px;margin:0 auto;" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {% block content_header_more %}
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN')%}
                             <li>
-                                <a role="presentation" href="{{ path('fos_ext_avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
                                     {{ 'link.dashboard'|trans }}
                                 </a>
@@ -63,6 +63,25 @@
                                     </ul>
                                 </li>
                             {% endif %}
+                            <li>
+                                <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.faq'|trans }}
+                                </a>
+                            </li>
+                        {% elseif is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                    <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'link.dashboard'|trans }}
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="presentation" href="{{ path('avl_subuser') }}">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="top:2px"></span>
+                                    {{ 'title.subuser'|trans }}
+                                </a>
+                            </li>
                             <li>
                                 <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
                                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
@@ -98,7 +117,7 @@
                         <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown" style="padding-top: 17px;padding-bottom: 10px;">
                             <img src="{{ UserProfileImagePath(app.session.get('profilePicturePath'), 50, 50) }}" height="26" class="img-circle" style="margin-top:-5px"/>
                             {{ app.session.get('username') }}
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation">
@@ -118,9 +137,15 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;" title="{{ 'title.link.logout'|trans }}">
-                            <span class="glyphicon glyphicon-log-out" style="top:2px"></span>
-                        </a>
+                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                            <a href="{{ path('avl_subuser', {'switch': '_exit'}) }}" style="padding-left:0px;" title="{{ 'title.link.switch.off'|trans }}">
+                                <span class="glyphicon glyphicon-off" style="color:red;top:4px"></span>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;" title="{{ 'title.link.logout'|trans }}">
+                                <span class="glyphicon glyphicon-log-out" style="top:3px"></span>
+                            </a>
+                        {% endif %}
                     </li>
 
                 </ul>

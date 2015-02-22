@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class SubUserController extends BaseController
 {
+
     /**
      * \FOS\UserBundle\Model\UserManagerInterface
      */
@@ -60,14 +61,20 @@ class SubUserController extends BaseController
     public function indexAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
 
+        if ($this->hasRole('ROLE_ADMIN')) {
+            $pagination = $this->getAdminUserPagination($request, $form->getData(), 5);
+        } else {
+            $pagination = $this->getUserPagination($request, $form->getData(), 5);
+        }
+
         return $this->render(
             'UserBundle:SubUser:index.html.twig', array(
-            'entities' => $this->getUserPagination($request, $form->getData(), 5),
+            'entities' => $pagination,
             'form' => $form->createView()
             )
         );
@@ -82,7 +89,7 @@ class SubUserController extends BaseController
     public function newAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         $user = $this->getUserManager()->createUser();
         $user->setEnabled(true);
@@ -93,10 +100,15 @@ class SubUserController extends BaseController
 
         if ($form->isValid()) {
 
-            // Add the parentId
-            $user->setParentId(
-                $this->getParentId()
-            );
+            // Add the parentId if not ROLE_ADMIN
+            if ($this->hasRole('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
+                $user->setParentId(
+                    $this->getParentId()
+                );
+            }
+
+            // Setup the roles
+            $user->setUsedRoles();
 
             // Insert the user
             $this->getUserManager()->updateUser($user);
@@ -130,7 +142,7 @@ class SubUserController extends BaseController
     public function editAction(Request $request, $id)
     {
         // Has user granted role?
-        $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         // Find the user to edit
         $user = $this->findUser($id);
@@ -189,7 +201,7 @@ class SubUserController extends BaseController
     public function removeAction(Request $request, $id)
     {
         // Has user granted role?
-        $this->hasGranted('ROLE_CUSTOMER_SUBUSER_MANAGER');
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         if ($request->getMethod() == 'DELETE') {
             try {
@@ -214,6 +226,20 @@ class SubUserController extends BaseController
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function switchAction()
+    {
+        $this->session->set('username', $this->getUser()->getUsername());
+        $this->session->set('profilePicturePath', $this->getUser()->getProfilePicturePath());
+        $this->session->set('_locale', $this->getUser()->getLocale());
+
+        return $this->redirect(
+            $this->generateUrl('fos_user_profile_show')
+        );
+    }
+
+    /**
      * Find the correct user by
      * id and parentId
      *
@@ -225,12 +251,18 @@ class SubUserController extends BaseController
         // Get the userManager
         $userManager = $this->getUserManager();
 
-        return $userManager->findUserBy(
-            array(
-                'id' => (integer) $id,
-                'parentId' => (integer) $this->getParentId()
-            )
-        );
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return $userManager->findUserBy(
+                array('id' => (integer)$id)
+            );
+        } else {
+            return $userManager->findUserBy(
+                array(
+                    'id' => (integer)$id,
+                    'parentId' => (integer)$this->getParentId()
+                )
+            );
+        }
     }
 
     /**

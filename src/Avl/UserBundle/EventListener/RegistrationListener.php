@@ -65,7 +65,11 @@ class RegistrationListener implements EventSubscriberInterface
      */
     public function onRegistrationSuccess(FormEvent $event) 
     {
-        // not use yet
+        // Get the userdate
+        $user = $event->getForm()->getData();
+
+        // Add some roles to the user
+        $user->setUsedRoles();
     }
 
     /**
