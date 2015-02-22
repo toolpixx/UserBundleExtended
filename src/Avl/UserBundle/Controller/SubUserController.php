@@ -241,6 +241,10 @@ class SubUserController extends BaseController
         return $this->switchAction('avl_subuser');
     }
 
+    /**
+     * @param $route
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     private function switchAction($route)
     {
         $this->session->set('username', $this->getUser()->getUsername());
