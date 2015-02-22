@@ -1,14 +1,9 @@
 # UserBundleExtended
 
-This documentation is out dated...Please wait for new documentation a few of days....
 
-Add and change/overwrite some functions stuff for  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
+## What is UserBundleExtended?
 
-[Checkout first the video at youtube](https://www.youtube.com/watch?v=Ogyof5WTp3c&feature=youtu.be)
-
-# What is UserBundleExtended?
-
-UserBundleExtended is not a plugin for FOSUserBundle. It's an application that only will
+UserBundleExtended is not a plugin for [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle). It's an application that only will
 demonstrate how you can use FOSUserBundle-Method's and configuration. I have change many
 things for my needed privacy project for user and security. But many things is, what you
 search for on stackoverflow, too.
@@ -17,6 +12,8 @@ Now you can install this application for your sandbox. Play with it and you can 
 you get, if you change configuration or methods.
 
 I hope this application can answer your questions about FOSUB.
+
+[Checkout the video for visual demonstration at youtube](https://www.youtube.com/watch?v=Ogyof5WTp3c&feature=youtu.be)
 
 ## I have integrate the follow functions:
 
