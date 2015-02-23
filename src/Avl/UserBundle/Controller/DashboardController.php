@@ -54,7 +54,8 @@ class DashboardController extends BaseController
                 'user' => $this->getUser(),
                 'entities' => $pagination,
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
-            ));
+            )
+        );
     }
 
     /**
