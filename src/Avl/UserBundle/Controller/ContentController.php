@@ -24,9 +24,7 @@ class ContentController extends BaseController
         try {
             return
                 $this->render('UserBundle:Content:'.$slug.'.html.twig',
-                    array(
-                        'slug' => $slug
-                    )
+                    array('slug' => $slug)
                 );
 
         } catch (\Exception $e) {
