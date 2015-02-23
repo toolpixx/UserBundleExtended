@@ -35,26 +35,22 @@ class ProfileFormType extends BaseType
             ->remove('current_password')
             ->remove('email')
             ->remove('username')
-            ->add(
-                'username', 'text', array(
-                    'required' => true,
-                    'label' => 'label.username',
-                    'attr' => array(
-                        'size' => 20,
-                        'style' => 'width:350px'
-                    )
+            ->add('username', 'text', array(
+                'required' => true,
+                'label' => 'label.username',
+                'attr' => array(
+                    'size' => 20,
+                    'style' => 'width:350px'
                 )
-            )
-            ->add(
-                'email', 'email', array(
-                    'required' => true,
-                    'label' => 'label.email',
-                    'attr' => array(
-                        'size' => 20,
-                        'style' => 'width:350px'
-                    )
+            ))
+            ->add('email', 'email', array(
+                'required' => true,
+                'label' => 'label.email',
+                'attr' => array(
+                    'size' => 20,
+                    'style' => 'width:350px'
                 )
-            );
+            ));
 
         // If adminView is true
         if (isset($options['adminView']) && $options['adminView']) {
@@ -69,12 +65,12 @@ class ProfileFormType extends BaseType
         // If roleView is true
         if (isset($options['roleView']) && $options['roleView']) {
             $builder->add('usedRoles', 'choice', array(
-                    'property_path' => 'roles',
-                    'choices' => $roles,
-                    'mapped' => true,
-                    'expanded' => true,
-                    'multiple' => true,
-                    'label' => 'Rollen',
+                'property_path' => 'roles',
+                'choices' => $roles,
+                'mapped' => true,
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Rollen',
                     'attr' => array(
                         'style' => 'width:200px'
                     )
@@ -84,34 +80,29 @@ class ProfileFormType extends BaseType
 
         // If enabledView is true
         if (isset($options['enabledView']) && $options['enabledView']) {
-            $builder->add(
-                'enabled', 'checkbox', array(
-                    'label' => 'label.enabled',
-                    'required' => false
-                )
-            );
+            $builder->add('enabled', 'checkbox', array(
+                'label' => 'label.enabled',
+                'required' => false
+            ));
         }
 
-        $builder->add(
-            'locale', 'choice', array(
-                'choices' => User::getLocaleNames(),
-                'label' => 'label.locale',
-                'attr' => array(
-                    'style' => 'width:200px'
-                )
+        $builder->add('locale', 'choice', array(
+            'choices' => User::getLocaleNames(),
+            'label' => 'label.locale',
+            'attr' => array(
+                'style' => 'width:200px'
+            )
+        ))
+        ->add('profilePictureFile', 'file',
+            array(
+                'label' => 'label.avatar',
+                'required' => false
             )
         )
-            ->add(
-                'profilePictureFile', 'file',
-                array(
-                    'label' => 'label.avatar',
-                    'required' => false
-                )
-            )
-            ->add('imageCropY', 'hidden')
-            ->add('imageCropX', 'hidden')
-            ->add('imageCropHeight', 'hidden')
-            ->add('imageCropWidth', 'hidden');
+        ->add('imageCropY', 'hidden')
+        ->add('imageCropX', 'hidden')
+        ->add('imageCropHeight', 'hidden')
+        ->add('imageCropWidth', 'hidden');
     }
 
     /**

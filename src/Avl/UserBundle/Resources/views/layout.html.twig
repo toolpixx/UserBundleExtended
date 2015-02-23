@@ -136,7 +136,7 @@
                             <li style="color:black;font-weight: normal;">
                                 <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown"
                                    style="padding-top: 17px;padding-bottom: 10px;">
-                                    <img src="{{ UserProfileImagePath(app.session.get('profilePicturePath'), 50, 50) }}"
+                                    <img src="{{ getUserProfileImage(app.session.get('profilePicturePath'), 50, 50) }}"
                                          height="26" class="img-circle" style="margin-top:-5px"/>
                                     {{ app.session.get('username') }}
                                     <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>

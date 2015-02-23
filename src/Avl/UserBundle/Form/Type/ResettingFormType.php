@@ -22,24 +22,22 @@ class ResettingFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'plainPassword', 'repeated', array(
-                'type' => 'password',
-                'options' => array(
-                    'translation_domain' => 'FOSUserBundle',
-                    'attr' => array(
-                        'style' => 'width:180px'
-                    )
-                ),
-                'first_options' => array(
-                    'label' => 'form.new_password'
-                ),
-                'second_options' => array(
-                    'label' => 'form.new_password_confirmation'
-                ),
-                'invalid_message' => 'fos_user.password.mismatch',
-            )
-        );
+        $builder->add('plainPassword', 'repeated', array(
+            'type' => 'password',
+            'options' => array(
+                'translation_domain' => 'FOSUserBundle',
+                'attr' => array(
+                    'style' => 'width:180px'
+                )
+            ),
+            'first_options' => array(
+                'label' => 'form.new_password'
+            ),
+            'second_options' => array(
+                'label' => 'form.new_password_confirmation'
+            ),
+            'invalid_message' => 'fos_user.password.mismatch',
+        ));
     }
 
     /**

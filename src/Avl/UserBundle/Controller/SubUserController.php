@@ -116,16 +116,16 @@ class SubUserController extends BaseController
             $this->session->getFlashBag()->add('notice', 'Subuser was created');
 
             return $this->redirect(
-                $this->generateUrl(
-                    'avl_subuser_edit', array(
+                $this->generateUrl('avl_subuser_edit',
+                    array(
                         'id' => $user->getId()
                     )
                 )
             );
         }
 
-        return $this->render(
-            'FOSUserBundle:Registration:register.html.twig', array(
+        return $this->render('FOSUserBundle:Registration:register.html.twig',
+            array(
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_new'
             )
@@ -142,7 +142,12 @@ class SubUserController extends BaseController
     public function editAction(Request $request, $id)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(
+            array(
+                'ROLE_ADMIN',
+                'ROLE_CUSTOMER_SUBUSER_MANAGER'
+            )
+        );
 
         // Find the user to edit
         $user = $this->findUser($id);
@@ -196,8 +201,7 @@ class SubUserController extends BaseController
         }
         // Get and create the FOSUserbundleForm
         // Render my view with additional data
-        return $this->render(
-            'UserBundle:Profile:edit.html.twig',
+        return $this->render('UserBundle:Profile:edit.html.twig',
             array(
                 'id' => $id,
                 'form' => $form->createView(),
@@ -217,7 +221,12 @@ class SubUserController extends BaseController
     public function removeAction(Request $request, $id)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(
+            array(
+                'ROLE_ADMIN',
+                'ROLE_CUSTOMER_SUBUSER_MANAGER'
+            )
+        );
 
         if ($request->getMethod() == 'DELETE') {
             try {

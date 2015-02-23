@@ -20,7 +20,7 @@
     <div class="col-md-4">
         <div style="padding: 19px;min-height:336px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
             <h2>{{ 'title.customer.avatar'|trans }}</h2>
-            <img src="{{ UserProfileImagePath(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="220"
+            <img src="{{ getUserProfileImage(profilePicturePath, 220, 220) }}" class="img-thumbnail" height="220"
                  widht="220"/>
             {% if profilePicturePath is not null %}
                 <br><br>

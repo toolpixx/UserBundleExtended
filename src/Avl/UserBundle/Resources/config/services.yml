@@ -47,7 +47,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
     avl.twig.extension.UserProfileImagePath:
-         class: Avl\UserBundle\Twig\Extension\UserProfileImagePathExtension
+         class: Avl\UserBundle\Twig\Extension\UserProfileImageExtension
          arguments: [@service_container]
          tags:
             - { name: twig.extension }

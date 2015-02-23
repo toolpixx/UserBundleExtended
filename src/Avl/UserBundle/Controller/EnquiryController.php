@@ -96,8 +96,8 @@ class EnquiryController extends BaseController
         }
 
         // Render form
-        return $this->render(
-            'UserBundle:Enquiry:index.html.twig', array(
+        return $this->render('UserBundle:Enquiry:index.html.twig',
+            array(
                 'form' => $form->createView()
             )
         );
@@ -117,8 +117,8 @@ class EnquiryController extends BaseController
             ->setReturnPath($this->getEnquiryParameter('returnpath'))
             ->setTo($this->getEnquiryParameter('to'))
             ->setBody(
-                $this->renderView(
-                    'UserBundle:Enquiry:enquiryEmail.txt.twig', array(
+                $this->renderView('UserBundle:Enquiry:enquiryEmail.txt.twig',
+                    array(
                         'enquiry' => $enquiry
                     )
                 )

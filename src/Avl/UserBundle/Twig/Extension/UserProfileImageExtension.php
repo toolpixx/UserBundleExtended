@@ -13,7 +13,7 @@ use Avl\UserBundle\Entity\User as User;
  * Class UserProfileImagePathExtension
  * @package Avl\UserBundle\Twig\Extension
  */
-class UserProfileImagePathExtension extends \Twig_Extension
+class UserProfileImageExtension extends \Twig_Extension
 {
     /**
      * @var
@@ -48,7 +48,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'UserProfileImagePath' => new \Twig_Function_Method($this, 'UserProfileImagePath')
+            'getUserProfileImage' => new \Twig_Function_Method($this, 'getUserProfileImage')
         );
     }
 
@@ -58,7 +58,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
      * @param $height
      * @return mixed
      */
-    public function UserProfileImagePath($profilePicturePath, $with, $height)
+    public function getUserProfileImage($profilePicturePath, $with, $height)
     {
         // Cachemanager for images
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
