@@ -51,10 +51,10 @@ class DashboardController extends BaseController
 
         return $this->render(
             'UserBundle:Dashboard:index.html.twig',
-                array(
-                    'user' => $this->getUser(),
-                    'entities' => $pagination,
-                    'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
+            array(
+                'user' => $this->getUser(),
+                'entities' => $pagination,
+                'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
     }

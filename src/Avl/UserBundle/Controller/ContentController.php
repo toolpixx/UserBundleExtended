@@ -22,9 +22,17 @@ class ContentController extends BaseController
     public function indexAction($slug)
     {
         try {
-            return $this->render('UserBundle:Content:'.$slug.'.html.twig', array('slug' => $slug));
+            return $this->render(
+                'UserBundle:Content:'.$slug.'.html.twig',
+                array(
+                    'slug' => $slug
+                )
+            );
         } catch (\Exception $e) {
-            return $this->render('UserBundle:Content:404.html.twig', array());
+            return $this->render(
+                'UserBundle:Content:404.html.twig',
+                array()
+            );
         }
     }
 }

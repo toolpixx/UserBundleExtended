@@ -72,11 +72,13 @@ class SubUserController extends BaseController
             $pagination = $this->getUserPagination($request, $form->getData(), 5);
         }
 
-        return $this->render('UserBundle:SubUser:index.html.twig',
+        return $this->render(
+            'UserBundle:SubUser:index.html.twig',
             array(
                 'entities' => $pagination,
                 'form' => $form->createView()
-            ));
+            )
+        );
     }
 
     /**
@@ -114,18 +116,23 @@ class SubUserController extends BaseController
 
             $this->session->getFlashBag()->add('notice', 'Subuser was created');
 
-            return $this->redirect($this->generateUrl('avl_subuser_edit',
-                array(
-                    'id' => $user->getId()
+            return $this->redirect(
+                $this->generateUrl(
+                    'avl_subuser_edit',
+                    array(
+                        'id' => $user->getId()
+                    )
                 )
-            ));
+            );
         }
 
-        return $this->render('FOSUserBundle:Registration:register.html.twig',
+        return $this->render(
+            'FOSUserBundle:Registration:register.html.twig',
             array(
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_new'
-            ));
+            )
+        );
     }
 
     /**
@@ -196,13 +203,15 @@ class SubUserController extends BaseController
         }
         // Get and create the FOSUserbundleForm
         // Render my view with additional data
-        return $this->render('UserBundle:Profile:edit.html.twig',
+        return $this->render(
+            'UserBundle:Profile:edit.html.twig',
             array(
                 'id' => $id,
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_edit',
                 'profilePicturePath' => $user->getProfilePicturePath()
-            ));
+            )
+        );
     }
 
     /**
@@ -276,7 +285,10 @@ class SubUserController extends BaseController
                 $this->generateUrl($route)
             );
         } catch (\Exception $e) {
-            return $this->render('UserBundle:Content:404.html.twig', array());
+            return $this->render(
+                'UserBundle:Content:404.html.twig',
+                array()
+            );
         }
     }
 
