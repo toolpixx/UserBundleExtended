@@ -14,6 +14,7 @@ use FOS\UserBundle\Event\UserEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -31,6 +32,11 @@ class LoginListener implements EventSubscriberInterface
     private $router;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * @var Session
      */
     private $session;
@@ -38,9 +44,10 @@ class LoginListener implements EventSubscriberInterface
     /**
      * @param UrlGeneratorInterface $router
      */
-    public function __construct(UrlGeneratorInterface $router) 
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
+        $this->container = $container;
         $this->session = new Session();
     }
 
@@ -75,9 +82,11 @@ class LoginListener implements EventSubscriberInterface
         // set the actually name into session.
         // (for output and so on...)
         if ($user instanceof User) {
-            $this->session->set('username', $user->getUsername());
-            $this->session->set('profilePicturePath', $user->getProfilePicturePath());
-            $this->session->set('_locale', $user->getLocale());
+            $this->container
+                ->get('set_session_service')
+                ->setUser(
+                    $user
+                );
         }
     }
 }

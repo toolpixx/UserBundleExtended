@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ResettingListener
@@ -31,6 +32,11 @@ class ResettingListener implements EventSubscriberInterface
     private $router;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * @var Session
      */
     private $session;
@@ -38,9 +44,10 @@ class ResettingListener implements EventSubscriberInterface
     /**
      * @param UrlGeneratorInterface $router
      */
-    public function __construct(UrlGeneratorInterface $router) 
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
+        $this->container = $container;
         $this->session = new Session();
     }
 
@@ -73,9 +80,11 @@ class ResettingListener implements EventSubscriberInterface
          */
         $user = $event->getForm()->getData();
 
-        $this->session->set('username', $user->getUsername());
-        $this->session->set('profilePicturePath', $user->getProfilePicturePath());
-        $this->session->set('_locale', $user->getLocale());
+        $this->container
+            ->get('set_session_service')
+            ->setUser(
+                $user
+            );
 
         $event->setResponse(
             new RedirectResponse(

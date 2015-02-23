@@ -124,10 +124,12 @@ class ProfileEditListener implements EventSubscriberInterface
      *
      * @param UserEvent $userEvent
      */
-    private function setUsernameAndProfilePicturePath(UserEvent $userEvent) 
+    private function setUsernameAndProfilePicturePath(UserEvent $userEvent)
     {
-        $this->session->set('username', $userEvent->getUser()->getUsername());
-        $this->session->set('profilePicturePath', $userEvent->getUser()->getProfilePicturePath());
-        $this->session->set('_locale', $userEvent->getUser()->getLocale());
+        $this->container
+            ->get('set_session_service')
+            ->setUser(
+                $userEvent->getUser()
+            );
     }
 }

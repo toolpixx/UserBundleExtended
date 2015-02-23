@@ -85,8 +85,10 @@ class RegistrationListener implements EventSubscriberInterface
      */
     public function onRegistrationConfirmed(FilterUserResponseEvent $responseEvent) 
     {
-        $this->session->set('username', $responseEvent->getUser()->getUsername());
-        $this->session->set('profilePicturePath', $responseEvent->getUser()->getProfilePicturePath());
-        $this->session->set('_locale', $responseEvent->getUser()->getLocale());
+        $this->container
+            ->get('set_session_service')
+            ->setUser(
+                $responseEvent->getUser()
+            );
     }
 }

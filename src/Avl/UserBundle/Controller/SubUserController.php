@@ -263,9 +263,11 @@ class SubUserController extends BaseController
      */
     private function switchAction($route)
     {
-        $this->session->set('username', $this->getUser()->getUsername());
-        $this->session->set('profilePicturePath', $this->getUser()->getProfilePicturePath());
-        $this->session->set('_locale', $this->getUser()->getLocale());
+        $this->container
+            ->get('set_session_service')
+            ->setUser(
+                $this->getUser()
+            );
 
         try {
             return $this->redirect(

@@ -28,7 +28,7 @@ services:
             - { name: kernel.event_subscriber }
     avl_user.resetting_success:
             class: Avl\UserBundle\EventListener\ResettingListener
-            arguments: [@router]
+            arguments: [@router, @service_container]
             tags:
                 - { name: kernel.event_subscriber }
     avl_user.change_password:
@@ -43,7 +43,7 @@ services:
                 - { name: kernel.event_subscriber }
     avl_user.login_manager:
         class: Avl\UserBundle\EventListener\LoginListener
-        arguments: [@router]
+        arguments: [@router, @service_container]
         tags:
             - { name: kernel.event_subscriber }
     avl.twig.extension.UserProfileImagePath:
@@ -52,10 +52,15 @@ services:
          tags:
             - { name: twig.extension }
     image_service:
-             class: Common\Services\ImageService
-             arguments: []
-             tags:
-                - { name: image.service }
+         class: Common\Services\ImageService
+         tags:
+            - { name: image.service }
+
+    set_session_service:
+          class: Common\Services\SetUserSessionService
+          arguments: []
+          tags:
+            - { name: set.session.service }
 
     avl_user.profile.form.factory:
         class: Avl\UserBundle\Form\Factory\FormFactory
