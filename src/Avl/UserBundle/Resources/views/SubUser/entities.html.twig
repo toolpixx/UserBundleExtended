@@ -22,7 +22,14 @@
                 <td><img src="{{ getUserProfileImage(entity.profilePicturePath, 50, 50) }}" height="20"
                          class="img-circle" style="margin-top:-5px"/></td>
                 <td valign="middle">
-                    {{ entity.username }}<br>
+                    {% if not entity.parentId is null %}
+                        <div style="margin-left:12px;"><span class="glyphicon glyphicon-stop"></span>
+                    {% else %}
+                        <div><span class="glyphicon glyphicon-unchecked"></span>
+                    {% endif %}
+                    {{ entity.username }}
+                    <br>
+                    <div style="margin-left:16px;">
                     {% for role in entity.roles %}
                         {% if role != 'ROLE_USER' and role != 'ROLE_ADMIN' %}
                             <span class="label label-info" style="font-size:11px">{{ role|trans }}</span><br>
@@ -30,6 +37,8 @@
                             <span class="label label-warning" style="font-size:11px">{{ role|trans }}</span><br>
                         {% endif %}
                     {% endfor %}
+                    </div>
+                    </div>
                 </td>
                 <td>{{ entity.email }}</td>
                 <td style="white-space: nowrap;">

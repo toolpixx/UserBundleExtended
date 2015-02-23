@@ -72,7 +72,14 @@ class UserRepository extends EntityRepository
             ->createQuery(
                 '
                 SELECT
-                  user
+                  user.enabled,
+                  user.profilePicturePath,
+                  user.username,
+                  user.email,
+                  user.roles,
+                  user.id,
+                  user.parentId,
+                  COALESCE(user.parentId, user.id) as orderTree
                 FROM
                   UserBundle:User user
                 WHERE (
@@ -83,7 +90,7 @@ class UserRepository extends EntityRepository
                 AND
                   user.id != :userId
                 ORDER BY
-                   user.id, user.parentId
+                   orderTree
                 ASC
             '
             )
