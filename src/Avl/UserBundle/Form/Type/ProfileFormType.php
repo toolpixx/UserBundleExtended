@@ -56,32 +56,41 @@ class ProfileFormType extends BaseType
                 )
             );
 
+            // If adminView is true
+            if (isset($options['adminView']) && $options['adminView']) {
+                $roles = array_merge(
+                    User::getAdminRoles(),
+                    User::getUsedRoles()
+                );
+            } else {
+                $roles = User::getUsedRoles();
+            }
+
             // If roleView is true
-        if (isset($options['roleView']) && $options['roleView']) {
-            $builder->add(
-                'usedRoles', 'choice', array(
-                'property_path' => 'roles',
-                'choices' => User::getUsedRoles(),
-                'mapped' => true,
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Rollen',
-                'attr' => array(
-                    'style' => 'width:200px'
+            if (isset($options['roleView']) && $options['roleView']) {
+                $builder->add('usedRoles', 'choice', array(
+                    'property_path' => 'roles',
+                    'choices' => $roles,
+                    'mapped' => true,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'label' => 'Rollen',
+                    'attr' => array(
+                        'style' => 'width:200px'
+                        )
                     )
-                    )
-            );
-        }
+                );
+            }
 
             // If enabledView is true
-        if (isset($options['enabledView']) && $options['enabledView']) {
-            $builder->add(
-                'enabled', 'checkbox', array(
-                'label' => 'label.enabled',
-                'required' => false
-                    )
-            );
-        }
+            if (isset($options['enabledView']) && $options['enabledView']) {
+                $builder->add(
+                    'enabled', 'checkbox', array(
+                    'label' => 'label.enabled',
+                    'required' => false
+                        )
+                );
+            }
 
             $builder->add(
                 'locale', 'choice', array(
@@ -121,6 +130,13 @@ class ProfileFormType extends BaseType
         $resolver->setDefaults(
             array(
             'enabledView'  => null,
+            )
+        );
+
+        // Set adminView
+        $resolver->setDefaults(
+            array(
+                'adminView'  => null,
             )
         );
 

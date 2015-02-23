@@ -33,7 +33,7 @@ class SecurityController extends BaseSecurityController
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return new RedirectResponse(
                 $this->container->get('router')->generate(
-                    'fos_ext_avl_user_dashboard_show',
+                    'avl_user_dashboard_show',
                     array()
                 )
             );

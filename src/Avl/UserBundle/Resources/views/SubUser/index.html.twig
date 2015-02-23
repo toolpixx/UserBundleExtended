@@ -19,7 +19,7 @@
                         </div>
                     </form>
                     <br>
-                    <div class="{% if entities|length > 0 %}well{% endif %}">
+                    <div class="{% if entities|length > 0 %}{% endif %}">
                         {% include "FOSUserBundle:Subuser:entities.html.twig" %}
                     </div>
                     {{ knp_pagination_render(entities) }}

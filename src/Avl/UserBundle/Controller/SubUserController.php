@@ -158,6 +158,14 @@ class SubUserController extends BaseController
         // select if user is enabled
         $formFactory->setEnabledView(true);
 
+        // View the choice to choose
+        // if user is admin or customer
+        // Only in admin-view
+        if ($this->hasRole('ROLE_ADMIN')) {
+            $formFactory->setUser($user);
+            $formFactory->setAdminView(true);
+        }
+
         // Create the form
         $form = $formFactory->createForm();
 
@@ -169,6 +177,14 @@ class SubUserController extends BaseController
         // then we save and redirect the
         // output.
         if ($request->getMethod() == 'POST' && $form->isValid()) {
+
+            // Which type of user was set?
+            if ($this->hasRole('ROLE_ADMIN')) {
+                // Setup Adminrole
+                if (count($user->getRoles()) > 2 && in_array('ROLE_ADMIN', $user->getRoles())) {
+                    $user->setAdminRoles();
+                }
+            }
 
             // Update the user
             $this->getUserManager()->updateUser($user);

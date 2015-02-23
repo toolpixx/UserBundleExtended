@@ -47,7 +47,7 @@ class RegistrationController extends BaseRegistrationController
 
             return new RedirectResponse(
                 $this->container->get('router')->generate(
-                    'fos_ext_avl_user_dashboard_show',
+                    'avl_user_dashboard_show',
                     array()
                 )
             );

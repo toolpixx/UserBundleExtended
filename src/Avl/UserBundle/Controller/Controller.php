@@ -83,7 +83,10 @@ abstract class Controller extends BaseController
         $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:User')
-            ->findAllSubUser($formData);
+            ->findAllSubUser(
+                $this->getUser()->getId(),
+                $formData
+            );
 
         return $this->get('knp_paginator')
             ->paginate(

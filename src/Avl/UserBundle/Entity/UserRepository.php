@@ -29,7 +29,7 @@ class UserRepository extends EntityRepository
         $parentId = (null !== $parentId) ? $parentId : $userId;
 
         // Create query
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery(
                 '
                 SELECT
@@ -55,38 +55,39 @@ class UserRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->setParameter('parentId', $parentId)
             ->setParameter('query', '%'.$query.'%');
-
-        return $query;
     }
 
     /**
+     * @param $userId
      * @param $formData
      * @return \Doctrine\ORM\AbstractQuery|string
      */
-    public function findAllSubUser($formData)
+    public function findAllSubUser($userId, $formData)
     {
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';
 
         // Query
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery(
                 '
                 SELECT
                   user
                 FROM
                   UserBundle:User user
-                WHERE
-                  user.email LIKE :query
-                OR
-                  user.username LIKE :query
+                WHERE (
+                    user.email LIKE :query
+                  OR
+                    user.username LIKE :query
+                )
+                AND
+                  user.id != :userId
                 ORDER BY
-                  user.id
+                   user.id, user.parentId
                 ASC
             '
             )
+            ->setParameter('userId', $userId)
             ->setParameter('query', '%'.$query.'%');
-
-        return $query;
     }
 }

@@ -233,6 +233,10 @@
                 <source>ROLE_CUSTOMER_SUBUSER_MANAGER</source>
                 <target>Subuser-Manager</target>
             </trans-unit>
+            <trans-unit id="ROLE_ADMIN">
+                <source>ROLE_ADMIN</source>
+                <target>Admin / Mitarbeiter</target>
+            </trans-unit>
             <trans-unit id="TITLE_EN">
                 <source>TITLE_EN</source>
                 <target>Englisch</target>

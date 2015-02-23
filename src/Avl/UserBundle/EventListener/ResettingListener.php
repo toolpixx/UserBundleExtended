@@ -79,7 +79,7 @@ class ResettingListener implements EventSubscriberInterface
 
         $event->setResponse(
             new RedirectResponse(
-                $this->router->generate('fos_ext_avl_user_dashboard_show')
+                $this->router->generate('avl_user_dashboard_show')
             )
         );
     }

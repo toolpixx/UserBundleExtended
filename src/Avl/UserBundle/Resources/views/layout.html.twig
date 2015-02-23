@@ -34,7 +34,7 @@
                     {% block content_header_more %}
                         {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN')%}
                             <li>
-                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
                                     {{ 'link.dashboard'|trans }}
                                 </a>
@@ -71,7 +71,7 @@
                             </li>
                         {% elseif is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
                             <li>
-                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'fos_ext_avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
                                     <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
                                     {{ 'link.dashboard'|trans }}
                                 </a>

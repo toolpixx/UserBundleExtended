@@ -130,7 +130,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * Create values for the locale drop-down.
      * @return array
      */
-    public static function getUsedRoles() 
+    public static function getUsedRoles()
     {
         return array(
             'ROLE_CUSTOMER_EVENT_MANAGER' => 'ROLE_CUSTOMER_EVENT_MANAGER',
@@ -150,6 +150,30 @@ class User extends BaseUser implements AdvancedUserInterface
             )
         );
     }
+
+    /**
+     * Create values for the locale drop-down.
+     * @return array
+     */
+    public static function getAdminRoles()
+    {
+        return array(
+            'ROLE_ADMIN' => 'ROLE_ADMIN'
+        );
+    }
+
+    /**
+     * Set the admin-roles for user
+     */
+    public function setAdminRoles() {
+        // Set the admin-roles if selected
+        $this->setRoles(
+            array_keys(
+                $this->getAdminRoles()
+            )
+        );
+    }
+
     /**
      * Returns the locale of a user
      * @return mixed

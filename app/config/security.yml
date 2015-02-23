@@ -3,7 +3,6 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_CUSTOMER:    ROLE_USER
         ROLE_ADMIN:       ROLE_ADMIN
         ROLE_CUSTOMER_EVENT_MANAGER: ROLE_USER
         ROLE_CUSTOMER_COMMENT_MANAGER: ROLE_USER

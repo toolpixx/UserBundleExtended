@@ -53,6 +53,11 @@ class FormFactory implements FactoryInterface
     private $enabledView;
 
     /**
+     * @var
+     */
+    private $adminView;
+
+    /**
      * @param FormFactoryInterface $formFactory
      * @param $name
      * @param $type
@@ -80,7 +85,8 @@ class FormFactory implements FactoryInterface
                 'validation_groups' => $this->validationGroups,
                 'user' => $this->user,
                 'roleView' => $this->roleView,
-                'enabledView' => $this->enabledView
+                'enabledView' => $this->enabledView,
+                'adminView' => $this->adminView
             )
         );
     }
@@ -115,5 +121,16 @@ class FormFactory implements FactoryInterface
     public function setEnabledView($enabledView) 
     {
         $this->enabledView = $enabledView;
+    }
+
+    /**
+     * Set the adminView parameter to
+     * view choice or not
+     *
+     * @param $adminView
+     */
+    public function setadminView($adminView)
+    {
+        $this->adminView = $adminView;
     }
 }

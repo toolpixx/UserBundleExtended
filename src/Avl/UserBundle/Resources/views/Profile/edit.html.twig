@@ -66,6 +66,23 @@
             $('.input-group').css({width: '320px !important'});
         });
 
+        /**
+         * Disable roles even which used
+         */
+        function setupRoles() {
+            if ($('#fos_user_profile_form_usedRoles_0').prop('checked')) {
+                $('#fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').attr('disabled', 'disabled');
+            } else if (!$('#fos_user_profile_form_usedRoles_0').prop('checked')) {
+                $('#fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').removeAttr('disabled');
+            }
+
+            if ($('#fos_user_profile_form_usedRoles_1').prop('checked') || $('#fos_user_profile_form_usedRoles_2').prop('checked') || $('#fos_user_profile_form_usedRoles_3').prop('checked')) {
+                $('#fos_user_profile_form_usedRoles_0').attr('disabled', 'disabled');
+            } else if (!$('#fos_user_profile_form_usedRoles_1').prop('checked') && !$('#fos_user_profile_form_usedRoles_2').prop('checked') && !$('#fos_user_profile_form_usedRoles_3').prop('checked')) {
+                $('#fos_user_profile_form_usedRoles_0').removeAttr('disabled');
+            }
+        }
+
         function previewImage(e)
         {
             var img = $(document.createElement('img'));
@@ -104,6 +121,12 @@
 
             });
         }
+
+        $('#fos_user_profile_form_usedRoles_0, #fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').click(function() {
+            setupRoles();
+        });
+
+        setupRoles();
     </script>
 {% endblock javascripts %}
 
