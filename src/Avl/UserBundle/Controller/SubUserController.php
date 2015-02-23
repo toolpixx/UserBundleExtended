@@ -149,7 +149,8 @@ class SubUserController extends BaseController
             array(
                 'ROLE_ADMIN',
                 'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            ));
+            )
+        );
 
         // Find the user to edit
         $user = $this->findUser($id);
@@ -228,7 +229,8 @@ class SubUserController extends BaseController
             array(
                 'ROLE_ADMIN',
                 'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            ));
+            )
+        );
 
         if ($request->getMethod() == 'DELETE') {
             try {
@@ -315,7 +317,8 @@ class SubUserController extends BaseController
                 array(
                     'id' => (integer)$id,
                     'parentId' => (integer)$this->getParentId()
-                ));
+                )
+            );
         }
     }
 
@@ -390,7 +393,8 @@ class SubUserController extends BaseController
                         'cropHeight' => (int)$user->getImageCropHeight(),
                         'cropWidth' => (int)$user->getImageCropWidth(),
                         'cropImagePath' => (string)$user->getProfilePictureAbsolutePath()
-                    ));
+                    )
+                );
             }
             return true;
         } catch (Exception $e) {

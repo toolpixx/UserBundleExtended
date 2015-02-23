@@ -94,10 +94,12 @@ class EnquiryController extends BaseController
         }
 
         // Render form
-        return $this->render('UserBundle:Enquiry:index.html.twig',
+        return $this->render(
+            'UserBundle:Enquiry:index.html.twig',
             array(
                 'form' => $form->createView()
-            ));
+            )
+        );
     }
 
     /**
