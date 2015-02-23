@@ -297,8 +297,8 @@ class SubUserController extends BaseController
             return $userManager->findUserBy(
                 array('id' => (integer)$id)
             );
-        } // If user is customer
-        else {
+        } else {
+            // If user is customer
             return $userManager->findUserBy(
                 array(
                     'id' => (integer)$id,
