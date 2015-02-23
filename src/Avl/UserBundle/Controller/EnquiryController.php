@@ -120,7 +120,8 @@ class EnquiryController extends BaseController
                     array(
                         'enquiry' => $enquiry
                     )
-                ));
+                )
+            );
 
         // If any attachment exists
         if ($enquiry->hasAttachment()) {
