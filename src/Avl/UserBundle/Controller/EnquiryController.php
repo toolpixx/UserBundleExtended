@@ -116,7 +116,8 @@ class EnquiryController extends BaseController
             ->setReturnPath($this->getEnquiryParameter('returnpath'))
             ->setTo($this->getEnquiryParameter('to'))
             ->setBody(
-                $this->renderView('UserBundle:Enquiry:enquiryEmail.txt.twig',
+                $this->renderView(
+                    'UserBundle:Enquiry:enquiryEmail.txt.twig',
                     array(
                         'enquiry' => $enquiry
                     )
