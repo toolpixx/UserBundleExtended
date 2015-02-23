@@ -92,11 +92,10 @@ class ProfileFormType extends BaseType
                 'style' => 'width:200px'
             )
         ))
-        ->add('profilePictureFile', 'file',
-            array(
-                'label' => 'label.avatar',
-                'required' => false
-            ))
+        ->add('profilePictureFile', 'file', array(
+            'label' => 'label.avatar',
+            'required' => false
+        ))
         ->add('imageCropY', 'hidden')
         ->add('imageCropX', 'hidden')
         ->add('imageCropHeight', 'hidden')
