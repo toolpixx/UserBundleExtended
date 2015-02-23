@@ -35,7 +35,7 @@ class ProfileController extends BaseProfileController
     /**
      * Constructor
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->session = new Session();
     }
@@ -47,7 +47,7 @@ class ProfileController extends BaseProfileController
      * @param  Request $request
      * @return null|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request) 
+    public function editAction(Request $request)
     {
         // Get and create the FOSUserbundleForm
         $formFactory = $this->get(self::FORM_FACTORY_PROFILE);
@@ -84,7 +84,7 @@ class ProfileController extends BaseProfileController
      * @param  Request $request
      * @return RedirectResponse
      */
-    public function removePictureAction(Request $request) 
+    public function removePictureAction(Request $request)
     {
         // Method DELETE?
         if ($request->getMethod() == 'DELETE') {

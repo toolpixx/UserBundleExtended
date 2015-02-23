@@ -26,7 +26,7 @@ class ResettingController extends BaseResettingController
     /**
      * Constructor
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->session = new Session();
     }
@@ -36,7 +36,7 @@ class ResettingController extends BaseResettingController
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function requestAction() 
+    public function requestAction()
     {
         // Check if user is loggin. If yes they cannot
         // resetting passwort....

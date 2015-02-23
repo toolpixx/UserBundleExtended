@@ -41,7 +41,7 @@ class ProfileEditListener implements EventSubscriberInterface
      * @param UrlGeneratorInterface $router
      * @param ContainerInterface    $container
      */
-    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) 
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
         $this->container = $container;
@@ -51,7 +51,7 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileInitialize',
@@ -72,7 +72,7 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function onProfileEditSuccess(FormEvent $event) 
+    public function onProfileEditSuccess(FormEvent $event)
     {
         $user = $event->getForm('user')->getData();
 
@@ -103,7 +103,7 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileCompleted(UserEvent $userEvent) 
+    public function onProfileCompleted(UserEvent $userEvent)
     {
         // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);

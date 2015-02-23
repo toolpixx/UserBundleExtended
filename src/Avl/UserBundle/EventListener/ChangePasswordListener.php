@@ -42,7 +42,7 @@ class ChangePasswordListener implements EventSubscriberInterface
      * @param UrlGeneratorInterface $router
      * @param ContainerInterface    $container
      */
-    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) 
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
         $this->container = $container;
@@ -52,7 +52,7 @@ class ChangePasswordListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onChangePasswordInitialize',
@@ -64,7 +64,7 @@ class ChangePasswordListener implements EventSubscriberInterface
     /**
      * @param UserEvent $userEvent
      */
-    public function onChangePasswordInitialize(UserEvent $userEvent) 
+    public function onChangePasswordInitialize(UserEvent $userEvent)
     {
         // nothing implemented yes
     }
@@ -72,7 +72,7 @@ class ChangePasswordListener implements EventSubscriberInterface
     /**
      * @param FormEvent $formEvent
      */
-    public function onChangePasswordSuccess(FormEvent $formEvent) 
+    public function onChangePasswordSuccess(FormEvent $formEvent)
     {
         // Redirect to dashboard after update
         $url = $this->router->generate('fos_user_change_password');
@@ -82,7 +82,7 @@ class ChangePasswordListener implements EventSubscriberInterface
     /**
      * onChangePasswordCompleted
      */
-    public function onChangePasswordCompleted() 
+    public function onChangePasswordCompleted()
     {
         if (!$this->session->getFlashBag()->has('error')) {
             $this->session->getFlashBag()->add('notice', 'change_password.flash.success');
