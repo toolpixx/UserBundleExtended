@@ -36,7 +36,7 @@ class DashboardController extends BaseController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request) 
+    public function indexAction(Request $request)
     {
 
         // Log info to test chromephp
@@ -51,9 +51,9 @@ class DashboardController extends BaseController
 
         return $this->render(
             'UserBundle:Dashboard:index.html.twig', array(
-            'user' => $this->getUser(),
-            'entities' => $pagination,
-            'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
+                'user' => $this->getUser(),
+                'entities' => $pagination,
+                'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
     }
@@ -64,7 +64,7 @@ class DashboardController extends BaseController
      * @param  $url
      * @return \SimpleXMLElement
      */
-    private function getRssFeed($url) 
+    private function getRssFeed($url)
     {
         try {
             // CacheKey
@@ -76,20 +76,19 @@ class DashboardController extends BaseController
             // If content was cached return it
             if ($this->cacheDriver->contains($this->cacheKey)) {
                 return $this->getCachedFeed();
-            }
-            // Or get and save the new content
+            } // Or get and save the new content
             else {
                 $rssFeed = file_get_contents($url);
 
                 // Save to cache ad return content
-                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600*24);
+                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600 * 24);
 
                 return simplexml_load_string($rssFeed);
             }
 
-        } catch(ContextErrorException $e) {
-            $this->get('logger')->error('Can not load: '.$url);
-            $this->get('logger')->error($e->getCode().' : '.$e->getMessage());
+        } catch (ContextErrorException $e) {
+            $this->get('logger')->error('Can not load: ' . $url);
+            $this->get('logger')->error($e->getCode() . ' : ' . $e->getMessage());
         } finally {
             return $this->getCachedFeed();
         }
@@ -100,7 +99,7 @@ class DashboardController extends BaseController
      *
      * @return \SimpleXMLElement
      */
-    private function getCachedFeed() 
+    private function getCachedFeed()
     {
         return
             simplexml_load_string(

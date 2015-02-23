@@ -18,9 +18,9 @@ class SubUserSearchFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) 
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('query', 'text');
@@ -29,7 +29,7 @@ class SubUserSearchFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return 'page_filter';
     }

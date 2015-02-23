@@ -39,7 +39,7 @@ class ProfileEditListener implements EventSubscriberInterface
 
     /**
      * @param UrlGeneratorInterface $router
-     * @param ContainerInterface    $container
+     * @param ContainerInterface $container
      */
     public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
@@ -63,7 +63,7 @@ class ProfileEditListener implements EventSubscriberInterface
     /**
      * @param UserEvent $userEvent
      */
-    public function onProfileInitialize(UserEvent $userEvent) 
+    public function onProfileInitialize(UserEvent $userEvent)
     {
         // Setup username and profile-picture to the session
         $this->setUsernameAndProfilePicturePath($userEvent);
@@ -87,15 +87,15 @@ class ProfileEditListener implements EventSubscriberInterface
                 // crop the image
                 $imageService->cropImage(
                     array(
-                        'cropY' => (int) $user->getImageCropY(),
-                        'cropX' => (int) $user->getImageCropX(),
-                        'cropHeight' => (int) $user->getImageCropHeight(),
-                        'cropWidth' => (int) $user->getImageCropWidth(),
-                        'cropImagePath' => (string) $user->getProfilePictureFile()->getPathname()
+                        'cropY' => (int)$user->getImageCropY(),
+                        'cropX' => (int)$user->getImageCropX(),
+                        'cropHeight' => (int)$user->getImageCropHeight(),
+                        'cropWidth' => (int)$user->getImageCropWidth(),
+                        'cropImagePath' => (string)$user->getProfilePictureFile()->getPathname()
                     )
                 );
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
         }
     }

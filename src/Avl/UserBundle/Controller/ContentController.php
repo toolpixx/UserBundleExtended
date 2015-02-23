@@ -23,11 +23,11 @@ class ContentController extends BaseController
     {
         try {
             return $this->render(
-                'UserBundle:Content:'.$slug.'.html.twig', array(
-                'slug' => $slug
+                'UserBundle:Content:' . $slug . '.html.twig', array(
+                    'slug' => $slug
                 )
             );
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return $this->render('UserBundle:Content:404.html.twig', array());
         }
     }

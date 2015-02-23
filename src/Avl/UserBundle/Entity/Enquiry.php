@@ -191,7 +191,7 @@ class Enquiry
     /**
      * @return bool
      */
-    public function hasAttachment() 
+    public function hasAttachment()
     {
         return ($this->getAttachment() instanceof UploadedFile) ? true : false;
     }

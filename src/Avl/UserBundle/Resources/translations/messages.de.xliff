@@ -370,7 +370,9 @@
             </trans-unit>
             <trans-unit id="text.resetting.checkemail">
                 <source>text.resetting.checkemail</source>
-                <target>Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Passwort zurückzusetzen.</target>
+                <target>Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr
+                    Passwort zurückzusetzen.
+                </target>
             </trans-unit>
 
             <trans-unit id="title.resetting.reset">
@@ -392,7 +394,9 @@
             </trans-unit>
             <trans-unit id="text.resetting.already.requested">
                 <source>text.resetting.already.requested</source>
-                <target>Für diesen Benutzer wurde in den vergangenen %token_ttl% Minuten bereits ein neues Passwort beantragt, bitte versuchen Sie es später noch einmal.</target>
+                <target>Für diesen Benutzer wurde in den vergangenen %token_ttl% Minuten bereits ein neues Passwort
+                    beantragt, bitte versuchen Sie es später noch einmal.
+                </target>
             </trans-unit>
 
             <trans-unit id="button.search">

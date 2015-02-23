@@ -1,17 +1,18 @@
-<form action="{% if path is defined  %}{{ path(path) }}{% else %}{{ path('fos_user_registration_register') }}{% endif %}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+<form action="{% if path is defined %}{{ path(path) }}{% else %}{{ path('fos_user_registration_register') }}{% endif %}" {{ form_enctype(form) }}
+      method="POST" class="fos_user_registration_register">
     {% if currentRouteName == 'avl_subuser_new' %}
-        <div class="well">
-    {% endif %}
+    <div class="well">
+        {% endif %}
         {{ form_widget(form) }}
-    {% if currentRouteName == 'avl_subuser_new' %}
-        </div>
+        {% if currentRouteName == 'avl_subuser_new' %}
+    </div>
     {% endif %}
     <div style="clear:both;text-align: center;">
         <hr>
         {% if currentRouteName == 'avl_subuser_new' %}
-            <input type="submit" class="btn btn-primary" value="{{ 'button.subuser.save'|trans }}" />
+            <input type="submit" class="btn btn-primary" value="{{ 'button.subuser.save'|trans }}"/>
         {% else %}
-            <input type="submit" class="btn btn-primary" value="{{ 'button.registration'|trans }}" />
+            <input type="submit" class="btn btn-primary" value="{{ 'button.registration'|trans }}"/>
         {% endif %}
         {% if path is defined %}
             <a class="btn btn-primary" href="{{ path('avl_subuser') }}" role="button">Back</a>

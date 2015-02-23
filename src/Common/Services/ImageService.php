@@ -52,7 +52,7 @@ class ImageService
      *
      * @return mixed
      */
-    public function getImagePath() 
+    public function getImagePath()
     {
         return $this->imagePath;
     }
@@ -62,7 +62,7 @@ class ImageService
      *
      * @param $imagePath
      */
-    public function setImagePath($imagePath) 
+    public function setImagePath($imagePath)
     {
         $this->imagePath = $imagePath;
     }
@@ -72,7 +72,7 @@ class ImageService
      *
      * @return mixed
      */
-    public function getImageCropY() 
+    public function getImageCropY()
     {
         return $this->imageCropY;
     }
@@ -82,7 +82,7 @@ class ImageService
      *
      * @param $imageCropY
      */
-    public function setImageCropY($imageCropY) 
+    public function setImageCropY($imageCropY)
     {
         $this->imageCropY = $imageCropY;
     }
@@ -92,7 +92,7 @@ class ImageService
      *
      * @return mixed
      */
-    public function getImageCropX() 
+    public function getImageCropX()
     {
         return $this->imageCropX;
     }
@@ -102,7 +102,7 @@ class ImageService
      *
      * @param $imageCropX
      */
-    public function setImageCropX($imageCropX) 
+    public function setImageCropX($imageCropX)
     {
         $this->imageCropX = $imageCropX;
     }
@@ -112,7 +112,7 @@ class ImageService
      *
      * @return mixed
      */
-    public function getImageCropHeight() 
+    public function getImageCropHeight()
     {
         return $this->imageCropHeight;
     }
@@ -122,7 +122,7 @@ class ImageService
      *
      * @param $imageCropHeight
      */
-    public function setImageCropHeight($imageCropHeight) 
+    public function setImageCropHeight($imageCropHeight)
     {
         $this->imageCropHeight = $imageCropHeight;
     }
@@ -132,7 +132,7 @@ class ImageService
      *
      * @return mixed
      */
-    public function getImageCropWidth() 
+    public function getImageCropWidth()
     {
         return $this->imageCropWidth;
     }
@@ -142,7 +142,7 @@ class ImageService
      *
      * @param $imageCropWidth
      */
-    public function setImageCropWidth($imageCropWidth) 
+    public function setImageCropWidth($imageCropWidth)
     {
         $this->imageCropWidth = $imageCropWidth;
     }
@@ -170,15 +170,15 @@ class ImageService
 
                 // Read the picture
                 switch ($imageType) {
-                case "image/gif":
-                    $src_img = imagecreatefromgif($this->getImagePath());
-                    break;
-                case "image/jpeg":
-                    $src_img = imagecreatefromjpeg($this->getImagePath());
-                    break;
-                case "image/png":
-                    $src_img = imagecreatefrompng($this->getImagePath());
-                    break;
+                    case "image/gif":
+                        $src_img = imagecreatefromgif($this->getImagePath());
+                        break;
+                    case "image/jpeg":
+                        $src_img = imagecreatefromjpeg($this->getImagePath());
+                        break;
+                    case "image/png":
+                        $src_img = imagecreatefrompng($this->getImagePath());
+                        break;
                 }
 
                 // Check if pictures can read
@@ -188,27 +188,35 @@ class ImageService
 
                 // Resample the picture
                 $dst_img = imagecreatetruecolor(
-                    220, 220
+                    220,
+                    220
                 );
 
                 $result = imagecopyresampled(
-                    $dst_img, $src_img, 0, 0,
-                    $this->imageCropX, $this->imageCropY, 220, 220,
-                    $this->imageCropWidth, $this->imageCropHeight
+                    $dst_img,
+                    $src_img,
+                    0,
+                    0,
+                    $this->imageCropX,
+                    $this->imageCropY,
+                    220,
+                    220,
+                    $this->imageCropWidth,
+                    $this->imageCropHeight
                 );
 
                 // If picture was resampled save
                 if ($result) {
                     switch ($imageType) {
-                    case "image/gif":
-                        $result = imagegif($dst_img, $this->getImagePath());
-                        break;
-                    case "image/jpeg":
-                        $result = imagejpeg($dst_img, $this->getImagePath());
-                        break;
-                    case "image/png":
-                        $result = imagepng($dst_img, $this->getImagePath());
-                        break;
+                        case "image/gif":
+                            $result = imagegif($dst_img, $this->getImagePath());
+                            break;
+                        case "image/jpeg":
+                            $result = imagejpeg($dst_img, $this->getImagePath());
+                            break;
+                        case "image/png":
+                            $result = imagepng($dst_img, $this->getImagePath());
+                            break;
                     }
                     if (!$result) {
                         throw new Exception('Failed to save the cropped image file');
@@ -232,7 +240,7 @@ class ImageService
      * @param $src
      * @return null|mime-type
      */
-    private function getImageMimeType($src) 
+    private function getImageMimeType($src)
     {
 
         $imageInfo = getimagesize($src);

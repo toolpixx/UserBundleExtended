@@ -1,24 +1,28 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="col-md-12">
-    {% if currentRouteName == 'avl_subuser_new' %}
-        <h1>{{ 'title.subuser'|trans }} <small>{{ 'title.subuser.registration'|trans }}</small></h1>
-    {% else %}
-        <h1>{{ 'title.registration'|trans }}  <small>{{ 'title.sub.registration'|trans }}</small></h1>
-    {% endif %}
-    <hr>
-    {% if currentRouteName == 'avl_subuser_new' %}
-        <div class="tabbable tabs-left">
-            {% include 'UserBundle:Tabs:subuser.html.twig' %}
-            <div class="tab-content" style="width:75%;float:left">
-                <div class="tab-pane active">
-                    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    <div class="col-md-12">
+        {% if currentRouteName == 'avl_subuser_new' %}
+            <h1>{{ 'title.subuser'|trans }}
+                <small>{{ 'title.subuser.registration'|trans }}</small>
+            </h1>
+        {% else %}
+            <h1>{{ 'title.registration'|trans }}
+                <small>{{ 'title.sub.registration'|trans }}</small>
+            </h1>
+        {% endif %}
+        <hr>
+        {% if currentRouteName == 'avl_subuser_new' %}
+            <div class="tabbable tabs-left">
+                {% include 'UserBundle:Tabs:subuser.html.twig' %}
+                <div class="tab-content" style="width:75%;float:left">
+                    <div class="tab-pane active">
+                        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% else %}
-        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
-    {% endif %}
-</div>
+        {% else %}
+            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+        {% endif %}
+    </div>
 {% endblock %}

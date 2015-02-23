@@ -1,13 +1,14 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="col-md-12">
-    <h1>{{ 'title.registration.confirmed'|trans }}</h1>
-    <hr>
-    <p>{{ 'text.registration.confirmed'|trans({'%username%': user.username, '%faq_link%': path('avl_content_show', {'slug': 'faq'})})|raw }}</p>
-    {% if app.session is not empty %}
-        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
-    {% endif %}
-</div>
-{% endblock  %}
+    <div class="col-md-12">
+        <h1>{{ 'title.registration.confirmed'|trans }}</h1>
+        <hr>
+        <p>{{ 'text.registration.confirmed'|trans({'%username%': user.username, '%faq_link%': path('avl_content_show', {'slug': 'faq'})})|raw }}</p>
+        {% if app.session is not empty %}
+            {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+            {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+                </p>{% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

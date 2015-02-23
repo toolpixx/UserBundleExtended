@@ -40,7 +40,7 @@ class ChangePasswordListener implements EventSubscriberInterface
 
     /**
      * @param UrlGeneratorInterface $router
-     * @param ContainerInterface    $container
+     * @param ContainerInterface $container
      */
     public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {

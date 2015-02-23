@@ -22,9 +22,9 @@ class ProfileFormType extends BaseType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) 
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->buildUserForm($builder, $options);
 
@@ -37,38 +37,38 @@ class ProfileFormType extends BaseType
             ->remove('username')
             ->add(
                 'username', 'text', array(
-                'required' => true,
-                'label' => 'label.username',
-                'attr' => array(
-                    'size' => 20,
-                    'style' => 'width:350px'
-                )
+                    'required' => true,
+                    'label' => 'label.username',
+                    'attr' => array(
+                        'size' => 20,
+                        'style' => 'width:350px'
+                    )
                 )
             )
             ->add(
                 'email', 'email', array(
-                'required' => true,
-                'label' => 'label.email',
-                'attr' => array(
-                    'size' => 20,
-                    'style' => 'width:350px'
-                )
+                    'required' => true,
+                    'label' => 'label.email',
+                    'attr' => array(
+                        'size' => 20,
+                        'style' => 'width:350px'
+                    )
                 )
             );
 
-            // If adminView is true
-            if (isset($options['adminView']) && $options['adminView']) {
-                $roles = array_merge(
-                    User::getAdminRoles(),
-                    User::getUsedRoles()
-                );
-            } else {
-                $roles = User::getUsedRoles();
-            }
+        // If adminView is true
+        if (isset($options['adminView']) && $options['adminView']) {
+            $roles = array_merge(
+                User::getAdminRoles(),
+                User::getUsedRoles()
+            );
+        } else {
+            $roles = User::getUsedRoles();
+        }
 
-            // If roleView is true
-            if (isset($options['roleView']) && $options['roleView']) {
-                $builder->add('usedRoles', 'choice', array(
+        // If roleView is true
+        if (isset($options['roleView']) && $options['roleView']) {
+            $builder->add('usedRoles', 'choice', array(
                     'property_path' => 'roles',
                     'choices' => $roles,
                     'mapped' => true,
@@ -77,73 +77,73 @@ class ProfileFormType extends BaseType
                     'label' => 'Rollen',
                     'attr' => array(
                         'style' => 'width:200px'
-                        )
                     )
-                );
-            }
+                )
+            );
+        }
 
-            // If enabledView is true
-            if (isset($options['enabledView']) && $options['enabledView']) {
-                $builder->add(
-                    'enabled', 'checkbox', array(
+        // If enabledView is true
+        if (isset($options['enabledView']) && $options['enabledView']) {
+            $builder->add(
+                'enabled', 'checkbox', array(
                     'label' => 'label.enabled',
                     'required' => false
-                        )
-                );
-            }
+                )
+            );
+        }
 
-            $builder->add(
-                'locale', 'choice', array(
-                    'choices' => User::getLocaleNames(),
-                    'label' => 'label.locale',
-                    'attr' => array(
-                        'style' => 'width:200px'
-                    )
+        $builder->add(
+            'locale', 'choice', array(
+                'choices' => User::getLocaleNames(),
+                'label' => 'label.locale',
+                'attr' => array(
+                    'style' => 'width:200px'
                 )
             )
-                ->add(
-                    'profilePictureFile', 'file',
-                    array(
+        )
+            ->add(
+                'profilePictureFile', 'file',
+                array(
                     'label' => 'label.avatar',
                     'required' => false
-                    )
                 )
-                ->add('imageCropY', 'hidden')
-                ->add('imageCropX', 'hidden')
-                ->add('imageCropHeight', 'hidden')
-                ->add('imageCropWidth', 'hidden');
+            )
+            ->add('imageCropY', 'hidden')
+            ->add('imageCropX', 'hidden')
+            ->add('imageCropHeight', 'hidden')
+            ->add('imageCropWidth', 'hidden');
     }
 
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) 
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         // Set roleView
         $resolver->setDefaults(
             array(
-            'roleView'  => null,
+                'roleView' => null,
             )
         );
 
         // Set enabledView
         $resolver->setDefaults(
             array(
-            'enabledView'  => null,
+                'enabledView' => null,
             )
         );
 
         // Set adminView
         $resolver->setDefaults(
             array(
-                'adminView'  => null,
+                'adminView' => null,
             )
         );
 
         // Set user
         $resolver->setDefaults(
             array(
-            'user'  => null,
+                'user' => null,
             )
         );
     }
@@ -151,7 +151,7 @@ class ProfileFormType extends BaseType
     /**
      * @return string
      */
-    public function getParent() 
+    public function getParent()
     {
         return 'fos_user_profile';
     }
@@ -159,7 +159,7 @@ class ProfileFormType extends BaseType
     /**
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return 'avl_user_profile';
     }

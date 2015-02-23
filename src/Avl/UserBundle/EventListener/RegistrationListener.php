@@ -39,9 +39,9 @@ class RegistrationListener implements EventSubscriberInterface
 
     /**
      * @param UrlGeneratorInterface $router
-     * @param ContainerInterface    $container
+     * @param ContainerInterface $container
      */
-    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container) 
+    public function __construct(UrlGeneratorInterface $router, ContainerInterface $container)
     {
         $this->router = $router;
         $this->container = $container;
@@ -51,7 +51,7 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
@@ -63,7 +63,7 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function onRegistrationSuccess(FormEvent $event) 
+    public function onRegistrationSuccess(FormEvent $event)
     {
         // Get the userdate
         $user = $event->getForm()->getData();
@@ -75,7 +75,7 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * @param FilterUserResponseEvent $responseEvent
      */
-    public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent) 
+    public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent)
     {
         // not use yet
     }
@@ -83,7 +83,7 @@ class RegistrationListener implements EventSubscriberInterface
     /**
      * @param FilterUserResponseEvent $responseEvent
      */
-    public function onRegistrationConfirmed(FilterUserResponseEvent $responseEvent) 
+    public function onRegistrationConfirmed(FilterUserResponseEvent $responseEvent)
     {
         $this->container
             ->get('set_session_service')

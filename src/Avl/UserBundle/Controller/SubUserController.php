@@ -74,8 +74,8 @@ class SubUserController extends BaseController
 
         return $this->render(
             'UserBundle:SubUser:index.html.twig', array(
-            'entities' => $pagination,
-            'form' => $form->createView()
+                'entities' => $pagination,
+                'form' => $form->createView()
             )
         );
     }
@@ -118,7 +118,7 @@ class SubUserController extends BaseController
             return $this->redirect(
                 $this->generateUrl(
                     'avl_subuser_edit', array(
-                    'id' => $user->getId()
+                        'id' => $user->getId()
                     )
                 )
             );
@@ -126,8 +126,8 @@ class SubUserController extends BaseController
 
         return $this->render(
             'FOSUserBundle:Registration:register.html.twig', array(
-            'form' => $form->createView(),
-            'path' => 'avl_subuser_new'
+                'form' => $form->createView(),
+                'path' => 'avl_subuser_new'
             )
         );
     }
@@ -232,7 +232,7 @@ class SubUserController extends BaseController
                 } else {
                     throw new AccessDeniedException('This user does not have access to this section.');
                 }
-            } catch(AccessDeniedException $e) {
+            } catch (AccessDeniedException $e) {
                 $this->session->getFlashBag()->add('error', 'Subuser cannot be removed');
                 return $this->redirectSubUser();
             }
@@ -273,7 +273,7 @@ class SubUserController extends BaseController
             return $this->redirect(
                 $this->generateUrl($route)
             );
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return $this->render('UserBundle:Content:404.html.twig', array());
         }
     }
@@ -295,8 +295,7 @@ class SubUserController extends BaseController
             return $userManager->findUserBy(
                 array('id' => (integer)$id)
             );
-        }
-        // If user is customer
+        } // If user is customer
         else {
             return $userManager->findUserBy(
                 array(
@@ -337,7 +336,7 @@ class SubUserController extends BaseController
     private function redirectSubUser($message = null)
     {
         if (null !== $message && !$this->session->getFlashBag()->has('error')) {
-            $this->session->getFlashBag()->add('notice', (string) $message);
+            $this->session->getFlashBag()->add('notice', (string)$message);
         }
         return $this->redirect(
             $this->generateUrl('avl_subuser')
@@ -373,16 +372,16 @@ class SubUserController extends BaseController
                 // crop the image
                 $imageService->cropImage(
                     array(
-                        'cropY' => (int) $user->getImageCropY(),
-                        'cropX' => (int) $user->getImageCropX(),
-                        'cropHeight' => (int) $user->getImageCropHeight(),
-                        'cropWidth' => (int) $user->getImageCropWidth(),
-                        'cropImagePath' => (string) $user->getProfilePictureAbsolutePath()
+                        'cropY' => (int)$user->getImageCropY(),
+                        'cropX' => (int)$user->getImageCropX(),
+                        'cropHeight' => (int)$user->getImageCropHeight(),
+                        'cropWidth' => (int)$user->getImageCropWidth(),
+                        'cropImagePath' => (string)$user->getProfilePictureAbsolutePath()
                     )
                 );
             }
             return true;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
         }
         return false;

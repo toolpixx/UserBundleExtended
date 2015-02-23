@@ -54,7 +54,7 @@ class ResettingListener implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::RESETTING_RESET_INITIALIZE => 'onResettingResetInitialize',
@@ -65,7 +65,7 @@ class ResettingListener implements EventSubscriberInterface
     /**
      * @param GetResponseUserEvent $event
      */
-    public function onResettingResetInitialize(GetResponseUserEvent $event) 
+    public function onResettingResetInitialize(GetResponseUserEvent $event)
     {
         // Not use yet
     }
@@ -73,7 +73,7 @@ class ResettingListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function onResettingResetSuccess(FormEvent $event) 
+    public function onResettingResetSuccess(FormEvent $event)
     {
         /**
          * @var $user \FOS\UserBundle\Model\UserInterface

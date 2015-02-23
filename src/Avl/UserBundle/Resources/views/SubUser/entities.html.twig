@@ -1,56 +1,63 @@
 {% if entities|length > 0 %}
-<table class="table table-hover" id="pagination">
-    <thead>
-    <tr>
-        <th width="1%"></th>
-        <th width="1%"></th>
-        <th>{{ knp_pagination_sortable(entities, 'Name', 'user.username') }}</th>
-        <th>{{ knp_pagination_sortable(entities, 'E-Mail-Adresse', 'user.email') }}</th>
-        <th width="{% if is_granted('ROLE_ADMIN') %}18{% else %}13{% endif %}%" style="text-align: right"></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
+    <table class="table table-hover" id="pagination">
+        <thead>
         <tr>
-            <td>
-                {% if entity.enabled %}
-                    <span class="glyphicon glyphicon-ok text-success"></span>
-                {% else %}
-                    <span class="glyphicon glyphicon-off text-danger"></span>
-                {% endif %}
-            </td>
-            <td><img src="{{ UserProfileImagePath(entity.profilePicturePath, 50, 50) }}" height="20" class="img-circle" style="margin-top:-5px"/></td>
-            <td valign="middle">
-                {{ entity.username }}<br>
-                {% for role in entity.roles %}
-                    {% if role != 'ROLE_USER' and role != 'ROLE_ADMIN'%}
-                        <span class="label label-info" style="font-size:11px">{{ role|trans }}</span><br>
-                    {% elseif role == 'ROLE_ADMIN' %}
-                        <span class="label label-warning" style="font-size:11px">{{ role|trans }}</span><br>
-                    {% endif %}
-                {% endfor %}
-            </td>
-            <td>{{ entity.email }}</td>
-            <td style="white-space: nowrap;">
-                <form style="float:right" action="{{ path('avl_subuser_remove', {'id': entity.id}) }}" method="POST" onsubmit="return confirm('{{ 'Do you remove the subuser?'|trans }}')">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <div style="text-align: center">
-                        <button type="submit" title="{{ 'title.link.remove'|trans }}" class="btn btn-xs btn-danger">
-                            <span class="glyphicon glyphicon-trash" style="top:2px"></span>
-                        </button>
-                    </div>
-                </form>
-                <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px" href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" title="{{ 'title.link.edit'|trans }}" style="float:left">
-                    <span class="glyphicon glyphicon-edit" style="top:2px"></span>
-                </a>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a class="btn btn-xs btn-info" style="float:right;margin-right:10px" href="{{ path('avl_subuser_switch_on', {'switch': entity.username}) }}" title="{{ 'title.link.switch.on'|trans }}" style="float:left">
-                        <span class="glyphicon glyphicon-user" style="top:2px"></span>
-                    </a>
-                {% endif %}
-            </td>
+            <th width="1%"></th>
+            <th width="1%"></th>
+            <th>{{ knp_pagination_sortable(entities, 'Name', 'user.username') }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'E-Mail-Adresse', 'user.email') }}</th>
+            <th width="{% if is_granted('ROLE_ADMIN') %}18{% else %}13{% endif %}%" style="text-align: right"></th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>
+                    {% if entity.enabled %}
+                        <span class="glyphicon glyphicon-ok text-success"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-off text-danger"></span>
+                    {% endif %}
+                </td>
+                <td><img src="{{ UserProfileImagePath(entity.profilePicturePath, 50, 50) }}" height="20"
+                         class="img-circle" style="margin-top:-5px"/></td>
+                <td valign="middle">
+                    {{ entity.username }}<br>
+                    {% for role in entity.roles %}
+                        {% if role != 'ROLE_USER' and role != 'ROLE_ADMIN' %}
+                            <span class="label label-info" style="font-size:11px">{{ role|trans }}</span><br>
+                        {% elseif role == 'ROLE_ADMIN' %}
+                            <span class="label label-warning" style="font-size:11px">{{ role|trans }}</span><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ entity.email }}</td>
+                <td style="white-space: nowrap;">
+                    <form style="float:right" action="{{ path('avl_subuser_remove', {'id': entity.id}) }}" method="POST"
+                          onsubmit="return confirm('{{ 'Do you remove the subuser?'|trans }}')">
+                        <input type="hidden" name="_method" value="DELETE">
+
+                        <div style="text-align: center">
+                            <button type="submit" title="{{ 'title.link.remove'|trans }}" class="btn btn-xs btn-danger">
+                                <span class="glyphicon glyphicon-trash" style="top:2px"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px"
+                       href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" title="{{ 'title.link.edit'|trans }}"
+                       style="float:left">
+                        <span class="glyphicon glyphicon-edit" style="top:2px"></span>
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-xs btn-info" style="float:right;margin-right:10px"
+                           href="{{ path('avl_subuser_switch_on', {'switch': entity.username}) }}"
+                           title="{{ 'title.link.switch.on'|trans }}" style="float:left">
+                            <span class="glyphicon glyphicon-user" style="top:2px"></span>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endif %}

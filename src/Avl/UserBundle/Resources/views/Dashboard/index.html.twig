@@ -3,42 +3,43 @@
 {% block title %}{{ 'title.dashboard'|trans }}{% endblock %}
 
 {% block content %}
-<div class="col-md-8">
-    <h1>{{ 'title.dashboard'|trans }}</h1>
-    <hr>
-    <div class="well">
-        Hello {{ app.session.get('username') }}
-        <br><br>
-        nice to meet you. Lets take a look arround the
-        features of FOSUserBundle that was overwrite
-        and change by avl.
-        <br><br>
-        Lets have a look at your userdata:
-        <br>
-        <small>(Output generate with Twig-Dump)</small>
-        {{ dump(user) }}
-    </div>
-    {% if entities is not null %}
-        <h1>Subuser-Management</h1>
+    <div class="col-md-8">
+        <h1>{{ 'title.dashboard'|trans }}</h1>
         <hr>
-        <br>
-        {% include "FOSUserBundle:Subuser:entities.html.twig" %}
-        {{ knp_pagination_render(entities) }}
-    {% endif %}
-</div>
-<div class="col-md-4">
-    <h1 class="title">Symfony News</h1>
-    <hr>
-    <br>
-    <div style="overflow:auto">
-        {% if symfonyRss %}
-            {% for item in symfonyRss.channel.item %}
-                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                <hr style="margin-top:0px;margin-bottom:0px">
-            {% endfor %}
-        {% else %}
-            No data found
+        <div class="well">
+            Hello {{ app.session.get('username') }}
+            <br><br>
+            nice to meet you. Lets take a look arround the
+            features of FOSUserBundle that was overwrite
+            and change by avl.
+            <br><br>
+            Lets have a look at your userdata:
+            <br>
+            <small>(Output generate with Twig-Dump)</small>
+            {{ dump(user) }}
+        </div>
+        {% if entities is not null %}
+            <h1>Subuser-Management</h1>
+            <hr>
+            <br>
+            {% include "FOSUserBundle:Subuser:entities.html.twig" %}
+            {{ knp_pagination_render(entities) }}
         {% endif %}
     </div>
-</div>
+    <div class="col-md-4">
+        <h1 class="title">Symfony News</h1>
+        <hr>
+        <br>
+
+        <div style="overflow:auto">
+            {% if symfonyRss %}
+                {% for item in symfonyRss.channel.item %}
+                    <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                    <hr style="margin-top:0px;margin-bottom:0px">
+                {% endfor %}
+            {% else %}
+                No data found
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

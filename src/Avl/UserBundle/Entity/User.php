@@ -73,7 +73,7 @@ class User extends BaseUser implements AdvancedUserInterface
     protected $locale;
 
     /**
-     *  @ORM\Column(
+     * @ORM\Column(
      *  type="datetimetz",
      *  nullable=true)
      */
@@ -97,7 +97,7 @@ class User extends BaseUser implements AdvancedUserInterface
     /**
      * Constructor
      */
-    public function __construct() 
+    public function __construct()
     {
         // BaseUser from FOSUB
         parent::__construct();
@@ -111,7 +111,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @return mixed
      */
-    public function getParentId() 
+    public function getParentId()
     {
         return $this->parentId;
     }
@@ -121,7 +121,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @param $id
      */
-    public function setParentId($id) 
+    public function setParentId($id)
     {
         $this->parentId = $id;
     }
@@ -142,7 +142,8 @@ class User extends BaseUser implements AdvancedUserInterface
     /**
      * Set the standard-roles for user
      */
-    public function setUsedRoles() {
+    public function setUsedRoles()
+    {
         // Set the standard-roles
         $this->setRoles(
             array_keys(
@@ -165,7 +166,8 @@ class User extends BaseUser implements AdvancedUserInterface
     /**
      * Set the admin-roles for user
      */
-    public function setAdminRoles() {
+    public function setAdminRoles()
+    {
         // Set the admin-roles if selected
         $this->setRoles(
             array_keys(
@@ -178,7 +180,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * Returns the locale of a user
      * @return mixed
      */
-    public function getLocale() 
+    public function getLocale()
     {
         return (null !== $this->locale) ? $this->locale : self::DEFAULT_LOCALE;
     }
@@ -187,7 +189,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * Set the locale of a user
      * @param string $locale
      */
-    public function setLocale($locale = null) 
+    public function setLocale($locale = null)
     {
         $this->locale = (null !== $locale) ? $locale : self::DEFAULT_LOCALE;
     }
@@ -196,7 +198,7 @@ class User extends BaseUser implements AdvancedUserInterface
      * Create values for the locale drop-down.
      * @return array
      */
-    public static function getLocaleNames() 
+    public static function getLocaleNames()
     {
         return self::$defaultLocaleNames;
     }
@@ -206,7 +208,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @param $createdDate
      */
-    public function setCreatedDate($createdDate) 
+    public function setCreatedDate($createdDate)
     {
         $this->createdDate = $createdDate;
     }
@@ -216,7 +218,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @return \DateTime
      */
-    public function getCreatedDate() 
+    public function getCreatedDate()
     {
         return $this->createdDate;
     }
@@ -226,7 +228,7 @@ class User extends BaseUser implements AdvancedUserInterface
      *
      * @return \DateTime
      */
-    public function getCreatedDateFormatted() 
+    public function getCreatedDateFormatted()
     {
         return $this->createdDate->format('d.m.Y H:i:s');
     }

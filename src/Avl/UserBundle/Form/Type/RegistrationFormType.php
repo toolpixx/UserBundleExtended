@@ -18,9 +18,9 @@ class RegistrationFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) 
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->remove('username')
@@ -28,38 +28,38 @@ class RegistrationFormType extends AbstractType
             ->remove('plainPassword')
             ->add(
                 'username', null, array(
-                'label' => 'form.username',
-                'translation_domain' => 'FOSUserBundle',
-                'attr' => array(
-                    'style' => 'width:350px'
-                )
+                    'label' => 'form.username',
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array(
+                        'style' => 'width:350px'
+                    )
                 )
             )
             ->add(
                 'email', 'email', array(
-                'label' => 'form.email',
-                'translation_domain' => 'FOSUserBundle',
-                'attr' => array(
-                    'style' => 'width:350px'
-                )
+                    'label' => 'form.email',
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array(
+                        'style' => 'width:350px'
+                    )
                 )
             )
             ->add(
                 'plainPassword', 'repeated', array(
-                'type' => 'password',
-                'options' => array(
-                    'translation_domain' => 'FOSUserBundle',
-                    'attr' => array(
-                        'style' => 'width:180px'
-                    )
-                ),
-                'first_options' => array(
-                    'label' => 'form.password'
-                ),
-                'second_options' => array(
-                    'label' => 'form.password_confirmation'
-                ),
-                'invalid_message' => 'fos_user.password.mismatch'
+                    'type' => 'password',
+                    'options' => array(
+                        'translation_domain' => 'FOSUserBundle',
+                        'attr' => array(
+                            'style' => 'width:180px'
+                        )
+                    ),
+                    'first_options' => array(
+                        'label' => 'form.password'
+                    ),
+                    'second_options' => array(
+                        'label' => 'form.password_confirmation'
+                    ),
+                    'invalid_message' => 'fos_user.password.mismatch'
                 )
             );
     }
@@ -67,7 +67,7 @@ class RegistrationFormType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() 
+    public function getParent()
     {
         return 'fos_user_registration';
     }
@@ -75,7 +75,7 @@ class RegistrationFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return 'avl_user_registration';
     }

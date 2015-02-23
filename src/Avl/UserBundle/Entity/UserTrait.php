@@ -84,7 +84,7 @@ trait UserTrait
      *
      * @return mixed
      */
-    public function getImageCropY() 
+    public function getImageCropY()
     {
         return $this->imageCropY;
     }
@@ -94,7 +94,7 @@ trait UserTrait
      *
      * @param $imageCropY
      */
-    public function setImageCropY($imageCropY) 
+    public function setImageCropY($imageCropY)
     {
         $this->imageCropY = $imageCropY;
     }
@@ -104,7 +104,7 @@ trait UserTrait
      *
      * @return mixed
      */
-    public function getImageCropX() 
+    public function getImageCropX()
     {
         return $this->imageCropX;
     }
@@ -114,7 +114,7 @@ trait UserTrait
      *
      * @param $imageCropX
      */
-    public function setImageCropX($imageCropX) 
+    public function setImageCropX($imageCropX)
     {
         $this->imageCropX = $imageCropX;
     }
@@ -124,7 +124,7 @@ trait UserTrait
      *
      * @return mixed
      */
-    public function getImageCropHeight() 
+    public function getImageCropHeight()
     {
         return $this->imageCropHeight;
     }
@@ -134,7 +134,7 @@ trait UserTrait
      *
      * @param $imageCropHeight
      */
-    public function setImageCropHeight($imageCropHeight) 
+    public function setImageCropHeight($imageCropHeight)
     {
         $this->imageCropHeight = $imageCropHeight;
     }
@@ -144,7 +144,7 @@ trait UserTrait
      *
      * @return mixed
      */
-    public function getImageCropWidth() 
+    public function getImageCropWidth()
     {
         return $this->imageCropWidth;
     }
@@ -154,7 +154,7 @@ trait UserTrait
      *
      * @param $imageCropWidth
      */
-    public function setImageCropWidth($imageCropWidth) 
+    public function setImageCropWidth($imageCropWidth)
     {
         $this->imageCropWidth = $imageCropWidth;
     }
@@ -165,7 +165,7 @@ trait UserTrait
      * @param  UploadedFile $file
      * @return object
      */
-    public function setProfilePictureFile(UploadedFile $file = null) 
+    public function setProfilePictureFile(UploadedFile $file = null)
     {
         // set the value of the holder
         $this->profilePictureFile = $file;
@@ -186,7 +186,7 @@ trait UserTrait
      *
      * @return UploadedFile
      */
-    public function getProfilePictureFile() 
+    public function getProfilePictureFile()
     {
         return (null !== $this->profilePictureFile) ? $this->profilePictureFile : null;
     }
@@ -197,7 +197,7 @@ trait UserTrait
      * @param  string $profilePicturePath
      * @return User
      */
-    public function setProfilePicturePath($profilePicturePath = '') 
+    public function setProfilePicturePath($profilePicturePath = '')
     {
         $this->profilePicturePath = $profilePicturePath;
     }
@@ -207,7 +207,7 @@ trait UserTrait
      *
      * @return string
      */
-    public function getProfilePicturePath() 
+    public function getProfilePicturePath()
     {
         return $this->profilePicturePath;
     }
@@ -215,11 +215,11 @@ trait UserTrait
     /**
      * Get the absolute path of the profilePicturePath
      */
-    public function getProfilePictureAbsolutePath() 
+    public function getProfilePictureAbsolutePath()
     {
         return null == $this->getProfilePicturePath()
             ? null
-            : $this->getUploadRootDir().'/'.$this->getProfilePicturePath();
+            : $this->getUploadRootDir() . '/' . $this->getProfilePicturePath();
     }
 
     /**
@@ -227,11 +227,11 @@ trait UserTrait
      *
      * @return string
      */
-    public function getUploadRootDir() 
+    public function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.self::UPLOAD_ROOT_DIR.self::UPLOAD_DIR;
+        return __DIR__ . self::UPLOAD_ROOT_DIR . self::UPLOAD_DIR;
     }
 
     /**
@@ -239,15 +239,15 @@ trait UserTrait
      *
      * @return string
      */
-    public function getWebProfilePicturePath() 
+    public function getWebProfilePicturePath()
     {
-        return self::UPLOAD_DIR.'/'.$this->getProfilePicturePath();
+        return self::UPLOAD_DIR . '/' . $this->getProfilePicturePath();
     }
 
     /**
      * @return bool
      */
-    public function hasProfilePictureUpload() 
+    public function hasProfilePictureUpload()
     {
         return ($this->getProfilePictureFile() instanceof UploadedFile) ? true : false;
     }
@@ -256,13 +256,13 @@ trait UserTrait
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUploadProfilePicture() 
+    public function preUploadProfilePicture()
     {
         if (null !== $this->getProfilePictureFile()) {
             // a file was uploaded, generate a unique filename
             $filename = $this->generateRandomFilename();
             $this->setProfilePicturePath(
-                $filename.'.'.$this->getProfilePictureFile()->guessExtension()
+                $filename . '.' . $this->getProfilePictureFile()->guessExtension()
             );
         }
     }
@@ -276,7 +276,7 @@ trait UserTrait
      *
      * @return string
      */
-    public function generateRandomFilename() 
+    public function generateRandomFilename()
     {
         // Local variable
         $count = 0;
@@ -287,7 +287,7 @@ trait UserTrait
             $random = $generator->nextBytes(16);
             $randomString = bin2hex($random);
             $count++;
-        } while (file_exists($this->getUploadRootDir().'/'.$randomString.'.'.$this->getProfilePictureFile()->guessExtension()) && $count < 50);
+        } while (file_exists($this->getUploadRootDir() . '/' . $randomString . '.' . $this->getProfilePictureFile()->guessExtension()) && $count < 50);
 
         return $randomString;
     }
@@ -300,7 +300,7 @@ trait UserTrait
      *
      * @return mixed
      */
-    public function uploadProfilePicture() 
+    public function uploadProfilePicture()
     {
         // check there is a profile pic to upload
         if ($this->getProfilePictureFile() === null) {
@@ -318,12 +318,12 @@ trait UserTrait
         // check if we have an old image
         if (true
             && isset($this->oldProfilePicturePath)
-            && file_exists($this->getUploadRootDir().'/'.$this->oldProfilePicturePath)
+            && file_exists($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath)
         ) {
             // delete the old image
-            if (is_file($this->getUploadRootDir().'/'.$this->oldProfilePicturePath)) {
+            if (is_file($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath)) {
 
-                unlink($this->getUploadRootDir().'/'.$this->oldProfilePicturePath);
+                unlink($this->getUploadRootDir() . '/' . $this->oldProfilePicturePath);
                 // clear the temp image path
                 $this->oldProfilePicturePath = null;
             }
@@ -331,7 +331,7 @@ trait UserTrait
         $this->profilePictureFile = null;
     }
 
-    public function getUploadDir() 
+    public function getUploadDir()
     {
         return self::UPLOAD_DIR;
     }
@@ -341,7 +341,7 @@ trait UserTrait
      *
      * @ORM\PostRemove()
      */
-    public function removeProfilePictureFile() 
+    public function removeProfilePictureFile()
     {
         // Check the profile-picture
         if (true

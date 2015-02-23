@@ -28,7 +28,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @param $container
      */
-    public function __construct($container) 
+    public function __construct($container)
     {
         $this->container = $container;
         $this->user = new User();
@@ -37,7 +37,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return 'profile_image_extension';
     }
@@ -45,7 +45,7 @@ class UserProfileImagePathExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() 
+    public function getFunctions()
     {
         return array(
             'UserProfileImagePath' => new \Twig_Function_Method($this, 'UserProfileImagePath')
@@ -58,16 +58,16 @@ class UserProfileImagePathExtension extends \Twig_Extension
      * @param $height
      * @return mixed
      */
-    public function UserProfileImagePath($profilePicturePath, $with, $height) 
+    public function UserProfileImagePath($profilePicturePath, $with, $height)
     {
         // Cachemanager for images
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
 
         // Setup the correct path for image
         $image =
-            is_file($this->user->getUploadRootDir().'/'.$profilePicturePath)
-            ? $this->user->getUploadDir().'/'.$profilePicturePath
-            : $this->user->getUploadDir().'/default-avatar.png';
+            is_file($this->user->getUploadRootDir() . '/' . $profilePicturePath)
+                ? $this->user->getUploadDir() . '/' . $profilePicturePath
+                : $this->user->getUploadDir() . '/default-avatar.png';
 
         // Cachemanager runtimeConfig
         // it overwrite the config in

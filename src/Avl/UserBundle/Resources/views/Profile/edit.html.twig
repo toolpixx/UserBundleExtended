@@ -13,9 +13,8 @@
     {% stylesheets
     "bundles/user/cropper/cropper.css"
     "bundles/user/fileinput/css/fileinput.min.css"
-    filter="cssrewrite"
-    %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    filter="cssrewrite" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock stylesheets %}
 
@@ -23,15 +22,14 @@
     {{ parent() }}
 
     {% javascripts
-        'bundles/user/cropper/cropper.js'
-        'bundles/user/fileinput/js/fileinput.min.js'
-    %}
+    'bundles/user/cropper/cropper.js'
+    'bundles/user/fileinput/js/fileinput.min.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <script type="text/javascript">
-        $(function() {
-            $('#fos_user_profile_form_profilePictureFile').change(function(e) {
+        $(function () {
+            $('#fos_user_profile_form_profilePictureFile').change(function (e) {
                 if (this.files !== 'undefined' && typeof FileReader !== 'undefined') {
                     $('.fixed-dragger-cropper').hide();
                     for (var f = 0; f < this.files.length; f++) {
@@ -83,32 +81,31 @@
             }
         }
 
-        function previewImage(e)
-        {
+        function previewImage(e) {
             var img = $(document.createElement('img'));
 
             $(img).attr('src', e.target.result);
             $('.cropper-container').remove();
             $('.fixed-dragger-cropper').append(img);
 
-            $('.fixed-dragger-cropper > img').ready(function(e) {
+            $('.fixed-dragger-cropper > img').ready(function (e) {
 
                 $('.fixed-dragger-cropper').show();
 
                 $(".fixed-dragger-cropper > img").cropper({
                     aspectRatio: 500 / 500,
                     autoCropArea: 0.6, // Center 60%
-                    minWidth:400,
-                    maxWidth:800,
-                    minHeight:400,
-                    maxHeight:800,
+                    minWidth: 400,
+                    maxWidth: 800,
+                    minHeight: 400,
+                    maxHeight: 800,
                     multiple: false,
                     dragCrop: false,
                     dashed: false,
                     movable: true,
                     zoomable: false,
                     resizable: true,
-                    done: function(data) {
+                    done: function (data) {
                         $('#fos_user_profile_form_imageCropY').val(Math.round(data.y));
                         $('#fos_user_profile_form_imageCropX').val(Math.round(data.x));
                         $('#fos_user_profile_form_imageCropHeight').val(Math.round(data.height));
@@ -122,7 +119,7 @@
             });
         }
 
-        $('#fos_user_profile_form_usedRoles_0, #fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').click(function() {
+        $('#fos_user_profile_form_usedRoles_0, #fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').click(function () {
             setupRoles();
         });
 
@@ -131,24 +128,26 @@
 {% endblock javascripts %}
 
 {% block content %}
-<div class="col-md-12">
-    {% if currentRouteName == 'avl_subuser_edit' %}
-        <h1>{{ 'title.subuser'|trans }} <small>{{ 'title.subuser.edit'|trans }}</small></h1>
-    {% else %}
-        <h1>{{ 'title.customer.edit'|trans }}</h1>
-    {% endif %}
-    <hr>
-    <div class="tabbable tabs-left">
-        {% if currentRouteName == 'avl_subuser_edit' or currentRouteName == 'avl_subuser_create' %}
-            {% include 'UserBundle:Tabs:subuser.html.twig' %}
+    <div class="col-md-12">
+        {% if currentRouteName == 'avl_subuser_edit' %}
+            <h1>{{ 'title.subuser'|trans }}
+                <small>{{ 'title.subuser.edit'|trans }}</small>
+            </h1>
         {% else %}
-            {% include 'UserBundle:Tabs:profile.html.twig' %}
+            <h1>{{ 'title.customer.edit'|trans }}</h1>
         {% endif %}
-        <div class="tab-content" style="width:75%;float:left">
-            <div class="tab-pane active">
-                {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        <hr>
+        <div class="tabbable tabs-left">
+            {% if currentRouteName == 'avl_subuser_edit' or currentRouteName == 'avl_subuser_create' %}
+                {% include 'UserBundle:Tabs:subuser.html.twig' %}
+            {% else %}
+                {% include 'UserBundle:Tabs:profile.html.twig' %}
+            {% endif %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

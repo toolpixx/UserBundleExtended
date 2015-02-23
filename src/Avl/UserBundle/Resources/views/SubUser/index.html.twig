@@ -19,6 +19,7 @@
                         </div>
                     </form>
                     <br>
+
                     <div class="{% if entities|length > 0 %}{% endif %}">
                         {% include "FOSUserBundle:Subuser:entities.html.twig" %}
                     </div>
@@ -37,7 +38,7 @@
             {% set infoNotice = 'notice.no.subuser' %}
         {% endif %}
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 toastr.info('{{ infoNotice|trans }}', '{{ 'notice.label'|trans }}');
             });
         </script>

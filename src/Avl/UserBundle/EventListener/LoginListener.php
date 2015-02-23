@@ -54,7 +54,7 @@ class LoginListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
@@ -65,7 +65,7 @@ class LoginListener implements EventSubscriberInterface
     /**
      * @param UserEvent $event
      */
-    public function onImplicitLogin(UserEvent $event) 
+    public function onImplicitLogin(UserEvent $event)
     {
         // nothing implemented yet
     }
@@ -73,7 +73,7 @@ class LoginListener implements EventSubscriberInterface
     /**
      * @param InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event) 
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         // Get user-object
         $user = $event->getAuthenticationToken()->getUser();

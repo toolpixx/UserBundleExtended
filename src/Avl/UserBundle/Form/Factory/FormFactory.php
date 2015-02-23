@@ -61,7 +61,7 @@ class FormFactory implements FactoryInterface
      * @param FormFactoryInterface $formFactory
      * @param $name
      * @param $type
-     * @param array                $validationGroups
+     * @param array $validationGroups
      */
     public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
     {
@@ -74,7 +74,7 @@ class FormFactory implements FactoryInterface
     /**
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createForm() 
+    public function createForm()
     {
 
         return $this->formFactory->createNamed(
@@ -96,7 +96,7 @@ class FormFactory implements FactoryInterface
      *
      * @param $user
      */
-    public function setUser($user) 
+    public function setUser($user)
     {
         $this->user = $user;
     }
@@ -107,7 +107,7 @@ class FormFactory implements FactoryInterface
      *
      * @param $roleView
      */
-    public function setRoleView($roleView) 
+    public function setRoleView($roleView)
     {
         $this->roleView = $roleView;
     }
@@ -118,7 +118,7 @@ class FormFactory implements FactoryInterface
      *
      * @param $enabledView
      */
-    public function setEnabledView($enabledView) 
+    public function setEnabledView($enabledView)
     {
         $this->enabledView = $enabledView;
     }

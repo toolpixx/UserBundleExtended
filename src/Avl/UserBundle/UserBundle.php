@@ -8,12 +8,14 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Class UserBundle
  * @package Avl\UserBundle
  */
-class UserBundle extends Bundle {
+class UserBundle extends Bundle
+{
 
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'FOSUserBundle';
     }
 }

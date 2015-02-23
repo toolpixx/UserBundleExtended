@@ -2,162 +2,189 @@
 {% set currentRouteName = app.request.attributes.get('_route') %}
 {% block title 'UserBundleExtended by avl' %}
 
-{% block head %}
-{% endblock %}
+    {% block head %}
+    {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock stylesheets %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock stylesheets %}
 
-{% block javascripts %}
-    {{ parent() }}
-{% endblock javascripts %}
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock javascripts %}
 
-{% block body %}
-    {% block content_header %}
-        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <div style="margin-top:16px;color:silver">
-                    {{ 'footer.text'|trans }}
+    {% block body %}
+        {% block content_header %}
+            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div style="margin-top:16px;color:silver">
+                        {{ 'footer.text'|trans }}
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                    <i class="fa fa-reorder"></i>
-                </button>
-                <a href="#" class="navbar-brand">MT_CNSL</a>
-            </div>
-            <div class="collapse navbar-collapse" style="width: 1000px;margin:0 auto;" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    {% block content_header_more %}
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN')%}
-                            <li>
-                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                    <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.dashboard'|trans }}
-                                </a>
-                            </li>
-                            {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') or is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+            </nav>
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                        <i class="fa fa-reorder"></i>
+                    </button>
+                    <a href="#" class="navbar-brand">MT_CNSL</a>
+                </div>
+                <div class="collapse navbar-collapse" style="width: 1000px;margin:0 auto;"
+                     id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        {% block content_header_more %}
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
                                 <li>
-                                    <a role="presentation" href="{{ path('avl_event_show') }}" id="dropdownMenuEvents" data-toggle="dropdown" {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="top:2px"></span>
-                                        {{ 'link.events'|trans }}
-                                        {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
-                                            <span class="label label-success label-as-badge" style="top: -10px;position: relative;" title="{{ 'link.events.badge.title'|trans }}">2</span>
-                                        {% endif %}
+                                    <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"
+                                       {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.dashboard'|trans }}
                                     </a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
-                                        {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') %}
-                                            <li role="presentation"><a role="menuitem" href="{{ path('avl_event_show') }}">{{ 'link.events'|trans }}</a></li>
-                                        {% endif %}
-                                        {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
-                                            <li role="presentation">
-                                                <a role="presentation" href="{{ path('avl_comment_show') }}">
-                                                    {{ 'link.comments'|trans }}
-                                                    <span class="label label-success label-as-badge" title="{{ 'link.events.badge.title'|trans }}">2</span>
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
                                 </li>
-                            {% endif %}
-                            <li>
-                                <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
-                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.faq'|trans }}
-                                </a>
-                            </li>
-                        {% elseif is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"  {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                    <span class="glyphicon glyphicon-cloud" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.dashboard'|trans }}
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a role="presentation" href="{{ path('avl_subuser') }}">
-                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'title.subuser'|trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
-                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.faq'|trans }}
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li>
-                                <a role="presentation" href="{{ path('fos_user_security_login') }}">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.login'|trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a role="presentation" href="{{ path('fos_user_registration_register') }}">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.register'|trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a role="presentation" href="{{ path('fos_user_resetting_request') }}">
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.resetting.password'|trans }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endblock %}
-                </ul>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li style="color:black;font-weight: normal;">
-                        <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown" style="padding-top: 17px;padding-bottom: 10px;">
-                            <img src="{{ UserProfileImagePath(app.session.get('profilePicturePath'), 50, 50) }}" height="26" class="img-circle" style="margin-top:-5px"/>
-                            {{ app.session.get('username') }}
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation">
-                                <a role="menuitem" href="{{ path('fos_user_profile_show') }}">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true" style="top:2px"></span>
-                                    {{ 'link.account'|trans }}
-                                </a>
-                            </li>
-                            {% if is_granted('ROLE_CUSTOMER_SUBUSER_MANAGER') %}
+                                {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') or is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+                                    <li>
+                                        <a role="presentation" href="{{ path('avl_event_show') }}"
+                                           id="dropdownMenuEvents" data-toggle="dropdown"
+                                           {% if currentRouteName == 'avl_event_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                            {{ 'link.events'|trans }}
+                                            {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+                                                <span class="label label-success label-as-badge"
+                                                      style="top: -10px;position: relative;"
+                                                      title="{{ 'link.events.badge.title'|trans }}">2</span>
+                                            {% endif %}
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEvents">
+                                            {% if is_granted('ROLE_CUSTOMER_EVENT_MANAGER') %}
+                                                <li role="presentation"><a role="menuitem"
+                                                                           href="{{ path('avl_event_show') }}">{{ 'link.events'|trans }}</a>
+                                                </li>
+                                            {% endif %}
+                                            {% if is_granted('ROLE_CUSTOMER_COMMENT_MANAGER') %}
+                                                <li role="presentation">
+                                                    <a role="presentation" href="{{ path('avl_comment_show') }}">
+                                                        {{ 'link.comments'|trans }}
+                                                        <span class="label label-success label-as-badge"
+                                                              title="{{ 'link.events.badge.title'|trans }}">2</span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                </li>
+                            {% elseif is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"
+                                       {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
+                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.dashboard'|trans }}
+                                    </a>
+                                </li>
                                 <li role="presentation">
                                     <a role="presentation" href="{{ path('avl_subuser') }}">
-                                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="top:2px"></span>
+                                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"
+                                              style="top:2px"></span>
                                         {{ 'title.subuser'|trans }}
                                     </a>
                                 </li>
+                                <li>
+                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                </li>
                             {% endif %}
+                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li>
+                                    <a role="presentation" href="{{ path('fos_user_security_login') }}">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.login'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a role="presentation" href="{{ path('fos_user_registration_register') }}">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.register'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a role="presentation" href="{{ path('fos_user_resetting_request') }}">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'link.resetting.password'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endblock %}
+                    </ul>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li style="color:black;font-weight: normal;">
+                                <a href="{{ path('fos_user_profile_show') }}" id="dropdownMenu1" data-toggle="dropdown"
+                                   style="padding-top: 17px;padding-bottom: 10px;">
+                                    <img src="{{ UserProfileImagePath(app.session.get('profilePicturePath'), 50, 50) }}"
+                                         height="26" class="img-circle" style="margin-top:-5px"/>
+                                    {{ app.session.get('username') }}
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true" style="top:2px"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a role="menuitem" href="{{ path('fos_user_profile_show') }}">
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                            {{ 'link.account'|trans }}
+                                        </a>
+                                    </li>
+                                    {% if is_granted('ROLE_CUSTOMER_SUBUSER_MANAGER') %}
+                                        <li role="presentation">
+                                            <a role="presentation" href="{{ path('avl_subuser') }}">
+                                                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"
+                                                      style="top:2px"></span>
+                                                {{ 'title.subuser'|trans }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            <li>
+                                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                                    <a href="{{ path('avl_subuser_switch_off', {'switch': '_exit'}) }}"
+                                       style="padding-left:0px;" title="{{ 'title.link.switch.off'|trans }}">
+                                        <span class="glyphicon glyphicon-off" style="color:red;top:4px"></span>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;"
+                                       title="{{ 'title.link.logout'|trans }}">
+                                        <span class="glyphicon glyphicon-log-out" style="top:3px"></span>
+                                    </a>
+                                {% endif %}
+                            </li>
+
                         </ul>
-                    </li>
-                    <li>
-                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <a href="{{ path('avl_subuser_switch_off', {'switch': '_exit'}) }}" style="padding-left:0px;" title="{{ 'title.link.switch.off'|trans }}">
-                                <span class="glyphicon glyphicon-off" style="color:red;top:4px"></span>
-                            </a>
-                        {% else %}
-                            <a href="{{ path('fos_user_security_logout') }}" style="padding-left:0px;" title="{{ 'title.link.logout'|trans }}">
-                                <span class="glyphicon glyphicon-log-out" style="top:3px"></span>
-                            </a>
-                        {% endif %}
-                    </li>
-
-                </ul>
-                {% endif %}
-            </div>
-        </nav>
-    {% endblock %}
-
-    <div class="row" style="padding-top:20px;border-top:3px solid #e7eaec;background-color:white;padding-bottom:5%;margin-top:100px">
-        {% block content %}
-            {% block fos_user_content %}{% endblock %}
+                    {% endif %}
+                </div>
+            </nav>
         {% endblock %}
-    </div>
-    <br><br><br><br>
-{% endblock %}
+
+        <div class="row"
+             style="padding-top:20px;border-top:3px solid #e7eaec;background-color:white;padding-bottom:5%;margin-top:100px">
+            {% block content %}
+                {% block fos_user_content %}{% endblock %}
+            {% endblock %}
+        </div>
+        <br><br><br><br>
+    {% endblock %}
