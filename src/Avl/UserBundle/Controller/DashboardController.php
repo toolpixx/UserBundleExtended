@@ -49,11 +49,12 @@ class DashboardController extends BaseController
             $pagination = null;
         }
 
-        return $this->render('UserBundle:Dashboard:index.html.twig',
-            array(
-                'user' => $this->getUser(),
-                'entities' => $pagination,
-                'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
+        return $this->render(
+            'UserBundle:Dashboard:index.html.twig',
+                array(
+                    'user' => $this->getUser(),
+                    'entities' => $pagination,
+                    'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
     }
@@ -76,8 +77,8 @@ class DashboardController extends BaseController
             // If content was cached return it
             if ($this->cacheDriver->contains($this->cacheKey)) {
                 return $this->getCachedFeed();
-            } // Or get and save the new content
-            else {
+            } else {
+                // Or get and save the new content
                 $rssFeed = file_get_contents($url);
 
                 // Save to cache ad return content
