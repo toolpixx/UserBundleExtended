@@ -72,12 +72,11 @@ class SubUserController extends BaseController
             $pagination = $this->getUserPagination($request, $form->getData(), 5);
         }
 
-        return $this->render(
-            'UserBundle:SubUser:index.html.twig', array(
+        return $this->render('UserBundle:SubUser:index.html.twig',
+            array(
                 'entities' => $pagination,
                 'form' => $form->createView()
-            )
-        );
+            ));
     }
 
     /**
@@ -115,21 +114,18 @@ class SubUserController extends BaseController
 
             $this->session->getFlashBag()->add('notice', 'Subuser was created');
 
-            return $this->redirect(
-                $this->generateUrl('avl_subuser_edit',
-                    array(
-                        'id' => $user->getId()
-                    )
+            return $this->redirect($this->generateUrl('avl_subuser_edit',
+                array(
+                    'id' => $user->getId()
                 )
-            );
+            ));
         }
 
         return $this->render('FOSUserBundle:Registration:register.html.twig',
             array(
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_new'
-            )
-        );
+            ));
     }
 
     /**
@@ -146,8 +142,7 @@ class SubUserController extends BaseController
             array(
                 'ROLE_ADMIN',
                 'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            )
-        );
+            ));
 
         // Find the user to edit
         $user = $this->findUser($id);
@@ -207,8 +202,7 @@ class SubUserController extends BaseController
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_edit',
                 'profilePicturePath' => $user->getProfilePicturePath()
-            )
-        );
+            ));
     }
 
     /**
@@ -225,8 +219,7 @@ class SubUserController extends BaseController
             array(
                 'ROLE_ADMIN',
                 'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            )
-        );
+            ));
 
         if ($request->getMethod() == 'DELETE') {
             try {
@@ -310,8 +303,7 @@ class SubUserController extends BaseController
                 array(
                     'id' => (integer)$id,
                     'parentId' => (integer)$this->getParentId()
-                )
-            );
+                ));
         }
     }
 
@@ -386,8 +378,7 @@ class SubUserController extends BaseController
                         'cropHeight' => (int)$user->getImageCropHeight(),
                         'cropWidth' => (int)$user->getImageCropWidth(),
                         'cropImagePath' => (string)$user->getProfilePictureAbsolutePath()
-                    )
-                );
+                    ));
             }
             return true;
         } catch (Exception $e) {

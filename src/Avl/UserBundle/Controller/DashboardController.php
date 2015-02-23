@@ -49,13 +49,12 @@ class DashboardController extends BaseController
             $pagination = null;
         }
 
-        return $this->render(
-            'UserBundle:Dashboard:index.html.twig', array(
+        return $this->render('UserBundle:Dashboard:index.html.twig',
+            array(
                 'user' => $this->getUser(),
                 'entities' => $pagination,
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
-            )
-        );
+            ));
     }
 
     /**

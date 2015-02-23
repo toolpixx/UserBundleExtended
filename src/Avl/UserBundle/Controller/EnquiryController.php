@@ -76,13 +76,11 @@ class EnquiryController extends BaseController
                         'warning',
                         'enquiry.flash.error'
                     );
-                }
-
-                // Send mail was true, redirect
-                // because we prevent user will
-                // repost the form data if they
-                // refresh the site.
-                else {
+                } else {
+                    // Send mail was true, redirect
+                    // because we prevent user will
+                    // repost the form data if they
+                    // refresh the site.
                     $this->session->getFlashBag()->add(
                         'notice',
                         'enquiry.flash.success'
@@ -99,8 +97,7 @@ class EnquiryController extends BaseController
         return $this->render('UserBundle:Enquiry:index.html.twig',
             array(
                 'form' => $form->createView()
-            )
-        );
+            ));
     }
 
     /**
@@ -121,8 +118,7 @@ class EnquiryController extends BaseController
                     array(
                         'enquiry' => $enquiry
                     )
-                )
-            );
+                ));
 
         // If any attachment exists
         if ($enquiry->hasAttachment()) {

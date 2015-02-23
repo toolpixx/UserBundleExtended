@@ -22,8 +22,8 @@ class ContentController extends BaseController
     public function indexAction($slug)
     {
         try {
-            return $this->render(
-                'UserBundle:Content:' . $slug . '.html.twig', array(
+            return $this->render('UserBundle:Content:' . $slug . '.html.twig',
+                array(
                     'slug' => $slug
                 )
             );

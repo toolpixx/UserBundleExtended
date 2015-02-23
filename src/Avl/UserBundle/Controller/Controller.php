@@ -113,8 +113,8 @@ abstract class Controller extends BaseController
                     $checkSecurity[] = true;
                 }
             }
-        } // $role is only a string
-        else {
+        } else {
+            // $role is only a string
             if ($this->get('security.authorization_checker')->isGranted($roles)) {
                 $checkSecurity[] = true;
             }

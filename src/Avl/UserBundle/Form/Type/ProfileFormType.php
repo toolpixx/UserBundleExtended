@@ -74,8 +74,7 @@ class ProfileFormType extends BaseType
                     'attr' => array(
                         'style' => 'width:200px'
                     )
-                )
-            );
+                ));
         }
 
         // If enabledView is true
@@ -97,8 +96,7 @@ class ProfileFormType extends BaseType
             array(
                 'label' => 'label.avatar',
                 'required' => false
-            )
-        )
+            ))
         ->add('imageCropY', 'hidden')
         ->add('imageCropX', 'hidden')
         ->add('imageCropHeight', 'hidden')
