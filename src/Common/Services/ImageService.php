@@ -218,9 +218,8 @@ class ImageService
      */
     private function getImageMimeType($src)
     {
-
         $imageInfo = getimagesize($src);
-        return ($imageInfo['mime']) ? $imageInfo['mime'] : null;
+        return ($imageInfo['mime']) ? $imageInfo['mime'] : '';
     }
 
     private function getImageSource($path, $type) {
