@@ -63,7 +63,7 @@ class FormFactory implements FactoryInterface
      * @param $type
      * @param array $validationGroups
      */
-    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
+    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = array())
     {
         $this->formFactory = $formFactory;
         $this->name = $name;
