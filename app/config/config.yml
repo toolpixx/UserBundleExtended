@@ -71,6 +71,7 @@ framework:
 twig:
     globals:
         token_ttl: "%fos_resetting.token_ttl%"
+        sort_title: UserBundle::_sortable_title.html.twig
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
@@ -142,4 +143,4 @@ liip_imagine:
 knp_paginator:
     template:
         pagination: UserBundle::_pagination.html.twig     # sliding pagination controls template
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+        #sortable: UserBundle::_sortable_title.html.twig #KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template

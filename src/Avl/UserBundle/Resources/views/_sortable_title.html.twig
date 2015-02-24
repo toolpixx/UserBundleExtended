@@ -1,0 +1,9 @@
+{% if pagination.isSorted(field) %}
+    {% if app.request.get('direction') == 'asc' %}
+        <span class="glyphicon glyphicon-chevron-down" style="right:3px;font-size:12px"></span><a href="?sort={{ field }}&direction=desc&page={{ app.request.get('page') }}">{{ title|trans }}</a>
+    {% else %}
+        <span class="glyphicon glyphicon-chevron-up" style="right:3px;font-size:12px"></span><a href="?sort={{ field }}&direction=asc&page={{ app.request.get('page') }}">{{ title|trans }}</a>
+    {% endif %}
+{% else %}
+    <a href="?sort={{ field }}&direction=asc&page={{ app.request.get('page') }}">{{ title|trans }}</a>
+{% endif %}
