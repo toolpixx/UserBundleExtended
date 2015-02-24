@@ -5,5 +5,5 @@
         <span class="glyphicon glyphicon-chevron-up" style="right:3px;font-size:12px"></span><a href="?sort={{ field }}&direction=asc&page={{ app.request.get('page') }}">{{ title|trans }}</a>
     {% endif %}
 {% else %}
-    <a href="?sort={{ field }}&direction=asc&page={{ app.request.get('page') }}">{{ title|trans }}</a>
+    <a href="?sort={{ field }}&direction=asc&page={% if app.request.get('page') != '' %}{{ app.request.get('page') }}{% else %}1{% endif %}">{{ title|trans }}</a>
 {% endif %}
