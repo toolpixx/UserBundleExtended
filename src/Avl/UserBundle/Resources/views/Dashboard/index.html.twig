@@ -16,13 +16,13 @@
             Lets have a look at your userdata:
             <br>
             <small>(Output generate with Twig-Dump)</small>
-            {{ dump(user) }}
+            {# dump(user) #}
         </div>
         {% if entities is not null %}
             <h1>Subuser-Management</h1>
             <hr>
             <br>
-            {% include "FOSUserBundle:Subuser:entities.html.twig" %}
+            {% include "UserBundle:SubUser:entities.html.twig" %}
             {{ knp_pagination_render(entities) }}
         {% endif %}
     </div>
