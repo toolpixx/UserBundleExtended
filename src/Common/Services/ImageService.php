@@ -232,17 +232,18 @@ class ImageService
 
         // Read the picture
         switch ($type) {
+            default:
+                return '';
             case "image/gif":
-                $source = imagecreatefromgif($path);
+                return imagecreatefromgif($path);
                 break;
             case "image/jpeg":
-                $source = imagecreatefromjpeg($path);
+                return imagecreatefromjpeg($path);
                 break;
             case "image/png":
-                $source = imagecreatefrompng($path);
+                return imagecreatefrompng($path);
                 break;
         }
-        return $source;
     }
 
     /**
