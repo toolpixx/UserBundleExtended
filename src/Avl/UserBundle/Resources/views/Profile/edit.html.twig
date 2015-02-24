@@ -119,11 +119,12 @@
             });
         }
 
+        {% if is_granted('ROLE_ADMIN') %}
         $('#fos_user_profile_form_usedRoles_0, #fos_user_profile_form_usedRoles_1, #fos_user_profile_form_usedRoles_2, #fos_user_profile_form_usedRoles_3').click(function () {
             setupRoles();
         });
-
         setupRoles();
+        {% endif %}
     </script>
 {% endblock javascripts %}
 
