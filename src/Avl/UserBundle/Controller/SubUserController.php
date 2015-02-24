@@ -114,7 +114,7 @@ class SubUserController extends BaseController
             // Insert the user
             $this->getUserManager()->updateUser($user);
 
-            $this->session->getFlashBag()->add('notice', 'Subuser was created');
+            $this->session->getFlashBag()->add('notice', 'subuser.flash.create.success');
 
             return $this->redirect(
                 $this->generateUrl(
@@ -199,7 +199,7 @@ class SubUserController extends BaseController
 
             // Crop image
             if ($this->cropImage($user)) {
-                return $this->redirectSubUser('Subuser was editing');
+                return $this->redirectSubUser('subuser.flash.edit.success');
             }
         }
         // Get and create the FOSUserbundleForm
@@ -241,12 +241,12 @@ class SubUserController extends BaseController
                 if (null !== $user && is_object($user)) {
                     $em->remove($user);
                     $em->flush();
-                    return $this->redirectSubUser('Subuser was removed');
+                    return $this->redirectSubUser('subuser.flash.remove.success');
                 } else {
                     throw new AccessDeniedException('This user does not have access to this section.');
                 }
             } catch (AccessDeniedException $e) {
-                $this->session->getFlashBag()->add('error', 'Subuser cannot be removed');
+                $this->session->getFlashBag()->add('error', 'subuser.flash.remove.error');
                 return $this->redirectSubUser();
             }
         } else {

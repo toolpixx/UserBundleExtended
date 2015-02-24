@@ -21,4 +21,16 @@
             </a>
         </li>
     {% endif %}
+
+    {% if currentRouteName == 'avl_subuser' %}
+        <li style="margin-left:20px;margin-top:40px;font-size:12px">
+            <span class="glyphicon glyphicon-ok text-success" style="margin-right:6px"></span>Benutzer aktiv<br>
+            <span class="glyphicon glyphicon-off text-danger" style="margin-right:6px"></span>Benutzer inaktiv<br><br>
+            <span class="glyphicon glyphicon-user" style="margin-right:6px"></span>Zum Benutzer wechseln<br>
+            <span class="glyphicon glyphicon-edit" style="margin-right:6px"></span>Benutzer bearbeiten<br>
+            <span class="glyphicon glyphicon-trash" style="margin-right:6px"></span>Benutzer löschen<br><br>
+            <span class="glyphicon glyphicon-unchecked" style="margin-right:6px"></span>Hauptbenutzer<br>
+            <span class="glyphicon glyphicon-stop" style="margin-right:6px"></span>Sub-Benutzer
+        </li>
+    {% endif %}
 </ul>

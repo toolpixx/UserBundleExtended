@@ -5,6 +5,10 @@ _welcome:
     path:     /
     defaults: { _controller: FOSUserBundle:Security:login }
 
+avl_user_registration_register:
+    path:      /register/
+    defaults:  { _controller: FOSUserBundle:Registration:register }
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

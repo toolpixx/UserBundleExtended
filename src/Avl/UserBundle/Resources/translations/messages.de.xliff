@@ -18,6 +18,10 @@
                 <source>button.delete</source>
                 <target>Löschen</target>
             </trans-unit>
+            <trans-unit id="button.back">
+                <source>button.back</source>
+                <target>Abbrechen</target>
+            </trans-unit>
             <trans-unit id="alert.delete.avatar">
                 <source>alert.delete.avatar</source>
                 <target>Möchten Sie Ihr Benutzerbild wirklich löschen?</target>
@@ -205,6 +209,29 @@
                 <source>enquiry.flash.error</source>
                 <target>Es ist ein Fehler bei der Weiterleitung Ihrer E-Mail an Uns aufgetreten.</target>
             </trans-unit>
+
+            <trans-unit id="subuser.flash.create.success">
+                <source>subuser.flash.create.success</source>
+                <target>Der Benutzer wurde angelegt.</target>
+            </trans-unit>
+            <trans-unit id="subuser.flash.edit.success">
+                <source>subuser.flash.edit.success</source>
+                <target>Der Benutzer wurde bearbeitet.</target>
+            </trans-unit>
+            <trans-unit id="subuser.flash.remove.success">
+                <source>subuser.flash.remove.success</source>
+                <target>Der Benutzer wurde gelöscht.</target>
+            </trans-unit>
+            <trans-unit id="subuser.flash.remove.error">
+                <source>subuser.flash.remove.error</source>
+                <target>Der Benutzer konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="subuser.question.remove">
+                <source>subuser.question.remove</source>
+                <target>Möchten Sie den Benutzer wirklich löschen?</target>
+            </trans-unit>
+
+
 
             <trans-unit id="title.404.not.found">
                 <source>title.404.not.found</source>
