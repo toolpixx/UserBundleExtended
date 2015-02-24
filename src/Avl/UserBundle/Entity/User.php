@@ -7,7 +7,6 @@
  */
 namespace Avl\UserBundle\Entity;
 
-
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Model\User as BaseUser;

@@ -57,17 +57,8 @@ class LoginListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
-            SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin'
         );
-    }
-
-    /**
-     * @param UserEvent $event
-     */
-    public function onImplicitLogin(UserEvent $event)
-    {
-        // nothing implemented yet
     }
 
     /**
@@ -80,7 +71,6 @@ class LoginListener implements EventSubscriberInterface
 
         // If user-object is instance of User
         // set the actually name into session.
-        // (for output and so on...)
         if ($user instanceof User) {
             $this->container
                 ->get('set_session_service')

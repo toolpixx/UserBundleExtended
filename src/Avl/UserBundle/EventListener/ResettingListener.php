@@ -57,17 +57,8 @@ class ResettingListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::RESETTING_RESET_INITIALIZE => 'onResettingResetInitialize',
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onResettingResetSuccess'
         );
-    }
-
-    /**
-     * @param GetResponseUserEvent $event
-     */
-    public function onResettingResetInitialize(GetResponseUserEvent $event)
-    {
-        // Not use yet
     }
 
     /**

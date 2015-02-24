@@ -55,7 +55,6 @@ class RegistrationListener implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
-            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted',
             FOSUserEvents::REGISTRATION_CONFIRMED => 'onRegistrationConfirmed'
         );
     }
@@ -70,14 +69,6 @@ class RegistrationListener implements EventSubscriberInterface
 
         // Add some roles to the user
         $user->setUsedRoles();
-    }
-
-    /**
-     * @param FilterUserResponseEvent $responseEvent
-     */
-    public function onRegistrationCompleted(FilterUserResponseEvent $responseEvent)
-    {
-        // not use yet
     }
 
     /**

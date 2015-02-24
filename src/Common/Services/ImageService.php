@@ -215,7 +215,7 @@ class ImageService
 
     /**
      * @param $src
-     * @return null|mime-type
+     * @return mimetype
      */
     private function getImageMimeType($src)
     {
@@ -236,13 +236,10 @@ class ImageService
                 return '';
             case "image/gif":
                 return imagecreatefromgif($path);
-                break;
             case "image/jpeg":
                 return imagecreatefromjpeg($path);
-                break;
             case "image/png":
                 return imagecreatefrompng($path);
-                break;
         }
     }
 
