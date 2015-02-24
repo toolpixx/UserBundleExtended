@@ -233,11 +233,10 @@ class SubUserController extends BaseController
                 }
             } catch (AccessDeniedException $e) {
                 $this->get('session')->getFlashBag()->add('error', 'subuser.flash.remove.error');
-                return $this->redirectSubUser();
             }
-        } else {
-            return $this->redirectSubUser();
         }
+
+        return $this->redirectSubUser();
     }
 
     /**
