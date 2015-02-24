@@ -125,10 +125,10 @@ class SubUserController extends BaseController
      * Edit subuser
      *
      * @param  Request $request
-     * @param  $id
+     * @param  $userId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $userId)
     {
         // Has user granted role?
         $this->hasGranted(
@@ -139,7 +139,7 @@ class SubUserController extends BaseController
         );
 
         // Find the user to edit
-        $user = $this->findUser($id);
+        $user = $this->findUser($userId);
 
         // Add Data and the request to the form
         $formFactory = $this->getFormFactory(self::FORM_FACTORY_PROFILE);
@@ -193,7 +193,7 @@ class SubUserController extends BaseController
         return $this->render(
             'UserBundle:Profile:edit.html.twig',
             array(
-                'id' => $id,
+                'id' => $userId,
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_edit',
                 'profilePicturePath' => $user->getProfilePicturePath()
@@ -208,7 +208,7 @@ class SubUserController extends BaseController
      * @param  $id
      * @return RedirectResponse
      */
-    public function removeAction(Request $request, $id)
+    public function removeAction(Request $request, $userId)
     {
         // Has user granted role?
         $this->hasGranted(
@@ -222,7 +222,7 @@ class SubUserController extends BaseController
             try {
                 $em = $this->getDoctrine()->getManager();
                 // Find the user to delete
-                $user = $this->findUser($id);
+                $user = $this->findUser($userId);
 
                 if (null !== $user && is_object($user)) {
                     $em->remove($user);
@@ -287,7 +287,7 @@ class SubUserController extends BaseController
      * @param  $id
      * @return \FOS\UserBundle\Model\UserInterface
      */
-    private function findUser($id)
+    private function findUser($userId)
     {
         // Get the userManager
         $userManager = $this->getUserManager();
@@ -295,13 +295,13 @@ class SubUserController extends BaseController
         // If user is admin
         if ($this->hasRole('ROLE_ADMIN')) {
             return $userManager->findUserBy(
-                array('id' => (integer)$id)
+                array('id' => (integer)$userId)
             );
         } else {
             // If user is customer
             return $userManager->findUserBy(
                 array(
-                    'id' => (integer)$id,
+                    'id' => (integer)$userId,
                     'parentId' => (integer)$this->getParentId()
                 )
             );
@@ -324,7 +324,7 @@ class SubUserController extends BaseController
      * @param  null $formFactory
      * @return null|object
      */
-    private function getFormFactory($formFactory = null)
+    private function getFormFactory($formFactory = '')
     {
         return (null !== $formFactory) ? $this->get($formFactory) : null;
     }
@@ -335,7 +335,7 @@ class SubUserController extends BaseController
      * @param  null $message
      * @return RedirectResponse
      */
-    private function redirectSubUser($message = null)
+    private function redirectSubUser($message = '')
     {
         if (null !== $message && !$this->get('session')->getFlashBag()->has('error')) {
             $this->get('session')->getFlashBag()->add('notice', (string)$message);
