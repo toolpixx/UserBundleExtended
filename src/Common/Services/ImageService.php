@@ -196,7 +196,7 @@ class ImageService
 
                 // If picture was resampled save
                 if ($result) {
-                    $result = $this->getImageResult($this->getImagePath(), $type, $destination);
+                    $this->getImageResult($this->getImagePath(), $type, $destination);
                 } else {
                     throw new Exception('Failed to crop the image file');
                 }
