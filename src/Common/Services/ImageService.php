@@ -168,6 +168,7 @@ class ImageService
                 // Get the image-type
                 $type = $this->getImageMimeType($this->getImagePath());
 
+                // Get image source
                 $source = $this->getImageSource($this->getImagePath(), $type);
 
                 // Check if pictures can read
@@ -222,6 +223,11 @@ class ImageService
         return ($imageInfo['mime']) ? $imageInfo['mime'] : '';
     }
 
+    /**
+     * @param $path
+     * @param $type
+     * @return resource
+     */
     private function getImageSource($path, $type) {
 
         // Read the picture
@@ -239,6 +245,11 @@ class ImageService
         return $source;
     }
 
+    /**
+     * @param $path
+     * @param $type
+     * @param $destination
+     */
     private function getImageResult($path, $type, $destination) {
 
         $result = '';
@@ -257,6 +268,5 @@ class ImageService
         if (!$result) {
             throw new Exception('Failed to save the cropped image file');
         }
-        return $result;
     }
 }

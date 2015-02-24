@@ -113,17 +113,19 @@ class EnquiryController extends BaseController
         // If any attachment exists
         if ($enquiry->hasAttachment()) {
 
-            $message->attach(
-                \Swift_Attachment::fromPath(
-                    $enquiry->getAttachment()
-                )
-                    ->setFilename(
-                        $enquiry->getAttachment()->getClientOriginalName()
-                    )
-                    ->setContentType(
-                        $enquiry->getAttachment()->getClientMimeType()
-                    )
-            );
+            $attachment = $enquiry->getAttachment();
+
+            if (null !== $attachment) {
+                $message->attach(
+                    \Swift_Attachment::fromPath($attachment)
+                        ->setFilename(
+                            $attachment->getClientOriginalName()
+                        )
+                        ->setContentType(
+                            $attachment->getClientMimeType()
+                        )
+                );
+            }
         }
         return $this->get('mailer')->send($message);
     }

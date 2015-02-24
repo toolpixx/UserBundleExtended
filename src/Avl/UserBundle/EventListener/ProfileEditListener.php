@@ -95,7 +95,7 @@ class ProfileEditListener implements EventSubscriberInterface
                     )
                 );
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
         }
     }
