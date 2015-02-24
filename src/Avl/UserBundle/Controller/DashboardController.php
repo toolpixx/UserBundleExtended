@@ -88,7 +88,6 @@ class DashboardController extends BaseController
             }
 
         } catch (ContextErrorException $e) {
-            $this->get('logger')->error('Can not load: ' . $url);
             $this->get('logger')->error($e->getCode() . ' : ' . $e->getMessage());
         } finally {
             return $this->getCachedFeed();

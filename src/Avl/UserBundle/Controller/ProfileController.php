@@ -11,7 +11,6 @@ use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class ProfileController
@@ -25,20 +24,6 @@ class ProfileController extends BaseProfileController
      * \FOS\UserBundle\Form\Factory\FactoryInterface
      */
     const FORM_FACTORY_PROFILE = 'avl_user.profile.form.factory';
-
-
-    /**
-     * @var null
-     */
-    private $session;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
 
     /**
      * Overriding profile edit to add custom logic
@@ -97,9 +82,9 @@ class ProfileController extends BaseProfileController
                     $this->getUser()
                 );
 
-                $this->session->getFlashBag()->add('notice', 'notice.avatar.was.removed');
+                $this->get('session')->getFlashBag()->add('notice', 'notice.avatar.was.removed');
             } else {
-                $this->session->getFlashBag()->add('error', 'notice.cannot.remove.avatar');
+                $this->get('session')->getFlashBag()->add('error', 'notice.cannot.remove.avatar');
             }
         }
 

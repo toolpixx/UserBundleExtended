@@ -19,19 +19,6 @@ use FOS\UserBundle\Controller\ResettingController as BaseResettingController;
 class ResettingController extends BaseResettingController
 {
     /**
-     * @var null
-     */
-    private $session;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
-
-    /**
      * Overriding resetting to add custom logic.
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -41,7 +28,7 @@ class ResettingController extends BaseResettingController
         // Check if user is loggin. If yes they cannot
         // resetting passwort....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->session->getFlashBag()->add('notice', 'Please logout before resetting password.');
+            $this->get('session')->getFlashBag()->add('notice', 'Please logout before resetting password.');
 
             return new RedirectResponse(
                 $this->container->get('router')->generate(

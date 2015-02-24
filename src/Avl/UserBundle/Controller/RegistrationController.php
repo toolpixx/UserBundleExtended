@@ -7,7 +7,6 @@
  */
 namespace Avl\UserBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -20,19 +19,6 @@ use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationControll
 class RegistrationController extends BaseRegistrationController
 {
     /**
-     * @var null
-     */
-    private $session;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
-
-    /**
      * Overriding register to add custom logic.
      *
      * @param  Request $request
@@ -43,7 +29,7 @@ class RegistrationController extends BaseRegistrationController
         // Check if user is loggin. If yes they cannot
         // register accounts....
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->session->getFlashBag()->add('notice', 'Please logout before register.');
+            $this->get('session')->getFlashBag()->add('notice', 'Please logout before register.');
 
             return new RedirectResponse(
                 $this->container->get('router')->generate(

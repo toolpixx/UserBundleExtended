@@ -12,7 +12,6 @@ use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -40,19 +39,6 @@ class SubUserController extends BaseController
      * \FOS\UserBundle\Form\Factory\FactoryInterface
      */
     const FORM_FACTORY_REGISTRATION = 'fos_user.registration.form.factory';
-
-    /**
-     * @var Session
-     */
-    private $session;
-
-    /**
-     * Contructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
 
     /**
      * @param Request $request
@@ -114,7 +100,7 @@ class SubUserController extends BaseController
             // Insert the user
             $this->getUserManager()->updateUser($user);
 
-            $this->session->getFlashBag()->add('notice', 'subuser.flash.create.success');
+            $this->get('session')->getFlashBag()->add('notice', 'subuser.flash.create.success');
 
             return $this->redirect(
                 $this->generateUrl(
@@ -246,7 +232,7 @@ class SubUserController extends BaseController
                     throw new AccessDeniedException('This user does not have access to this section.');
                 }
             } catch (AccessDeniedException $e) {
-                $this->session->getFlashBag()->add('error', 'subuser.flash.remove.error');
+                $this->get('session')->getFlashBag()->add('error', 'subuser.flash.remove.error');
                 return $this->redirectSubUser();
             }
         } else {
@@ -351,8 +337,8 @@ class SubUserController extends BaseController
      */
     private function redirectSubUser($message = null)
     {
-        if (null !== $message && !$this->session->getFlashBag()->has('error')) {
-            $this->session->getFlashBag()->add('notice', (string)$message);
+        if (null !== $message && !$this->get('session')->getFlashBag()->has('error')) {
+            $this->get('session')->getFlashBag()->add('notice', (string)$message);
         }
         return $this->redirect(
             $this->generateUrl('avl_subuser')
@@ -398,7 +384,7 @@ class SubUserController extends BaseController
             }
             return true;
         } catch (Exception $e) {
-            $this->session->getFlashBag()->add('error', $e->getMessage());
+            $this->get('session')->getFlashBag()->add('error', $e->getMessage());
         }
         return false;
     }

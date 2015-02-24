@@ -18,7 +18,6 @@ use FOS\UserBundle\Controller\SecurityController as BaseSecurityController;
  */
 class SecurityController extends BaseSecurityController
 {
-
     /**
      * Overriding login to add custom logic.
      *

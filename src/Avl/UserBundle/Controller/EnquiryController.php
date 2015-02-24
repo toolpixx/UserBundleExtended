@@ -12,7 +12,6 @@ use Avl\UserBundle\Entity\User;
 use Avl\UserBundle\Form\Type\EnquiryType;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,19 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class EnquiryController extends BaseController
 {
-    /**
-     * @var null
-     */
-    private $session;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
-
     /**
      * View or send the contact formdata
      *
@@ -72,7 +58,7 @@ class EnquiryController extends BaseController
 
                 // If send mail was false
                 if (!$this->sendMail($enquiry)) {
-                    $this->session->getFlashBag()->add(
+                    $this->get('session')->getFlashBag()->add(
                         'warning',
                         'enquiry.flash.error'
                     );
@@ -81,7 +67,7 @@ class EnquiryController extends BaseController
                     // because we prevent user will
                     // repost the form data if they
                     // refresh the site.
-                    $this->session->getFlashBag()->add(
+                    $this->get('session')->getFlashBag()->add(
                         'notice',
                         'enquiry.flash.success'
                     );
