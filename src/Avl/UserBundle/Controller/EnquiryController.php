@@ -94,7 +94,7 @@ class EnquiryController extends BaseController
      * @param  Enquiry $enquiry
      * @return mixed
      */
-    private function sendMail(Enquiry $enquiry)
+    private function sendMail($enquiry)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject(sprintf($this->getEnquiryParameter('subject'), $enquiry->getSubject()))
