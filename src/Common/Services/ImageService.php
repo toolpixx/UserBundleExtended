@@ -166,35 +166,24 @@ class ImageService
             if (is_file($this->getImagePath())) {
 
                 // Get the image-type
-                $imageType = $this->getImageMimeType($this->getImagePath());
+                $type = $this->getImageMimeType($this->getImagePath());
 
-                // Read the picture
-                switch ($imageType) {
-                    case "image/gif":
-                        $src_img = imagecreatefromgif($this->getImagePath());
-                        break;
-                    case "image/jpeg":
-                        $src_img = imagecreatefromjpeg($this->getImagePath());
-                        break;
-                    case "image/png":
-                        $src_img = imagecreatefrompng($this->getImagePath());
-                        break;
-                }
+                $source = $this->getImageSource($this->getImagePath(), $type);
 
                 // Check if pictures can read
-                if (!isset($src_img)) {
+                if (!isset($source)) {
                     throw new Exception('Cannot read image.');
                 }
 
                 // Resample the picture
-                $dst_img = imagecreatetruecolor(
+                $destination = imagecreatetruecolor(
                     220,
                     220
                 );
 
                 $result = imagecopyresampled(
-                    $dst_img,
-                    $src_img,
+                    $destination,
+                    $source,
                     0,
                     0,
                     $this->imageCropX,
@@ -207,27 +196,14 @@ class ImageService
 
                 // If picture was resampled save
                 if ($result) {
-                    switch ($imageType) {
-                        case "image/gif":
-                            $result = imagegif($dst_img, $this->getImagePath());
-                            break;
-                        case "image/jpeg":
-                            $result = imagejpeg($dst_img, $this->getImagePath());
-                            break;
-                        case "image/png":
-                            $result = imagepng($dst_img, $this->getImagePath());
-                            break;
-                    }
-                    if (!$result) {
-                        throw new Exception('Failed to save the cropped image file');
-                    }
+                    $result = $this->getImageResult($this->getImagePath(), $type, $destination);
                 } else {
                     throw new Exception('Failed to crop the image file');
                 }
 
                 // Make clean
-                imagedestroy($src_img);
-                imagedestroy($dst_img);
+                imagedestroy($source);
+                imagedestroy($destination);
 
                 return true;
             }
@@ -245,5 +221,41 @@ class ImageService
 
         $imageInfo = getimagesize($src);
         return ($imageInfo['mime']) ? $imageInfo['mime'] : null;
+    }
+
+    private function getImageSource($path, $type) {
+
+        // Read the picture
+        switch ($type) {
+            case "image/gif":
+                $source = imagecreatefromgif($path);
+                break;
+            case "image/jpeg":
+                $source = imagecreatefromjpeg($path);
+                break;
+            case "image/png":
+                $source = imagecreatefrompng($path);
+                break;
+        }
+        return $source;
+    }
+
+    private function getImageResult($path, $type, $destination) {
+
+        switch ($type) {
+            case "image/gif":
+                $result = imagegif($destination, $path);
+                break;
+            case "image/jpeg":
+                $result = imagejpeg($destination, $path);
+                break;
+            case "image/png":
+                $result = imagepng($destination, $path);
+                break;
+        }
+        if (!$result) {
+            throw new Exception('Failed to save the cropped image file');
+        }
+        return $result;
     }
 }
