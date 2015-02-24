@@ -47,11 +47,11 @@ avl_subuser_new:
     defaults:  { _controller: UserBundle:SubUser:new }
 
 avl_subuser_edit:
-    path:      /cnsl/subuser/edit/{id}
+    path:      /cnsl/subuser/edit/{userId}
     defaults:  { _controller: UserBundle:SubUser:edit }
 
 avl_subuser_remove:
-    path:      /cnsl/subuser/remove/{id}
+    path:      /cnsl/subuser/remove/{userId}
     defaults:  { _controller: UserBundle:SubUser:remove }
     requirements:
         _method: DELETE

@@ -49,7 +49,7 @@
                 </td>
                 <td>{{ entity.email }}</td>
                 <td style="white-space: nowrap;">
-                    <form style="float:right" action="{{ path('avl_subuser_remove', {'id': entity.id}) }}" method="POST"
+                    <form style="float:right" action="{{ path('avl_subuser_remove', {'userId': entity.id}) }}" method="POST"
                           onsubmit="return confirm('{{ 'subuser.question.remove'|trans }}')">
                         <input type="hidden" name="_method" value="DELETE">
 
@@ -60,7 +60,7 @@
                         </div>
                     </form>
                     <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px"
-                       href="{{ path('avl_subuser_edit', { 'id': entity.id }) }}" title="{{ 'title.link.edit'|trans }}"
+                       href="{{ path('avl_subuser_edit', { 'userId': entity.id }) }}" title="{{ 'title.link.edit'|trans }}"
                        style="float:left">
                         <span class="glyphicon glyphicon-edit" style="top:2px"></span>
                     </a>

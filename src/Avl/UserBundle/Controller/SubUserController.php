@@ -193,7 +193,7 @@ class SubUserController extends BaseController
         return $this->render(
             'UserBundle:Profile:edit.html.twig',
             array(
-                'id' => $userId,
+                'userId' => $userId,
                 'form' => $form->createView(),
                 'path' => 'avl_subuser_edit',
                 'profilePicturePath' => $user->getProfilePicturePath()
@@ -383,7 +383,7 @@ class SubUserController extends BaseController
                 );
             }
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->get('session')->getFlashBag()->add('error', $e->getMessage());
         }
         return false;
