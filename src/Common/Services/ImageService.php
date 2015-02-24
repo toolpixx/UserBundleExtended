@@ -242,6 +242,8 @@ class ImageService
 
     private function getImageResult($path, $type, $destination) {
 
+        $result = '';
+
         switch ($type) {
             case "image/gif":
                 $result = imagegif($destination, $path);
