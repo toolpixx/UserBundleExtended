@@ -378,15 +378,7 @@ class SubUserController extends BaseController
                 $imageService->setImagePath($user->getProfilePictureAbsolutePath());
 
                 // crop the image
-                $imageService->cropImage(
-                    array(
-                        'cropY' => (int)$user->getImageCropY(),
-                        'cropX' => (int)$user->getImageCropX(),
-                        'cropHeight' => (int)$user->getImageCropHeight(),
-                        'cropWidth' => (int)$user->getImageCropWidth(),
-                        'cropImagePath' => (string)$user->getProfilePictureAbsolutePath()
-                    )
-                );
+                $imageService->cropImage();
             }
             return true;
         } catch (\Exception $e) {
