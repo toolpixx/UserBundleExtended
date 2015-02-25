@@ -74,17 +74,15 @@ class News
     /**
      * Constructor
      */
-    public function __construct(\Avl\UserBundle\Entity\User $user = null)
+    public function __construct(User $user = null)
     {
         $this->createdDate = new \DateTime();
         $this->enabledDate = new \DateTime();
-        $this->user = $user ?: new \Avl\UserBundle\Entity\User();
+        $this->user = $user ?: new User();
     }
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -92,8 +90,6 @@ class News
     }
 
     /**
-     * Get enabled
-     *
      * @return mixed
      */
     public function getEnabled()
@@ -102,9 +98,7 @@ class News
     }
 
     /**
-     * Set enabled
-     *
-     * @param $id
+     * @param $enabled
      */
     public function setEnabled($enabled)
     {
@@ -112,8 +106,6 @@ class News
     }
 
     /**
-     * Get internal
-     *
      * @return mixed
      */
     public function getInternal()
@@ -122,9 +114,7 @@ class News
     }
 
     /**
-     * Set internal
-     *
-     * @param $id
+     * @param $internal
      */
     public function setInternal($internal)
     {
@@ -132,22 +122,15 @@ class News
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return News
+     * @param $title
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
-     * Get title
-     *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -155,22 +138,15 @@ class News
     }
 
     /**
-     * Set body
-     *
      * @param string $body
-     * @return News
      */
     public function setBody($body)
     {
         $this->body = $body;
-
-        return $this;
     }
 
     /**
-     * Get body
-     *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -181,13 +157,10 @@ class News
      * Set createdDate
      *
      * @param \DateTime $createdDate
-     * @return News
      */
     public function setCreatedDate($createdDate)
     {
         $this->createdDate = $createdDate;
-
-        return $this;
     }
 
     /**
@@ -197,12 +170,10 @@ class News
      */
     public function getCreatedDate()
     {
-        return $this->createdDate; //->format('d.m.Y H:i:s');
+        return $this->createdDate;
     }
 
     /**
-     * Get createdDateFormatted
-     *
      * @return \DateTime
      */
     public function getCreatedDateFormatted()
@@ -211,32 +182,23 @@ class News
     }
 
     /**
-     * Set enabledDate
-     *
      * @param \DateTime $enabledDate
-     * @return News
      */
     public function setEnabledDate($enabledDate)
     {
         $this->enabledDate = $enabledDate;
-
-        return $this;
     }
 
     /**
-     * Get enabledDate
-     *
      * @return \DateTime
      */
     public function getEnabledDate()
     {
-        return $this->enabledDate; //->format('d.m.Y H:i:s');
+        return $this->enabledDate;
     }
 
     /**
-     * Get enabledDateFormatted
-     *
-     * @return \DateTime
+     * @return string
      */
     public function getEnabledDateFormatted()
     {
@@ -244,48 +206,18 @@ class News
     }
 
     /**
-     * Set userid
-     *
-     * @param integer $userid
-     * @return News
+     * @param integer $user
      */
     public function setUser($user)
     {
         $this->user = $user;
-
-        return $this;
     }
 
     /**
-     * Get userid
-     *
-     * @return integer 
+     * @return integer
      */
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Add userid
-     *
-     * @param \Avl\UserBundle\Entity\User $userid
-     * @return News
-     */
-    public function addUserid(\Avl\UserBundle\Entity\User $userid)
-    {
-        $this->userid[] = $userid;
-
-        return $this;
-    }
-
-    /**
-     * Remove userid
-     *
-     * @param \Avl\UserBundle\Entity\User $userid
-     */
-    public function removeUserid(\Avl\UserBundle\Entity\User $userid)
-    {
-        $this->userid->removeElement($userid);
     }
 }

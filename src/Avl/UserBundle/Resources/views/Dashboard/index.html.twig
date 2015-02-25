@@ -18,10 +18,27 @@
             <small>(Output generate with Twig-Dump)</small>
             {# dump(user) #}
         </div>
+        {% if news is not null %}
+            <br>
+            <h1 class="title">MT_CNSL News</h1>
+            <hr>
+            {% if news|length > 0 %}
+                {% for entity in news %}
+                    <div class="well">
+                        <h3>{{ entity.title }}</h3>
+                        {{ entity.body|nl2br }}
+                        <br><br>
+                        <small>
+                            Von <strong>{{ entity.user.username }}</strong> am <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                        </small>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
         {% if entities is not null %}
             <h1>Subuser-Management</h1>
             <hr>
-            <br>
             {% include "UserBundle:SubUser:entities.html.twig" %}
             {{ knp_pagination_render(entities) }}
         {% endif %}
@@ -29,8 +46,6 @@
     <div class="col-md-4">
         <h1 class="title">Symfony News</h1>
         <hr>
-        <br>
-
         <div style="overflow:auto">
             {% if symfonyRss %}
                 {% for item in symfonyRss.channel.item %}

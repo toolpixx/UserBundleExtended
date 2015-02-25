@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-md-12">
         <form action="{% if currentRouteName == 'avl_news_edit' %}{{ path('avl_news_edit', {'newsId': entity.id}) }}{% else %}{{ path('avl_news_create') }}{% endif %}" {{ form_enctype(form) }} method="POST">
-            {{ form_widget(form) }}
+            <div style="padding: 19px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
+                {{ form_widget(form) }}
+            </div>
             <div style="clear:both;text-align: center;">
                 <hr>
                 <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}"/>

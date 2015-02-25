@@ -11,14 +11,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * News controller.
- *
  */
 class NewsController extends BaseController
 {
-
     /**
-     * Lists all News entities.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
@@ -46,8 +44,6 @@ class NewsController extends BaseController
     }
 
     /**
-     * Creates a new News entity.
-     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -75,29 +71,30 @@ class NewsController extends BaseController
     }
 
     /**
-     * Finds and displays a News entity.
-     *
+     * @param $newsId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($newsId)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('UserBundle:News')->find($newsId);
+        $entity = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:News')
+            ->find($newsId);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find News entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($newsId);
-
         return $this->render('UserBundle:News:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing News entity.
+     * @param Request $request
+     * @param $newsId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, $newsId)
     {
@@ -126,8 +123,9 @@ class NewsController extends BaseController
     }
 
     /**
-     * Deletes a News entity.
-     *
+     * @param Request $request
+     * @param $newsId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, $newsId)
     {

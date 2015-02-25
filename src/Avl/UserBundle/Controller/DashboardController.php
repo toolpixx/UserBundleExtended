@@ -49,11 +49,23 @@ class DashboardController extends BaseController
             $pagination = null;
         }
 
+        $news = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:News')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('createdDate' => 'DESC')
+            );
+
         return $this->render(
             'UserBundle:Dashboard:index.html.twig',
             array(
                 'user' => $this->getUser(),
                 'entities' => $pagination,
+                'news' => $news,
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
