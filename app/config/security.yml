@@ -37,4 +37,4 @@ security:
         - { path: ^/(cnsl/event.*)$, role: ROLE_CUSTOMER_EVENT_MANAGER }
         - { path: ^/(cnsl/comment.*)$, role: ROLE_CUSTOMER_COMMENT_MANAGER }
         - { path: ^/(cnsl/dashboard|cnsl/subuser.*|cnsl/content.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_SUBUSER_MANAGER] }
-        - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/news.*)/, role: ROLE_ADMIN }
+        - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/news.*)$, role: ROLE_ADMIN }
