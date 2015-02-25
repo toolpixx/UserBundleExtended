@@ -93,7 +93,7 @@ class Enquiry
     /**
      * The attachment for the email
      *
-     * @var string
+     * @var UploadedFile
      *
      * @Assert\File(
      *  maxSize = "2M",
