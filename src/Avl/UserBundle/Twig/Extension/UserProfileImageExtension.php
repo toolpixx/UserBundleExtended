@@ -48,7 +48,7 @@ class UserProfileImageExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'getUserProfileImage' => new \Twig_Function_Method($this, 'getUserProfileImage')
+            new \Twig_SimpleFunction('getUserProfileImage', array($this, 'getUserProfileImage'))
         );
     }
 
