@@ -74,7 +74,7 @@ class ProfileEditListener implements EventSubscriberInterface
      */
     public function onProfileEditSuccess(FormEvent $event)
     {
-        $user = $event->getForm('user')->getData();
+        $user = $event->getForm()->getData();
 
         // Use the Crop-Service
         try {
