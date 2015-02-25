@@ -183,7 +183,7 @@ class Enquiry
     /**
      * @param $attachment
      */
-    public function setAttachment($attachment)
+    public function setAttachment(UploadedFile $attachment)
     {
         $this->attachment = $attachment;
     }
