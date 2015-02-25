@@ -153,14 +153,8 @@ class ImageService
      * @param  $vars
      * @return bool
      */
-    public function cropImage($vars)
+    public function cropImage()
     {
-        $this->setImageCropY($vars['cropY']);
-        $this->setImageCropX($vars['cropX']);
-        $this->setImageCropHeight($vars['cropHeight']);
-        $this->setImageCropWidth($vars['cropWidth']);
-        $this->setImagePath($vars['cropImagePath']);
-
         try {
 
             if (is_file($this->getImagePath())) {

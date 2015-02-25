@@ -84,16 +84,14 @@ class ProfileEditListener implements EventSubscriberInterface
                 // Get the cropimage-service
                 $imageService = $this->container->get('image_service');
 
+                $this->setImageCropY($user->getImageCropY());
+                $this->setImageCropX($user->getImageCropX());
+                $this->setImageCropHeight($user->getImageCropHeight());
+                $this->setImageCropWidth($user->getImageCropWidth());
+                $this->setImagePath($user->getProfilePictureFile()->getPathname());
+
                 // crop the image
-                $imageService->cropImage(
-                    array(
-                        'cropY' => (int)$user->getImageCropY(),
-                        'cropX' => (int)$user->getImageCropX(),
-                        'cropHeight' => (int)$user->getImageCropHeight(),
-                        'cropWidth' => (int)$user->getImageCropWidth(),
-                        'cropImagePath' => (string)$user->getProfilePictureFile()->getPathname()
-                    )
-                );
+                $imageService->cropImage();
             }
         } catch (\Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
