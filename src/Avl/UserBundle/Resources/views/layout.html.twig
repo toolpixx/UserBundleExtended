@@ -38,7 +38,7 @@
                                 <li>
                                     <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"
                                        {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"
+                                        <span class="glyphicon glyphicon-dashboard" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'link.dashboard'|trans }}
                                     </a>
@@ -86,7 +86,7 @@
                                 <li>
                                     <a role="presentation" href="{{ path('avl_user_dashboard_show') }}"
                                        {% if currentRouteName == 'avl_user_dashboard_show' %}style="color:#167ac6 !important;"{% endif %}>
-                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"
+                                        <span class="glyphicon glyphicon-dashboard" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'link.dashboard'|trans }}
                                     </a>
@@ -96,6 +96,13 @@
                                         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'title.subuser'|trans }}
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="presentation" href="{{ path('avl_news') }}">
+                                        <span class="glyphicon glyphicon-paperclip" aria-hidden="true"
+                                              style="top:2px"></span>
+                                        {{ 'Newsverwaltung'|trans }}
                                     </a>
                                 </li>
                                 <li>

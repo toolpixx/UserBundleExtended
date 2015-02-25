@@ -94,6 +94,12 @@ class User extends BaseUser implements AdvancedUserInterface
     use UserTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="User")
+     * @ORM\JoinColumn(name="newsid", referencedColumnName="id")
+     */
+    protected $news;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -230,5 +236,51 @@ class User extends BaseUser implements AdvancedUserInterface
     public function getCreatedDateFormatted()
     {
         return $this->createdDate->format('d.m.Y H:i:s');
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set news
+     *
+     * @param \Avl\UserBundle\Entity\News $news
+     * @return User
+     */
+    public function setNews(\Avl\UserBundle\Entity\News $news = null)
+    {
+        $this->news = $news;
+
+        return $this;
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Avl\UserBundle\Entity\News 
+     */
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    /**
+     * Set profilePicturePath
+     *
+     * @param string $profilePicturePath
+     * @return User
+     */
+    public function setProfilePicturePath($profilePicturePath)
+    {
+        $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
     }
 }

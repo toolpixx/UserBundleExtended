@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="{% if currentRouteName == 'avl_news_edit' %}{{ path('avl_news_edit', {'newsId': entity.id}) }}{% else %}{{ path('avl_news_create') }}{% endif %}" {{ form_enctype(form) }} method="POST">
+            {{ form_widget(form) }}
+            <div style="clear:both;text-align: center;">
+                <hr>
+                <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}"/>
+                <a class="btn btn-info" href="{{ path('avl_news') }}" role="button">{{ 'button.back'|trans }}</a>
+            </div>
+    </div>
+</div>

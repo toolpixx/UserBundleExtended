@@ -444,6 +444,90 @@
                 <source>notice.no.subuser</source>
                 <target>Es sind keine Benutzer vorhanden.</target>
             </trans-unit>
+
+
+            <!-- news -->
+            <trans-unit id="title.news">
+                <source>title.news</source>
+                <target>Newsverwaltung</target>
+            </trans-unit>
+            <trans-unit id="title.news.create">
+                <source>title.news.create</source>
+                <target> / News anlegen</target>
+            </trans-unit>
+            <trans-unit id="title.news.edit">
+                <source>title.news.edit</source>
+                <target> / News bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="link.news.create">
+                <source>link.news.create</source>
+                <target>News anlegen</target>
+            </trans-unit>
+
+            <trans-unit id="title.news.link.remove">
+                <source>title.news.link.remove</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="title.news.link.edit">
+                <source>title.news.link.edit</source>
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.link.internal">
+                <source>title.link.internal</source>
+                <target>Interne News</target>
+            </trans-unit>
+            <trans-unit id="title.link.external">
+                <source>title.link.external</source>
+                <target>Externe News</target>
+            </trans-unit>
+            <trans-unit id="title.link.disabled">
+                <source>title.link.disabled</source>
+                <target>News nicht Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="title.link.enabled">
+                <source>title.link.enabled</source>
+                <target>News Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.title">
+                <source>label.title</source>
+                <target>Titel / Überschrift</target>
+            </trans-unit>
+            <trans-unit id="label.content">
+                <source>label.content</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="label.enabledDate">
+                <source>label.enabledDate</source>
+                <target>Veröffentlichen ab dem</target>
+            </trans-unit>
+            <trans-unit id="label.news.enabled">
+                <source>label.news.enabled</source>
+                <target>Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.internal">
+                <source>label.internal</source>
+                <target>Interne News</target>
+            </trans-unit>
+            <trans-unit id="news.flash.create.success">
+                <source>news.flash.create.success</source>
+                <target>Die News wurde angelegt.</target>
+            </trans-unit>
+            <trans-unit id="news.flash.edit.success">
+                <source>news.flash.edit.success</source>
+                <target>Die News wurde bearbeitet.</target>
+            </trans-unit>
+            <trans-unit id="news.flash.remove.success">
+                <source>news.flash.remove.success</source>
+                <target>Die News wurde gelöscht.</target>
+            </trans-unit>
+            <trans-unit id="news.flash.remove.error">
+                <source>news.flash.remove.error</source>
+                <target>Die News konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="news.question.remove">
+                <source>news.question.remove</source>
+                <target>Möchten Sie die News wirklich löschen?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

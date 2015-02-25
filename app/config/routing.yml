@@ -79,3 +79,25 @@ avl_faq_enquiry:
 ###
 # All for admin
 ##
+avl_news:
+    path:     /cnsl/news
+    defaults: { _controller: "UserBundle:News:index" }
+
+avl_news_show:
+    path:     /cnsl/news/{newsId}/show
+    defaults: { _controller: "UserBundle:News:show" }
+
+avl_news_create:
+    path:     /cnsl/news/create
+    defaults: { _controller: "UserBundle:News:create" }
+    requirements: { _method: post|get }
+
+avl_news_edit:
+    path:     /cnsl/news/{newsId}/edit
+    defaults: { _controller: "UserBundle:News:edit" }
+    requirements: { _method: post|get }
+
+avl_news_delete:
+    path:     /cnsl/news/{newsId}/delete
+    defaults: { _controller: "UserBundle:News:delete" }
+    requirements: { _method: post|delete }

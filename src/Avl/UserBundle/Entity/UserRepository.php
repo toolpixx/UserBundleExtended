@@ -54,7 +54,7 @@ class UserRepository extends EntityRepository
             )
             ->setParameter('userId', $userId)
             ->setParameter('parentId', $parentId)
-            ->setParameter('query', '%' . $query . '%');
+            ->setParameter('query', '%'.$query.'%');
     }
 
     /**
@@ -95,6 +95,6 @@ class UserRepository extends EntityRepository
             '
             )
             ->setParameter('userId', $userId)
-            ->setParameter('query', '%' . $query . '%');
+            ->setParameter('query', '%'.$query.'%');
     }
 }

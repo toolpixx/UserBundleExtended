@@ -1,0 +1,30 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ 'title.news'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        {% if currentRouteName == 'avl_news_edit' %}
+            <h1>
+                {{ 'title.news'|trans }}
+                <small>{{ 'title.news.edit'|trans }}</small>
+            </h1>
+        {% else %}
+            <h1>
+                {{ 'title.news'|trans }}
+                <small>{{ 'title.news.create'|trans }}</small>
+            </h1>
+        {% endif %}
+        <hr>
+        <div class="tabbable tabs-left">
+            {% include 'UserBundle:Tabs:news.html.twig' %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    {% include "UserBundle:News:edit_content.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
