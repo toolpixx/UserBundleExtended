@@ -62,17 +62,9 @@ class ProfileController extends BaseProfileController
      */
     public function removePictureAction(Request $request)
     {
-        // Method DELETE?
         if ($request->getMethod() == 'DELETE') {
-
-            // Can i delete the picture?
             if ($this->getUser()->removeProfilePictureFile()) {
-
-                // Update user profile
-                $this->get('fos_user.user_manager')->updateUser(
-                    $this->getUser()
-                );
-
+                $this->get('fos_user.user_manager')->updateUser($this->getUser());
                 $this->get('session')->getFlashBag()->add('notice', 'notice.avatar.was.removed');
             } else {
                 $this->get('session')->getFlashBag()->add('error', 'notice.cannot.remove.avatar');
