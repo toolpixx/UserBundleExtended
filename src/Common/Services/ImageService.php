@@ -155,48 +155,46 @@ class ImageService
      */
     public function cropImage()
     {
-        try {
-            if (is_file($this->getImagePath())) {
-                // Get the image-type
-                $type = $this->getImageMimeType($this->getImagePath());
 
-                // Get image source
-                $source = $this->getImageSource($this->getImagePath(), $type);
+        if (is_file($this->getImagePath())) {
+            // Get the image-type
+            $type = $this->getImageMimeType($this->getImagePath());
 
-                // Check if pictures can read
-                if (!isset($source)) {
-                    throw new Exception('Cannot read image.');
-                }
+            // Get image source
+            $source = $this->getImageSource($this->getImagePath(), $type);
 
-                // Resample the picture
-                $destination = imagecreatetruecolor(220, 220);
-
-                $result = imagecopyresampled(
-                    $destination,
-                    $source,
-                    0,
-                    0,
-                    $this->imageCropX,
-                    $this->imageCropY,
-                    220,
-                    220,
-                    $this->imageCropWidth,
-                    $this->imageCropHeight
-                );
-
-                // If picture was resampled save
-                if (!$result) {
-                    throw new Exception('Failed to crop the image file');
-                }
-
-                $this->getImageResult($this->getImagePath(), $type, $destination);
-
-                imagedestroy($source);
-                imagedestroy($destination);
-
-                return true;
+            // Check if pictures can read
+            if (!isset($source)) {
+                throw new Exception('Cannot read image.');
             }
-        } catch (Exception $e) {
+
+            // Resample the picture
+            $destination = imagecreatetruecolor(220, 220);
+
+            $result = imagecopyresampled(
+                $destination,
+                $source,
+                0,
+                0,
+                $this->imageCropX,
+                $this->imageCropY,
+                220,
+                220,
+                $this->imageCropWidth,
+                $this->imageCropHeight
+            );
+
+            // If picture was resampled save
+            if (!$result) {
+                throw new Exception('Failed to crop the image file');
+            }
+
+            $this->getImageResult($this->getImagePath(), $type, $destination);
+
+            imagedestroy($source);
+            imagedestroy($destination);
+
+            return true;
         }
         return false;
     }
