@@ -52,7 +52,7 @@ class NewsController extends BaseController
     public function createAction(Request $request)
     {
         $session = new Session();
-        $entity = new News($this->getUser(), new NewsCategorys());
+        $entity = new News($this->getUser());
 
         $form = $form = $this->createForm(new NewsType(), $entity);
         $form->handleRequest($request);
