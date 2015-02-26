@@ -32,13 +32,9 @@ class EnquiryController extends BaseController
     {
         $enquiry = new Enquiry($this->getUser());
         $form = $this->createForm(new EnquiryType(), $enquiry);
-
-        // If form was send with POST
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
-            // Formfields valid and email send?
             if ($form->isValid() && $this->sendMail($enquiry)) {
-
                 $this->get('session')->getFlashBag()->add('notice', 'enquiry.flash.success');
                 return $this->redirect($this->generateUrl('avl_faq_enquiry'));
             } else {
@@ -46,7 +42,6 @@ class EnquiryController extends BaseController
             }
         }
 
-        // Render form
         return $this->render(
             'UserBundle:Enquiry:index.html.twig',
             array(
