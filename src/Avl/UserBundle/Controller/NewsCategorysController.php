@@ -2,19 +2,17 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Avl\UserBundle\Entity\News;
-use Avl\UserBundle\Entity\NewsGroups;
-use Avl\UserBundle\Form\Type\NewsType;
+use Avl\UserBundle\Entity\NewsCategorys;
+use Avl\UserBundle\Form\Type\NewsCategorysType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * News controller.
  */
-class NewsController extends BaseController
+class NewsCategorysController extends BaseController
 {
     /**
      * @param Request $request
@@ -27,8 +25,8 @@ class NewsController extends BaseController
 
         $query = $this->getDoctrine()
             ->getManager()
-            ->getRepository('UserBundle:News')
-            ->findAllNewsByQuery(
+            ->getRepository('UserBundle:NewsCategorys')
+            ->findAllNewsCategorysByQuery(
                 $form->getData()
             );
 
@@ -39,7 +37,7 @@ class NewsController extends BaseController
                 5
             );
 
-        return $this->render('UserBundle:News:list.news.html.twig', array(
+        return $this->render('UserBundle:News:list.categorys.html.twig', array(
             'entities' => $entities,
             'form' => $form->createView()
         ));
@@ -52,9 +50,9 @@ class NewsController extends BaseController
     public function createAction(Request $request)
     {
         $session = new Session();
-        $entity = new News($this->getUser(), new NewsGroups());
+        $entity = new NewsCategorys();
 
-        $form = $form = $this->createForm(new NewsType(), $entity);
+        $form = $form = $this->createForm(new NewsCategorysType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -62,63 +60,63 @@ class NewsController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.flash.create.success');
-            return $this->redirect($this->generateUrl('avl_news', array('newsId' => $entity->getId())));
+            $session->getFlashBag()->add('notice', 'news.categorys.flash.create.success');
+            return $this->redirect($this->generateUrl('avl_news_categorys', array('groupId' => $entity->getId())));
         }
 
-        return $this->render('UserBundle:News:edit.news.html.twig', array(
+        return $this->render('UserBundle:News:edit.categorys.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * @param $newsId
+     * @param $groupId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($newsId)
+    public function showAction($groupId)
     {
         $entity = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('UserBundle:News')
+            ->getRepository('UserBundle:NewsCategorys')
             ->find($newsId);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
         }
 
-        return $this->render('UserBundle:News:show.news.html.twig', array(
-            'entity' => $entity,
+        return $this->render('UserBundle:News:show.categorys.html.twig', array(
+            'entity'      => $entity,
         ));
     }
 
     /**
      * @param Request $request
-     * @param $newsId
+     * @param $groupId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $newsId)
+    public function editAction(Request $request, $groupId)
     {
         $session = new Session();
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('UserBundle:News')->find($newsId);
+        $entity = $em->getRepository('UserBundle:NewsCategorys')->find($groupId);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
         }
 
-        $form = $this->createForm(new NewsType(), $entity);
+        $form = $this->createForm(new NewsCategorysType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.flash.edit.success');
-            return $this->redirect($this->generateUrl('avl_news', array('newsId' => $newsId)));
+            $session->getFlashBag()->add('notice', 'news.categorys.flash.edit.success');
+            return $this->redirect($this->generateUrl('avl_news_categorys', array('groupId' => $groupId)));
         }
 
-        return $this->render('UserBundle:News:edit.news.html.twig', array(
+        return $this->render('UserBundle:News:edit.categorys.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView()
         ));
@@ -126,26 +124,26 @@ class NewsController extends BaseController
 
     /**
      * @param Request $request
-     * @param $newsId
+     * @param $groupId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, $newsId)
+    public function deleteAction(Request $request, $groupId)
     {
         $session = new Session();
 
         if ($request->getMethod() == 'DELETE') {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UserBundle:News')->find($newsId);
+            $entity = $em->getRepository('UserBundle:NewsCategorys')->find($groupId);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find News entity.');
+                throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
             }
 
             $em->remove($entity);
             $em->flush();
-            $session->getFlashBag()->add('notice', 'news.flash.remove.success');
+            $session->getFlashBag()->add('notice', 'news.categorys.flash.remove.success');
         }
 
-        return $this->redirect($this->generateUrl('avl_news'));
+        return $this->redirect($this->generateUrl('avl_news_categorys'));
     }
 }

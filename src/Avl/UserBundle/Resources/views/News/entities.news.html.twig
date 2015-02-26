@@ -28,6 +28,10 @@
                     {% endif %}
                 </td>
                 <td valign="middle">
+                    {% if not entity.category is null %}
+                        <strong>{{ entity.category.name }}</strong>
+                        <br>
+                    {% endif %}
                     {{ entity.title }}
                 </td>
                 <td valign="middle">

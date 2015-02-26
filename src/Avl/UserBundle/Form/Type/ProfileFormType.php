@@ -12,7 +12,8 @@ use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 use Symfony\Component\Locale as Locale;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use /** @noinspection PhpDeprecationInspection */
+    Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ProfileFormType

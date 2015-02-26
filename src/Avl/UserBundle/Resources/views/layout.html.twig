@@ -92,18 +92,36 @@
                                     </a>
                                 </li>
                                 <li role="presentation">
-                                    <a role="presentation" href="{{ path('avl_subuser') }}">
+                                    <a role="presentation" href="{{ path('avl_subuser') }}"
+                                       {% if currentRouteName == 'avl_subuser' %}style="color:#167ac6 !important;"{% endif %}>
                                         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'title.subuser'|trans }}
                                     </a>
                                 </li>
                                 <li role="presentation">
-                                    <a role="presentation" href="{{ path('avl_news') }}">
+                                    <a role="presentation" href="{{ path('avl_news') }}" id="dropdownMenu2" data-toggle="dropdown"
+                                       {% if currentRouteName == 'avl_news' or currentRouteName == 'avl_news_categorys' %}style="color:#167ac6 !important;"{% endif %}">
                                         <span class="glyphicon glyphicon-paperclip" aria-hidden="true"
                                               style="top:2px"></span>
-                                        {{ 'Newsverwaltung'|trans }}
+                                        {{ 'title.news'|trans }}
                                     </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                        <li role="presentation">
+                                            <a role="presentation" href="{{ path('avl_news') }}">
+                                            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                                {{ 'link.news.posts'|trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a role="menuitem" href="{{ path('avl_news_categorys') }}">
+                                            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                                {{ 'link.news.categorys'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">

@@ -23,7 +23,7 @@
                     <br>
 
                     <div class="{% if entities|length > 0 %}{% endif %}">
-                        {% include "UserBundle:News:entities.html.twig" %}
+                        {% include "UserBundle:News:entities.news.html.twig" %}
                     </div>
                     {{ knp_pagination_render(entities) }}
                 </div>
@@ -35,9 +35,9 @@
     {{ parent() }}
     {% if entities|length == 0 %}
         {% if form.vars.value.query is not null %}
-            {% set infoNotice = 'notice.no.search.results' %}
+            {% set infoNotice = 'news.flash.no.results' %}
         {% else %}
-            {% set infoNotice = 'notice.no.subuser' %}
+            {% set infoNotice = 'news.flash.no.news' %}
         {% endif %}
         <script>
             $(document).ready(function () {

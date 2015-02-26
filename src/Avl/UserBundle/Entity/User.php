@@ -94,12 +94,6 @@ class User extends BaseUser implements AdvancedUserInterface
     use UserTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="User")
-     * @ORM\JoinColumn(name="newsid", referencedColumnName="id")
-     */
-    protected $news;
-
-    /**
      * Constructor
      */
     public function __construct()

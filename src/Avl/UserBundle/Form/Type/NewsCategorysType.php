@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use /** @noinspection PhpDeprecationInspection */
     Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class NewsType extends AbstractType
+class NewsCategorysType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,34 +16,17 @@ class NewsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array(
-                'label' => 'label.title',
+            ->add('name', 'text', array(
+                'label' => 'label.news.categorys.name',
                 'required' => true
-            ))
-            ->add('body', 'textarea', array(
-                'label' => 'label.content',
-                'attr' => array(
-                    'rows' => '10'
-                ),
-                'required' => true
-            ))
-            ->add('category', 'entity', array(
-                'class' => 'UserBundle:NewsCategorys',
-                'label' => 'label.category',
-                'empty_value' => 'form.select.categorys.please.select',
-                'property' => 'name',
-                'required' => false
             ))
             ->add('enabled', 'checkbox', array(
-                'label' => 'label.news.enabled',
+                'label' => 'label.news.categorys.enabled',
                 'required' => false
             ))
             ->add('internal', 'checkbox', array(
-                'label' => 'label.internal',
+                'label' => 'label.news.categorys.internal',
                 'required' => false
-            ))
-            ->add('enabledDate', 'datetime', array(
-                'label' => 'label.enabledDate'
             ))
         ;
     }
@@ -54,7 +37,7 @@ class NewsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Avl\UserBundle\Entity\News'
+            'data_class' => 'Avl\UserBundle\Entity\NewsCategorys'
         ));
     }
 
@@ -63,6 +46,6 @@ class NewsType extends AbstractType
      */
     public function getName()
     {
-        return 'avl_news';
+        return 'avl_news_categorys';
     }
 }

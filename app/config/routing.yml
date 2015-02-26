@@ -77,7 +77,33 @@ avl_faq_enquiry:
         _method:  GET|POST
 
 ###
-# All for admin
+# NewsCategorysManagement
+##
+avl_news_categorys:
+    path:     /cnsl/newscategorys
+    defaults: { _controller: "UserBundle:NewsCategorys:index" }
+
+avl_news_categorys_show:
+    path:     /cnsl/newsgroups/{groupId}/show
+    defaults: { _controller: "UserBundle:NewsCategorys:show" }
+
+avl_news_categorys_create:
+    path:     /cnsl/newscategorys/create
+    defaults: { _controller: "UserBundle:NewsCategorys:create" }
+    requirements: { _method: post|get }
+
+avl_news_categorys_edit:
+    path:     /cnsl/newscategorys/{groupId}/edit
+    defaults: { _controller: "UserBundle:NewsCategorys:edit" }
+    requirements: { _method: post|get }
+
+avl_news_categorys_delete:
+    path:     /cnsl/newscategorys/{groupId}/delete
+    defaults: { _controller: "UserBundle:NewsCategorys:delete" }
+    requirements: { _method: post|delete }
+
+###
+# NewsManagement
 ##
 avl_news:
     path:     /cnsl/news

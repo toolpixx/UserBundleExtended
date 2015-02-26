@@ -2,6 +2,8 @@
 
 namespace Avl\UserBundle\Entity;
 
+use Avl\UserBundle\Entity\NewsGroups;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -72,6 +74,12 @@ class News
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="NewsCategorys", inversedBy="news", cascade={"persist"})
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     */
+    private $category;
+
+    /**
      * Constructor
      */
     public function __construct(User $user = null)
@@ -79,6 +87,7 @@ class News
         $this->createdDate = new \DateTime();
         $this->enabledDate = new \DateTime();
         $this->user = $user ?: new User();
+        $this->category = $category ?: new NewsCategorys();
     }
 
     /**
@@ -219,5 +228,21 @@ class News
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param integer $group
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
