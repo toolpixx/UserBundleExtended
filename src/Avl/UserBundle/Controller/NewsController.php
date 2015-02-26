@@ -3,13 +3,11 @@
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Entity\News;
-use Avl\UserBundle\Entity\NewsCategorys;
 use Avl\UserBundle\Form\Type\NewsType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * News controller.

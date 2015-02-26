@@ -10,7 +10,6 @@ namespace Avl\UserBundle\Controller;
 use Avl\UserBundle\Entity\Enquiry;
 use Avl\UserBundle\Entity\User;
 use Avl\UserBundle\Form\Type\EnquiryType;
-
 use Avl\UserBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,7 +42,7 @@ class EnquiryController extends BaseController
                 $this->get('session')->getFlashBag()->add('notice', 'enquiry.flash.success');
                 return $this->redirect($this->generateUrl('avl_faq_enquiry'));
             } else {
-                $this->get('session')->getFlashBag()->add('warning','enquiry.flash.error');
+                $this->get('session')->getFlashBag()->add('warning', 'enquiry.flash.error');
             }
         }
 
