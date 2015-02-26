@@ -166,7 +166,7 @@ class ImageService
                 // Resample the picture
                 $destination = imagecreatetruecolor(220, 220);
 
-                $result = imagecopyresampled(
+                imagecopyresampled(
                     $destination,
                     $source,
                     0,
@@ -179,7 +179,7 @@ class ImageService
                     $this->imageCropHeight
                 );
 
-                $this->getImageResult($this->getImagePath(), $type, $destination);
+                  $this->getImageResult($this->getImagePath(), $type, $destination);
 
                 imagedestroy($source);
                 imagedestroy($destination);
