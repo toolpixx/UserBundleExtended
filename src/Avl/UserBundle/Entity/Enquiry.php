@@ -108,15 +108,9 @@ class Enquiry
      */
     protected $attachment;
 
-    /**
-     * @var User
-     */
-    private $user;
-
     public function __construct(User $user = null)
     {
-        $this->user = $user ?: new User();
-        if (null !== $this->user) {
+        if ($user instanceof User) {
             $this->setName($user->getUsername());
             $this->setEmail($user->getEmail());
         }
