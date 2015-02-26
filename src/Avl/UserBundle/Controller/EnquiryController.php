@@ -32,12 +32,7 @@ class EnquiryController extends BaseController
     public function enquiryAction(Request $request)
     {
         $enquiry = new Enquiry($this->getUser());
-
-        // Create form
-        $form = $this->createForm(
-            new EnquiryType(),
-            $enquiry
-        );
+        $form = $this->createForm(new EnquiryType(), $enquiry);
 
         // If form was send with POST
         if ($request->getMethod() == 'POST') {
@@ -45,19 +40,10 @@ class EnquiryController extends BaseController
             // Formfields valid and email send?
             if ($form->isValid() && $this->sendMail($enquiry)) {
 
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'enquiry.flash.success'
-                );
-
-                return $this->redirect(
-                    $this->generateUrl('avl_faq_enquiry')
-                );
+                $this->get('session')->getFlashBag()->add('notice', 'enquiry.flash.success');
+                return $this->redirect($this->generateUrl('avl_faq_enquiry'));
             } else {
-                $this->get('session')->getFlashBag()->add(
-                    'warning',
-                    'enquiry.flash.error'
-                );
+                $this->get('session')->getFlashBag()->add('warning','enquiry.flash.error');
             }
         }
 
@@ -83,18 +69,10 @@ class EnquiryController extends BaseController
             ->setFrom($enquiry->getEmail())
             ->setReturnPath($this->getEnquiryParameter('returnpath'))
             ->setTo($this->getEnquiryParameter('to'))
-            ->setBody(
-                $this->renderView(
-                    'UserBundle:Enquiry:enquiryEmail.txt.twig',
-                    array(
-                        'enquiry' => $enquiry
-                    )
-                )
-            );
+            ->setBody($this->getMailBody($enquiry));
 
         // If any attachment exists
         if ($enquiry->hasAttachment()) {
-
             if (null !== $enquiry->getAttachment()) {
                 $message->attach(
                     \Swift_Attachment::fromPath($enquiry->getAttachment())
@@ -117,5 +95,19 @@ class EnquiryController extends BaseController
     private function getEnquiryParameter($parameter)
     {
         return $this->container->getParameter('enquiry.email.address.' . $parameter);
+    }
+
+    /**
+     * @param $enquiry
+     * @return string
+     */
+    private function getMailBody($enquiry)
+    {
+        return $this->renderView(
+            'UserBundle:Enquiry:enquiryEmail.txt.twig',
+            array(
+                'enquiry' => $enquiry
+            )
+        );
     }
 }
