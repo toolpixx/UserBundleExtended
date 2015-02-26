@@ -86,7 +86,6 @@ class SubUserController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             // Add the parentId if not ROLE_ADMIN
             if ($this->hasRole('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
                 $user->setParentId(
@@ -94,12 +93,8 @@ class SubUserController extends BaseController
                 );
             }
 
-            // Setup the roles
             $user->setUsedRoles();
-
-            // Insert the user
             $this->getUserManager()->updateUser($user);
-
             $this->get('session')->getFlashBag()->add('notice', 'subuser.flash.create.success');
 
             return $this->redirect(
@@ -131,48 +126,24 @@ class SubUserController extends BaseController
     public function editAction(Request $request, $userId)
     {
         // Has user granted role?
-        $this->hasGranted(
-            array(
-                'ROLE_ADMIN',
-                'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            )
-        );
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
-        // Find the user to edit
         $user = $this->findUser($userId);
-
-        // Add Data and the request to the form
         $formFactory = $this->getFormFactory(self::FORM_FACTORY_PROFILE);
 
-        // View the roles to select which
-        // role user can use
         $formFactory->setRoleView(true);
-
-        // View the enabled checkbox to
-        // select if user is enabled
         $formFactory->setEnabledView(true);
 
-        // View the choice to choose
-        // if user is admin or customer
-        // Only in admin-view
         if ($this->hasRole('ROLE_ADMIN')) {
             $formFactory->setUser($user);
             $formFactory->setAdminView(true);
         }
 
-        // Create the form
         $form = $formFactory->createForm();
-
-        // Add Data and the request to the form
         $form->setData($user);
         $form->handleRequest($request);
 
-        // If method was POST and is valid,
-        // then we save and redirect the
-        // output.
         if ($request->getMethod() == 'POST' && $form->isValid()) {
-
-            // Which type of user was set?
             if ($this->hasRole('ROLE_ADMIN')) {
                 // Setup Adminrole
                 if (count($user->getRoles()) > 2 && in_array('ROLE_ADMIN', $user->getRoles())) {
@@ -180,16 +151,12 @@ class SubUserController extends BaseController
                 }
             }
 
-            // Update the user
             $this->getUserManager()->updateUser($user);
-
-            // Crop image
             if ($this->cropImage($user)) {
                 return $this->redirectSubUser('subuser.flash.edit.success');
             }
         }
-        // Get and create the FOSUserbundleForm
-        // Render my view with additional data
+
         return $this->render(
             'UserBundle:Profile:edit.html.twig',
             array(
@@ -211,12 +178,7 @@ class SubUserController extends BaseController
     public function removeAction(Request $request, $userId)
     {
         // Has user granted role?
-        $this->hasGranted(
-            array(
-                'ROLE_ADMIN',
-                'ROLE_CUSTOMER_SUBUSER_MANAGER'
-            )
-        );
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         if ($request->getMethod() == 'DELETE') {
             try {
