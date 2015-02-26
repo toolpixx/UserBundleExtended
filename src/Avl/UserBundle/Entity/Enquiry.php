@@ -108,6 +108,11 @@ class Enquiry
      */
     protected $attachment;
 
+    /**
+     * @var User
+     */
+    private $user;
+
     public function __construct(User $user = null)
     {
         $this->user = $user ?: new User();
