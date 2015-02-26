@@ -156,9 +156,7 @@ class ImageService
     public function cropImage()
     {
         try {
-
             if (is_file($this->getImagePath())) {
-
                 // Get the image-type
                 $type = $this->getImageMimeType($this->getImagePath());
 
@@ -171,10 +169,7 @@ class ImageService
                 }
 
                 // Resample the picture
-                $destination = imagecreatetruecolor(
-                    220,
-                    220
-                );
+                $destination = imagecreatetruecolor(220, 220);
 
                 $result = imagecopyresampled(
                     $destination,
@@ -190,13 +185,12 @@ class ImageService
                 );
 
                 // If picture was resampled save
-                if ($result) {
-                    $this->getImageResult($this->getImagePath(), $type, $destination);
-                } else {
+                if (!$result) {
                     throw new Exception('Failed to crop the image file');
                 }
 
-                // Make clean
+                $this->getImageResult($this->getImagePath(), $type, $destination);
+
                 imagedestroy($source);
                 imagedestroy($destination);
 
