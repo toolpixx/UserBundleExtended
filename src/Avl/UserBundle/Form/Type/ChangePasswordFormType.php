@@ -28,17 +28,13 @@ class ChangePasswordFormType extends AbstractType
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => new UserPassword(),
-            'attr' => array(
-                'style' => 'width:180px'
-            )
+            'attr' => array('style' => 'width:180px')
         ))
         ->add('plainPassword', 'repeated', array(
             'type' => 'password',
             'options' => array(
                 'translation_domain' => 'FOSUserBundle',
-                'attr' => array(
-                    'style' => 'width:180px'
-                )
+                'attr' => array('style' => 'width:180px')
             ),
             'first_options' => array(
                 'label' => 'form.new_password'

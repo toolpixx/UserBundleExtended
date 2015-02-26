@@ -157,13 +157,8 @@ class ImageService
     {
         try {
             if (is_file($this->getImagePath())) {
-                // Get the image-type
                 $type = $this->getImageMimeType($this->getImagePath());
-
-                // Get image source
                 $source = $this->getImageSource($this->getImagePath(), $type);
-
-                // Resample the picture
                 $destination = imagecreatetruecolor(220, 220);
 
                 imagecopyresampled(
@@ -183,7 +178,6 @@ class ImageService
 
                 imagedestroy($source);
                 imagedestroy($destination);
-
                 return true;
             }
         } catch (Exception $error) {
@@ -207,9 +201,8 @@ class ImageService
      * @param $type
      * @return resource
      */
-    private function getImageSource($path, $type) {
-
-        // Read the picture
+    private function getImageSource($path, $type)
+    {
         switch ($type) {
             default:
                 return '';
@@ -227,10 +220,9 @@ class ImageService
      * @param $type
      * @param $destination
      */
-    private function getImageResult($path, $type, $destination) {
-
+    private function getImageResult($path, $type, $destination)
+    {
         $result = '';
-
         switch ($type) {
             case "image/gif":
                 $result = imagegif($destination, $path);

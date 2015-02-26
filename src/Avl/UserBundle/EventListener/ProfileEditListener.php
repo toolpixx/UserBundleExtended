@@ -80,19 +80,7 @@ class ProfileEditListener implements EventSubscriberInterface
         try {
             // Was profilePicture uploaded?
             if ($user->hasProfilePictureUpload()) {
-
-                // Get the cropimage-service
-                $imageService = $this->container->get('image_service');
-
-                // Setup the cropImage-Service
-                $imageService->setImageCropY($user->getImageCropY());
-                $imageService->setImageCropX($user->getImageCropX());
-                $imageService->setImageCropHeight($user->getImageCropHeight());
-                $imageService->setImageCropWidth($user->getImageCropWidth());
-                $imageService->setImagePath($user->getProfilePictureFile()->getPathname());
-
-                // crop the image
-                $imageService->cropImage();
+                $imageService = $this->cropImage();
             }
         } catch (\Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
@@ -130,5 +118,23 @@ class ProfileEditListener implements EventSubscriberInterface
             ->setUser(
                 $userEvent->getUser()
             );
+    }
+
+    /**
+     * @return mixed
+     */
+    private function cropImage()
+    {
+        // Get the cropimage-service
+        $imageService = $this->container->get('image_service');
+
+        // Setup the cropImage-Service
+        $imageService->setImageCropY($user->getImageCropY());
+        $imageService->setImageCropX($user->getImageCropX());
+        $imageService->setImageCropHeight($user->getImageCropHeight());
+        $imageService->setImageCropWidth($user->getImageCropWidth());
+        $imageService->setImagePath($user->getProfilePictureFile()->getPathname());
+
+        return $imageService->cropImage();
     }
 }
