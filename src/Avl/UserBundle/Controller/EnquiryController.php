@@ -89,8 +89,8 @@ class EnquiryController extends BaseController
     }
 
     /**
-     * @param $parameter
-     * @return mixed
+     * @param string $parameter
+     * @return string
      */
     private function getEnquiryParameter($parameter)
     {
@@ -98,7 +98,7 @@ class EnquiryController extends BaseController
     }
 
     /**
-     * @param $enquiry
+     * @param Enquiry $enquiry
      * @return string
      */
     private function getMailBody($enquiry)
