@@ -57,7 +57,7 @@ abstract class Controller extends BaseController
         $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:User')
-            ->findAllSubUserByParentId(
+            ->getAllSubUserByParentId(
                 $this->getUser()->getId(),
                 $this->getUser()->getParentId(),
                 $formData
@@ -83,7 +83,7 @@ abstract class Controller extends BaseController
         $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:User')
-            ->findAllSubUser(
+            ->getAllSubUser(
                 $this->getUser()->getId(),
                 $formData
             );

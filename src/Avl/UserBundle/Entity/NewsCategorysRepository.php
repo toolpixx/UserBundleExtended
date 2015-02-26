@@ -19,7 +19,7 @@ class NewsCategorysRepository extends EntityRepository
      * @param $formData
      * @return \Doctrine\ORM\AbstractQuery
      */
-    public function findAllNewsCategorysByQuery($formData)
+    public function getAllNewsCategorysByQuery($formData)
     {
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';

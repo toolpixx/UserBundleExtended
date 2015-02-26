@@ -28,7 +28,7 @@ class NewsController extends BaseController
         $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:News')
-            ->findAllNewsByQuery(
+            ->getAllNewsByQuery(
                 $form->getData()
             );
 
