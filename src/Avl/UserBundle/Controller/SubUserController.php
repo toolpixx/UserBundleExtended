@@ -250,16 +250,13 @@ class SubUserController extends BaseController
      */
     private function findUser($userId)
     {
-        // Get the userManager
         $userManager = $this->getUserManager();
 
-        // If user is admin
         if ($this->hasRole('ROLE_ADMIN')) {
             return $userManager->findUserBy(
                 array('id' => (integer)$userId)
             );
         } else {
-            // If user is customer
             return $userManager->findUserBy(
                 array(
                     'id' => (integer)$userId,

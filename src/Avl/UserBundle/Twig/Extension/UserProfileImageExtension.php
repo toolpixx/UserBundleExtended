@@ -60,32 +60,19 @@ class UserProfileImageExtension extends \Twig_Extension
      */
     public function getUserProfileImage($profilePicturePath, $with, $height)
     {
-        // Cachemanager for images
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
 
-        // Setup the correct path for image
         $image =
             is_file($this->user->getUploadRootDir() . '/' . $profilePicturePath)
                 ? $this->user->getUploadDir() . '/' . $profilePicturePath
                 : $this->user->getUploadDir() . '/default-avatar.png';
 
-        // Cachemanager runtimeConfig
-        // it overwrite the config in
-        // config.yml
         if (null !== $height || null !== $height) {
-            $runtimeConfig = array(
-                "thumbnail" => array(
-                    "size" => array(
-                        $with,
-                        $height
-                    )
-                )
-            );
+            $runtimeConfig = array("thumbnail" => array("size" => array($with, $height)));
         } else {
             $runtimeConfig = null;
         }
 
-        // Return the imagepath of cached image
         return $cacheManager->getBrowserPath(
             $image,
             'user_thumb',
