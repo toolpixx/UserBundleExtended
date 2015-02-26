@@ -95,9 +95,9 @@ class EnquiryController extends BaseController
         // If any attachment exists
         if ($enquiry->hasAttachment()) {
 
-            if (null !== $attachment) {
+            if (null !== $enquiry->getAttachment()) {
                 $message->attach(
-                    \Swift_Attachment::fromPath($attachment)
+                    \Swift_Attachment::fromPath($enquiry->getAttachment())
                         ->setFilename(
                             $enquiry->getAttachment()->getClientOriginalName()
                         )

@@ -180,7 +180,7 @@ class Enquiry
     }
 
     /**
-     * @return string
+     * @return UploadedFile
      */
     public function getAttachment()
     {
