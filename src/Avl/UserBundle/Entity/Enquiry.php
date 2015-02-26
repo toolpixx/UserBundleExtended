@@ -116,8 +116,10 @@ class Enquiry
     public function __construct(User $user = null)
     {
         $this->user = $user ?: new User();
-        $this->setName($user->getUsername());
-        $this->setEmail($user->getEmail());
+        if (null !== $this->user) {
+            $this->setName($user->getUsername());
+            $this->setEmail($user->getEmail());
+        }
     }
 
     /**
