@@ -31,17 +31,7 @@ class EnquiryController extends BaseController
      */
     public function enquiryAction(Request $request)
     {
-        $enquiry = new Enquiry();
-
-        // If isset user map the
-        // username and email to
-        // enquiry-form
-        //
-        $user = $this->getUser();
-        if ($user instanceof User && $request->getMethod() != 'POST') {
-            $enquiry->setName($user->getUsername());
-            $enquiry->setEmail($user->getEmail());
-        }
+        $enquiry = new Enquiry($this->getUser());
 
         // Create form
         $form = $this->createForm(
@@ -52,30 +42,22 @@ class EnquiryController extends BaseController
         // If form was send with POST
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
+            // Formfields valid and email send?
+            if ($form->isValid() && $this->sendMail($enquiry)) {
 
-            // Formfields valid?
-            if ($form->isValid()) {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'enquiry.flash.success'
+                );
 
-                // If send mail was false
-                if (!$this->sendMail($enquiry)) {
-                    $this->get('session')->getFlashBag()->add(
-                        'warning',
-                        'enquiry.flash.error'
-                    );
-                } else {
-                    // Send mail was true, redirect
-                    // because we prevent user will
-                    // repost the form data if they
-                    // refresh the site.
-                    $this->get('session')->getFlashBag()->add(
-                        'notice',
-                        'enquiry.flash.success'
-                    );
-
-                    return $this->redirect(
-                        $this->generateUrl('avl_faq_enquiry')
-                    );
-                }
+                return $this->redirect(
+                    $this->generateUrl('avl_faq_enquiry')
+                );
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'warning',
+                    'enquiry.flash.error'
+                );
             }
         }
 

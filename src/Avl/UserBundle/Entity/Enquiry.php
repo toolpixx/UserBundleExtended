@@ -108,6 +108,13 @@ class Enquiry
      */
     protected $attachment;
 
+    public function __construct(User $user = null)
+    {
+        $this->user = $user ?: new User();
+        $this->setName($user->getUsername());
+        $this->setEmail($user->getEmail());
+    }
+
     /**
      * @return string
      */
