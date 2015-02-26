@@ -179,7 +179,7 @@ class ImageService
                     $this->imageCropHeight
                 );
 
-                  $this->getImageResult($this->getImagePath(), $type, $destination);
+                $this->getImageResult($this->getImagePath(), $type, $destination);
 
                 imagedestroy($source);
                 imagedestroy($destination);
