@@ -38,7 +38,11 @@
                     {{ entity.enabledDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}
                 </td>
                 <td valign="middle">
-                    {{ entity.user.username }}
+                    {% if not entity.getUser is null %}
+                        {{ entity.getUser.username }}
+                    {% else %}
+                        {{ 'Nicht zugeordnet'|trans }}
+                    {% endif %}
                 </td>
                 <td style="white-space: nowrap;">
                     <form style="float:right" action="{{ path('avl_news_delete', {'newsId': entity.id}) }}" method="POST"

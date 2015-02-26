@@ -108,6 +108,10 @@ class NewsController extends BaseController
             throw $this->createNotFoundException('Unable to find News entity.');
         }
 
+        if (null === $entity->getUser()) {
+            $entity->setUser($this->getUser());
+        }
+
         $form = $this->createForm(new NewsType(), $entity);
         $form->handleRequest($request);
 

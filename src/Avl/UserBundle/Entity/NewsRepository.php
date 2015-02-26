@@ -32,14 +32,14 @@ class NewsRepository extends EntityRepository
                   news
                 FROM
                   UserBundle:News news
-                JOIN
+                LEFT JOIN
                   news.user user
                 WHERE
                     news.title LIKE :query
                   OR
                     news.body LIKE :query
                   OR
-                    user.username LIKE :query
+                    (user.username LIKE :query AND news.user IS NOT null)
                 ORDER BY
                   news.id
                 ASC

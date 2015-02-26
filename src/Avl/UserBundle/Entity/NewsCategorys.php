@@ -51,11 +51,6 @@ class NewsCategorys
     private $createdDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="News", mappedBy="news")
-     */
-    protected $news;
-
-    /**
      * Constructor
      */
     public function __construct()

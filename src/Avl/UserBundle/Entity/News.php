@@ -68,14 +68,15 @@ class News
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="News", cascade={"persist"})
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", onDelete="cascade")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="NewsCategorys", inversedBy="news", cascade={"persist"})
-     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Assert\Valid
      */
     private $category;
 

@@ -106,7 +106,7 @@ class SubUserController extends BaseController
                 $this->generateUrl(
                     'avl_subuser_edit',
                     array(
-                        'id' => $user->getId()
+                        'userId' => $user->getId()
                     )
                 )
             );

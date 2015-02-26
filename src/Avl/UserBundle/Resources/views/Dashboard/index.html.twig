@@ -32,7 +32,10 @@
                             {% if not entity.category is null %}
                                 Gefunden in <strong>{{ entity.category.name }}</strong> /
                             {% endif %}
-                            Von <strong>{{ entity.user.username }}</strong> am <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                            {% if not entity.user is null %}
+                            Von <strong>{{ entity.user.username }}</strong> am
+                            {% endif %}
+                            <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                         </small>
                     </div>
                 {% endfor %}
