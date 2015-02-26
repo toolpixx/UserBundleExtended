@@ -20,6 +20,9 @@ class NewsCategorysController extends BaseController
      */
     public function indexAction(Request $request)
     {
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
 
@@ -49,9 +52,10 @@ class NewsCategorysController extends BaseController
      */
     public function createAction(Request $request)
     {
-        $session = new Session();
-        $entity = new NewsCategorys();
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
+        $entity = new NewsCategorys();
         $form = $form = $this->createForm(new NewsCategorysType(), $entity);
         $form->handleRequest($request);
 
@@ -60,7 +64,7 @@ class NewsCategorysController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.categorys.flash.create.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.create.success');
             return $this->redirect($this->generateUrl('avl_news_categorys', array('groupId' => $entity->getId())));
         }
 
@@ -98,7 +102,9 @@ class NewsCategorysController extends BaseController
      */
     public function editAction(Request $request, $groupId)
     {
-        $session = new Session();
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UserBundle:NewsCategorys')->find($groupId);
 
@@ -112,7 +118,7 @@ class NewsCategorysController extends BaseController
         if ($form->isValid()) {
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.categorys.flash.edit.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.edit.success');
             return $this->redirect($this->generateUrl('avl_news_categorys', array('groupId' => $groupId)));
         }
 
@@ -129,8 +135,6 @@ class NewsCategorysController extends BaseController
      */
     public function deleteAction(Request $request, $groupId)
     {
-        $session = new Session();
-
         if ($request->getMethod() == 'DELETE') {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UserBundle:NewsCategorys')->find($groupId);
@@ -141,7 +145,7 @@ class NewsCategorysController extends BaseController
 
             $em->remove($entity);
             $em->flush();
-            $session->getFlashBag()->add('notice', 'news.categorys.flash.remove.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.remove.success');
         }
 
         return $this->redirect($this->generateUrl('avl_news_categorys'));

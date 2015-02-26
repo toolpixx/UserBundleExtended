@@ -20,6 +20,9 @@ class NewsController extends BaseController
      */
     public function indexAction(Request $request)
     {
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
 
@@ -49,9 +52,10 @@ class NewsController extends BaseController
      */
     public function createAction(Request $request)
     {
-        $session = new Session();
-        $entity = new News($this->getUser());
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
+        $entity = new News($this->getUser());
         $form = $form = $this->createForm(new NewsType(), $entity);
         $form->handleRequest($request);
 
@@ -60,7 +64,7 @@ class NewsController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.flash.create.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.flash.create.success');
             return $this->redirect($this->generateUrl('avl_news', array('newsId' => $entity->getId())));
         }
 
@@ -98,7 +102,9 @@ class NewsController extends BaseController
      */
     public function editAction(Request $request, $newsId)
     {
-        $session = new Session();
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UserBundle:News')->find($newsId);
 
@@ -116,7 +122,7 @@ class NewsController extends BaseController
         if ($form->isValid()) {
             $em->flush();
 
-            $session->getFlashBag()->add('notice', 'news.flash.edit.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.flash.edit.success');
             return $this->redirect($this->generateUrl('avl_news', array('newsId' => $newsId)));
         }
 
@@ -133,7 +139,8 @@ class NewsController extends BaseController
      */
     public function deleteAction(Request $request, $newsId)
     {
-        $session = new Session();
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         if ($request->getMethod() == 'DELETE') {
             $em = $this->getDoctrine()->getManager();
@@ -145,7 +152,7 @@ class NewsController extends BaseController
 
             $em->remove($entity);
             $em->flush();
-            $session->getFlashBag()->add('notice', 'news.flash.remove.success');
+            $this->get('session')->getFlashBag()->add('notice', 'news.flash.remove.success');
         }
 
         return $this->redirect($this->generateUrl('avl_news'));

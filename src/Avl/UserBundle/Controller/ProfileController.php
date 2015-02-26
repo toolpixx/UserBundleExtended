@@ -37,22 +37,13 @@ class ProfileController extends BaseProfileController
         // Get and create the FOSUserbundleForm
         $formFactory = $this->get(self::FORM_FACTORY_PROFILE);
 
-        // Create the form
         $form = $formFactory->createForm();
-
-        // Add Data and the request to the form
         $form->setData($this->getUser());
         $form->handleRequest($request);
 
-        // If method was POST and is valid,
-        // then we save and redirect the
-        // output.
         if ($request->getMethod() == 'POST' && $form->isValid()) {
-            // Save the userdata
             return parent::editAction($request);
         } else {
-            // Get and create the FOSUserbundleForm
-            // Render my view with additional data
             return $this->render(
                 'UserBundle:Profile:edit.html.twig',
                 array(

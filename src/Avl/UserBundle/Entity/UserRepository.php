@@ -22,7 +22,7 @@ class UserRepository extends EntityRepository
      * @param $formData
      * @return \Doctrine\ORM\AbstractQuery
      */
-    public function findAllSubUserByParentId($userId, $parentId, $formData)
+    public function getAllSubUserByParentId($userId, $parentId, $formData)
     {
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';

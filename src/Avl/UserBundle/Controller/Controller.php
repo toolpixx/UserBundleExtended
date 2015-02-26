@@ -106,18 +106,14 @@ abstract class Controller extends BaseController
     private function checkGrantedRoles($roles)
     {
         $checkSecurity = array();
-        // If $roles is array, iterate it.
         if (is_array($roles)) {
             foreach ($roles as $role) {
                 if (in_array($this->get('security.authorization_checker')->isGranted($role), $roles)) {
                     $checkSecurity[] = true;
                 }
             }
-        } else {
-            // $role is only a string
-            if ($this->get('security.authorization_checker')->isGranted($roles)) {
-                $checkSecurity[] = true;
-            }
+        } else if ($this->get('security.authorization_checker')->isGranted($roles)) {
+            $checkSecurity[] = true;
         }
         return (count($checkSecurity) > 0) ? true : false;
     }

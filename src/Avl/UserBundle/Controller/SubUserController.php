@@ -88,9 +88,7 @@ class SubUserController extends BaseController
         if ($form->isValid()) {
             // Add the parentId if not ROLE_ADMIN
             if ($this->hasRole('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
-                $user->setParentId(
-                    $this->getParentId()
-                );
+                $user->setParentId($this->getParentId());
             }
 
             $user->setUsedRoles();
@@ -98,12 +96,7 @@ class SubUserController extends BaseController
             $this->get('session')->getFlashBag()->add('notice', 'subuser.flash.create.success');
 
             return $this->redirect(
-                $this->generateUrl(
-                    'avl_subuser_edit',
-                    array(
-                        'userId' => $user->getId()
-                    )
-                )
+                $this->generateUrl('avl_subuser_edit', array('userId' => $user->getId()))
             );
         }
 
