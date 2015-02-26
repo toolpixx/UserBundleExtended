@@ -38,34 +38,12 @@ class DashboardController extends BaseController
      */
     public function indexAction(Request $request)
     {
-
-        // Log info to test chromephp
-        $this->get('logger')->info($this->getUser());
-
-        // Can i view the subuser?
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
-            $pagination = $this->getUserPagination($request, null, 5);
-        } else {
-            $pagination = null;
-        }
-
-        $news = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('UserBundle:News')
-            ->findBy(
-                array(
-                    'enabled' => true,
-                    'internal' => true
-                ),
-                array('createdDate' => 'DESC')
-            );
-
         return $this->render(
             'UserBundle:Dashboard:index.html.twig',
             array(
                 'user' => $this->getUser(),
-                'entities' => $pagination,
-                'news' => $news,
+                'entities' => $this->getSubuser(),
+                'news' => $this->getNews(),
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
@@ -80,30 +58,30 @@ class DashboardController extends BaseController
     private function getRssFeed($url)
     {
         try {
-            // CacheKey
             $this->cacheKey = $url;
-
-            // Get the cachedriver
-            $this->cacheDriver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
-
-            // If content was cached return it
-            if ($this->cacheDriver->contains($this->cacheKey)) {
-                return $this->getCachedFeed();
-            } else {
-                // Or get and save the new content
-                $rssFeed = file_get_contents($url);
-
-                // Save to cache ad return content
-                $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600 * 24);
-
-                return simplexml_load_string($rssFeed);
-            }
+            return $this->getCachedFeed();
 
         } catch (ContextErrorException $e) {
             $this->get('logger')->error($e->getCode() . ' : ' . $e->getMessage());
         } finally {
-            return $this->getCachedFeed();
+            return $this->loadCachedFeed();
         }
+    }
+
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getCachedFeed()
+    {
+        $this->cacheDriver = $this->container->get('liip_doctrine_cache.ns.rssfeed');
+
+        if ($this->cacheDriver->contains($this->cacheKey)) {
+            return $this->loadCachedFeed();
+        }
+
+        $rssFeed = file_get_contents($url);
+        $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600 * 24);
+        return simplexml_load_string($rssFeed);
     }
 
     /**
@@ -111,11 +89,40 @@ class DashboardController extends BaseController
      *
      * @return \SimpleXMLElement
      */
-    private function getCachedFeed()
+    private function loadCachedFeed()
     {
         return
             simplexml_load_string(
                 $this->cacheDriver->fetch($this->cacheKey)
+            );
+    }
+
+    /**
+     * @return mixed|null
+     */
+    private function getSubuser()
+    {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
+            return $this->getUserPagination($request, null, 5);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getNews()
+    {
+        return $this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:News')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('createdDate' => 'DESC')
             );
     }
 }
