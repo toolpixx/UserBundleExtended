@@ -34,12 +34,16 @@ class NewsRepository extends EntityRepository
                   UserBundle:News news
                 LEFT JOIN
                   news.user user
+                LEFT JOIN
+                  news.category category
                 WHERE
                     news.title LIKE :query
                   OR
                     news.body LIKE :query
                   OR
                     (user.username LIKE :query AND news.user IS NOT null)
+                  OR
+                    (category.name LIKE :query AND news.category IS NOT null)
                 ORDER BY
                   news.id
                 ASC
