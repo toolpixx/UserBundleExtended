@@ -3,7 +3,7 @@
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Entity\News;
-use Avl\UserBundle\Entity\NewsGroups;
+use Avl\UserBundle\Entity\NewsCategorys;
 use Avl\UserBundle\Form\Type\NewsType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +52,7 @@ class NewsController extends BaseController
     public function createAction(Request $request)
     {
         $session = new Session();
-        $entity = new News($this->getUser(), new NewsGroups());
+        $entity = new News($this->getUser(), new NewsCategorys());
 
         $form = $form = $this->createForm(new NewsType(), $entity);
         $form->handleRequest($request);

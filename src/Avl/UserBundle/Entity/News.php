@@ -87,7 +87,6 @@ class News
         $this->createdDate = new \DateTime();
         $this->enabledDate = new \DateTime();
         $this->user = $user ?: new User();
-        $this->category = $category ?: new NewsCategorys();
     }
 
     /**
@@ -231,7 +230,7 @@ class News
     }
 
     /**
-     * @param integer $group
+     * @param integer $category
      */
     public function setCategory($category)
     {

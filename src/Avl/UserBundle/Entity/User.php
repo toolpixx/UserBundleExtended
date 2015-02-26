@@ -243,29 +243,6 @@ class User extends BaseUser implements AdvancedUserInterface
     }
 
     /**
-     * Set news
-     *
-     * @param \Avl\UserBundle\Entity\News $news
-     * @return User
-     */
-    public function setNews(\Avl\UserBundle\Entity\News $news = null)
-    {
-        $this->news = $news;
-
-        return $this;
-    }
-
-    /**
-     * Get news
-     *
-     * @return \Avl\UserBundle\Entity\News 
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
      * Set profilePicturePath
      *
      * @param string $profilePicturePath

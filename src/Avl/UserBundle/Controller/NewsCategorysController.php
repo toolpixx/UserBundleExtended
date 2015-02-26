@@ -80,7 +80,7 @@ class NewsCategorysController extends BaseController
             ->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:NewsCategorys')
-            ->find($newsId);
+            ->find($groupId);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
