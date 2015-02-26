@@ -67,7 +67,7 @@ class News
     private $enabledDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="News", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="news", cascade={"persist"})
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
      */
