@@ -136,12 +136,9 @@ class SubUserController extends BaseController
         $form->setData($user);
         $form->handleRequest($request);
 
-        if ($request->getMethod() == 'POST' && $form->isValid()) {
-            if ($this->hasRole('ROLE_ADMIN')) {
-                // Setup Adminrole
-                if (count($user->getRoles()) > 2 && in_array('ROLE_ADMIN', $user->getRoles())) {
-                    $user->setAdminRoles();
-                }
+        if ($form->isValid()) {
+            if ($this->hasRole('ROLE_ADMIN') && in_array('ROLE_ADMIN', $user->getRoles())) {
+                $user->setAdminRoles();
             }
 
             $this->getUserManager()->updateUser($user);
