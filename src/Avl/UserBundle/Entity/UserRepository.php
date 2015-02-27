@@ -36,18 +36,14 @@ class UserRepository extends EntityRepository
                   UserBundle:User user
                 WHERE
                   user.parentId = :parentId
-                AND
-                  user.id != :parentId
-                AND
-                  user.id != :userId
+                AND user.id != :parentId
+                AND user.id != :userId
                 AND (
                       user.email LIKE :query
                     OR
                       user.username LIKE :query
                 )
-                ORDER BY
-                  user.id
-                ASC')
+                ORDER BY user.id ASC')
             ->setParameter('userId', $userId)
             ->setParameter('parentId', $parentId)
             ->setParameter('query', '%'.$query.'%');
@@ -81,11 +77,8 @@ class UserRepository extends EntityRepository
                   OR
                     user.username LIKE :query
                 )
-                AND
-                  user.id != :userId
-                ORDER BY
-                   orderTree
-                ASC')
+                AND user.id != :userId
+                ORDER BY orderTree ASC')
             ->setParameter('userId', $userId)
             ->setParameter('query', '%'.$query.'%');
     }
