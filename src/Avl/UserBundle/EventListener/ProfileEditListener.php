@@ -79,7 +79,7 @@ class ProfileEditListener implements EventSubscriberInterface
         try {
             // Was profilePicture uploaded?
             if ($user->hasProfilePictureUpload()) {
-                $imageService = $this->cropImage();
+                $this->cropImage();
             }
         } catch (\Exception $e) {
             $this->session->getFlashBag()->add('error', $e->getMessage());
