@@ -1,0 +1,49 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'MT_CNSL News'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-8">
+        <h1>{{ 'MT_CNSL News'|trans }}</h1>
+        <hr>
+        {% if entity is not null %}
+            <div class="well">
+                <h3>{{ entity.title }}</h3>
+                {{ entity.preface|nl2br }}
+                <hr>
+                {{ entity.body|nl2br }}
+                <br><br>
+                <small>
+                    {% if not entity.category is null %}
+                        Gefunden in <strong>{{ entity.category.name }}</strong> /
+                    {% endif %}
+                    {% if not entity.user is null %}
+                    Von <strong>{{ entity.user.username }}</strong> am
+                    {% endif %}
+                    <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                </small>
+            </div>
+            <div style="clear:both;text-align: center;">
+                <hr>
+                <a class="btn btn-info" href="{{ path('avl_user_dashboard_show') }}" role="button">{{ 'button.backlink'|trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <h1 class="title">Kategorien</h1>
+        <hr>
+        <div style="overflow:auto">
+            {% if entityCategorys is not null %}
+                {% if entityCategorys|length > 0 %}
+                    <ul class="nav nav-pills nav-stacked">
+                    {% for categorys in entityCategorys %}
+                        <li>
+                            <a href="#">{{ categorys.name }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

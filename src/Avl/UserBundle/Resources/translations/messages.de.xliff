@@ -22,6 +22,10 @@
                 <source>button.back</source>
                 <target>Abbrechen</target>
             </trans-unit>
+            <trans-unit id="button.backlink">
+                <source>button.backlink</source>
+                <target>Zurück</target>
+            </trans-unit>
             <trans-unit id="alert.delete.avatar">
                 <source>alert.delete.avatar</source>
                 <target>Möchten Sie Ihr Benutzerbild wirklich löschen?</target>
@@ -76,11 +80,11 @@
             </trans-unit>
             <trans-unit id="link.dashboard">
                 <source>link.dashboard</source>
-                <target>Übersicht</target>
+                <target>CNSL-Cockpit</target>
             </trans-unit>
             <trans-unit id="title.dashboard">
                 <source>title.dashboard</source>
-                <target>Übersicht</target>
+                <target>CNSL-Cockpit</target>
             </trans-unit>
             <trans-unit id="link.events">
                 <source>link.events</source>
@@ -499,6 +503,14 @@
                 <source>label.content</source>
                 <target>Inhalt</target>
             </trans-unit>
+            <trans-unit id="label.preface">
+                <source>label.preface</source>
+                <target>Vorwort/Einleitung</target>
+            </trans-unit>
+            <trans-unit id="label.link">
+                <source>label.link</source>
+                <target>Externer Link</target>
+            </trans-unit>
             <trans-unit id="form.select.categorys.please.select">
                 <source>form.select.categorys.please.select</source>
                 <target>Bitte wählen oder leer lassen</target>
@@ -510,6 +522,10 @@
             <trans-unit id="label.enabledDate">
                 <source>label.enabledDate</source>
                 <target>Veröffentlichen ab dem</target>
+            </trans-unit>
+            <trans-unit id="label.expiredDate">
+                <source>label.expiredDate</source>
+                <target>Veröffentlichen bis zum</target>
             </trans-unit>
             <trans-unit id="label.news.enabled">
                 <source>label.news.enabled</source>

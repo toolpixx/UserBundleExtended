@@ -20,12 +20,23 @@ class NewsType extends AbstractType
                 'label' => 'label.title',
                 'required' => true
             ))
+            ->add('preface', 'textarea', array(
+                'label' => 'label.preface',
+                'attr' => array(
+                    'rows' => '5'
+                ),
+                'required' => true
+            ))
             ->add('body', 'textarea', array(
                 'label' => 'label.content',
                 'attr' => array(
-                    'rows' => '10'
+                    'rows' => '20'
                 ),
-                'required' => true
+                'required' => false
+            ))
+            ->add('link', 'text', array(
+                'label' => 'label.link',
+                'required' => false
             ))
             ->add('category', 'entity', array(
                 'class' => 'UserBundle:NewsCategorys',
@@ -44,6 +55,9 @@ class NewsType extends AbstractType
             ))
             ->add('enabledDate', 'datetime', array(
                 'label' => 'label.enabledDate'
+            ))
+            ->add('expiredDate', 'datetime', array(
+                'label' => 'label.expiredDate'
             ))
         ;
     }

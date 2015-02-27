@@ -48,9 +48,23 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="preface", type="text")
+     */
+    private $preface;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     */
+    private $link;
 
     /**
      * @var \DateTime
@@ -65,6 +79,13 @@ class News
      * @ORM\Column(name="enabledDate", type="datetimetz")
      */
     private $enabledDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expiredDate", type="datetimetz")
+     */
+    private $expiredDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="news", cascade={"persist"})
@@ -87,6 +108,7 @@ class News
     {
         $this->createdDate = new \DateTime();
         $this->enabledDate = new \DateTime();
+        $this->expiredDate = new \DateTime();
         $this->user = $user ?: new User();
     }
 
@@ -147,6 +169,22 @@ class News
     }
 
     /**
+     * @param string $preface
+     */
+    public function setPreface($preface)
+    {
+        $this->preface = $preface;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreface()
+    {
+        return $this->preface;
+    }
+
+    /**
      * @param string $body
      */
     public function setBody($body)
@@ -160,6 +198,22 @@ class News
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
     }
 
     /**
@@ -212,6 +266,33 @@ class News
     public function getEnabledDateFormatted()
     {
         return $this->enabledDate->format('d.m.Y H:i:s');
+    }
+
+    /**
+     * @param \DateTime $expiredDate
+     */
+    public function setExpiredDate($expiredDate)
+    {
+        $this->expiredDate = $expiredDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpiredDate()
+    {
+        if ('-0001' != date('Y', $this->expiredDate->getTimestamp())) {
+            return $this->expiredDate;
+        }
+        return new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpiredDateFormatted()
+    {
+        return $this->expiredDate->format('d.m.Y H:i:s');
     }
 
     /**

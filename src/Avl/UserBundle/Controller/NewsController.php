@@ -86,12 +86,24 @@ class NewsController extends BaseController
             ->getRepository('UserBundle:News')
             ->find($newsId);
 
+        $entityCategorys = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:NewsCategorys')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('name' => 'ASC')
+            );
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find News entity.');
         }
 
         return $this->render('UserBundle:News:show.news.html.twig', array(
             'entity' => $entity,
+            'entityCategorys' => $entityCategorys
         ));
     }
 
