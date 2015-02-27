@@ -29,16 +29,10 @@ class NewsCategorysController extends BaseController
         $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('UserBundle:NewsCategorys')
-            ->getAllNewsCategorysByQuery(
-                $form->getData()
-            );
+            ->getAllNewsCategorysByQuery($form->getData());
 
         $entities = $this->get('knp_paginator')
-            ->paginate(
-                $query,
-                $request->query->get('page', 1),
-                5
-            );
+            ->paginate($query, $request->query->get('page', 1), 5);
 
         return $this->render('UserBundle:News:list.categorys.html.twig', array(
             'entities' => $entities,

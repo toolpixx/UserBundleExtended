@@ -42,8 +42,9 @@ class DashboardController extends BaseController
             'UserBundle:Dashboard:index.html.twig',
             array(
                 'user' => $this->getUser(),
-                'entities' => $this->getSubuser(),
+                'entities' => $this->getSubuser($request),
                 'news' => $this->getNews(),
+                'entityCategorys' => $this->getNewsCategorys(),
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );
@@ -79,7 +80,7 @@ class DashboardController extends BaseController
             return $this->loadCachedFeed();
         }
 
-        $rssFeed = file_get_contents($url);
+        $rssFeed = file_get_contents($this->cacheKey);
         $this->cacheDriver->save($this->cacheKey, $rssFeed, 3600 * 24);
         return simplexml_load_string($rssFeed);
     }
@@ -100,7 +101,7 @@ class DashboardController extends BaseController
     /**
      * @return mixed|null
      */
-    private function getSubuser()
+    private function getSubuser($request)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER_SUBUSER_MANAGER')) {
             return $this->getUserPagination($request, null, 5);
@@ -123,6 +124,20 @@ class DashboardController extends BaseController
                     'internal' => true
                 ),
                 array('createdDate' => 'DESC')
+            );
+    }
+
+    private function getNewsCategorys()
+    {
+        return $this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:NewsCategorys')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('name' => 'ASC')
             );
     }
 }

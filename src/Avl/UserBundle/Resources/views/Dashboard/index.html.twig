@@ -53,6 +53,22 @@
         {% endif %}
     </div>
     <div class="col-md-4">
+        <h1 class="title">Kategorien</h1>
+        <hr>
+        <div style="overflow:auto">
+            {% if entityCategorys is not null %}
+                {% if entityCategorys|length > 0 %}
+                    <ul class="nav nav-pills nav-stacked">
+                        {% for categorys in entityCategorys %}
+                            <li>
+                                <a href="#">{{ categorys.name }} ({{ categorys.news|length }})</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </div>
+        <br>
         <h1 class="title">Symfony News</h1>
         <hr>
         <div style="overflow:auto">
