@@ -5,6 +5,7 @@
             <th width="1%"></th>
             <th width="1%"></th>
             <th>{% include sort_title with {'pagination': entities, 'title': 'Name', 'field': 'categorys.name'} %}</th>
+            <th width="5%">Nachrichten</th>
             <th width="12%" style="text-align: right"></th>
         </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td valign="middle">
                     {{ entity.name }}
                 </td>
+                <td align="center">{{ entity.news|length }}</td>
                 <td style="white-space: nowrap;">
                     <form style="float:right" action="{{ path('avl_news_categorys_delete', {'groupId': entity.id}) }}" method="POST"
                           onsubmit="return confirm('{{ 'news.categorys.question.remove'|trans }}')">

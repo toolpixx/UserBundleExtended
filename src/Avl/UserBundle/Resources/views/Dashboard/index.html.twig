@@ -9,14 +9,12 @@
         <div class="well">
             Hello {{ app.session.get('username') }}
             <br><br>
-            nice to meet you. Lets take a look arround the
-            features of FOSUserBundle that was overwrite
-            and change by avl.
+            nice to meet you. Lets look arround @my private SF2 project named MT_CNSL (Management Console).
+            This project demonstrate how you can use work with SF2 and FOSUserBundle.
             <br><br>
-            Lets have a look at your userdata:
-            <br>
-            <small>(Output generate with Twig-Dump)</small>
-            {# dump(user) #}
+            If you have a question, you can ask me @github.
+            <br><br>
+            Have fun, now ;)
         </div>
         {% if news is not null %}
             <br>
@@ -25,6 +23,9 @@
             {% if news|length > 0 %}
                 {% for entity in news %}
                     <div class="well wellink">
+                        {% if entity.link is not null %}
+                            <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
+                        {% endif %}
                         <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'newsId': entity.id }) }}"{% endif %}>
                             <h3>{{ entity.title }}</h3>
                             {{ entity.preface|nl2br }}

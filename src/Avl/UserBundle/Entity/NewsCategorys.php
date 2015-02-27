@@ -2,6 +2,7 @@
 
 namespace Avl\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -51,11 +52,24 @@ class NewsCategorys
     private $createdDate;
 
     /**
+     * @ORM\OneToMany(targetEntity="News", mappedBy="category", cascade={"persist"})
+     * @ORM\JoinColumn(name="news", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Assert\Valid
+     */
+    private $news;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->createdDate = new \DateTime();
+        $this->news = new ArrayCollection();
+    }
+
+    public function getNews()
+    {
+        return $this->news;
     }
 
     /**

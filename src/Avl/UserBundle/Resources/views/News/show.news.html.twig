@@ -1,14 +1,17 @@
 {% extends 'UserBundle::layout.html.twig' %}
 
-{% block title %}{{ 'MT_CNSL News'|trans }}{% endblock %}
+{% block title %}
+    {% if entity is not null %}
+        {{ 'MT_CNSL News'|trans }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div class="col-md-8">
-        <h1>{{ 'MT_CNSL News'|trans }}</h1>
-        <hr>
         {% if entity is not null %}
+            <h1>{{ entity.title }}</h1>
+            <hr>
             <div class="well">
-                <h3>{{ entity.title }}</h3>
                 {{ entity.preface|nl2br }}
                 <hr>
                 {{ entity.body|nl2br }}
@@ -38,7 +41,7 @@
                     <ul class="nav nav-pills nav-stacked">
                     {% for categorys in entityCategorys %}
                         <li>
-                            <a href="#">{{ categorys.name }}</a>
+                            <a href="#">{{ categorys.name }} ({{ categorys.news|length }})</a>
                         </li>
                     {% endfor %}
                     </ul>
