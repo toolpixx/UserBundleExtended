@@ -28,11 +28,9 @@ class UserRepository extends EntityRepository
         $query = (null !== $formData['query']) ? $formData['query'] : '';
         $parentId = (null !== $parentId) ? $parentId : $userId;
 
-        // Create query
         return $this->getEntityManager()
             ->createQuery(
-                '
-                SELECT
+                'SELECT
                   user
                 FROM
                   UserBundle:User user
@@ -49,9 +47,7 @@ class UserRepository extends EntityRepository
                 )
                 ORDER BY
                   user.id
-                ASC
-            '
-            )
+                ASC')
             ->setParameter('userId', $userId)
             ->setParameter('parentId', $parentId)
             ->setParameter('query', '%'.$query.'%');
@@ -67,11 +63,9 @@ class UserRepository extends EntityRepository
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';
 
-        // Query
         return $this->getEntityManager()
             ->createQuery(
-                '
-                SELECT
+                'SELECT
                   user.enabled,
                   user.profilePicturePath,
                   user.username,
@@ -91,9 +85,7 @@ class UserRepository extends EntityRepository
                   user.id != :userId
                 ORDER BY
                    orderTree
-                ASC
-            '
-            )
+                ASC')
             ->setParameter('userId', $userId)
             ->setParameter('query', '%'.$query.'%');
     }
