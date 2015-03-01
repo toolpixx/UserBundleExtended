@@ -6,10 +6,14 @@ use Avl\UserBundle\Entity\NewsGroups;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\NewsRepository")
  * @ORM\Table(name="news")
+ * @UniqueEntity("path")
+ * @UniqueEntity("title")
+ * @ORM\HasLifecycleCallbacks
  */
 class News
 {
@@ -41,7 +45,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100)
+     * @ORM\Column(name="title", type="string", length=100, unique=true)
      */
     private $title;
 
@@ -65,6 +69,13 @@ class News
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
      */
     private $link;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true, unique=true)
+     */
+    private $path;
 
     /**
      * @var \DateTime
@@ -214,6 +225,39 @@ class News
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * @ORM\PreFlush()
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setPathReplace()
+    {
+        $path = $this->getPath();
+
+        if (empty($path)) {
+            $path = $this->getTitle();
+        }
+        $path = preg_replace('/\s/', '_', $path);
+        $path = preg_replace('/[^a-zA-Z0-9_]/sm', '', $path);
+        $this->setPath(strtolower($path));
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 
     /**

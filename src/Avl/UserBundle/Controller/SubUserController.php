@@ -53,9 +53,9 @@ class SubUserController extends BaseController
         $form->submit($request);
 
         if ($this->hasRole('ROLE_ADMIN')) {
-            $pagination = $this->getAdminUserPagination($request, $form->getData(), 5);
+            $pagination = $this->getAdminUserPagination($request, $form->getData(), 10);
         } else {
-            $pagination = $this->getUserPagination($request, $form->getData(), 5);
+            $pagination = $this->getUserPagination($request, $form->getData(), 10);
         }
 
         return $this->render(
@@ -172,13 +172,12 @@ class SubUserController extends BaseController
 
         if ($request->getMethod() == 'DELETE') {
             try {
-                $em = $this->getDoctrine()->getManager();
                 // Find the user to delete
                 $user = $this->findUser($userId);
 
                 if (null !== $user && is_object($user)) {
-                    $em->remove($user);
-                    $em->flush();
+                    $this->getEm()->remove($user);
+                    $this->getEm()->flush();
                     return $this->redirectSubUser('subuser.flash.remove.success');
                 } else {
                     throw new AccessDeniedException('This user does not have access to this section.');
@@ -254,6 +253,57 @@ class SubUserController extends BaseController
                 )
             );
         }
+    }
+
+    /**
+     * Pagiation for the subuser-management
+     * @param $request
+     * @param $formData
+     * @param $resultsPerSite
+     * @return mixed
+     */
+    public function getUserPagination($request, $formData, $resultsPerSite)
+    {
+        $query = $this
+            ->getEm()
+            ->getRepository('UserBundle:User')
+            ->getAllSubUserByParentId(
+                $this->getUser()->getId(),
+                $this->getUser()->getParentId(),
+                $formData
+            );
+
+        return $this->get('knp_paginator')
+            ->paginate(
+                $query,
+                $request->query->get('page', 1),
+                $resultsPerSite
+            );
+    }
+
+    /**
+     * Pagiation for the subuser-management
+     * @param $request
+     * @param $formData
+     * @param $resultsPerSite
+     * @return mixed
+     */
+    public function getAdminUserPagination($request, $formData, $resultsPerSite)
+    {
+        $query = $this
+            ->getEm()
+            ->getRepository('UserBundle:User')
+            ->getAllSubUser(
+                $this->getUser()->getId(),
+                $formData
+            );
+
+        return $this->get('knp_paginator')
+            ->paginate(
+                $query,
+                $request->query->get('page', 1),
+                $resultsPerSite
+            );
     }
 
     /**

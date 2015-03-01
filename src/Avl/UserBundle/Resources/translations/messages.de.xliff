@@ -455,6 +455,10 @@
                 <source>link.news.posts</source>
                 <target>Nachrichten</target>
             </trans-unit>
+            <trans-unit id="link.news.edit">
+                <source>link.news.edit</source>
+                <target>Nachrichten bearbeiten</target>
+            </trans-unit>
             <trans-unit id="title.news">
                 <source>title.news</source>
                 <target>Nachrichtenverwaltung</target>
@@ -510,6 +514,10 @@
             <trans-unit id="label.link">
                 <source>label.link</source>
                 <target>Externer Link</target>
+            </trans-unit>
+            <trans-unit id="label.path">
+                <source>label.path</source>
+                <target>Pfadname für Verlinkung</target>
             </trans-unit>
             <trans-unit id="form.select.categorys.please.select">
                 <source>form.select.categorys.please.select</source>
@@ -567,7 +575,11 @@
             <!-- news/categorys -->
             <trans-unit id="link.news.categorys">
                 <source>link.news.categorys</source>
-                <target>Gruppen</target>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="link.news.categorys.edit">
+                <source>link.news.categorys.edit</source>
+                <target>Kategorie bearbeiten</target>
             </trans-unit>
             <trans-unit id="title.news.categorys">
                 <source>title.news.categorys</source>

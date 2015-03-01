@@ -80,25 +80,21 @@ avl_faq_enquiry:
 # NewsCategorysManagement
 ##
 avl_news_categorys:
-    path:     /cnsl/newscategorys
+    path:     /cnsl/admin/news/categorys
     defaults: { _controller: "UserBundle:NewsCategorys:index" }
 
-avl_news_categorys_show:
-    path:     /cnsl/newsgroups/{groupId}/show
-    defaults: { _controller: "UserBundle:NewsCategorys:show" }
-
 avl_news_categorys_create:
-    path:     /cnsl/newscategorys/create
+    path:     /cnsl/admin/news/categorys/create
     defaults: { _controller: "UserBundle:NewsCategorys:create" }
     requirements: { _method: post|get }
 
 avl_news_categorys_edit:
-    path:     /cnsl/newscategorys/{groupId}/edit
+    path:     /cnsl/admin/news/categorys/{groupId}/edit
     defaults: { _controller: "UserBundle:NewsCategorys:edit" }
     requirements: { _method: post|get }
 
 avl_news_categorys_delete:
-    path:     /cnsl/newscategorys/{groupId}/delete
+    path:     /cnsl/admin/news/categorys/{groupId}/delete
     defaults: { _controller: "UserBundle:NewsCategorys:delete" }
     requirements: { _method: post|delete }
 
@@ -106,24 +102,32 @@ avl_news_categorys_delete:
 # NewsManagement
 ##
 avl_news:
-    path:     /cnsl/news
+    path:     /cnsl/admin/news
     defaults: { _controller: "UserBundle:News:index" }
 
 avl_news_show:
-    path:     /cnsl/news/{newsId}/show
+    path:     /cnsl/news/{slug}
     defaults: { _controller: "UserBundle:News:show" }
 
+avl_news_category_list:
+    path:     /cnsl/news/category/{slug}
+    defaults: { _controller: "UserBundle:News:showCategory" }
+
+avl_news_category_list_all:
+    path:     /cnsl/news/category/
+    defaults: { _controller: "UserBundle:News:showCategory" }
+
 avl_news_create:
-    path:     /cnsl/news/create
+    path:     /cnsl/news/admin/create
     defaults: { _controller: "UserBundle:News:create" }
     requirements: { _method: post|get }
 
 avl_news_edit:
-    path:     /cnsl/news/{newsId}/edit
+    path:     /cnsl/news/admin/{newsId}/edit
     defaults: { _controller: "UserBundle:News:edit" }
     requirements: { _method: post|get }
 
 avl_news_delete:
-    path:     /cnsl/news/{newsId}/delete
+    path:     /cnsl/news/admin/{newsId}/delete
     defaults: { _controller: "UserBundle:News:delete" }
     requirements: { _method: post|delete }

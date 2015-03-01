@@ -20,6 +20,10 @@ class NewsCategorysType extends AbstractType
                 'label' => 'label.news.categorys.name',
                 'required' => true
             ))
+            ->add('path', 'text', array(
+                'label' => 'label.path',
+                'required' => false
+            ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'label.news.categorys.enabled',
                 'required' => false

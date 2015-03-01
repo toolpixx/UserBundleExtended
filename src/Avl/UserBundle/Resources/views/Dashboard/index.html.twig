@@ -18,7 +18,7 @@
         </div>
         {% if news is not null %}
             <br>
-            <h1 class="title">MT_CNSL News</h1>
+            <h1 class="title">{{ 'link.news.posts'|trans }}</h1>
             <hr>
             {% if news|length > 0 %}
                 {% for entity in news %}
@@ -26,10 +26,15 @@
                         {% if entity.link is not null %}
                             <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
                         {% endif %}
-                        <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'newsId': entity.id }) }}"{% endif %}>
-                            <h3>{{ entity.title }}</h3>
+                        <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.title }}</h3>
+                        <hr style="margin-top:0px !important">
+                        {% if entity.body is not null or entity.link is not null %}
+                            <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entity.path }) }}"{% endif %}>
+                        {% endif %}
                             {{ entity.preface|nl2br }}
-                        </a>
+                        {% if entity.body is not null or entity.link is not null %}
+                            </a>
+                        {% endif %}
                         <br><br>
                         <small>
                             {% if not entity.category is null %}
@@ -41,34 +46,13 @@
                             <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                         </small>
                     </div>
+                    <br>
                 {% endfor %}
             {% endif %}
         {% endif %}
-
-        {% if entities is not null %}
-            <h1>Subuser-Management</h1>
-            <hr>
-            {% include "UserBundle:SubUser:entities.html.twig" %}
-            {{ knp_pagination_render(entities) }}
-        {% endif %}
     </div>
     <div class="col-md-4">
-        <h1 class="title">Kategorien</h1>
-        <hr>
-        <div style="overflow:auto">
-            {% if entityCategorys is not null %}
-                {% if entityCategorys|length > 0 %}
-                    <ul class="nav nav-pills nav-stacked">
-                        {% for categorys in entityCategorys %}
-                            <li>
-                                <a href="#">{{ categorys.name }} ({{ categorys.news|length }})</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endif %}
-        </div>
-        <br>
+        {% include "UserBundle:News:list.categorys.navigation.html.twig" %}
         <h1 class="title">Symfony News</h1>
         <hr>
         <div style="overflow:auto">

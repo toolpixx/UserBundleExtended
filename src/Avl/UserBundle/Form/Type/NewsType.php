@@ -34,6 +34,10 @@ class NewsType extends AbstractType
                 ),
                 'required' => false
             ))
+            ->add('path', 'text', array(
+                'label' => 'label.path',
+                'required' => false
+            ))
             ->add('link', 'text', array(
                 'label' => 'label.link',
                 'required' => false

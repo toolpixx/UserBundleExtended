@@ -1,0 +1,20 @@
+{% if entityCategorys is not null %}
+    {% if entityCategorys|length > 0 %}
+        <h1 class="title">{{ 'link.news.categorys'|trans }}</h1>
+        <hr>
+        <div style="overflow:auto">
+            <ul class="nav nav-pills nav-stacked">
+                {% for categorys in entityCategorys %}
+                    <li>
+                        {% if categorys.getEnabledAndInternalNews == 0 %}
+                            <a href="#">{{ categorys.name }} (0)</a>
+                        {% else %}
+                            <a href="{{ path('avl_news_category_list', { 'slug': categorys.path }) }}">{{ categorys.name }} ({{ categorys.getEnabledAndInternalNews }})</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
+    {% endif %}
+{% endif %}

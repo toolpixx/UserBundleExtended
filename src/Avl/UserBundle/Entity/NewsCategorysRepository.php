@@ -26,19 +26,12 @@ class NewsCategorysRepository extends EntityRepository
 
         // Create query
         return $this->getEntityManager()
-            ->createQuery(
-                '
-                SELECT
-                  categorys
-                FROM
-                  UserBundle:NewsCategorys categorys
-                WHERE
-                    categorys.name LIKE :query
-                ORDER BY
-                  categorys.id
-                ASC
-            '
-            )
+            ->createQuery('
+                SELECT categorys
+                FROM UserBundle:NewsCategorys categorys
+                WHERE categorys.name LIKE :query
+                ORDER BY categorys.id ASC
+            ')
             ->setParameter('query', '%'.$query.'%');
     }
 }

@@ -5,10 +5,14 @@ namespace Avl\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\NewsCategorysRepository")
  * @ORM\Table(name="news_categorys")
+ * @UniqueEntity("path")
+ * @UniqueEntity("name")
+ * @ORM\HasLifecycleCallbacks
  */
 class NewsCategorys
 {
@@ -40,23 +44,30 @@ class NewsCategorys
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100)
+     * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
-    private $name;
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $path;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdDate", type="datetimetz")
      */
-    private $createdDate;
+    protected $createdDate;
 
     /**
      * @ORM\OneToMany(targetEntity="News", mappedBy="category", cascade={"persist"})
      * @ORM\JoinColumn(name="news", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
      */
-    private $news;
+    protected $news;
 
     /**
      * Constructor
@@ -129,6 +140,37 @@ class NewsCategorys
     }
 
     /**
+     * @ORM\PreFlush()
+     */
+    public function setPathReplace()
+    {
+        $path = $this->getPath();
+
+        if (empty($path)) {
+            $path = $this->getName();
+        }
+        $path = preg_replace('/\s/', '_', $path);
+        $path = preg_replace('/[^a-zA-Z0-9_]/sm', '', $path);
+        $this->setPath(strtolower($path));
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Set createdDate
      *
      * @param \DateTime $createdDate
@@ -154,5 +196,16 @@ class NewsCategorys
     public function getCreatedDateFormatted()
     {
         return $this->createdDate->format('d.m.Y H:i:s');
+    }
+
+    public function getEnabledAndInternalNews()
+    {
+        $count = 0;
+        foreach ($this->getNews() as $news) {
+            if ($news->getEnabled() && $news->getInternal()) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }

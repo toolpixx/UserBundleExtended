@@ -29,21 +29,15 @@ class UserRepository extends EntityRepository
         $parentId = (null !== $parentId) ? $parentId : $userId;
 
         return $this->getEntityManager()
-            ->createQuery(
-                'SELECT
-                  user
-                FROM
-                  UserBundle:User user
-                WHERE
-                  user.parentId = :parentId
+            ->createQuery('
+                SELECT user
+                FROM UserBundle:User user
+                WHERE user.parentId = :parentId
                 AND user.id != :parentId
                 AND user.id != :userId
-                AND (
-                      user.email LIKE :query
-                    OR
-                      user.username LIKE :query
-                )
-                ORDER BY user.id ASC')
+                AND (user.email LIKE :query OR user.username LIKE :query)
+                ORDER BY user.id ASC
+            ')
             ->setParameter('userId', $userId)
             ->setParameter('parentId', $parentId)
             ->setParameter('query', '%'.$query.'%');
@@ -60,25 +54,15 @@ class UserRepository extends EntityRepository
         $query = (null !== $formData['query']) ? $formData['query'] : '';
 
         return $this->getEntityManager()
-            ->createQuery(
-                'SELECT
-                  user.enabled,
-                  user.profilePicturePath,
-                  user.username,
-                  user.email,
-                  user.roles,
-                  user.id,
-                  user.parentId,
-                  COALESCE(user.parentId, user.id) as orderTree
-                FROM
-                  UserBundle:User user
-                WHERE (
-                    user.email LIKE :query
-                  OR
-                    user.username LIKE :query
-                )
+            ->createQuery('
+                SELECT
+                  user.enabled, user.profilePicturePath, user.username, user.email,
+                  user.roles, user.id, user.parentId, COALESCE(user.parentId, user.id) as orderTree
+                FROM UserBundle:User user
+                WHERE (user.email LIKE :query OR user.username LIKE :query)
                 AND user.id != :userId
-                ORDER BY orderTree ASC')
+                ORDER BY orderTree ASC
+            ')
             ->setParameter('userId', $userId)
             ->setParameter('query', '%'.$query.'%');
     }

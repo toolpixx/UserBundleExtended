@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
  */
 abstract class Controller extends BaseController
 {
-
     /**
      * This method checks if user is granted
      * if not it throw exception, otherwise
@@ -46,57 +45,6 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * Pagiation for the subuser-management
-     * @param $request
-     * @param $formData
-     * @param $resultsPerSite
-     * @return mixed
-     */
-    public function getUserPagination($request, $formData, $resultsPerSite)
-    {
-        $query = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('UserBundle:User')
-            ->getAllSubUserByParentId(
-                $this->getUser()->getId(),
-                $this->getUser()->getParentId(),
-                $formData
-            );
-
-        return $this->get('knp_paginator')
-            ->paginate(
-                $query,
-                $request->query->get('page', 1),
-                $resultsPerSite
-            );
-    }
-
-    /**
-     * Pagiation for the subuser-management
-     * @param $request
-     * @param $formData
-     * @param $resultsPerSite
-     * @return mixed
-     */
-    public function getAdminUserPagination($request, $formData, $resultsPerSite)
-    {
-        $query = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('UserBundle:User')
-            ->getAllSubUser(
-                $this->getUser()->getId(),
-                $formData
-            );
-
-        return $this->get('knp_paginator')
-            ->paginate(
-                $query,
-                $request->query->get('page', 1),
-                $resultsPerSite
-            );
-    }
-
-    /**
      * Checks if a role is granted. $roles
      * can be an array or string
      *
@@ -116,5 +64,47 @@ abstract class Controller extends BaseController
             $checkSecurity[] = true;
         }
         return (count($checkSecurity) > 0) ? true : false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInternalNews()
+    {
+        return $this
+            ->getEm()
+            ->getRepository('UserBundle:News')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('createdDate' => 'DESC')
+            );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewsCategory()
+    {
+        return $this
+            ->getEm()
+            ->getRepository('UserBundle:NewsCategorys')
+            ->findBy(
+                array(
+                    'enabled' => true,
+                    'internal' => true
+                ),
+                array('name' => 'ASC')
+            );
+    }
+
+    /**
+     * @return object
+     */
+    public function getEm()
+    {
+        return $this->container->get('doctrine.orm.entity_manager');
     }
 }

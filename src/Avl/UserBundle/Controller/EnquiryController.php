@@ -41,7 +41,6 @@ class EnquiryController extends BaseController
                 $this->get('session')->getFlashBag()->add('warning', 'enquiry.flash.error');
             }
         }
-
         return $this->render(
             'UserBundle:Enquiry:index.html.twig',
             array(

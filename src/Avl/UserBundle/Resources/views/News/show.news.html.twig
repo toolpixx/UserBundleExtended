@@ -3,15 +3,31 @@
 {% block title %}
     {% if entity is not null %}
         {{ 'MT_CNSL News'|trans }}
+        - {{ entity.title }}
     {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="col-md-8">
         {% if entity is not null %}
-            <h1>{{ entity.title }}</h1>
+            <ol class="breadcrumb" style="background-color:#ffffff;padding-left:0px;margin-bottom:28px">
+                <li><a href="{{ path('avl_user_dashboard_show') }}">{{ 'link.dashboard'|trans }}</a></li>
+                <li class="active"><a href="{{ path('avl_news_category_list_all') }}">{{ 'link.news.posts'|trans }}</a></li>
+                <li class="active">
+                    <a href="{{ path('avl_news_category_list', { 'slug': entity.category.path }) }}">
+                        {{ entity.category.name|length > 15 ? entity.category.name|slice(0, 15) ~ '...' : entity.category.name }}
+                    </a>
+                </li>
+                <li class="active">
+                    {{ entity.title|length > 40 ? entity.title|slice(0, 40) ~ '...' : entity.title }}
+                </li>
+            </ol>
+        {% endif %}
+        {% if entity is not null %}
             <hr>
             <div class="well">
+                <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.title }}</h3>
+                <hr style="margin-top:0px !important">
                 {{ entity.preface|nl2br }}
                 <hr>
                 {{ entity.body|nl2br }}
@@ -33,20 +49,6 @@
         {% endif %}
     </div>
     <div class="col-md-4">
-        <h1 class="title">Kategorien</h1>
-        <hr>
-        <div style="overflow:auto">
-            {% if entityCategorys is not null %}
-                {% if entityCategorys|length > 0 %}
-                    <ul class="nav nav-pills nav-stacked">
-                    {% for categorys in entityCategorys %}
-                        <li>
-                            <a href="#">{{ categorys.name }} ({{ categorys.news|length }})</a>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endif %}
-        </div>
+        {% include "UserBundle:News:list.categorys.navigation.html.twig" %}
     </div>
 {% endblock %}
