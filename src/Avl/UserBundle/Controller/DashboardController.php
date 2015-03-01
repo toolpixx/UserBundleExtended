@@ -33,10 +33,9 @@ class DashboardController extends BaseController
     private $cacheKey = null;
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render(
             'UserBundle:Dashboard:index.html.twig',

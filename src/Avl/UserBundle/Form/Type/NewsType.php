@@ -34,10 +34,18 @@ class NewsType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('path', 'text', array(
-                'label' => 'label.path',
-                'required' => false
-            ))
+        ;
+
+        if (null !== $options['data']->getId()) {
+            $builder
+                ->add('path', 'text', array(
+                    'label' => 'label.path',
+                    'required' => false
+                ))
+            ;
+        }
+
+        $builder
             ->add('link', 'text', array(
                 'label' => 'label.link',
                 'required' => false
