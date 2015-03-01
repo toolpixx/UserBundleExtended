@@ -118,16 +118,16 @@ avl_news_category_list_all:
     defaults: { _controller: "UserBundle:News:showCategory" }
 
 avl_news_create:
-    path:     /cnsl/news/admin/create
+    path:     /cnsl/admin/news/create
     defaults: { _controller: "UserBundle:News:create" }
     requirements: { _method: post|get }
 
 avl_news_edit:
-    path:     /cnsl/news/admin/{newsId}/edit
+    path:     /cnsl/admin/news/{newsId}/edit
     defaults: { _controller: "UserBundle:News:edit" }
     requirements: { _method: post|get }
 
 avl_news_delete:
-    path:     /cnsl/news/admin/{newsId}/delete
+    path:     /cnsl/admin/news/{newsId}/delete
     defaults: { _controller: "UserBundle:News:delete" }
     requirements: { _method: post|delete }
