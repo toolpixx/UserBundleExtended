@@ -59,4 +59,21 @@ class NewsRepository extends EntityRepository
             ')
             ->setParameter('slug', '%'.$slug.'%')->getResult();
     }
+
+    public function findInteralEnabledNews()
+    {
+        // Create query
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT news
+                FROM UserBundle:News news
+                LEFT JOIN news.category category
+                WHERE news.enabled = TRUE
+                  AND news.internal = TRUE
+                  AND ((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
+                      AND news.enabledDate <= :dateSelect)
+                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect)
+                ORDER BY news.createdDate DESC
+            ')->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)->getResult();
+    }
 }

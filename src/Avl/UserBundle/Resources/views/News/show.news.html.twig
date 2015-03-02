@@ -37,9 +37,9 @@
                     <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                 </small>
                 <hr style="margin-top:10px !important">
-                {{ entity.preface|markdown|nl2br }}
+                {{ entity.preface|markdown }}
                 <hr>
-                {{ entity.body|markdown|nl2br }}
+                {{ entity.body|markdown }}
             </div>
             <div style="clear:both;text-align: center;">
                 <hr>

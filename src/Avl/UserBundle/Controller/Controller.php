@@ -74,6 +74,8 @@ abstract class Controller extends BaseController
         return $this
             ->getEm()
             ->getRepository('UserBundle:News')
+            ->findInteralEnabledNews();
+        /**
             ->findBy(
                 array(
                     'enabled' => true,
@@ -81,6 +83,7 @@ abstract class Controller extends BaseController
                 ),
                 array('createdDate' => 'DESC')
             );
+         **/
     }
 
     /**

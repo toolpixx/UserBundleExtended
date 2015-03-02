@@ -44,7 +44,7 @@
                         {% if entities.body is not null or entities.link is not null %}
                             <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>
                         {% endif %}
-                        {{ entities.preface|markdown|nl2br }}
+                        {{ entities.preface|markdown }}
                         {% if entities.body is not null or entities.link is not null %}
                             </a>
                         {% endif %}

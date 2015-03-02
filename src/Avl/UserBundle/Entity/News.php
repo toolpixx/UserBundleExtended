@@ -99,6 +99,14 @@ class News
     private $expiredDate;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="enabledExpiredDate", type="boolean", nullable=true)
+     */
+    private $enabledExpiredDate;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="news", cascade={"persist"})
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
@@ -335,6 +343,22 @@ class News
     public function getExpiredDateFormatted()
     {
         return $this->expiredDate->format('d.m.Y H:i:s');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabledExpiredDate()
+    {
+        return $this->enabledExpiredDate;
+    }
+
+    /**
+     * @param $enabled
+     */
+    public function setEnabledExpiredDate($enabledExpiredDate)
+    {
+        $this->enabledExpiredDate = $enabledExpiredDate;
     }
 
     /**
