@@ -12,11 +12,18 @@ use /** @noinspection PhpDeprecationInspection */
 class NewsCategorysType extends AbstractType
 {
     /**
+     * @var
+     */
+    private $builder;
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->builder = $builder;
+
         $builder
             ->add('name', 'text', array(
                 'label' => 'label.news.categorys.name',
@@ -36,14 +43,7 @@ class NewsCategorysType extends AbstractType
             ))
         ;
 
-        /**
-         * Setup the path from title if path is emtpy
-         */
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
-            $newsCategory = $event->getData();
-            $newsCategory['path'] = $event->getForm()->getData()->setPathReplace($newsCategory);
-            $event->setData($newsCategory);
-        });
+        $this->setPreSubmitFormEvent();
     }
     
     /**
@@ -62,5 +62,18 @@ class NewsCategorysType extends AbstractType
     public function getName()
     {
         return 'avl_news_categorys';
+    }
+
+    /**
+     * Setup PRE_SUBMIT
+     * Setup the path from title if path is emtpy
+     */
+    private function setPreSubmitFormEvent()
+    {
+        $this->builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+            $newsCategory = $event->getData();
+            $newsCategory['path'] = $event->getForm()->getData()->setPathReplace($newsCategory);
+            $event->setData($newsCategory);
+        });
     }
 }

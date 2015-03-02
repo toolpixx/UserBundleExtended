@@ -12,11 +12,18 @@ use /** @noinspection PhpDeprecationInspection */
 class NewsType extends AbstractType
 {
     /**
+     * @var
+     */
+    private $builder;
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->builder = $builder;
+
         $builder
             ->add('title', 'text', array(
                 'label' => 'label.title',
@@ -36,16 +43,10 @@ class NewsType extends AbstractType
                 ),
                 'required' => false
             ))
-        ;
-
-        $builder
             ->add('path', 'text', array(
                 'label' => 'label.path',
                 'required' => false
             ))
-        ;
-
-        $builder
             ->add('link', 'text', array(
                 'label' => 'label.link',
                 'required' => false
@@ -73,14 +74,7 @@ class NewsType extends AbstractType
             ))
         ;
 
-        /**
-         * Setup the path from title if path is emtpy
-         */
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
-            $news = $event->getData();
-            $news['path'] = $event->getForm()->getData()->setPathReplace($news);
-            $event->setData($news);
-        });
+        $this->setPreSubmitFormEvent();
     }
     
     /**
@@ -99,5 +93,18 @@ class NewsType extends AbstractType
     public function getName()
     {
         return 'avl_news';
+    }
+
+    /**
+     * Setup PRE_SUBMIT
+     * Setup the path from title if path is emtpy
+     */
+    private function setPreSubmitFormEvent()
+    {
+        $this->builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+            $news = $event->getData();
+            $news['path'] = $event->getForm()->getData()->setPathReplace($news);
+            $event->setData($news);
+        });
     }
 }

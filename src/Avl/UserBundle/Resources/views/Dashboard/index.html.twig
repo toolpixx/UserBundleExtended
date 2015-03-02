@@ -27,7 +27,16 @@
                             <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
                         {% endif %}
                         <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.title }}</h3>
-                        <hr style="margin-top:0px !important">
+                        <small>
+                            {% if not entity.category is null %}
+                                Gefunden in <strong>{{ entity.category.name }}</strong> /
+                            {% endif %}
+                            {% if not entity.user is null %}
+                                Von <strong>{{ entity.user.username }}</strong> am
+                            {% endif %}
+                            <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                        </small>
+                        <hr style="margin-top:10px !important">
                         {% if entity.body is not null or entity.link is not null %}
                             <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entity.path }) }}"{% endif %}>
                         {% endif %}
@@ -35,16 +44,6 @@
                         {% if entity.body is not null or entity.link is not null %}
                             </a>
                         {% endif %}
-                        <br><br>
-                        <small>
-                            {% if not entity.category is null %}
-                                Gefunden in <strong>{{ entity.category.name }}</strong> /
-                            {% endif %}
-                            {% if not entity.user is null %}
-                            Von <strong>{{ entity.user.username }}</strong> am
-                            {% endif %}
-                            <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
-                        </small>
                     </div>
                     <br>
                 {% endfor %}
