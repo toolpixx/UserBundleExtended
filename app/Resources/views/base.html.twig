@@ -78,10 +78,13 @@
                 toastr.error('{{ flashMessage|trans }}', '{{ 'notice.label'|trans }}');
             {% endfor %}
             {% if error is defined and error %}
-            toastr.error('{{ error.messageKey|trans(error.messageData, 'security') }}', '{{ 'notice.label'|trans }}');
+                toastr.error('{{ error.messageKey|trans(error.messageData, 'security') }}', '{{ 'notice.label'|trans }}');
             {% endif %}
             {% if invalid_username is defined %}
-            toastr.error('{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}', '{{ 'notice.label'|trans }}');
+                toastr.error('{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}', '{{ 'notice.label'|trans }}');
+            {% endif %}
+            {% if form is defined and form.vars.valid == false and app.request.method == 'POST' %}
+                toastr.error('{{ 'form.has.error'|trans }}', '{{ 'notice.label'|trans }}');
             {% endif %}
         });
     </script>

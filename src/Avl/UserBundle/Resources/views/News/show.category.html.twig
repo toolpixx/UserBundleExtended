@@ -31,24 +31,23 @@
                             <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
                         {% endif %}
                         <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entities.title }}</h3>
-                        <hr style="margin-top:0px !important">
-                        {% if entities.body is not null or entities.link is not null %}
-                            <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>
-                        {% endif %}
-                        {{ entities.preface|nl2br }}
-                        {% if entities.body is not null or entities.link is not null %}
-                            </a>
-                        {% endif %}
-                        <br><br>
                         <small>
                             {% if not entities.category is null %}
                                 Gefunden in <strong>{{ entities.category.name }}</strong> /
                             {% endif %}
                             {% if not entities.user is null %}
-                            Von <strong>{{ entities.user.username }}</strong> am
+                                Von <strong>{{ entities.user.username }}</strong> am
                             {% endif %}
                             <strong>{{ entities.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                         </small>
+                        <hr style="margin-top:10px !important">
+                        {% if entities.body is not null or entities.link is not null %}
+                            <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>
+                        {% endif %}
+                        {{ entities.preface|markdown|nl2br }}
+                        {% if entities.body is not null or entities.link is not null %}
+                            </a>
+                        {% endif %}
                     </div>
                     <br>
                 {% endfor %}

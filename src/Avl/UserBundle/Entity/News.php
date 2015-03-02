@@ -228,20 +228,18 @@ class News
     }
 
     /**
-     * @ORM\PreFlush()
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * @param $data
+     * @return string
      */
-    public function setPathReplace()
+    public function setPathReplace($data)
     {
-        $path = $this->getPath();
-
+        $path = $data['path'];
         if (empty($path)) {
-            $path = $this->getTitle();
+            $path = $data['title'];
         }
         $path = preg_replace('/\s/', '_', $path);
         $path = preg_replace('/[^a-zA-Z0-9_]/sm', '', $path);
-        $this->setPath(strtolower($path));
+        return strtolower($path);
     }
 
     /**

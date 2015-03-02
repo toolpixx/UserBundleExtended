@@ -4,6 +4,8 @@ namespace Avl\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use /** @noinspection PhpDeprecationInspection */
     Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -36,14 +38,12 @@ class NewsType extends AbstractType
             ))
         ;
 
-        //if (null !== $options['data']->getId()) {
-            $builder
-                ->add('path', 'text', array(
-                    'label' => 'label.path',
-                    'required' => false
-                ))
-            ;
-        //}
+        $builder
+            ->add('path', 'text', array(
+                'label' => 'label.path',
+                'required' => false
+            ))
+        ;
 
         $builder
             ->add('link', 'text', array(
@@ -72,6 +72,15 @@ class NewsType extends AbstractType
                 'label' => 'label.expiredDate'
             ))
         ;
+
+        /**
+         * Setup the path from title if path is emtpy
+         */
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+            $news = $event->getData();
+            $news['path'] = $event->getForm()->getData()->setPathReplace($news);
+            $event->setData($news);
+        });
     }
     
     /**

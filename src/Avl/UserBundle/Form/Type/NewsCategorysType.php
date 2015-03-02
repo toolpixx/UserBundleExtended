@@ -4,6 +4,8 @@ namespace Avl\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use /** @noinspection PhpDeprecationInspection */
     Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -33,6 +35,15 @@ class NewsCategorysType extends AbstractType
                 'required' => false
             ))
         ;
+
+        /**
+         * Setup the path from title if path is emtpy
+         */
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+            $newsCategory = $event->getData();
+            $newsCategory['path'] = $event->getForm()->getData()->setPathReplace($newsCategory);
+            $event->setData($newsCategory);
+        });
     }
     
     /**

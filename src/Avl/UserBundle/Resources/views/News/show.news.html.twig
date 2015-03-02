@@ -27,20 +27,19 @@
             <hr>
             <div class="well">
                 <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.title }}</h3>
-                <hr style="margin-top:0px !important">
-                {{ entity.preface|nl2br }}
-                <hr>
-                {{ entity.body|nl2br }}
-                <br><br>
                 <small>
                     {% if not entity.category is null %}
                         Gefunden in <strong>{{ entity.category.name }}</strong> /
                     {% endif %}
                     {% if not entity.user is null %}
-                    Von <strong>{{ entity.user.username }}</strong> am
+                        Von <strong>{{ entity.user.username }}</strong> am
                     {% endif %}
                     <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                 </small>
+                <hr style="margin-top:10px !important">
+                {{ entity.preface|markdown|nl2br }}
+                <hr>
+                {{ entity.body|markdown|nl2br }}
             </div>
             <div style="clear:both;text-align: center;">
                 <hr>

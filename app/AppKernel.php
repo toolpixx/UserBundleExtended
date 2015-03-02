@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Dothiv\Bundle\ParsedownBundle\DothivParsedownBundle(),
             new Avl\UserBundle\UserBundle(),
         );
 
