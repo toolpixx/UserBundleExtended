@@ -548,6 +548,10 @@
                 <source>label.expiredDate</source>
                 <target>Veröffentlichen bis zum</target>
             </trans-unit>
+            <trans-unit id="label.enabledExpiredDate">
+                <source>label.enabledExpiredDate</source>
+                <target>Zeitlich veröffentlichen bis zum</target>
+            </trans-unit>
             <trans-unit id="label.news.enabled">
                 <source>label.news.enabled</source>
                 <target>Veröffentlicht</target>

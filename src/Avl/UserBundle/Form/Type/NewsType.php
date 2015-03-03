@@ -70,7 +70,7 @@ class NewsType extends AbstractType
                 'label' => 'label.enabledDate'
             ))
             ->add('enabledExpiredDate', 'checkbox', array(
-                'label' => 'Veröffentlichung beenden am?',
+                'label' => 'label.enabledExpiredDate',
                 'required' => false
             ))
             ->add('expiredDate', 'datetime', array(

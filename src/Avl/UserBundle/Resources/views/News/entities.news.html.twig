@@ -28,11 +28,11 @@
                     {% endif %}
                 </td>
                 <td valign="middle">
+                    <strong>{{ entity.title }}</strong>
                     {% if not entity.category is null %}
-                        <strong>{{ entity.category.name }}</strong>
                         <br>
+                        {{ entity.category.name }}
                     {% endif %}
-                    {{ entity.title }}
                 </td>
                 <td valign="middle">
                     {{ entity.enabledDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}

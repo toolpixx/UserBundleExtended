@@ -3,7 +3,37 @@
 {% block title %}
     {{ 'title.news'|trans }}
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    {% javascripts
+    'bundles/user/cropper/cropper.js'
+    'bundles/user/fileinput/js/fileinput.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        /**
+         * Disable expiredData
+         */
+        function setupExpiredDate() {
+            if ($('#avl_news_enabledExpiredDate').prop('checked')) {
+                $('#avl_news_enabledExpiredDate').parent().parent().parent().next('div').show();
+                $('#avl_news_expiredDate_date_day, #avl_news_expiredDate_date_month, #avl_news_expiredDate_date_year, #avl_news_expiredDate_time_hour, #avl_news_expiredDate_time_minute').removeAttr('disabled');
+            } else if (!$('#avl_news_enabledExpiredDate').prop('checked')) {
+                $('#avl_news_enabledExpiredDate').parent().parent().parent().next('div').hide();
+                $('#avl_news_expiredDate_date_day, #avl_news_expiredDate_date_month, #avl_news_expiredDate_date_year, #avl_news_expiredDate_time_hour, #avl_news_expiredDate_time_minute').attr('disabled', 'disabled');
+            }
+        }
+
+        {% if is_granted('ROLE_ADMIN') %}
+        $('#avl_news_enabledExpiredDate').click(function () {
+            setupExpiredDate();
+        });
+        setupExpiredDate()
+        {% endif %}
+    </script>
+{% endblock javascripts %}
 {% block content %}
     <div class="col-md-12">
         {% if currentRouteName == 'avl_news_edit' %}

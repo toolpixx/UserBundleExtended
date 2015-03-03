@@ -94,7 +94,7 @@ class News
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expiredDate", type="datetimetz")
+     * @ORM\Column(name="expiredDate", type="datetimetz", nullable=true)
      */
     private $expiredDate;
 
@@ -331,7 +331,7 @@ class News
      */
     public function getExpiredDate()
     {
-        if ('-0001' != date('Y', $this->expiredDate->getTimestamp())) {
+        if (null !== $this->expiredDate && '-0001' != date('Y', $this->expiredDate->getTimestamp())) {
             return $this->expiredDate;
         }
         return new \DateTime();

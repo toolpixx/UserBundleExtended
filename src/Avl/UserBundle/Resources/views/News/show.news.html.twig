@@ -42,8 +42,8 @@
                 {{ entity.body|markdown }}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
                     <a class="btn btn-info btn-xs" style="float:right" target="_blank" href="{{ path('avl_news_edit', { 'newsId': entity.id }) }}" title="{{ 'title.news.link.edit'|trans }}" role="button">{{ 'button.edit'|trans }}</a>
-                    <br style="clear:both">
                 {% endif %}
+                <br style="clear:both">
             </div>
             <div style="clear:both;text-align: center;">
                 <hr>
