@@ -41,12 +41,13 @@
                             <strong>{{ entities.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
                         </small>
                         <hr style="margin-top:10px !important">
-                        {% if entities.body is not null or entities.link is not null %}
-                            <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>
-                        {% endif %}
                         {{ entities.preface|markdown }}
                         {% if entities.body is not null or entities.link is not null %}
-                            </a>
+                            <a class="btn btn-info btn-xs" style="float:right" <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>{{ 'button.readmore'|trans }}</a>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-warning btn-xs" style="float:left" target="_blank" href="{{ path('avl_news_edit', { 'newsId': entities.id }) }}" title="{{ 'title.news.link.edit'|trans }}" role="button">{{ 'button.edit'|trans }}</a>
+                            <br style="clear:both">
                         {% endif %}
                     </div>
                     <br>

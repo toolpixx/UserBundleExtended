@@ -197,15 +197,4 @@ class NewsCategorys
     {
         return $this->createdDate->format('d.m.Y H:i:s');
     }
-
-    public function getEnabledAndInternalNews()
-    {
-        $count = 0;
-        foreach ($this->getNews() as $news) {
-            if ($news->getEnabled() && $news->getInternal()) {
-                $count++;
-            }
-        }
-        return $count;
-    }
 }

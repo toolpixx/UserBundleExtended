@@ -6,11 +6,7 @@
             <ul class="nav nav-pills nav-stacked">
                 {% for categorys in entityCategorys %}
                     <li>
-                        {% if categorys.getEnabledAndInternalNews == 0 %}
-                            <a href="#">{{ categorys.name }} (0)</a>
-                        {% else %}
-                            <a href="{{ path('avl_news_category_list', { 'slug': categorys.path }) }}">{{ categorys.name }} ({{ categorys.getEnabledAndInternalNews }})</a>
-                        {% endif %}
+                        <a href="{{ path('avl_news_category_list', { 'slug': categorys.path }) }}">{{ categorys.name }} ({{ categorys.getNews|length }})</a>
                     </li>
                 {% endfor %}
             </ul>

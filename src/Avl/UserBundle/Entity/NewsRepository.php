@@ -24,7 +24,6 @@ class NewsRepository extends EntityRepository
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';
 
-        // Create query
         return $this->getEntityManager()
             ->createQuery('
                 SELECT news
@@ -33,8 +32,8 @@ class NewsRepository extends EntityRepository
                 LEFT JOIN news.category category
                 WHERE news.title LIKE :query
                   OR news.body LIKE :query
-                  OR (user.username LIKE :query AND news.user IS NOT null)
-                  OR (category.name LIKE :query AND news.category IS NOT null)
+                  OR (user.username LIKE :query AND news.user IS NOT NULL)
+                  OR (category.name LIKE :query AND news.category IS NOT NULL)
                 ORDER BY news.createdDate DESC
             ')
             ->setParameter('query', '%'.$query.'%');
@@ -46,23 +45,29 @@ class NewsRepository extends EntityRepository
      */
     public function getAllInternalNewsFromCategorysBySlug($slug)
     {
-        // Create query
         return $this->getEntityManager()
             ->createQuery('
                 SELECT news
                 FROM UserBundle:News news
                 LEFT JOIN news.category category
                 WHERE category.path LIKE :slug
-                  and news.enabled = TRUE
-                  and news.internal = true
+                  AND news.enabled = TRUE
+                  AND news.internal = TRUE
+                  AND ((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
+                      AND news.enabledDate <= :dateSelect)
+                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect)
                 ORDER BY news.createdDate DESC
             ')
-            ->setParameter('slug', '%'.$slug.'%')->getResult();
+            ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->setParameter('slug', '%'.$slug.'%')
+            ->getResult();
     }
 
-    public function findInteralEnabledNews()
+    /**
+     * @return array
+     */
+    public function getAllNewsWhereEnabledAndInternal()
     {
-        // Create query
         return $this->getEntityManager()
             ->createQuery('
                 SELECT news
@@ -74,6 +79,8 @@ class NewsRepository extends EntityRepository
                       AND news.enabledDate <= :dateSelect)
                   OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect)
                 ORDER BY news.createdDate DESC
-            ')->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)->getResult();
+            ')
+            ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->getResult();
     }
 }

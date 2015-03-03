@@ -74,16 +74,7 @@ abstract class Controller extends BaseController
         return $this
             ->getEm()
             ->getRepository('UserBundle:News')
-            ->findInteralEnabledNews();
-        /**
-            ->findBy(
-                array(
-                    'enabled' => true,
-                    'internal' => true
-                ),
-                array('createdDate' => 'DESC')
-            );
-         **/
+            ->getAllNewsWhereEnabledAndInternal();
     }
 
     /**
@@ -94,13 +85,7 @@ abstract class Controller extends BaseController
         return $this
             ->getEm()
             ->getRepository('UserBundle:NewsCategorys')
-            ->findBy(
-                array(
-                    'enabled' => true,
-                    'internal' => true
-                ),
-                array('name' => 'ASC')
-            );
+            ->getAllNewsCategoryWhereNewsEnabledAndInternal();
     }
 
     /**

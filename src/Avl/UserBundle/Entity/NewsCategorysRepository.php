@@ -24,7 +24,6 @@ class NewsCategorysRepository extends EntityRepository
         // Setup
         $query = (null !== $formData['query']) ? $formData['query'] : '';
 
-        // Create query
         return $this->getEntityManager()
             ->createQuery('
                 SELECT categorys
@@ -33,5 +32,25 @@ class NewsCategorysRepository extends EntityRepository
                 ORDER BY categorys.id ASC
             ')
             ->setParameter('query', '%'.$query.'%');
+    }
+
+    public function getAllNewsCategoryWhereNewsEnabledAndInternal()
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT categorys, news
+                FROM UserBundle:NewsCategorys categorys
+                LEFT JOIN categorys.news news
+                WHERE categorys.enabled = TRUE
+                  AND categorys.internal = TRUE
+                  AND (news.enabled = TRUE
+                  AND news.internal = TRUE
+                  AND ((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
+                      AND news.enabledDate <= :dateSelect)
+                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect))
+                ORDER BY categorys.name ASC
+            ')
+            ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->getResult();
     }
 }

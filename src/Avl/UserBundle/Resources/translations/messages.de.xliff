@@ -23,6 +23,14 @@
                 <source>button.delete</source>
                 <target>Löschen</target>
             </trans-unit>
+            <trans-unit id="button.edit">
+                <source>button.edit</source>
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="button.readmore">
+                <source>button.readmore</source>
+                <target>Weiter lesen...</target>
+            </trans-unit>
             <trans-unit id="button.back">
                 <source>button.back</source>
                 <target>Abbrechen</target>
