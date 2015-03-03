@@ -51,11 +51,13 @@ class NewsRepository extends EntityRepository
                 FROM UserBundle:News news
                 LEFT JOIN news.category category
                 WHERE category.path LIKE :slug
+                  AND category.enabled = TRUE
+                  AND category.internal = TRUE
                   AND news.enabled = TRUE
                   AND news.internal = TRUE
-                  AND ((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
+                  AND (((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
                       AND news.enabledDate <= :dateSelect)
-                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect)
+                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect))
                 ORDER BY news.createdDate DESC
             ')
             ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
@@ -73,11 +75,13 @@ class NewsRepository extends EntityRepository
                 SELECT news
                 FROM UserBundle:News news
                 LEFT JOIN news.category category
-                WHERE news.enabled = TRUE
+                WHERE category.enabled = TRUE
+                  AND category.internal = TRUE
+                  AND news.enabled = TRUE
                   AND news.internal = TRUE
-                  AND ((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
+                  AND (((news.enabledExpiredDate = FALSE OR news.enabledExpiredDate IS NULL)
                       AND news.enabledDate <= :dateSelect)
-                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect)
+                  OR (news.enabledExpiredDate = TRUE AND news.expiredDate >= :dateSelect))
                 ORDER BY news.createdDate DESC
             ')
             ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
