@@ -16,6 +16,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 abstract class Controller extends BaseController
 {
     /**
+     * News-Repository
+     */
+    const NEWS_REPOSITORY = 'UserBundle:News';
+
+    /**
+     * News-Categorys-Repository
+     */
+    const NEWS_CATEGORYS_REPOSITORY = 'UserBundle:NewsCategorys';
+
+    /**
+     * Security-Authorization-Checker
+     */
+    const SECURITY_AUTHORIZATION_CHECKER = 'security.authorization_checker';
+
+    /**
+     * Doctrine-Orm-Entity-Manager
+     */
+    const DOCTRINE_ORM_ENTITY_MANAGER = 'doctrine.orm.entity_manager';
+
+    /**
      * This method checks if user is granted
      * if not it throw exception, otherwise
      * return true.
@@ -56,11 +76,11 @@ abstract class Controller extends BaseController
         $checkSecurity = array();
         if (is_array($roles)) {
             foreach ($roles as $role) {
-                if (in_array($this->get('security.authorization_checker')->isGranted($role), $roles)) {
+                if (in_array($this->get(self::SECURITY_AUTHORIZATION_CHECKER)->isGranted($role), $roles)) {
                     $checkSecurity[] = true;
                 }
             }
-        } else if ($this->get('security.authorization_checker')->isGranted($roles)) {
+        } else if ($this->get(self::SECURITY_AUTHORIZATION_CHECKER)->isGranted($roles)) {
             $checkSecurity[] = true;
         }
         return (count($checkSecurity) > 0) ? true : false;
@@ -73,7 +93,7 @@ abstract class Controller extends BaseController
     {
         return $this
             ->getEm()
-            ->getRepository('UserBundle:News')
+            ->getRepository(self::NEWS_REPOSITORY)
             ->getAllNewsWhereEnabledAndInternal();
     }
 
@@ -84,7 +104,7 @@ abstract class Controller extends BaseController
     {
         return $this
             ->getEm()
-            ->getRepository('UserBundle:NewsCategorys')
+            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->getAllNewsCategoryWhereNewsEnabledAndInternal();
     }
 
@@ -93,6 +113,6 @@ abstract class Controller extends BaseController
      */
     public function getEm()
     {
-        return $this->container->get('doctrine.orm.entity_manager');
+        return $this->container->get(self::DOCTRINE_ORM_ENTITY_MANAGER);
     }
 }

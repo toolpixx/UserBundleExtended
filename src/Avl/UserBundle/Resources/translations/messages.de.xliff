@@ -550,7 +550,7 @@
             </trans-unit>
             <trans-unit id="label.enabledExpiredDate">
                 <source>label.enabledExpiredDate</source>
-                <target>Zeitlich veröffentlichen bis zum</target>
+                <target>Zeitlich veröffentlichen</target>
             </trans-unit>
             <trans-unit id="label.news.enabled">
                 <source>label.news.enabled</source>
@@ -677,6 +677,11 @@
             <trans-unit id="news.categorys.question.remove">
                 <source>news.categorys.question.remove</source>
                 <target>Möchten Sie die Kategorie wirklich löschen?</target>
+            </trans-unit>
+
+            <trans-unit id="error.notfound">
+                <source>error.notfound</source>
+                <target>Die angeforderte Seite konnte nicht gefunden werden.</target>
             </trans-unit>
         </body>
     </file>

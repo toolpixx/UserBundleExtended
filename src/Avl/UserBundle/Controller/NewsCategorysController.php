@@ -15,6 +15,11 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class NewsCategorysController extends BaseController
 {
     /**
+     * News-Categorys-Repository
+     */
+    const NEWS_CATEGORYS_REPOSITORY = 'UserBundle:NewsCategorys';
+
+    /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -28,7 +33,7 @@ class NewsCategorysController extends BaseController
 
         $query = $this
             ->getEm()
-            ->getRepository('UserBundle:NewsCategorys')
+            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->getAllNewsCategorysByQuery($form->getData());
 
         $entities = $this->get('knp_paginator')
@@ -73,11 +78,11 @@ class NewsCategorysController extends BaseController
     {
         $entity = $this
             ->getEm()
-            ->getRepository('UserBundle:NewsCategorys')
+            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->find($groupId);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
+            $this->entityNotFound();
         }
         return $this->render('UserBundle:News:show.categorys.html.twig', array(
             'entity'      => $entity,
@@ -94,9 +99,9 @@ class NewsCategorysController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
-        $entity = $this->getEm()->getRepository('UserBundle:NewsCategorys')->find($groupId);
+        $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
+            $this->entityNotFound();
         }
         $form = $this->createForm(new NewsCategorysType(), $entity);
         $form->handleRequest($request);
@@ -120,9 +125,9 @@ class NewsCategorysController extends BaseController
     public function deleteAction(Request $request, $groupId)
     {
         if ($request->getMethod() == 'DELETE') {
-            $entity = $this->getEm()->getRepository('UserBundle:NewsCategorys')->find($groupId);
+            $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find NewsCategorys entity.');
+                $this->entityNotFound();
             }
 
             $this->getEm()->remove($entity);
@@ -130,5 +135,13 @@ class NewsCategorysController extends BaseController
             $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.remove.success');
         }
         return $this->redirect($this->generateUrl('avl_news_categorys'));
+    }
+
+    /**
+     * @param string $message
+     */
+    private function entityNotFound($message = '')
+    {
+        throw $this->createNotFoundException((empty($message)) ? 'Unable to find NewsCategorys entity.': $message);
     }
 }

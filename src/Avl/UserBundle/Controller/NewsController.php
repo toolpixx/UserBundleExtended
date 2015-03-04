@@ -16,6 +16,16 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class NewsController extends BaseController
 {
     /**
+     * News-Repository
+     */
+    const NEWS_REPOSITORY = 'UserBundle:News';
+
+    /**
+     * News-Categorys-Repository
+     */
+    const NEWS_CATEGORYS_REPOSITORY = 'UserBundle:NewsCategorys';
+
+    /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -28,7 +38,7 @@ class NewsController extends BaseController
         $form->submit($request);
 
         $query = $this->getEm()
-            ->getRepository('UserBundle:News')
+            ->getRepository(self::NEWS_REPOSITORY)
             ->getAllNewsByQuery(
                 $form->getData()
             );
@@ -74,9 +84,10 @@ class NewsController extends BaseController
      */
     public function showAction($slug)
     {
-        $entity = $this->getNewsBySlug($slug);
+        $entity = $this->getAllNewsWhereEnabledAndInternalBySlug($slug);
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            $this->get('session')->getFlashBag()->add('error', 'error.notfound');
+            return $this->redirect($this->generateUrl('avl_user_dashboard_show'));
         }
         return $this->render('UserBundle:News:show.news.html.twig', array(
             'entity' => $entity,
@@ -90,6 +101,11 @@ class NewsController extends BaseController
      */
     public function showCategoryAction($slug = '')
     {
+        $entityCategory = $this->getAllInternalNewsFromCategoryBySlug($slug);
+        if (!$entityCategory) {
+            $this->get('session')->getFlashBag()->add('error', 'error.notfound');
+            return $this->redirect($this->generateUrl('avl_user_dashboard_show'));
+        }
         return $this->render('UserBundle:News:show.category.html.twig', array(
             'entityCategory' => $this->getAllInternalNewsFromCategoryBySlug($slug),
             'category' => (!empty($slug)) ? $this->getNewsCategoryBySlug($slug) : array(),
@@ -106,7 +122,7 @@ class NewsController extends BaseController
     {
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
-        $entity = $this->getEm()->getRepository('UserBundle:News')->find($newsId);
+        $entity = $this->getEm()->getRepository(self::NEWS_REPOSITORY)->find($newsId);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find News entity.');
@@ -139,7 +155,7 @@ class NewsController extends BaseController
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
         if ($request->getMethod() == 'DELETE') {
-            $entity = $this->getEm()->getRepository('UserBundle:News')->find($newsId);
+            $entity = $this->getEm()->getRepository(self::NEWS_REPOSITORY)->find($newsId);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find News entity.');
@@ -155,23 +171,11 @@ class NewsController extends BaseController
      * @param $slug
      * @return mixed
      */
-    private function getNewsBySlug($slug)
-    {
-        return $this
-            ->getEm()
-            ->getRepository('UserBundle:News')
-            ->findOneByPath($slug);
-    }
-
-    /**
-     * @param $slug
-     * @return mixed
-     */
     private function getNewsCategoryBySlug($slug)
     {
         return $this
             ->getEm()
-            ->getRepository('UserBundle:NewsCategorys')
+            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->findOneByPath($slug);
     }
 
@@ -183,7 +187,18 @@ class NewsController extends BaseController
     {
         return $this
             ->getEm()
-            ->getRepository('UserBundle:News')
+            ->getRepository(self::NEWS_REPOSITORY)
             ->getAllInternalNewsFromCategorysBySlug($slug);
+    }
+
+    /**
+     * @param $slug
+     */
+    private function getAllNewsWhereEnabledAndInternalBySlug($slug)
+    {
+        return $this
+            ->getEm()
+            ->getRepository(self::NEWS_REPOSITORY)
+            ->getAllNewsWhereEnabledAndInternalBySlug($slug);
     }
 }
