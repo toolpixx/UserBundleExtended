@@ -169,10 +169,10 @@ class FacebookProfileController extends BaseController
                 $session = new FacebookSession($tokenList[$account]['token']);
                 $response = (new FacebookRequest(
                     $session, 'POST', '/'.$account.'/feed', array(
-                        'message' => '[Automatik-Post] Ready for Dilbert ;)',
-                        'link' => 'http://www.facebook.com/',
-                        'picture' => 'http://assets.amuniversal.com/8021b8308da40132c3b5005056a9545d',
-                        'description' => ' via A.v.L\'s CNSL'
+                        'message' => '',
+                        'link' => '',
+                        'picture' => '',
+                        'description' => ''
                     )
                 ))->execute()->getGraphObject();
                 dump("Posted with id: " . $response->getProperty('id'));
@@ -192,23 +192,13 @@ class FacebookProfileController extends BaseController
         $response = (new FacebookRequest(
             $session, 'POST', '/211196185740363/milestones',
             array (
-                'title' => 'Final Episode Aired',
-                'description' => 'The big finale was today!',
-                'start_time' => '2015-03-02T21:00:00+0500'
+                'title' => '',
+                'description' => '',
+                'start_time' => ''
             )
         ))->execute()->getGraphObject();
         echo "Posted with id: " . $response->getProperty('id');
         dump($response);
-
-        $request = new FacebookRequest($session, 'POST', '/Schlabbanega/feed', array(
-            'access_token' => $longLivedAccessToken,
-            'message'=> 'test',
-            'link' => 'http://www.example.com/',
-            //'picture' => 'http://www.phpgang.com/wp-content/themes/PHPGang_v2/img/logo.png',
-            'description' => ' via demo.PHPGang.com'
-        ));
-        $request->execute();
-        dump($request);
         exit;
     }
 
