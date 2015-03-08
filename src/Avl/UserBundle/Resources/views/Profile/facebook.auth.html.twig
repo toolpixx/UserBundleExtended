@@ -1,0 +1,48 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ 'title.facebook.accounts'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    "bundles/user/cropper/cropper.css"
+    "bundles/user/fileinput/css/fileinput.min.css"
+    filter="cssrewrite" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h1>{{ 'title.facebook.accounts'|trans }}</h1>
+        <hr>
+        <div class="tabbable tabs-left">
+            {% include 'UserBundle:Tabs:profile.html.twig' %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                {{ 'text.facebook.info'|trans }}
+                                <hr>
+                                {% if entities|length > 0 %}
+                                    Folgende Facebook-Accounts wurden bereits mit CNSL verbunden:
+                                    <br><br>
+                                    {% for entity in entities %}
+                                        <a class="btn btn-info btn-xs" style="margin-bottom:10px" href="http://www.facebook.com/{{ entity.id }}" target="_blank">{{ entity.name }}</a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div style="clear:both;text-align: center;">
+                                <hr>
+                                <a class="btn btn-info" href="{{ facebookUrl }}" role="button">{{ 'button.forward'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

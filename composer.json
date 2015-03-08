@@ -23,7 +23,8 @@
         "behat/behat": "~3.0.6",
         "liip/imagine-bundle": "~1.2",
         "knplabs/knp-paginator-bundle": "~2.4",
-        "dothiv/dothiv-parsedown-bundle": "dev-master"
+        "dothiv/dothiv-parsedown-bundle": "dev-master",
+        "facebook/php-sdk-v4" : "4.0.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

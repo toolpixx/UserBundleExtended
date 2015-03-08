@@ -35,6 +35,10 @@
                 <source>button.back</source>
                 <target>Abbrechen</target>
             </trans-unit>
+            <trans-unit id="button.forward">
+                <source>button.forward</source>
+                <target>Weiter</target>
+            </trans-unit>
             <trans-unit id="button.backlink">
                 <source>button.backlink</source>
                 <target>Zurück</target>
@@ -683,6 +687,46 @@
                 <source>error.notfound</source>
                 <target>Die angeforderte Seite konnte nicht gefunden werden.</target>
             </trans-unit>
+
+            <!-- Facebookconnect -->
+            <trans-unit id="title.facebook.accounts">
+                <source>title.facebook.accounts</source>
+                <target>Facebook-Authorisierung</target>
+            </trans-unit>
+            <trans-unit id="text.facebook.info">
+                <source>text.facebook.info</source>
+                <target>
+                    CNSL bietet Ihnen die Möglichkeit an, sich mit Facebook zuverbinden. Damit
+                    Sie sich mit Facebook verbinden können, benötigen wir Ihre Access-Token von
+                    Facebook. Klicken Sie auf "Weiter" um sich Ihre Facebook-Accounts anzuzeigen
+                    und auszuwählen welche/r Facebook-Account mit CNSL verbunden werden soll.
+                </target>
+            </trans-unit>
+            <trans-unit id="text.facebook.accounts">
+                <source>text.facebook.accounts</source>
+                <target>Bitte wählen Sie die Accounts aus, auf welche CNSL in Ihrem Namen Zugriff haben darf.</target>
+            </trans-unit>
+            <trans-unit id="label.facebook.accounts">
+                <source>label.facebook.accounts</source>
+                <target>Ihre Facebook-Accounts.</target>
+            </trans-unit>
+            <trans-unit id="facebook.flash.connect.success">
+                <source>facebook.flash.connect.success</source>
+                <target>Die Facebook-Authorisierung war erfolgreich.</target>
+            </trans-unit>
+            <trans-unit id="facebook.flash.connect.error">
+                <source>facebook.flash.connect.error</source>
+                <target>Die Facebook-Authorisierung war nicht erfolgreich.</target>
+            </trans-unit>
+            <trans-unit id="facebook.flash.persist.error">
+                <source>facebook.flash.persist.error</source>
+                <target>Ihre Angaben konnten nicht gespeichert werden.</target>
+            </trans-unit>
+            <trans-unit id="facebook.flash.select.accounts.success">
+                <source>facebook.flash.select.accounts.success</source>
+                <target>Ihre Selektion wurde erfolgreich übernommen.</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

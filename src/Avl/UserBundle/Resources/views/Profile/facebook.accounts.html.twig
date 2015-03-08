@@ -1,0 +1,47 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ 'title.facebook.accounts'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    "bundles/user/cropper/cropper.css"
+    "bundles/user/fileinput/css/fileinput.min.css"
+    filter="cssrewrite" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h1>{{ 'title.facebook.accounts'|trans }}</h1>
+        <hr>
+        <div class="tabbable tabs-left">
+            {% include 'UserBundle:Tabs:profile.html.twig' %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="{{ path('avl_user_profile_update_facebook_accounts') }}" {{ form_enctype(form) }} method="POST">
+                                <div class="well">
+                                    {{ 'text.facebook.accounts'|trans }}
+                                    <hr>
+                                    {{ form_widget(form) }}
+                                </div>
+                                <div style="clear:both;text-align: center;">
+                                    <hr>
+                                    <input type="submit" class="btn btn-primary" value="{{ 'button.save'|trans }}"/>
+                                    {% if path is defined %}
+                                        <a class="btn btn-info" href="{{ path('fos_user_profile_show') }}" role="button">{{ 'button.back'|trans }}</a>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

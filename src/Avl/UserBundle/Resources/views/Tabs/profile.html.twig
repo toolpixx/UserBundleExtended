@@ -12,4 +12,12 @@
             {{ 'link.change.password'|trans }}
         </a>
     </li>
+
+    <li {% if currentRouteName == 'avl_user_profile_auth_facebook' %}class="active"{% endif %}>
+        <a href="{{ path('avl_user_profile_auth_facebook') }}">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="top:2px"></span>
+            {{ 'Facebook connect'|trans }}
+        </a>
+    </li>
+
 </ul>

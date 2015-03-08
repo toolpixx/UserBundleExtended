@@ -26,6 +26,26 @@ fos_user_change_password:
     defaults:  { _controller: UserBundle:ChangePassword:changePassword }
     methods:   [GET|POST]
 
+avl_user_profile_auth_facebook:
+    path:      /cnsl/profile/authfacebook
+    defaults:  { _controller: UserBundle:FacebookProfile:authFacebook }
+    methods:   [GET]
+
+avl_user_profile_facebook_test:
+    path:      /cnsl/profile/testfacebook
+    defaults:  { _controller: UserBundle:FacebookProfile:testFacebook }
+    methods:   [GET]
+
+avl_user_profile_connect_facebook:
+    path:      /cnsl/profile/connectfacebook
+    defaults:  { _controller: UserBundle:FacebookProfile:connectFacebook }
+    methods:   [GET]
+
+avl_user_profile_update_facebook_accounts:
+    path:      /cnsl/profile/updatefacebookaccounts
+    defaults:  { _controller: UserBundle:FacebookProfile:updateFacebookAccounts }
+    methods:   [POST]
+
 avl_user_dashboard_show:
     path:      /cnsl/dashboard
     defaults:  { _controller: UserBundle:Dashboard:index }
