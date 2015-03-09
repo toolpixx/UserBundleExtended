@@ -15,6 +15,7 @@ use Avl\UserBundle\Controller\Controller as BaseController;
 use Facebook\GraphUser;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
+use Facebook\FacebookRequestException;
 use Facebook\Entities\AccessToken;
 use Facebook\FacebookSDKException;
 use Facebook\FacebookRedirectLoginHelper;
@@ -78,6 +79,7 @@ class FacebookProfileController extends BaseController
     public function connectFacebookAction(Request $request)
     {
         $accounts = array();
+        $accountEntities = array();
         $choices = array();
         $infos = array();
 
@@ -90,7 +92,7 @@ class FacebookProfileController extends BaseController
             $session = $helper->getSessionFromRedirect();
         } catch(FacebookRequestException $exception) {
             return $this->redirectOnError($exception->getMessage());
-        } catch(\Exception $ex) {
+        } catch(\Exception $exception) {
             return $this->redirectOnError($exception->getMessage());
         }
 
@@ -185,9 +187,9 @@ class FacebookProfileController extends BaseController
                 ))->execute()->getGraphObject(GraphUser::className());
                 dump($user_profile);
             }
-        } catch(FacebookRequestException $ex) {
+        } catch(FacebookRequestException $exception) {
             return $this->redirectOnError($exception->getMessage());
-        } catch(\Exception $ex) {
+        } catch(\Exception $exception) {
             return $this->redirectOnError($exception->getMessage());
         }
         exit;
@@ -212,6 +214,8 @@ class FacebookProfileController extends BaseController
      */
     public function updateFacebookAccountsAction(Request $request)
     {
+        $infoData = array();
+
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
         $this->getFacebookSession();
         $helper = $this->getFacebookUrl();

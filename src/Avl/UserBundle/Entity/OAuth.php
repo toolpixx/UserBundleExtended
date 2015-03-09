@@ -30,7 +30,7 @@ class OAuth
     private $user;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="accounts", type="array")
      */
@@ -55,7 +55,6 @@ class OAuth
      */
     public function __construct(User $user = null)
     {
-        $this->enabled = false;
         $this->updatedDate = new \DateTime();
         $this->user = $user ?: new User();
     }
