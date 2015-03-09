@@ -27,22 +27,22 @@ fos_user_change_password:
     methods:   [GET|POST]
 
 avl_user_profile_auth_facebook:
-    path:      /cnsl/profile/authfacebook
+    path:      /cnsl/profile/fbc/authfacebook
     defaults:  { _controller: UserBundle:FacebookProfile:authFacebook }
     methods:   [GET]
 
 avl_user_profile_facebook_test:
-    path:      /cnsl/profile/testfacebook
+    path:      /cnsl/profile/fbc/testfacebook
     defaults:  { _controller: UserBundle:FacebookProfile:testFacebook }
     methods:   [GET]
 
 avl_user_profile_connect_facebook:
-    path:      /cnsl/profile/connectfacebook
+    path:      /cnsl/profile/fbc/connectfacebook
     defaults:  { _controller: UserBundle:FacebookProfile:connectFacebook }
     methods:   [GET]
 
 avl_user_profile_update_facebook_accounts:
-    path:      /cnsl/profile/updatefacebookaccounts
+    path:      /cnsl/profile/fbc/updatefacebookaccounts
     defaults:  { _controller: UserBundle:FacebookProfile:updateFacebookAccounts }
     methods:   [POST]
 

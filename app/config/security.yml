@@ -7,6 +7,7 @@ security:
         ROLE_CUSTOMER_EVENT_MANAGER: ROLE_USER
         ROLE_CUSTOMER_COMMENT_MANAGER: ROLE_USER
         ROLE_CUSTOMER_SUBUSER_MANAGER: ROLE_USER
+        ROLE_CUSTOMER_FBC_MANAGER: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -38,4 +39,5 @@ security:
         - { path: ^/(cnsl/comment.*)$, role: ROLE_CUSTOMER_COMMENT_MANAGER }
         - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/news.*|cnsl/switch-on|cnsl/switch-switch-off)$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/(cnsl/subuser.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_SUBUSER_MANAGER] }
+        - { path: ^/(cnsl/subuser.*|cnsl/profile/fbc/.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_FBC_MANAGER] }
         - { path: ^/(cnsl/admin/news.*)$, role: ROLE_ADMIN }

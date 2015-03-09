@@ -43,6 +43,7 @@ class FacebookProfileController extends BaseController
     public function authFacebookAction(Request $request)
     {
         $names = array();
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
 
         // Create the facebook-url
         $this->getFacebookSession();
@@ -58,7 +59,7 @@ class FacebookProfileController extends BaseController
             );
         }
 
-        sort($names);
+        ksort($names);
 
         return $this->render(
             'UserBundle:Profile:facebook.auth.html.twig',
@@ -79,6 +80,8 @@ class FacebookProfileController extends BaseController
         $accounts = array();
         $choices = array();
         $infos = array();
+
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
 
         $this->getFacebookSession();
         $helper = $this->getFacebookUrl();
@@ -159,6 +162,7 @@ class FacebookProfileController extends BaseController
 
     public function testFacebookAction(Request $request)
     {
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
         $this->getFacebookSession();
         $entity = $this->getEm()->getRepository(self::OAUTH_REPOSITORY)->findOneByUser($this->getUser());
         $tokenList = $entity->getUnserializeInfo();
@@ -208,6 +212,7 @@ class FacebookProfileController extends BaseController
      */
     public function updateFacebookAccountsAction(Request $request)
     {
+        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
         $this->getFacebookSession();
         $helper = $this->getFacebookUrl();
 
