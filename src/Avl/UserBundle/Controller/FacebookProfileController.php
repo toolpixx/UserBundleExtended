@@ -52,16 +52,17 @@ class FacebookProfileController extends BaseController
 
         // Get the names for the selected accounts
         $entities = $this->getEm()->getRepository(self::OAUTH_REPOSITORY)->findOneByUser($this->getUser());
-        $tokenList = $entities->getUnserializeInfo();
-        foreach($entities->getAccounts() as $account) {
-            $names[$tokenList[$account]['name'].'_'.$account] = array(
-                'id' => $account,
-                'name' => $tokenList[$account]['name']
-            );
+        if ($entities) {
+            $tokenList = $entities->getUnserializeInfo();
+            foreach($entities->getAccounts() as $account) {
+                $names[$tokenList[$account]['name'].'_'.$account] = array(
+                    'id' => $account,
+                    'name' => $tokenList[$account]['name']
+                );
+            }
+
+            ksort($names);
         }
-
-        ksort($names);
-
         return $this->render(
             'UserBundle:Profile:facebook.auth.html.twig',
             array(
@@ -175,10 +176,10 @@ class FacebookProfileController extends BaseController
                 $session = new FacebookSession($tokenList[$account]['token']);
                 $response = (new FacebookRequest(
                     $session, 'POST', '/'.$account.'/feed', array(
-                        'message' => '',
-                        'link' => '',
-                        'picture' => '',
-                        'description' => ''
+                        'message' => 'The automatic Dilbert ;)',
+                        'link' => 'http://dilbert.com/strip/'.date('y-m-d'),
+                        //'picture' => '',
+                        'description' => 'Have a little fun with the daily Dilbert...This is an automatic posting!'
                     )
                 ))->execute()->getGraphObject();
                 dump("Posted with id: " . $response->getProperty('id'));
