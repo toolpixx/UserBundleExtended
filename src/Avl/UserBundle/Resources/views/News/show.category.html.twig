@@ -8,7 +8,6 @@
         {% endif %}
     {% endif %}
 {% endblock %}
-
 {% block content %}
     <div class="col-md-8">
         {% if category is not null %}
@@ -22,37 +21,34 @@
                 {% endif %}
             </ol>
         {% endif %}
-
-        {% if entityCategory is not null %}
-            {% if entityCategory|length > 0 %}
-                {% for entities in entityCategory %}
-                    <div class="well wellink">
-                        {% if entities.link is not null %}
-                            <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
+        {% if entityCategory is not null and entityCategory|length > 0 %}
+            {% for entities in entityCategory %}
+                <div class="well wellink">
+                    {% if entities.link is not null %}
+                        <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
+                    {% endif %}
+                    <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entities.title }}</h3>
+                    <small>
+                        {% if not entities.category is null %}
+                            Gefunden in <strong>{{ entities.category.name }}</strong> /
                         {% endif %}
-                        <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entities.title }}</h3>
-                        <small>
-                            {% if not entities.category is null %}
-                                Gefunden in <strong>{{ entities.category.name }}</strong> /
-                            {% endif %}
-                            {% if not entities.user is null %}
-                                Von <strong>{{ entities.user.username }}</strong> am
-                            {% endif %}
-                            <strong>{{ entities.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
-                        </small>
-                        <hr style="margin-top:10px !important">
-                        {{ entities.preface|markdown }}
-                        {% if entities.body is not null or entities.link is not null %}
-                            <a class="btn btn-info btn-xs" style="float:right" <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>{{ 'button.readmore'|trans }}</a>
+                        {% if not entities.user is null %}
+                            Von <strong>{{ entities.user.username }}</strong> am
                         {% endif %}
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
-                            <a class="btn btn-warning btn-xs" style="float:left" target="_blank" href="{{ path('avl_news_edit', { 'newsId': entities.id }) }}" title="{{ 'title.news.link.edit'|trans }}" role="button">{{ 'button.edit'|trans }}</a>
-                        {% endif %}
-                        <br style="clear:both">
-                    </div>
-                    <br>
-                {% endfor %}
-            {% endif %}
+                        <strong>{{ entities.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                    </small>
+                    <hr style="margin-top:10px !important">
+                    {{ entities.preface|markdown }}
+                    {% if entities.body is not null or entities.link is not null %}
+                        <a class="btn btn-info btn-xs" style="float:right" <a {% if entities.link is not null %}href="{{ entities.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entities.path }) }}"{% endif %}>{{ 'button.readmore'|trans }}</a>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-warning btn-xs" style="float:left" target="_blank" href="{{ path('avl_news_edit', { 'newsId': entities.id }) }}" title="{{ 'title.news.link.edit'|trans }}" role="button">{{ 'button.edit'|trans }}</a>
+                    {% endif %}
+                    <br style="clear:both">
+                </div>
+                <br>
+            {% endfor %}
         {% endif %}
     </div>
     <div class="col-md-4">

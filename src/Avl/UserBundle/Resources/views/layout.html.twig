@@ -17,8 +17,8 @@
         {% block content_header %}
             <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div style="margin-top:16px;color:silver">
-                        {{ 'footer.text'|trans }}
+                    <div style="text-align:center;margin-top:16px;color:silver">
+                        {{ 'footer.text'|trans({'%date%': ''|date('Y')}) }}
                     </div>
                 </div>
             </nav>
@@ -76,7 +76,7 @@
                                     </li>
                                 {% endif %}
                                 <li>
-                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+                                    <a role="presentation" href="{{ path('avl_faq_category_list_all') }}">
                                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'link.faq'|trans }}
@@ -124,11 +124,35 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a role="presentation" href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
-                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+                                    <a role="presentation" href="{{ path('avl_faq') }}" id="dropdownMenu3" data-toggle="dropdown"
+                                       {% if currentRouteName == 'avl_faq' or currentRouteName == 'avl_faq_categorys' %}style="color:#167ac6 !important;"{% endif %}">
+                                        <span class="glyphicon glyphicon glyphicon-question-sign" aria-hidden="true"
                                               style="top:2px"></span>
                                         {{ 'link.faq'|trans }}
                                     </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                                        <li role="presentation">
+                                            <a role="presentation" href="{{ path('avl_faq') }}">
+                                            <span class="glyphicon glyphicon glyphicon-question-sign" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                                {{ 'link.faq.posts'|trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a role="menuitem" href="{{ path('avl_faq_categorys') }}">
+                                            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                                {{ 'link.faq.categorys'|trans }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a role="presentation" href="{{ path('avl_faq_category_list_all') }}">
+                                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+                                                  style="top:2px"></span>
+                                                {{ 'link.faq.preview'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             {% endif %}
                             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}

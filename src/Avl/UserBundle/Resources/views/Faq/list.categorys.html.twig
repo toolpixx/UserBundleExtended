@@ -1,0 +1,49 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ 'title.faq.categorys'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h1>{{ 'title.faq.categorys'|trans }}</h1>
+        <hr>
+        <div class="tabbable tabs-left">
+            {% include 'UserBundle:Tabs:faq.categorys.html.twig' %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    <form action="{{ path('avl_faq_categorys') }}" method="GET" novalidate>
+                        <div class="input-group">
+                            {{ form_widget(form.query) }}
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button">{{ 'button.search'|trans }}</button>
+                            </span>
+                        </div>
+                    </form>
+                    <br>
+
+                    <div class="{% if entities|length > 0 %}{% endif %}">
+                        {% include "UserBundle:Faq:entities.categorys.html.twig" %}
+                    </div>
+                    {{ knp_pagination_render(entities) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% if entities|length == 0 %}
+        {% if form.vars.value.query is not null %}
+            {% set infoNotice = 'faq.categorys.flash.no.results' %}
+        {% else %}
+            {% set infoNotice = 'faq.categorys.flash.no.news' %}
+        {% endif %}
+        <script>
+            $(document).ready(function () {
+                toastr.info('{{ infoNotice|trans }}', '{{ 'notice.label'|trans }}');
+            });
+        </script>
+    {% endif %}
+{% endblock %}
+

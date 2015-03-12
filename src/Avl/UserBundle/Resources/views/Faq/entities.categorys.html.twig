@@ -1,0 +1,54 @@
+{% if entities|length > 0 %}
+    <table class="table table-hover" id="pagination">
+        <thead>
+        <tr>
+            <th width="1%"></th>
+            <th width="1%"></th>
+            <th>{% include sort_title with {'pagination': entities, 'title': 'Name', 'field': 'categorys.name'} %}</th>
+            <th width="5%">Faq</th>
+            <th width="12%" style="text-align: right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>
+                    {% if entity.enabled %}
+                        <span class="glyphicon glyphicon-ok text-success" title="{{ 'title.link.enabled'|trans }}"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-off text-danger" title="{{ 'title.link.disabled'|trans }}"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.internal %}
+                        <span class="glyphicon glyphicon-cloud" title="{{ 'title.link.internal'|trans }}"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-globe" title="{{ 'title.link.external'|trans }}"></span>
+                    {% endif %}
+                </td>
+                <td valign="middle">
+                    {{ entity.name }}
+                </td>
+                <td align="center">{{ entity.faq|length }}</td>
+                <td style="white-space: nowrap;">
+                    <form style="float:right" action="{{ path('avl_faq_categorys_delete', {'groupId': entity.id}) }}" method="POST"
+                          onsubmit="return confirm('{{ 'faq.categorys.question.remove'|trans }}')">
+                        <input type="hidden" name="_method" value="DELETE">
+
+                        <div style="text-align: center">
+                            <button type="submit" title="{{ 'title.faq.categorys.link.remove'|trans }}" class="btn btn-xs btn-danger">
+                                <span class="glyphicon glyphicon-trash" style="top:2px"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <a class="btn btn-xs btn-primary" style="float:right;margin-right:10px"
+                       href="{{ path('avl_faq_categorys_edit', { 'groupId': entity.id }) }}" title="{{ 'title.faq.categorys.link.edit'|trans }}"
+                       style="float:left">
+                        <span class="glyphicon glyphicon-edit" style="top:2px"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

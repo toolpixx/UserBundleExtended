@@ -151,3 +151,63 @@ avl_news_delete:
     path:     /cnsl/admin/news/{newsId}/delete
     defaults: { _controller: "UserBundle:News:delete" }
     requirements: { _method: post|delete }
+
+###
+# FaqCategorysManagement
+##
+avl_faq_categorys:
+    path:     /cnsl/admin/faq/categorys
+    defaults: { _controller: "UserBundle:FaqCategorys:index" }
+
+avl_faq_categorys_create:
+    path:     /cnsl/admin/faq/categorys/create
+    defaults: { _controller: "UserBundle:FaqCategorys:create" }
+    requirements: { _method: post|get }
+
+avl_faq_categorys_edit:
+    path:     /cnsl/admin/faq/categorys/{groupId}/edit
+    defaults: { _controller: "UserBundle:FaqCategorys:edit" }
+    requirements: { _method: post|get }
+
+avl_faq_categorys_delete:
+    path:     /cnsl/admin/faq/categorys/{groupId}/delete
+    defaults: { _controller: "UserBundle:FaqCategorys:delete" }
+    requirements: { _method: post|delete }
+
+###
+# FaqManagement
+##
+avl_faq:
+    path:     /cnsl/admin/faq
+    defaults: { _controller: "UserBundle:Faq:index" }
+
+avl_faq_create:
+    path:     /cnsl/admin/faq/create
+    defaults: { _controller: "UserBundle:Faq:create" }
+    requirements: { _method: post|get }
+
+avl_faq_edit:
+    path:     /cnsl/admin/faq/{faqId}/edit
+    defaults: { _controller: "UserBundle:Faq:edit" }
+    requirements: { _method: post|get }
+
+avl_faq_delete:
+    path:     /cnsl/admin/faq/{faqId}/delete
+    defaults: { _controller: "UserBundle:Faq:delete" }
+    requirements: { _method: post|delete }
+
+avl_faq_list:
+    path:     /cnsl/list
+    defaults: { _controller: "UserBundle:Faq:list" }
+
+avl_faq_show:
+    path:     /cnsl/faq/{slug}
+    defaults: { _controller: "UserBundle:Faq:show" }
+
+avl_faq_category_list:
+    path:     /cnsl/faq/category/{slug}
+    defaults: { _controller: "UserBundle:Faq:showCategory" }
+
+avl_faq_category_list_all:
+    path:     /cnsl/faq/category/
+    defaults: { _controller: "UserBundle:Faq:showCategory" }

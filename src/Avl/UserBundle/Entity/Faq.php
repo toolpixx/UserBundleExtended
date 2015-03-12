@@ -8,13 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\NewsRepository")
- * @ORM\Table(name="news")
+ * @ORM\Entity(repositoryClass="Avl\UserBundle\Entity\FaqRepository")
+ * @ORM\Table(name="faq")
  * @UniqueEntity("path")
- * @UniqueEntity("title")
+ * @UniqueEntity("question")
  * @ORM\HasLifecycleCallbacks
  */
-class News
+class Faq
 {
     /**
      * @var integer
@@ -44,30 +44,16 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100, unique=true)
+     * @ORM\Column(name="question", type="string", length=100, unique=true)
      */
-    private $title;
+    private $question;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="preface", type="text")
+     * @ORM\Column(name="answer", type="text", nullable=true)
      */
-    private $preface;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="link", type="string", length=255, nullable=true)
-     */
-    private $link;
+    private $answer;
 
     /**
      * @var string
@@ -106,22 +92,22 @@ class News
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="news", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="faq", cascade={"persist"})
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NewsCategorys", inversedBy="news", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="FaqCategorys", inversedBy="faq", cascade={"persist"})
      * @ORM\JoinColumn(name="category", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid
      */
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="News")
-     * @ORM\JoinTable(name="news_related")
+     * @ORM\ManyToMany(targetEntity="Faq")
+     * @ORM\JoinTable(name="faq_related")
      * @Assert\Valid
      */
     private $related;
@@ -179,67 +165,35 @@ class News
     }
 
     /**
-     * @param $title
+     * @param $question
      */
-    public function setTitle($title)
+    public function setQuestion($question)
     {
-        $this->title = $title;
+        $this->question = $question;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getQuestion()
     {
-        return $this->title;
+        return $this->question;
     }
 
     /**
-     * @param string $preface
+     * @param string $answer
      */
-    public function setPreface($preface)
+    public function setAnswer($answer)
     {
-        $this->preface = $preface;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPreface()
-    {
-        return $this->preface;
-    }
-
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
+        $this->answer = $answer;
     }
 
     /**
      * @return string
      */
-    public function getBody()
+    public function getAnswer()
     {
-        return $this->body;
-    }
-
-    /**
-     * @param string $link
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLink()
-    {
-        return $this->link;
+        return $this->answer;
     }
 
     /**
@@ -250,7 +204,7 @@ class News
     {
         $path = $data['path'];
         if (empty($path)) {
-            $path = $data['title'];
+            $path = $data['question'];
         }
         $path = preg_replace('/\s/', '_', $path);
         $path = preg_replace('/[^a-zA-Z0-9_]/sm', '', $path);

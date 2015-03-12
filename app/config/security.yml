@@ -40,4 +40,4 @@ security:
         - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/news.*|cnsl/switch-on|cnsl/switch-switch-off)$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/(cnsl/subuser.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_SUBUSER_MANAGER] }
         - { path: ^/(cnsl/subuser.*|cnsl/profile/fbc/.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_FBC_MANAGER] }
-        - { path: ^/(cnsl/admin/news.*)$, role: ROLE_ADMIN }
+        - { path: ^/(cnsl/admin/news.*|cnsl/admin/faq.*)$, role: ROLE_ADMIN }

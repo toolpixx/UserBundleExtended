@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs" style="width:20%">
+    <li {% if slug is defined and slug == 'faq' %}class="active"{% endif %}>
+        <a href="{{ path('avl_content_show', {'slug': 'faq'}) }}">
+            Übersicht
+        </a>
+    </li>
+    <li {% if slug is defined and slug == 'faq.event' %}class="active"{% endif %}>
+        <a href="{{ path('avl_content_show', {'slug': 'faq.event'}) }}">
+            Events
+        </a>
+    </li>
+    <li {% if slug is defined and slug == 'faq.comment' %}class="active"{% endif %}>
+        <a href="{{ path('avl_content_show', {'slug': 'faq.comment'}) }}">
+            Kommentare
+        </a>
+    </li>
+    <li {% if slug is defined and slug == 'faq.user' %}class="active"{% endif %}>
+        <a href="{{ path('avl_content_show', {'slug': 'faq.user'}) }}">
+            Benutzer
+        </a>
+    </li>
+    <li {% if currentRouteName == 'avl_faq_enquiry' %}class="active"{% endif %}>
+        <a href="{{ path('avl_faq_enquiry') }}">
+            Keine Lösung gefunden
+        </a>
+    </li>
+</ul>

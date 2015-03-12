@@ -26,6 +26,11 @@ abstract class Controller extends BaseController
     const NEWS_CATEGORYS_REPOSITORY = 'UserBundle:NewsCategorys';
 
     /**
+     * Faq-Categorys-Repository
+     */
+    const FAQ_CATEGORYS_REPOSITORY = 'UserBundle:FaqCategorys';
+
+    /**
      * Security-Authorization-Checker
      */
     const SECURITY_AUTHORIZATION_CHECKER = 'security.authorization_checker';
@@ -106,6 +111,17 @@ abstract class Controller extends BaseController
             ->getEm()
             ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->getAllNewsCategoryWhereNewsEnabledAndInternal();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFaqCategory()
+    {
+        return $this
+            ->getEm()
+            ->getRepository(self::FAQ_CATEGORYS_REPOSITORY)
+            ->getAllFaqCategoryWhereFaqEnabledAndInternal();
     }
 
     /**

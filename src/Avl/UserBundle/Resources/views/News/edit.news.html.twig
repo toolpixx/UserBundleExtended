@@ -13,6 +13,8 @@
     {% endjavascripts %}
 
     <script type="text/javascript">
+        $("#avl_news_related option[value='{{ entity.id }}']").remove();
+
         /**
          * Disable expiredData
          */

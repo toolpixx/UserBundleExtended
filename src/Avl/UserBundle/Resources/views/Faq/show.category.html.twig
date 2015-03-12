@@ -1,0 +1,43 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}
+    {% if entityCategory is not null %}
+        {{ 'MT_CNSL Faq'|trans }}
+        {% if category.name is defined %}
+            - {{ category.name }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        {% if category is not null %}
+            <ol class="breadcrumb" style="background-color:#ffffff;padding-left:0px;margin-bottom:28px">
+                <li><a href="{{ path('avl_user_dashboard_show') }}">{{ 'link.dashboard'|trans }}</a></li>
+                <li class="active"><a href="{{ path('avl_faq_category_list_all') }}">{{ 'link.faq.posts'|trans }}</a></li>
+                {% if category.name is defined %}
+                    <li class="active">
+                        {{ category.name }}
+                    </li>
+                {% endif %}
+            </ol>
+        {% endif %}
+        <div class="tabbable tabs-left">
+            {% include "UserBundle:Faq:list.categorys.navigation.html.twig" %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    {% if entityCategory is not null and entityCategory|length > 0 %}
+                        {% for entities in entityCategory %}
+                            <div class="well wellink" style="padding-top:5px;padding-bottom:5px">
+                                <h5 style="font-weight: 200;margin-bottom:10px !important">
+                                    <a href="{{ path('avl_faq_show', { 'slug': entities.path }) }}">
+                                        {{ entities.question }}
+                                    </a>
+                                </h5>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

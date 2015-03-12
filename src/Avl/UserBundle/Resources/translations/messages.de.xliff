@@ -93,7 +93,7 @@
             </trans-unit>
             <trans-unit id="footer.text">
                 <source>footer.text</source>
-                <target>This is the footer with copyright...Your slogan here....</target>
+                <target>Copyright and all rights reserved by CNSL %date%</target>
             </trans-unit>
             <trans-unit id="link.dashboard">
                 <source>link.dashboard</source>
@@ -134,6 +134,10 @@
             <trans-unit id="link.faq">
                 <source>link.faq</source>
                 <target>Faq und Hilfe</target>
+            </trans-unit>
+            <trans-unit id="link.faq.preview">
+                <source>link.faq.preview</source>
+                <target>Vorschau</target>
             </trans-unit>
             <trans-unit id="title.link.logout">
                 <source>title.link.logout</source>
@@ -548,6 +552,10 @@
                 <source>label.category</source>
                 <target>Kategorie</target>
             </trans-unit>
+            <trans-unit id="label.news.related">
+                <source>label.news.related</source>
+                <target>Ähnliche Nachrichten</target>
+            </trans-unit>
             <trans-unit id="label.enabledDate">
                 <source>label.enabledDate</source>
                 <target>Veröffentlichen ab dem</target>
@@ -590,7 +598,7 @@
             </trans-unit>
             <trans-unit id="news.flash.no.news">
                 <source>news.flash.no.news</source>
-                <target>Es sind keine Benutzer vorhanden.</target>
+                <target>Es sind keine Nachrichten vorhanden.</target>
             </trans-unit>
             <trans-unit id="news.question.remove">
                 <source>news.question.remove</source>
@@ -690,6 +698,218 @@
             <trans-unit id="error.notfound">
                 <source>error.notfound</source>
                 <target>Die angeforderte Seite konnte nicht gefunden werden.</target>
+            </trans-unit>
+
+            <!-- faq -->
+            <trans-unit id="link.faq.posts">
+                <source>link.faq.posts</source>
+                <target>Faq</target>
+            </trans-unit>
+            <trans-unit id="link.faq.edit">
+                <source>link.faq.edit</source>
+                <target>Faq bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.faq.management">
+                <source>title.faq.management</source>
+                <target>Faq-Verwaltung</target>
+            </trans-unit>
+            <trans-unit id="title.faq.create">
+                <source>title.faq.create</source>
+                <target> / Faq anlegen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.edit">
+                <source>title.faq.edit</source>
+                <target> / Faq bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="link.faq.create">
+                <source>link.faq.create</source>
+                <target>Faq anlegen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.link.remove">
+                <source>title.faq.link.remove</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.link.edit">
+                <source>title.faq.link.edit</source>
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.faq.internal">
+                <source>title.faq.internal</source>
+                <target>Interne Faq</target>
+            </trans-unit>
+            <trans-unit id="title.faq.external">
+                <source>title.faq.external</source>
+                <target>Externe Faq</target>
+            </trans-unit>
+            <trans-unit id="title.faq.disabled">
+                <source>title.faq.disabled</source>
+                <target>Faq nicht Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="title.faq.enabled">
+                <source>title.faq.enabled</source>
+                <target>Faq Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.faq.question">
+                <source>label.faq.question</source>
+                <target>Frage</target>
+            </trans-unit>
+            <trans-unit id="label.faq.answer">
+                <source>label.faq.answer</source>
+                <target>Antwort</target>
+            </trans-unit>
+            <trans-unit id="label.faq.link">
+                <source>label.faq.link</source>
+                <target>Externer Link</target>
+            </trans-unit>
+            <trans-unit id="label.faq.path">
+                <source>label.faq.path</source>
+                <target>Pfadname für Verlinkung</target>
+            </trans-unit>
+            <trans-unit id="label.faq.category">
+                <source>label.faq.category</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="label.faq.related">
+                <source>label.faq.related</source>
+                <target>Ähnliche Artikel</target>
+            </trans-unit>
+            <trans-unit id="label.faq.enabledDate">
+                <source>label.faq.enabledDate</source>
+                <target>Veröffentlichen ab dem</target>
+            </trans-unit>
+            <trans-unit id="label.faq.expiredDate">
+                <source>label.faq.expiredDate</source>
+                <target>Veröffentlichen bis zum</target>
+            </trans-unit>
+            <trans-unit id="label.faq.enabledExpiredDate">
+                <source>label.faq.enabledExpiredDate</source>
+                <target>Zeitlich veröffentlichen</target>
+            </trans-unit>
+            <trans-unit id="label.faq.enabled">
+                <source>label.faq.enabled</source>
+                <target>Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.faq.internal">
+                <source>label.faq.internal</source>
+                <target>Interne Faq</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.create.success">
+                <source>faq.flash.create.success</source>
+                <target>Die Faq wurde angelegt.</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.edit.success">
+                <source>faq.flash.edit.success</source>
+                <target>Die Faq wurde bearbeitet.</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.remove.success">
+                <source>faq.flash.remove.success</source>
+                <target>Die Faq wurde gelöscht.</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.remove.error">
+                <source>faq.flash.remove.error</source>
+                <target>Die Faq konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.no.results">
+                <source>faq.flash.no.results</source>
+                <target>Es wurden keine Faq gefunden.</target>
+            </trans-unit>
+            <trans-unit id="faq.flash.no.faq">
+                <source>faq.flash.no.faq</source>
+                <target>Es sind keine Faq vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="faq.question.remove">
+                <source>faq.question.remove</source>
+                <target>Möchten Sie die Faq wirklich löschen?</target>
+            </trans-unit>
+
+            <!-- faq/categorys -->
+            <trans-unit id="link.faq.categorys">
+                <source>link.faq.categorys</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="link.faq.categorys.edit">
+                <source>link.faq.categorys.edit</source>
+                <target>Kategorie bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys">
+                <source>title.faq.categorys</source>
+                <target>Faq/Kategorienverwaltung</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.create">
+                <source>title.faq.categorys.create</source>
+                <target> / Kategorie anlegen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.edit">
+                <source>title.faq.categorys.edit</source>
+                <target> / Kategorie bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="link.faq.categorys.create">
+                <source>link.faq.categorys.create</source>
+                <target>Kategorie anlegen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.link.remove">
+                <source>title.faq.categorys.link.remove</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.link.edit">
+                <source>title.faq.categorys.link.edit</source>
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.internal">
+                <source>title.faq.categorys.internal</source>
+                <target>Interne Kategorie</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.external">
+                <source>title.faq.categorys.external</source>
+                <target>Externe Kategorie</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.disabled">
+                <source>title.faq.categorys.disabled</source>
+                <target>Kategorie nicht Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="title.faq.categorys.enabled">
+                <source>title.faq.categorys.enabled</source>
+                <target>Kategorie Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.faq.categorys.name">
+                <source>label.faq.categorys.name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="label.faq.categorys.enabled">
+                <source>label.faq.categorys.enabled</source>
+                <target>Veröffentlicht</target>
+            </trans-unit>
+            <trans-unit id="label.faq.categorys.internal">
+                <source>label.faq.categorys.internal</source>
+                <target>Interne Kategorie</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.create.success">
+                <source>faq.categorys.flash.create.success</source>
+                <target>Die Kategorie wurde angelegt.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.edit.success">
+                <source>faq.categorys.flash.edit.success</source>
+                <target>Die Kategorie wurde bearbeitet.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.remove.success">
+                <source>faq.categorys.flash.remove.success</source>
+                <target>Die Kategorie wurde gelöscht.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.remove.error">
+                <source>faq.categorys.flash.remove.error</source>
+                <target>Die Kategorie konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.no.results">
+                <source>faq.categorys.flash.no.results</source>
+                <target>Es wurden keine Kategorien gefunden.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.flash.no.news">
+                <source>faq.categorys.flash.no.news</source>
+                <target>Es sind keine Kategorien vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="faq.categorys.question.remove">
+                <source>faq.categorys.question.remove</source>
+                <target>Möchten Sie die Kategorie wirklich löschen?</target>
             </trans-unit>
 
             <!-- Facebookconnect -->

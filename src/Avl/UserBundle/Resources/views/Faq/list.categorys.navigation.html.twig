@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs" style="width:20%">
+    {% if entityCategorys is not null %}
+        {% if entityCategorys|length > 0 %}
+            {% for categorys in entityCategorys %}
+                <li {% if slug is defined and slug == categorys.path %}class="active"{% endif %}>
+                    <a href="{{ path('avl_faq_category_list', { 'slug': categorys.path }) }}">
+                        {{ categorys.name }} ({{ categorys.getFaq|length }})
+                    </a>
+                </li>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    <li {% if currentRouteName == 'avl_faq_enquiry' %}class="active"{% endif %}>
+        <a href="{{ path('avl_faq_enquiry') }}">
+            Keine Lösung gefunden
+        </a>
+    </li>
+</ul>

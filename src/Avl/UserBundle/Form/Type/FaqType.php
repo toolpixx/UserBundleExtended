@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use /** @noinspection PhpDeprecationInspection */
     Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class NewsType extends AbstractType
+class FaqType extends AbstractType
 {
     /**
      * @var
@@ -25,64 +25,53 @@ class NewsType extends AbstractType
         $this->builder = $builder;
 
         $builder
-            ->add('title', 'text', array(
-                'label' => 'label.title',
+            ->add('question', 'text', array(
+                'label' => 'label.faq.question',
                 'required' => true
             ))
-            ->add('preface', 'textarea', array(
-                'label' => 'label.preface',
-                'attr' => array(
-                    'rows' => '5'
-                ),
-                'required' => true
-            ))
-            ->add('body', 'textarea', array(
-                'label' => 'label.content',
+            ->add('answer', 'textarea', array(
+                'label' => 'label.faq.answer',
                 'attr' => array(
                     'rows' => '20'
                 ),
                 'required' => false
             ))
             ->add('path', 'text', array(
-                'label' => 'label.path',
-                'required' => false
-            ))
-            ->add('link', 'text', array(
-                'label' => 'label.link',
+                'label' => 'label.faq.path',
                 'required' => false
             ))
             ->add('category', 'entity', array(
-                'class' => 'UserBundle:NewsCategorys',
-                'label' => 'label.category',
+                'class' => 'UserBundle:FaqCategorys',
+                'label' => 'label.faq.category',
                 'empty_value' => 'form.select.categorys.please.select',
                 'property' => 'name',
                 'required' => false
             ))
             ->add('related', 'entity', array(
-                'class' => 'UserBundle:News',
-                'label' => 'label.news.related',
+                'class' => 'UserBundle:Faq',
+                'label' => 'label.faq.related',
                 'empty_value' => 'form.select.categorys.please.select',
-                'property' => 'title',
+                'property' => 'question',
                 'multiple' => true,
                 'required' => false
             ))
             ->add('enabled', 'checkbox', array(
-                'label' => 'label.news.enabled',
+                'label' => 'label.faq.enabled',
                 'required' => false
             ))
             ->add('internal', 'checkbox', array(
-                'label' => 'label.internal',
+                'label' => 'label.faq.internal',
                 'required' => false
             ))
             ->add('enabledDate', 'datetime', array(
-                'label' => 'label.enabledDate'
+                'label' => 'label.faq.enabledDate'
             ))
             ->add('enabledExpiredDate', 'checkbox', array(
-                'label' => 'label.enabledExpiredDate',
+                'label' => 'label.faq.enabledExpiredDate',
                 'required' => false
             ))
             ->add('expiredDate', 'datetime', array(
-                'label' => 'label.expiredDate'
+                'label' => 'label.faq.expiredDate'
             ))
         ;
 
@@ -95,7 +84,7 @@ class NewsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Avl\UserBundle\Entity\News'
+            'data_class' => 'Avl\UserBundle\Entity\Faq'
         ));
     }
 
@@ -104,7 +93,7 @@ class NewsType extends AbstractType
      */
     public function getName()
     {
-        return 'avl_news';
+        return 'avl_faq';
     }
 
     /**

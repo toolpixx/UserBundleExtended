@@ -2,22 +2,22 @@
 
 namespace Avl\UserBundle\Controller;
 
-use Avl\UserBundle\Entity\NewsCategorys;
-use Avl\UserBundle\Form\Type\NewsCategorysType;
+use Avl\UserBundle\Entity\FaqCategorys;
+use Avl\UserBundle\Form\Type\FaqCategorysType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * News controller.
+ * Faq controller.
  */
-class NewsCategorysController extends BaseController
+class FaqCategorysController extends BaseController
 {
     /**
-     * News-Categorys-Repository
+     * Faq-Categorys-Repository
      */
-    const NEWS_CATEGORYS_REPOSITORY = 'UserBundle:NewsCategorys';
+    const FAQ_CATEGORYS_REPOSITORY = 'UserBundle:FaqCategorys';
 
     /**
      * @param Request $request
@@ -33,13 +33,13 @@ class NewsCategorysController extends BaseController
 
         $query = $this
             ->getEm()
-            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
-            ->getAllNewsCategorysByQuery($form->getData());
+            ->getRepository(self::FAQ_CATEGORYS_REPOSITORY)
+            ->getAllFaqCategorysByQuery($form->getData());
 
         $entities = $this->get('knp_paginator')
             ->paginate($query, $request->query->get('page', 1), 10);
 
-        return $this->render('UserBundle:News:list.categorys.html.twig', array(
+        return $this->render('UserBundle:Faq:list.categorys.html.twig', array(
             'entities' => $entities,
             'form' => $form->createView()
         ));
@@ -54,17 +54,17 @@ class NewsCategorysController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
-        $entity = new NewsCategorys();
-        $form = $this->createForm(new NewsCategorysType(), $entity);
+        $entity = new FaqCategorys();
+        $form = $this->createForm(new FaqCategorysType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getEm()->persist($entity);
             $this->getEm()->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.create.success');
-            return $this->redirect($this->generateUrl('avl_news_categorys'));
+            $this->get('session')->getFlashBag()->add('notice', 'faq.categorys.flash.create.success');
+            return $this->redirect($this->generateUrl('avl_faq_categorys'));
         }
-        return $this->render('UserBundle:News:edit.categorys.html.twig', array(
+        return $this->render('UserBundle:Faq:edit.categorys.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -78,13 +78,13 @@ class NewsCategorysController extends BaseController
     {
         $entity = $this
             ->getEm()
-            ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
+            ->getRepository(self::FAQ_CATEGORYS_REPOSITORY)
             ->find($groupId);
 
         if (!$entity) {
             $this->entityNotFound();
         }
-        return $this->render('UserBundle:News:show.categorys.html.twig', array(
+        return $this->render('UserBundle:Faq:show.categorys.html.twig', array(
             'entity'      => $entity,
         ));
     }
@@ -99,19 +99,19 @@ class NewsCategorysController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
-        $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
+        $entity = $this->getEm()->getRepository(self::FAQ_CATEGORYS_REPOSITORY)->find($groupId);
         if (!$entity) {
             $this->entityNotFound();
         }
-        $form = $this->createForm(new NewsCategorysType(), $entity);
+        $form = $this->createForm(new FaqCategorysType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getEm()->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.edit.success');
-            return $this->redirect($this->generateUrl('avl_news_categorys'));
+            $this->get('session')->getFlashBag()->add('notice', 'faq.categorys.flash.edit.success');
+            return $this->redirect($this->generateUrl('avl_faq_categorys'));
         }
-        return $this->render('UserBundle:News:edit.categorys.html.twig', array(
+        return $this->render('UserBundle:Faq:edit.categorys.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView()
         ));
@@ -125,16 +125,16 @@ class NewsCategorysController extends BaseController
     public function deleteAction(Request $request, $groupId)
     {
         if ($request->getMethod() == 'DELETE') {
-            $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
+            $entity = $this->getEm()->getRepository(self::FAQ_CATEGORYS_REPOSITORY)->find($groupId);
             if (!$entity) {
                 $this->entityNotFound();
             }
 
             $this->getEm()->remove($entity);
             $this->getEm()->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'news.categorys.flash.remove.success');
+            $this->get('session')->getFlashBag()->add('notice', 'faq.categorys.flash.remove.success');
         }
-        return $this->redirect($this->generateUrl('avl_news_categorys'));
+        return $this->redirect($this->generateUrl('avl_faq_categorys'));
     }
 
     /**
@@ -142,6 +142,6 @@ class NewsCategorysController extends BaseController
      */
     private function entityNotFound($message = '')
     {
-        throw $this->createNotFoundException((empty($message)) ? 'Unable to find NewsCategorys entity.': $message);
+        throw $this->createNotFoundException((empty($message)) ? 'Unable to find FaqCategorys entity.': $message);
     }
 }
