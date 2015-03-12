@@ -7,7 +7,6 @@ use Avl\UserBundle\Form\Type\FaqCategorysType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Faq controller.
@@ -26,7 +25,7 @@ class FaqCategorysController extends BaseController
     public function indexAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
@@ -52,7 +51,7 @@ class FaqCategorysController extends BaseController
     public function createAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $entity = new FaqCategorys();
         $form = $this->createForm(new FaqCategorysType(), $entity);
@@ -85,7 +84,7 @@ class FaqCategorysController extends BaseController
             $this->entityNotFound();
         }
         return $this->render('UserBundle:Faq:show.categorys.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
         ));
     }
 
@@ -97,7 +96,7 @@ class FaqCategorysController extends BaseController
     public function editAction(Request $request, $groupId)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $entity = $this->getEm()->getRepository(self::FAQ_CATEGORYS_REPOSITORY)->find($groupId);
         if (!$entity) {
@@ -124,6 +123,9 @@ class FaqCategorysController extends BaseController
      */
     public function deleteAction(Request $request, $groupId)
     {
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN'));
+
         if ($request->getMethod() == 'DELETE') {
             $entity = $this->getEm()->getRepository(self::FAQ_CATEGORYS_REPOSITORY)->find($groupId);
             if (!$entity) {
@@ -142,6 +144,6 @@ class FaqCategorysController extends BaseController
      */
     private function entityNotFound($message = '')
     {
-        throw $this->createNotFoundException((empty($message)) ? 'Unable to find FaqCategorys entity.': $message);
+        throw $this->createNotFoundException((empty($message)) ? 'Unable to find FaqCategorys entity.' : $message);
     }
 }

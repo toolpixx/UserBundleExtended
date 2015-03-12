@@ -193,9 +193,10 @@ class FacebookProfileController extends BaseController
         } catch(\Exception $exception) {
             return $this->redirectOnError($exception->getMessage());
         }
-        exit;
 
+        return null;
 
+        /**
         $response = (new FacebookRequest(
             $session, 'POST', '/211196185740363/milestones',
             array (
@@ -207,6 +208,7 @@ class FacebookProfileController extends BaseController
         echo "Posted with id: " . $response->getProperty('id');
         dump($response);
         exit;
+        **/
     }
 
     /**

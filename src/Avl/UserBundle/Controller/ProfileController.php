@@ -8,15 +8,7 @@
 namespace Avl\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
-
 use Symfony\Component\HttpFoundation\Request;
-#use Symfony\Component\HttpFoundation\RedirectResponse;
-
-use Facebook\FacebookRequest;
-use Facebook\GraphUser;
-use Facebook\FacebookSession;
-use Facebook\FacebookRedirectLoginHelper;
-use Facebook\FacebookResponse;
 
 /**
  * Class ProfileController

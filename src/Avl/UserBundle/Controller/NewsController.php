@@ -5,10 +5,8 @@ namespace Avl\UserBundle\Controller;
 use Avl\UserBundle\Entity\News;
 use Avl\UserBundle\Form\Type\NewsType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * News controller.
@@ -32,7 +30,7 @@ class NewsController extends BaseController
     public function indexAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
@@ -59,7 +57,7 @@ class NewsController extends BaseController
     public function createAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $entity = new News($this->getUser());
         $form = $form = $this->createForm(new NewsType(), $entity);
@@ -121,7 +119,7 @@ class NewsController extends BaseController
     public function editAction(Request $request, $newsId)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
         $entity = $this->getEm()->getRepository(self::NEWS_REPOSITORY)->find($newsId);
 
         if (!$entity) {
@@ -152,7 +150,7 @@ class NewsController extends BaseController
     public function deleteAction(Request $request, $newsId)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         if ($request->getMethod() == 'DELETE') {
             $entity = $this->getEm()->getRepository(self::NEWS_REPOSITORY)->find($newsId);

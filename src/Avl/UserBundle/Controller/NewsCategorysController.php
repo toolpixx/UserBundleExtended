@@ -7,7 +7,6 @@ use Avl\UserBundle\Form\Type\NewsCategorysType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * News controller.
@@ -26,7 +25,7 @@ class NewsCategorysController extends BaseController
     public function indexAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $form = $this->createForm(new SubUserSearchFormType());
         $form->submit($request);
@@ -52,7 +51,7 @@ class NewsCategorysController extends BaseController
     public function createAction(Request $request)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $entity = new NewsCategorys();
         $form = $this->createForm(new NewsCategorysType(), $entity);
@@ -97,7 +96,7 @@ class NewsCategorysController extends BaseController
     public function editAction(Request $request, $groupId)
     {
         // Has user granted role?
-        $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
+        $this->hasGranted(array('ROLE_ADMIN'));
 
         $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
         if (!$entity) {
@@ -124,6 +123,9 @@ class NewsCategorysController extends BaseController
      */
     public function deleteAction(Request $request, $groupId)
     {
+        // Has user granted role?
+        $this->hasGranted(array('ROLE_ADMIN'));
+
         if ($request->getMethod() == 'DELETE') {
             $entity = $this->getEm()->getRepository(self::NEWS_CATEGORYS_REPOSITORY)->find($groupId);
             if (!$entity) {
@@ -142,6 +144,6 @@ class NewsCategorysController extends BaseController
      */
     private function entityNotFound($message = '')
     {
-        throw $this->createNotFoundException((empty($message)) ? 'Unable to find NewsCategorys entity.': $message);
+        throw $this->createNotFoundException((empty($message)) ? 'Unable to find NewsCategorys entity.' : $message);
     }
 }

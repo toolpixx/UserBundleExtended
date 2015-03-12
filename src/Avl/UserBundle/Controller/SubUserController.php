@@ -9,7 +9,6 @@ namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
-
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;

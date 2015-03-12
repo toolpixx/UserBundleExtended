@@ -5,10 +5,8 @@ namespace Avl\UserBundle\Controller;
 use Avl\UserBundle\Entity\Faq;
 use Avl\UserBundle\Form\Type\FaqType;
 use Avl\UserBundle\Form\Type\SubUserSearchFormType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Faq controller.
