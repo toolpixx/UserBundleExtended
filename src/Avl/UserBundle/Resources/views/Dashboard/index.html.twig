@@ -26,7 +26,15 @@
                         {% if entity.link is not null %}
                             <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
                         {% endif %}
-                        <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.title }}</h3>
+                        <h3 style="font-weight: 200;margin-bottom:10px !important">
+                            {% if entity.body is not null or entity.link is not null %}
+                                <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entity.path }) }}"{% endif %}>
+                                    {{ entity.title }}
+                                </a>
+                            {% else %}
+                                {{ entity.title }}
+                            {% endif %}
+                        </h3>
                         <small>
                             {% if not entity.category is null %}
                                 Gefunden in <strong>{{ entity.category.name }}</strong> /
@@ -38,13 +46,6 @@
                         </small>
                         <hr style="margin-top:10px !important">
                         {{ entity.preface|markdown }}
-                        {% if entity.body is not null or entity.link is not null %}
-                            <a class="btn btn-info btn-xs" style="float:right" <a {% if entity.link is not null %}href="{{ entity.link }}" target="_blank"{% else %}href="{{ path('avl_news_show', { 'slug': entity.path }) }}"{% endif %}>{{ 'button.readmore'|trans }}</a>
-                        {% endif %}
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
-                            <a class="btn btn-warning btn-xs" style="float:left" target="_blank" href="{{ path('avl_news_edit', { 'newsId': entity.id }) }}">{{ 'button.edit'|trans }}</a>
-                        {% endif %}
-                        <br style="clear:both">
                     </div>
                     <br>
                 {% endfor %}

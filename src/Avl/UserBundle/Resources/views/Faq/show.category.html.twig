@@ -25,16 +25,27 @@
             {% include "UserBundle:Faq:list.categorys.navigation.html.twig" %}
             <div class="tab-content" style="width:75%;float:left">
                 <div class="tab-pane active">
+                    <form action="{% if slug is not null %}{{ path('avl_faq_category_search', { 'slug': slug }) }}{% else %}{{ path('avl_faq_category_search_without_slug') }}{% endif %}" method="GET" novalidate>
+                        <div class="input-group">
+                            {{ form_widget(form.query) }}
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button">{{ 'button.search'|trans }}</button>
+                            </span>
+                        </div>
+                    </form>
+                    <hr>
                     {% if entityCategory is not null and entityCategory|length > 0 %}
                         {% for entities in entityCategory %}
-                            <div class="well wellink" style="padding-top:5px;padding-bottom:5px">
-                                <h5 style="font-weight: 200;margin-bottom:10px !important">
-                                    <a href="{{ path('avl_faq_show', { 'slug': entities.path }) }}">
+                            <div class="well wellink" style="padding-top:5px;padding-bottom:5px;padding-left:10px">
+                                <h5 style="font-weight: 200;margin-bottom:5px !important;margin-top:5px !important">
+                                    <a href="{{ path('avl_faq_show', { 'slug': entities.path }) }}" style="width:100%;display:block">
                                         {{ entities.question }}
                                     </a>
                                 </h5>
                             </div>
                         {% endfor %}
+
+                        {{ knp_pagination_render(entityCategory) }}
                     {% endif %}
                 </div>
             </div>

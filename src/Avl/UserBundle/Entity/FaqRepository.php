@@ -43,8 +43,11 @@ class FaqRepository extends EntityRepository
      * @param $slug
      * @return array
      */
-    public function getAllInternalFaqFromCategorysBySlug($slug)
+    public function getAllInternalFaqFromCategorysBySlug($slug, $formData)
     {
+        // Setup
+        $query = (null !== $formData['query']) ? $formData['query'] : '';
+
         return $this->getEntityManager()
             ->createQuery('
                 SELECT faq
@@ -58,10 +61,12 @@ class FaqRepository extends EntityRepository
                   AND (((faq.enabledExpiredDate = FALSE OR faq.enabledExpiredDate IS NULL)
                       AND faq.enabledDate <= :dateSelect)
                   OR (faq.enabledExpiredDate = TRUE AND faq.expiredDate >= :dateSelect))
+                  AND (faq.question LIKE :query OR faq.answer LIKE :query)
                 ORDER BY faq.createdDate DESC
             ')
             ->setParameter('dateSelect', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
             ->setParameter('slug', '%'.$slug.'%')
+            ->setParameter('query', '%'.$query.'%')
             ->getResult();
     }
 

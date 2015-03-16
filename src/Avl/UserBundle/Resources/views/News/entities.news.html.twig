@@ -14,7 +14,7 @@
         {% for entity in entities %}
             <tr>
                 <td>
-                    {% if entity.enabled %}
+                    {% if entity.enabled and entity.expiredDate|date("YmdHis") >= "now"|date("YmdHis") %}
                         <span class="glyphicon glyphicon-ok text-success" title="{{ 'title.link.enabled'|trans }}"></span>
                     {% else %}
                         <span class="glyphicon glyphicon-off text-danger" title="{{ 'title.link.disabled'|trans }}"></span>

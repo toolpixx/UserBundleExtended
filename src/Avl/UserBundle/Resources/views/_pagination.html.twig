@@ -3,7 +3,7 @@
         <ul class="pagination pagination-sm">
             {% if first is defined and current != first %}
                 <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): first})) }}#pagination">&lt;&lt;</a>
+                    <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">&lt;&lt;</a>
                 </li>
             {% else %}
                 <li class="disabled">
@@ -13,7 +13,7 @@
 
             {% if previous is defined %}
                 <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}#pagination">&lt;</a>
+                    <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&lt;</a>
                 </li>
             {% else %}
                 <li class="disabled">
@@ -24,7 +24,7 @@
             {% for page in pagesInRange %}
                 {% if page != current %}
                     <li>
-                        <a href="{{ path(route, query|merge({(pageParameterName): page})) }}#pagination">{{ page }}</a>
+                        <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
                     </li>
                 {% else %}
                     <li class="active"><a href="#">{{ page }}</a></li>
@@ -34,7 +34,7 @@
 
             {% if next is defined %}
                 <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): next})) }}#pagination">&gt;</a>
+                    <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&gt;</a>
                 </li>
             {% else %}
                 <li class="disabled">
@@ -44,7 +44,7 @@
 
             {% if last is defined and current != last %}
                 <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): last})) }}#pagination">&gt;&gt;</a>
+                    <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">&gt;&gt;</a>
                 </li>
             {% else %}
                 <li class="disabled">

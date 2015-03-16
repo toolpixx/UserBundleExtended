@@ -211,3 +211,14 @@ avl_faq_category_list:
 avl_faq_category_list_all:
     path:     /cnsl/faq/category/
     defaults: { _controller: "UserBundle:Faq:showCategory" }
+    requirements: { _method: post|get }
+
+avl_faq_category_search:
+    path:     /cnsl/faq/category/{slug}
+    defaults: { _controller: "UserBundle:Faq:showCategory" }
+    requirements: { _method: get }
+
+avl_faq_category_search_without_slug:
+    path:     /cnsl/faq/category/
+    defaults: { _controller: "UserBundle:Faq:showCategory" }
+    requirements: { _method: get }

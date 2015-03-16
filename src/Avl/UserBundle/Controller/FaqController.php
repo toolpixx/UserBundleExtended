@@ -98,17 +98,30 @@ class FaqController extends BaseController
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showCategoryAction($slug = '')
+    public function showCategoryAction(Request $request, $slug = null)
     {
-        $entityCategory = $this->getAllInternalFaqFromCategoryBySlug($slug);
+        $form = $this->createForm(new SubUserSearchFormType());
+        $form->submit($request);
+
+        $query = $this->getEm()
+            ->getRepository(self::FAQ_REPOSITORY)
+            ->getAllInternalFaqFromCategorysBySlug(
+                $slug, $form->getData()
+            );
+
+        $entityCategory = $this->get('knp_paginator')
+            ->paginate($query, $request->query->get('page', 1), 10);
+
         if (!$entityCategory) {
             $this->get('session')->getFlashBag()->add('error', 'error.notfound');
             return $this->redirect($this->generateUrl('avl_user_dashboard_show'));
         }
+
         return $this->render('UserBundle:Faq:show.category.html.twig', array(
-            'entityCategory' => $this->getAllInternalFaqFromCategoryBySlug($slug),
+            'entityCategory' => $entityCategory,
             'category' => (!empty($slug)) ? $this->getFaqCategoryBySlug($slug) : array(),
             'entityCategorys' => $this->getFaqCategory(),
+            'form' => $form->createView(),
             'slug' => $slug
         ));
     }
@@ -177,18 +190,6 @@ class FaqController extends BaseController
             ->getEm()
             ->getRepository(self::FAQ_CATEGORYS_REPOSITORY)
             ->findOneByPath($slug);
-    }
-
-    /**
-     * @param $slug
-     * @return mixed
-     */
-    private function getAllInternalFaqFromCategoryBySlug($slug)
-    {
-        return $this
-            ->getEm()
-            ->getRepository(self::FAQ_REPOSITORY)
-            ->getAllInternalFaqFromCategorysBySlug($slug);
     }
 
     /**

@@ -49,7 +49,7 @@
                     {{ 'label.faq.related'|trans }}
                 </span>
                 {% for entities in entity.related %}
-                    <a href="{{ path('avl_faq_show', { 'slug': entities.path }) }}" class="list-group-item">
+                    <a href="{{ path('avl_news_show', { 'slug': entities.path }) }}" class="list-group-item">
                         {{ entities.title }}
                     </a>
                 {% endfor %}
