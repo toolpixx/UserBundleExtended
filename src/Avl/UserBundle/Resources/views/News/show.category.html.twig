@@ -1,7 +1,7 @@
 {% extends 'UserBundle::layout.html.twig' %}
 
 {% block title %}
-    {% if entityCategory is not null %}
+    {% if news is not null %}
         {{ 'MT_CNSL News'|trans }}
         {% if category.name is defined %}
             - {{ category.name }}
@@ -21,8 +21,8 @@
                 {% endif %}
             </ol>
         {% endif %}
-        {% if entityCategory is not null and entityCategory|length > 0 %}
-            {% for entities in entityCategory %}
+        {% if news is not null and news|length > 0 %}
+            {% for entities in news %}
                 <div class="well wellink">
                     {% if entities.link is not null %}
                         <span style="font-size:11px;position:relative;float:right;top:-19px;right:-19px" class="label label-info">Externer Link</span>
@@ -48,8 +48,8 @@
                     <hr style="margin-top:10px !important">
                     {{ entities.preface|markdown }}
                 </div>
-                <br>
             {% endfor %}
+            {{ knp_pagination_render(news) }}
         {% endif %}
     </div>
     <div class="col-md-4">

@@ -37,7 +37,7 @@ security:
         - { path: ^/(login|register|resetting)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(cnsl/event.*)$, role: ROLE_CUSTOMER_EVENT_MANAGER }
         - { path: ^/(cnsl/comment.*)$, role: ROLE_CUSTOMER_COMMENT_MANAGER }
-        - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/news.*|cnsl/switch-on|cnsl/switch-switch-off)$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(cnsl/dashboard|cnsl/content.*|cnsl/faq.*|cnsl/news.*|cnsl/switch-on|cnsl/switch-switch-off)$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/(cnsl/subuser.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_SUBUSER_MANAGER] }
         - { path: ^/(cnsl/subuser.*|cnsl/profile/fbc/.*)$, role: [ROLE_ADMIN, ROLE_CUSTOMER_FBC_MANAGER] }
         - { path: ^/(cnsl/admin/news.*|cnsl/admin/faq.*)$, role: ROLE_ADMIN }

@@ -39,6 +39,10 @@
                 <source>button.forward</source>
                 <target>Weiter</target>
             </trans-unit>
+            <trans-unit id="button.more.news">
+                <source>button.more.news</source>
+                <target>Mehr Nachrichten</target>
+            </trans-unit>
             <trans-unit id="button.backlink">
                 <source>button.backlink</source>
                 <target>Zurück</target>

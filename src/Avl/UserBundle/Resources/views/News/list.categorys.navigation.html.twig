@@ -1,12 +1,12 @@
-{% if entityCategorys is not null %}
-    {% if entityCategorys|length > 0 %}
+{% if categorys is not null %}
+    {% if categorys|length > 0 %}
         <h1 class="title">{{ 'link.news.categorys'|trans }}</h1>
         <hr>
         <div style="overflow:auto">
             <ul class="nav nav-pills nav-stacked">
-                {% for categorys in entityCategorys %}
+                {% for category in categorys %}
                     <li>
-                        <a href="{{ path('avl_news_category_list', { 'slug': categorys.path }) }}">{{ categorys.name }} ({{ categorys.getNews|length }})</a>
+                        <a href="{{ path('avl_news_category_list', { 'slug': category.path }) }}">{{ category.name }} ({{ category.getNews|length }})</a>
                     </li>
                 {% endfor %}
             </ul>

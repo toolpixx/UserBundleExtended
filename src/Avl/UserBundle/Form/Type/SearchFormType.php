@@ -11,10 +11,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class SubUserSearchFormType
+ * Class SearchFormType
  * @package Avl\UserBundle\Form\Type
  */
-class SubUserSearchFormType extends AbstractType
+class SearchFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

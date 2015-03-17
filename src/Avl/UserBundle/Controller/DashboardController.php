@@ -35,14 +35,22 @@ class DashboardController extends BaseController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $query = $this
+            ->getEm()
+            ->getRepository(self::NEWS_REPOSITORY)
+            ->getAllNewsWhereEnabledAndInternal();
+
+        $news = $this->get('knp_paginator')
+            ->paginate($query, $request->query->get('page', 1), 4);
+
         return $this->render(
             'UserBundle:Dashboard:index.html.twig',
             array(
                 'user' => $this->getUser(),
-                'news' => $this->getInternalNews(),
-                'entityCategorys' => $this->getNewsCategory(),
+                'news' => $news,
+                'categorys' => $this->getNewsCategory(),
                 'symfonyRss' => $this->getRssFeed(self::SYMFONY_RSS_URL)
             )
         );

@@ -4,7 +4,7 @@ namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Entity\News;
 use Avl\UserBundle\Form\Type\NewsType;
-use Avl\UserBundle\Form\Type\SubUserSearchFormType;
+use Avl\UserBundle\Form\Type\SearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
 
@@ -32,7 +32,7 @@ class NewsController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN'));
 
-        $form = $this->createForm(new SubUserSearchFormType());
+        $form = $this->createForm(new SearchFormType());
         $form->submit($request);
 
         $query = $this->getEm()
@@ -89,7 +89,7 @@ class NewsController extends BaseController
         }
         return $this->render('UserBundle:News:show.news.html.twig', array(
             'entity' => $entity,
-            'entityCategorys' => $this->getNewsCategory()
+            'categorys' => $this->getNewsCategory()
         ));
     }
 
@@ -97,17 +97,27 @@ class NewsController extends BaseController
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showCategoryAction($slug = '')
+    public function showCategoryAction(Request $request, $slug = '')
     {
-        $entityCategory = $this->getAllInternalNewsFromCategoryBySlug($slug);
-        if (!$entityCategory) {
+        $query = $this
+            ->getEm()
+            ->getRepository(self::NEWS_REPOSITORY)
+            ->getAllInternalNewsFromCategorysBySlug($slug);
+
+        $news = $this->get('knp_paginator')
+            ->paginate($query, $request->query->get('page', 1), 10);
+
+        $news->setTemplate('UserBundle::prev_next_pagination.html.twig');
+
+
+        if (!$news) {
             $this->get('session')->getFlashBag()->add('error', 'error.notfound');
             return $this->redirect($this->generateUrl('avl_user_dashboard_show'));
         }
         return $this->render('UserBundle:News:show.category.html.twig', array(
-            'entityCategory' => $this->getAllInternalNewsFromCategoryBySlug($slug),
+            'news' => $news,
             'category' => (!empty($slug)) ? $this->getNewsCategoryBySlug($slug) : array(),
-            'entityCategorys' => $this->getNewsCategory()
+            'categorys' => $this->getNewsCategory()
         ));
     }
 
@@ -175,18 +185,6 @@ class NewsController extends BaseController
             ->getEm()
             ->getRepository(self::NEWS_CATEGORYS_REPOSITORY)
             ->findOneByPath($slug);
-    }
-
-    /**
-     * @param $slug
-     * @return mixed
-     */
-    private function getAllInternalNewsFromCategoryBySlug($slug)
-    {
-        return $this
-            ->getEm()
-            ->getRepository(self::NEWS_REPOSITORY)
-            ->getAllInternalNewsFromCategorysBySlug($slug);
     }
 
     /**

@@ -94,17 +94,6 @@ abstract class Controller extends BaseController
     /**
      * @return mixed
      */
-    public function getInternalNews()
-    {
-        return $this
-            ->getEm()
-            ->getRepository(self::NEWS_REPOSITORY)
-            ->getAllNewsWhereEnabledAndInternal();
-    }
-
-    /**
-     * @return mixed
-     */
     public function getNewsCategory()
     {
         return $this

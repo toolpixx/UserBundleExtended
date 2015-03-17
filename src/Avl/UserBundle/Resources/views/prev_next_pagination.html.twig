@@ -1,0 +1,12 @@
+{% if pageCount > 1 %}
+    <nav>
+        <ul class="pager">
+            {% if previous is defined %}
+                <li class="previous"><a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ 'button.backlink'|trans }}</a></li>
+            {% endif %}
+            {% if next is defined %}
+                <li class="next"><a href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'button.forward'|trans }}</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

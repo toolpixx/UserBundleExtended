@@ -4,7 +4,7 @@ namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Entity\FaqCategorys;
 use Avl\UserBundle\Form\Type\FaqCategorysType;
-use Avl\UserBundle\Form\Type\SubUserSearchFormType;
+use Avl\UserBundle\Form\Type\SearchFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Avl\UserBundle\Controller\Controller as BaseController;
 
@@ -27,7 +27,7 @@ class FaqCategorysController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN'));
 
-        $form = $this->createForm(new SubUserSearchFormType());
+        $form = $this->createForm(new SearchFormType());
         $form->submit($request);
 
         $query = $this

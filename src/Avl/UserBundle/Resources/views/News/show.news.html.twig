@@ -44,7 +44,7 @@
                 {% endif %}
                 <br style="clear:both">
             </div>
-            {% if entity.related is not null %}
+            {% if entity.related|length > 0 %}
                 <div class="list-group">
                     <span class="list-group-item" style="box-shadow: none !important;border-radius: 0 !important;background-color: #f5f5f5;">
                         {{ 'label.faq.related'|trans }}

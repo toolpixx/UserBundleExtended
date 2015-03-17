@@ -8,7 +8,7 @@
 namespace Avl\UserBundle\Controller;
 
 use Avl\UserBundle\Controller\Controller as BaseController;
-use Avl\UserBundle\Form\Type\SubUserSearchFormType;
+use Avl\UserBundle\Form\Type\SearchFormType;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -48,7 +48,7 @@ class SubUserController extends BaseController
         // Has user granted role?
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_SUBUSER_MANAGER'));
 
-        $form = $this->createForm(new SubUserSearchFormType());
+        $form = $this->createForm(new SearchFormType());
         $form->submit($request);
 
         if ($this->hasRole('ROLE_ADMIN')) {

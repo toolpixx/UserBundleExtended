@@ -47,8 +47,12 @@
                         <hr style="margin-top:10px !important">
                         {{ entity.preface|markdown }}
                     </div>
-                    <br>
                 {% endfor %}
+                <nav>
+                    <ul class="pager">
+                        <li class="next"><a href="{{ path('avl_news_category_list_all') }}">{{ 'button.more.news'|trans }}</a></li>
+                    </ul>
+                </nav>
             {% endif %}
         {% endif %}
     </div>
