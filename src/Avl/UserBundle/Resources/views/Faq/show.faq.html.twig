@@ -1,0 +1,68 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}
+    {% if entity is not null %}
+        {{ 'MT_CNSL Faq'|trans }}
+        - {{ entity.question }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        {% if entity is not null %}
+            <ol class="breadcrumb" style="background-color:#ffffff;padding-left:0px;margin-bottom:28px">
+                <li><a href="{{ path('avl_user_dashboard_show') }}">{{ 'link.dashboard'|trans }}</a></li>
+                <li class="active"><a href="{{ path('avl_faq_category_list_all') }}">{{ 'link.faq.posts'|trans }}</a></li>
+                <li class="active">
+                    <a href="{{ path('avl_faq_category_list', { 'slug': entity.category.path }) }}">
+                        {{ entity.category.name|length > 15 ? entity.category.name|slice(0, 15) ~ '...' : entity.category.name }}
+                    </a>
+                </li>
+            </ol>
+        {% endif %}
+        <div class="tabbable tabs-left">
+            {% include "UserBundle:Faq:list.categorys.navigation.html.twig" %}
+            <div class="tab-content" style="width:75%;float:left">
+                <div class="tab-pane active">
+                    {% if entity is not null %}
+                        <div class="well">
+                            <h3 style="font-weight: 200;margin-bottom:10px !important">{{ entity.question }}</h3>
+                            <small>
+                                {% if not entity.category is null %}
+                                    Gefunden in <strong>{{ entity.category.name }}</strong> /
+                                {% endif %}
+                                {% if not entity.user is null %}
+                                    Von <strong>{{ entity.user.username }}</strong> am
+                                {% endif %}
+                                <strong>{{ entity.createdDate|date("d.m.Y H.i") }} {{ 'Uhr'|trans }}</strong>
+                            </small>
+                            <hr style="margin-top:10px !important">
+                            {{ entity.answer|markdown }}
+                            <hr>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-info btn-xs" style="float:right" target="_blank" href="{{ path('avl_faq_edit', { 'faqId': entity.id }) }}" title="{{ 'title.faq.link.edit'|trans }}" role="button">{{ 'button.edit'|trans }}</a>
+                            {% endif %}
+                            <br style="clear:both">
+                        </div>
+                        {% if entity.related is not null %}
+                            <div class="list-group">
+                                <span class="list-group-item" style="box-shadow: none !important;border-radius: 0 !important;background-color: #f5f5f5;">
+                                    {{ 'label.faq.related'|trans }}
+                                </span>
+                                {% for entities in entity.related %}
+                                    <a href="{{ path('avl_faq_show', { 'slug': entities.path }) }}" class="list-group-item">
+                                        {{ entities.question }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div style="clear:both;text-align: center;">
+                            <hr>
+                            <a class="btn btn-info" href="javascript:history.back()" role="button">{{ 'button.backlink'|trans }}</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
