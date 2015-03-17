@@ -44,16 +44,18 @@
                 {% endif %}
                 <br style="clear:both">
             </div>
-            <div class="list-group">
-                <span class="list-group-item" style="box-shadow: none !important;border-radius: 0 !important;background-color: #f5f5f5;">
-                    {{ 'label.faq.related'|trans }}
-                </span>
-                {% for entities in entity.related %}
-                    <a href="{{ path('avl_news_show', { 'slug': entities.path }) }}" class="list-group-item">
-                        {{ entities.title }}
-                    </a>
-                {% endfor %}
-            </div>
+            {% if entity.related is not null %}
+                <div class="list-group">
+                    <span class="list-group-item" style="box-shadow: none !important;border-radius: 0 !important;background-color: #f5f5f5;">
+                        {{ 'label.faq.related'|trans }}
+                    </span>
+                    {% for entities in entity.related %}
+                        <a href="{{ path('avl_news_show', { 'slug': entities.path }) }}" class="list-group-item">
+                            {{ entities.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div style="clear:both;text-align: center;">
                 <hr>
                 <a class="btn btn-info" href="javascript:history.back()" role="button">{{ 'button.backlink'|trans }}</a>
