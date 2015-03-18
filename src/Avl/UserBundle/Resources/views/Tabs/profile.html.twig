@@ -14,7 +14,7 @@
     </li>
 
     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_CUSTOMER_FBC_MANAGER') %}
-        <li {% if currentRouteName == 'avl_user_profile_auth_facebook' %}class="active"{% endif %}>
+        <li {% if currentRouteName == 'avl_user_profile_auth_facebook' or currentRouteName == 'avl_user_profile_connect_facebook' %}class="active"{% endif %}>
             <a href="{{ path('avl_user_profile_auth_facebook') }}">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="top:2px"></span>
                 {{ 'Facebook connect'|trans }}
