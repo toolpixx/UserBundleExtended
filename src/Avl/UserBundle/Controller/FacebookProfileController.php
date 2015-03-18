@@ -73,13 +73,11 @@ class FacebookProfileController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return RedirectResponse
      * @throws \Facebook\FacebookRequestException
      */
-    public function connectFacebookAction(Request $request)
+    public function connectFacebookAction()
     {
-        $accounts = array();
         $accountEntities = array();
         $choices = array();
         $infos = array();
@@ -163,7 +161,7 @@ class FacebookProfileController extends BaseController
         return $this->redirectOnError('facebook.flash.connect.error');
     }
 
-    public function testFacebookAction(Request $request)
+    public function testFacebookAction()
     {
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
         $this->getFacebookSession();
@@ -218,10 +216,10 @@ class FacebookProfileController extends BaseController
     public function updateFacebookAccountsAction(Request $request)
     {
         $infoData = array();
+        $choices = array();
 
         $this->hasGranted(array('ROLE_ADMIN', 'ROLE_CUSTOMER_FBC_MANAGER'));
         $this->getFacebookSession();
-        $helper = $this->getFacebookUrl();
 
         // Get the Tokens from the request, because we
         // need the id from it for the choices
