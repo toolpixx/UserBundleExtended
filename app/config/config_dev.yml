@@ -46,3 +46,10 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+parameters:
+    fb.app.id: <YOUR_FACEBOOK_APP_ID>
+    fb.app.secret: <YOUR_FACEBOOK_APP_SECRET>
+    fb.app.host: <YOUR_FACEBOOK_APP_HOST>
+    fb.app.route: avl_user_profile_connect_facebook
+    fb.app.scope: manage_pages,publish_actions
