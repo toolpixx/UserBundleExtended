@@ -246,7 +246,9 @@ class FacebookProfileController extends BaseController
             }
             $this->getEm()->flush();
             $this->get('session')->getFlashBag()->add('notice', 'facebook.flash.select.accounts.success');
-            return $this->redirect($this->generateUrl('avl_user_profile_auth_facebook'));
+            return $this->redirect(
+                $this->generateUrl('avl_user_profile_auth_facebook')
+            );
         }
 
         return $this->redirectOnError('facebook.flash.persist.error');
@@ -258,7 +260,9 @@ class FacebookProfileController extends BaseController
     private function redirectOnError($message)
     {
         $this->get('session')->getFlashBag()->add('error', $message);
-        return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+        return new RedirectResponse(
+            $this->container->get('router')->generate('fos_user_profile_show')
+        );
     }
     /**
      * Create a FacebookSession

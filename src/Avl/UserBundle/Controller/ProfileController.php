@@ -9,6 +9,7 @@ namespace Avl\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class ProfileController

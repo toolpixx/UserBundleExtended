@@ -242,17 +242,4 @@ class User extends BaseUser implements AdvancedUserInterface
     {
         return $this->id;
     }
-
-    /**
-     * Set profilePicturePath
-     *
-     * @param string $profilePicturePath
-     * @return User
-     */
-    public function setProfilePicturePath($profilePicturePath)
-    {
-        $this->profilePicturePath = $profilePicturePath;
-
-        return $this;
-    }
 }

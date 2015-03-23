@@ -352,7 +352,6 @@ trait UserTrait
             if (unlink($file)) {
                 // Set profile-picture to empty
                 $this->setProfilePicturePath();
-
                 return true;
             }
         }
