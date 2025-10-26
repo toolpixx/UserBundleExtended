@@ -1,3 +1,5 @@
+# Please note: This is a very old project that has not been maintained since 2015.
+
 # UserBundleExtended
 
 ![Build Status](https://scrutinizer-ci.com/g/toolpixx/UserBundleExtended/badges/build.png?b=master)
